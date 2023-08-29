@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfermidadeController;
+use App\Http\Controllers\ClasseTerapeuticaController;
 
 
 /*
@@ -27,3 +28,10 @@ Route::post('/enfermidade.store', [EnfermidadeController::class, 'store']);
 Route::get('/enfermidade.delete.{i}', [EnfermidadeController::class, 'delete']);
 Route::get('/enfermidade.edit.{i}', [EnfermidadeController::class, 'edit']);
 
+// classe terapêutica
+Route::get('/classeTerapeutica.index', [ClasseTerapeuticaController::class, 'index']);
+Route::get('/classeTerapeutica.create', [ClasseTerapeuticaController::class, 'create']);
+Route::get('/classeTerapeutica.retrieveAll', [ClasseTerapeuticaController::class, 'retrieveAll']);
+Route::post('/classeTerapeutica.store', [ClasseTerapeuticaController::class, 'store']);
+Route::get('/classeTerapeutica.delete.{i}', [ClasseTerapeuticaController::class, 'delete']);
+Route::get('/classeTerapeutica.edit.{i}', [ClasseTerapeuticaController::class, 'edit']);
