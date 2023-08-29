@@ -45,13 +45,13 @@ class MedicamentoController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $obj = GrupoItem::find($id);
+        $obj = Medicamento::find($id);
         return view('medicamento.edit')->with(['msg' => $msg, 'obj' => $obj]);
     }
 
     public function delete($id)
     {
-        $obj = GrupoItem::find($id);
+        $obj = Medicamento::find($id);
         $msg = "{$obj->nome} excluída.";
         try {
             $obj->delete();
