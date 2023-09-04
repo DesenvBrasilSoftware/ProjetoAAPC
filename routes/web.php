@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfermidadeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\GrupoItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\ClasseTerapeuticaController;
@@ -30,6 +31,14 @@ Route::get('/enfermidade.retrieveAll', [EnfermidadeController::class, 'retrieveA
 Route::post('/enfermidade.store', [EnfermidadeController::class, 'store']);
 Route::get('/enfermidade.delete.{i}', [EnfermidadeController::class, 'delete']);
 Route::get('/enfermidade.edit.{i}', [EnfermidadeController::class, 'edit']);
+
+// Itens
+Route::get('/item.index', [ItemController::class, 'index']);
+Route::get('/item.create', [ItemController::class, 'create']);
+Route::get('/item.retrieveAll', [ItemController::class, 'retrieveAll']);
+Route::post('/item.store', [ItemController::class, 'store']);
+Route::get('/item.delete.{i}', [ItemController::class, 'delete']);
+Route::get('/item.edit.{i}', [ItemController::class, 'edit']);
 
 // Grupo Item
 Route::get('/grupoItem.index', [GrupoItemController::class, 'index']);
