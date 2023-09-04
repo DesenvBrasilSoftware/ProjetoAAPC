@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfermidadeController;
 use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\ClasseTerapeuticaController;
+use App\Http\Controllers\BairroController;
 
 
 /*
@@ -35,3 +37,19 @@ Route::get('/medicamento.retrieveAll', [MedicamentoController::class, 'retrieveA
 Route::post('/medicamento.store', [MedicamentoController::class, 'store']);
 Route::get('/medicamento.delete.{i}', [MedicamentoController::class, 'delete']);
 Route::get('/medicamento.edit.{i}', [MedicamentoController::class, 'edit']);
+ 
+// classe terapêutica
+Route::get('/classeTerapeutica.index', [ClasseTerapeuticaController::class, 'index']);
+Route::get('/classeTerapeutica.create', [ClasseTerapeuticaController::class, 'create']);
+Route::get('/classeTerapeutica.retrieveAll', [ClasseTerapeuticaController::class, 'retrieveAll']);
+Route::post('/classeTerapeutica.store', [ClasseTerapeuticaController::class, 'store']);
+Route::get('/classeTerapeutica.delete.{i}', [ClasseTerapeuticaController::class, 'delete']);
+Route::get('/classeTerapeutica.edit.{i}', [ClasseTerapeuticaController::class, 'edit']);
+
+// Bairro
+Route::get('/bairro.index', [BairroController::class, 'index']);
+Route::get('/bairro.create', [BairroController::class, 'create']);
+Route::get('/bairro.retrieveAll', [BairroController::class, 'retrieveAll']);
+Route::post('/bairro.store', [BairroController::class, 'store']);
+Route::get('/bairro.delete.{i}', [BairroController::class, 'delete']);
+Route::get('/bairro.edit.{i}', [BairroController::class, 'edit']);
