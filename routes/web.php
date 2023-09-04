@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfermidadeController;
 use App\Http\Controllers\ClasseTerapeuticaController;
+use App\Http\Controllers\BairroController;
 
 
 /*
@@ -35,3 +36,11 @@ Route::get('/classeTerapeutica.retrieveAll', [ClasseTerapeuticaController::class
 Route::post('/classeTerapeutica.store', [ClasseTerapeuticaController::class, 'store']);
 Route::get('/classeTerapeutica.delete.{i}', [ClasseTerapeuticaController::class, 'delete']);
 Route::get('/classeTerapeutica.edit.{i}', [ClasseTerapeuticaController::class, 'edit']);
+
+// Bairro
+Route::get('/bairro.index', [BairroController::class, 'index']);
+Route::get('/bairro.create', [BairroController::class, 'create']);
+Route::get('/bairro.retrieveAll', [BairroController::class, 'retrieveAll']);
+Route::post('/bairro.store', [BairroController::class, 'store']);
+Route::get('/bairro.delete.{i}', [BairroController::class, 'delete']);
+Route::get('/bairro.edit.{i}', [BairroController::class, 'edit']);
