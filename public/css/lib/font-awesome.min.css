@@ -298,6 +298,10 @@
     content: "\f015"
 }
 
+.fa-city:before {
+    content: "\f64f";
+}
+
 .fa-file-o:before {
     content: "\f016"
 }
