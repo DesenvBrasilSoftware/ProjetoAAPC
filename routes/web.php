@@ -8,6 +8,7 @@ use App\Http\Controllers\GrupoItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\ClasseTerapeuticaController;
 use App\Http\Controllers\BairroController;
+use App\Http\Controllers\AcomodacaoController;
 
 
 /*
@@ -64,7 +65,7 @@ Route::get('/medicamento.retrieveAll', [MedicamentoController::class, 'retrieveA
 Route::post('/medicamento.store', [MedicamentoController::class, 'store']);
 Route::get('/medicamento.delete.{i}', [MedicamentoController::class, 'delete']);
 Route::get('/medicamento.edit.{i}', [MedicamentoController::class, 'edit']);
- 
+
 // classe terapêutica
 Route::get('/classeTerapeutica.index', [ClasseTerapeuticaController::class, 'index']);
 Route::get('/classeTerapeutica.create', [ClasseTerapeuticaController::class, 'create']);
@@ -80,3 +81,11 @@ Route::get('/bairro.retrieveAll', [BairroController::class, 'retrieveAll']);
 Route::post('/bairro.store', [BairroController::class, 'store']);
 Route::get('/bairro.delete.{i}', [BairroController::class, 'delete']);
 Route::get('/bairro.edit.{i}', [BairroController::class, 'edit']);
+
+// Acomodações
+Route::get('/acomodacao.index', [AcomodacaoController::class, 'index']);
+Route::get('/acomodacao.create', [AcomodacaoController::class, 'create']);
+Route::get('/acomodacao.retrieveAll', [AcomodacaoController::class, 'retrieveAll']);
+Route::post('/acomodacao.store', [AcomodacaoController::class, 'store']);
+Route::get('/acomodacao.delete.{i}', [AcomodacaoController::class, 'delete']);
+Route::get('/acomodacao.edit.{i}', [AcomodacaoController::class, 'edit']);
