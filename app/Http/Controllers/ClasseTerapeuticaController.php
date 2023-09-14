@@ -37,7 +37,7 @@ class ClasseTerapeuticaController extends Controller
         if ($request['id']) {
             return redirect('/classeTerapeutica.edit.' . $obj->id);
         }
-        return redirect('/classeTerapeutica.create');
+        return redirect('/classeTerapeutica.index');    
     }
 
     public function edit(string $id, $msg = '')
