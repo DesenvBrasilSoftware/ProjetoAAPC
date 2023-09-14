@@ -9,7 +9,7 @@ class BairroController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Item::orderBy('nome')->get();
+        $lista = Bairro::orderBy('nome')->get();
         return view('bairro.index')->with(['lista' => $lista]);
     }
 

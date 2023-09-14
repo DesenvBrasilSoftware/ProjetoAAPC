@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center p-2 rounded mb-5" style="background-color: #343957fe;">
-                    <i class="fa fa-solid fa-city" style="font-size: 24px;"></i> <h3 class="mb-0 ml-2 text-white" style="color: #bbb !important;">Cidades</h3>
+                    <i class="ti-map-alt" style="font-size: 24px; color: #fff;"></i> <h3 class="mb-0 ml-2 text-white" style="color: #bbb !important;">Cidades</h3>
                 </div>
 
                 <form id="form" action="/cidade.store" method="post">

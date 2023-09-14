@@ -9,7 +9,7 @@ class MedicamentoController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Item::orderBy('nome')->get();
+        $lista = Medicamento::orderBy('nome')->get();
         return view('medicamento.index')->with(['lista' => $lista]);
     }
 
