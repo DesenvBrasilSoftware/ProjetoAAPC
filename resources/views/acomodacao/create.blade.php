@@ -1,6 +1,6 @@
 @extends('template')
 @section('conteudo')
-<form id="form" action="/enfermidade.store" method="post">
+<form id="form" action="/acomodacao.store" method="post">
     @csrf
     <div class="row">
         <div class="form-group">
