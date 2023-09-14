@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClassseTerapeutica;
+use App\Models\ClasseTerapeutica;
 use Illuminate\Http\Request;
 
-class ClasseTerapeuicaController extends Controller
+class ClasseTerapeuticaController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Item::orderBy('nome')->get();
+        $lista = ClasseTerapeutica::orderBy('descricao')->get();
         return view('classeTerapeutica.index')->with(['lista' => $lista]);
     }
 
