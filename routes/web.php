@@ -9,6 +9,7 @@ use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\ClasseTerapeuticaController;
 use App\Http\Controllers\BairroController;
 use App\Http\Controllers\AcomodacaoController;
+use App\Http\Controllers\PessoaController;
 
 
 /*
@@ -89,3 +90,11 @@ Route::get('/acomodacao.retrieveAll', [AcomodacaoController::class, 'retrieveAll
 Route::post('/acomodacao.store', [AcomodacaoController::class, 'store']);
 Route::get('/acomodacao.delete.{i}', [AcomodacaoController::class, 'delete']);
 Route::get('/acomodacao.edit.{i}', [AcomodacaoController::class, 'edit']);
+
+// Pessoa
+Route::get('/pessoa.index', [PessoaController::class, 'index']);
+Route::get('/pessoa.create', [PessoaController::class, 'create']);
+Route::get('/pessoa.retrieveAll', [PessoaController::class, 'retrieveAll']);
+Route::post('/pessoa.store', [PessoaController::class, 'store']);
+Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
+Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
