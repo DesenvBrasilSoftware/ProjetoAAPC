@@ -10,9 +10,9 @@
         </div>
         <div class="row">
             <div class="form-group">
-                <label for="cpf/cnpj" id="labelCpfCnpj">CPF</label>
-                <input type="text" name="cpf/cnpj" class="form-control" id="fornecedor" maxlength="45"
-                    value="{{ old('fornecedor') }}">
+                <label for="cadPessoa" id="labelCpfCnpj">CPF</label>
+                <input type="text" name="cadPessoa" class="form-control" id="cadPessoa" maxlength="45"
+                    value="{{ old('cadPessoa') }}">
             </div>
         </div>
         <div class="row">

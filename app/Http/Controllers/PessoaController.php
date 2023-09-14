@@ -30,8 +30,12 @@ class PessoaController extends Controller
         $obj->voluntario = $request['voluntario'];
         $obj->fornecedor = $request['fornecedor'];
         $obj->clinica = $request['clinica'];
-        $obj->cpf = $request['cpf'];
-        $obj->cnpj = $request['cnpj'];
+        if ($request['cpfCnpj']) {
+            $obj->cnpj = $request['cadPessoa'];
+        } else {
+            $obj->cpf = $request['cadPessoa'];
+        }
+
         $obj->rg = $request['rg'];
         $obj->data_cadastro = $request['data_Cadastro'];
         $msg = 'Registro salvo no banco de dados';
