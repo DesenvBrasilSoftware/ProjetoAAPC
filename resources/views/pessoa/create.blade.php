@@ -4,8 +4,8 @@
         @csrf
         <div class="row">
             <div class="form-group">
-                <input type="checkbox" name="cpfCnpj" id="cpfCnpj" data-toggle="toggle" data-on="Pessoa física"
-                    data-off="Pessoa jurídica" {{ old('cpfCnpj') ? 'checked' : '' }}>
+                <input type="checkbox" name="cpfCnpj" id="cpfCnpj" data-toggle="toggle" data-on="Pessoa jurídica"
+                    data-off="Pessoa física" {{ old('cpfCnpj') ? 'checked' : '' }}>
             </div>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
                     value="{{ old('rg') }}">
             </div>
         </div>
-            {{-- Os Selects deverão ter os dados vindo de uma listagem dos dados requeridos --}}
+        {{-- Os Selects deverão ter os dados vindo de uma listagem dos dados requeridos --}}
         <div class="row">
             <div class="form-group">
                 <label for="colaborador">Colaborador</label>
@@ -87,7 +87,7 @@
                 size: "small",
             });
             $("#cpfCnpj").change(function() {
-                if ($(this).prop("checked")) {
+                if (!$(this).prop("checked")) {
                     // Se CNPJ está selecionado, mude o texto do label para "Nome Fantasia"
                     $("#labelNome").text("Nome fantasia");
                     $("#labelCpfCnpj").text("CNPJ");
