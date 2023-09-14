@@ -29,6 +29,7 @@
                     value="{{ old('rg') }}">
             </div>
         </div>
+            {{-- Os Selects deverão ter os dados vindo de uma listagem dos dados requeridos --}}
         <div class="row">
             <div class="form-group">
                 <label for="colaborador">Colaborador</label>
