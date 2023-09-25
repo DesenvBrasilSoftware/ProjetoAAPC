@@ -1,10 +1,23 @@
-create database aapc;
-use aapc;
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Table `uf`
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `uf` (
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`uf`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`uf` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `sigla` VARCHAR(2) NULL,
@@ -13,9 +26,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cidade`
+-- Table `mydb`.`cidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cidade` (
+CREATE TABLE IF NOT EXISTS `mydb`.`cidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `uf_id` INT NOT NULL,
@@ -23,16 +36,16 @@ CREATE TABLE IF NOT EXISTS `cidade` (
   INDEX `fk_cidade_uf_idx` (`uf_id` ASC),
   CONSTRAINT `fk_cidade_uf`
     FOREIGN KEY (`uf_id`)
-    REFERENCES `uf` (`id`)
+    REFERENCES `mydb`.`uf` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bairro`
+-- Table `mydb`.`bairro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bairro` (
+CREATE TABLE IF NOT EXISTS `mydb`.`bairro` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `cidade_id` INT NOT NULL,
@@ -40,16 +53,16 @@ CREATE TABLE IF NOT EXISTS `bairro` (
   INDEX `fk_bairro_cidade1_idx` (`cidade_id` ASC),
   CONSTRAINT `fk_bairro_cidade1`
     FOREIGN KEY (`cidade_id`)
-    REFERENCES `cidade` (`id`)
+    REFERENCES `mydb`.`cidade` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pessoa`
+-- Table `mydb`.`pessoa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pessoa` (
+CREATE TABLE IF NOT EXISTS `mydb`.`pessoa` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `colaborador` TINYINT NOT NULL DEFAULT 0,
@@ -66,28 +79,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `consulta`
+-- Table `mydb`.`consulta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `consulta` (
+CREATE TABLE IF NOT EXISTS `mydb`.`consulta` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+  `data` DATE NOT NULL DEFAULT CURRENT_DATE,
   `pessoa_id` INT NOT NULL,
-  `realizada` TINYINT NOT NULL DEFAULT 0,
+  `realizada` TINYINT NOT NULL,
   `observacoes` TEXT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `data`),
   INDEX `fk_consulta_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_consulta_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `paciente`
+-- Table `mydb`.`paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `paciente` (
+CREATE TABLE IF NOT EXISTS `mydb`.`paciente` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `data_nascimento` DATE NULL,
@@ -114,21 +127,21 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   INDEX `fk_paciente_consulta1_idx` (`consulta_id` ASC),
   CONSTRAINT `fk_paciente_bairro1`
     FOREIGN KEY (`bairro_id`)
-    REFERENCES `bairro` (`id`)
+    REFERENCES `mydb`.`bairro` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_paciente_consulta1`
     FOREIGN KEY (`consulta_id`)
-    REFERENCES `consulta` (`id`)
+    REFERENCES `mydb`.`consulta` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `acompanhante`
+-- Table `mydb`.`acompanhante`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `acompanhante` (
+CREATE TABLE IF NOT EXISTS `mydb`.`acompanhante` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `paciente_id` INT NOT NULL,
   `pessoa_id` INT NOT NULL,
@@ -137,21 +150,21 @@ CREATE TABLE IF NOT EXISTS `acompanhante` (
   INDEX `fk_contato_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_contato_paciente1`
     FOREIGN KEY (`paciente_id`)
-    REFERENCES `paciente` (`id`)
+    REFERENCES `mydb`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contato_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contato`
+-- Table `mydb`.`contato`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `contato` (
+CREATE TABLE IF NOT EXISTS `mydb`.`contato` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `paciente_id` INT NOT NULL,
   `pessoa_id` INT NOT NULL,
@@ -160,21 +173,21 @@ CREATE TABLE IF NOT EXISTS `contato` (
   INDEX `fk_contato_pessoa2_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_contato_paciente2`
     FOREIGN KEY (`paciente_id`)
-    REFERENCES `paciente` (`id`)
+    REFERENCES `mydb`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contato_pessoa2`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `grupo_item`
+-- Table `mydb`.`grupo_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo_item` (
+CREATE TABLE IF NOT EXISTS `mydb`.`grupo_item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(45) NOT NULL,
   `perecivel` TINYINT NOT NULL DEFAULT 0,
@@ -184,9 +197,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `classe_terapeutica`
+-- Table `mydb`.`classe_terapeutica`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `classe_terapeutica` (
+CREATE TABLE IF NOT EXISTS `mydb`.`classe_terapeutica` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
@@ -194,9 +207,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicamento`
+-- Table `mydb`.`medicamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `medicamento` (
+CREATE TABLE IF NOT EXISTS `mydb`.`medicamento` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `principio_ativo` VARCHAR(45) NULL,
@@ -206,16 +219,16 @@ CREATE TABLE IF NOT EXISTS `medicamento` (
   INDEX `fk_medicamento_classe_terapeutica1_idx` (`classe_terapeutica_id` ASC),
   CONSTRAINT `fk_medicamento_classe_terapeutica1`
     FOREIGN KEY (`classe_terapeutica_id`)
-    REFERENCES `classe_terapeutica` (`id`)
+    REFERENCES `mydb`.`classe_terapeutica` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `item`
+-- Table `mydb`.`item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `item` (
+CREATE TABLE IF NOT EXISTS `mydb`.`item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `grupo_item_id` INT NOT NULL,
   `descricao` VARCHAR(60) NOT NULL,
@@ -228,38 +241,38 @@ CREATE TABLE IF NOT EXISTS `item` (
   INDEX `fk_item_medicamento1_idx` (`medicamento_id` ASC),
   CONSTRAINT `fk_item_grupo_item1`
     FOREIGN KEY (`grupo_item_id`)
-    REFERENCES `grupo_item` (`id`)
+    REFERENCES `mydb`.`grupo_item` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_medicamento1`
     FOREIGN KEY (`medicamento_id`)
-    REFERENCES `medicamento` (`id`)
+    REFERENCES `mydb`.`medicamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `entrada_doacao`
+-- Table `mydb`.`entrada_doacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `entrada_doacao` (
+CREATE TABLE IF NOT EXISTS `mydb`.`entrada_doacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+  `data` DATE NOT NULL DEFAULT CURRENT_DATE,
   `pessoa_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_doacao_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_doacao_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `entrada_doacao_item`
+-- Table `mydb`.`entrada_doacao_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `entrada_doacao_item` (
+CREATE TABLE IF NOT EXISTS `mydb`.`entrada_doacao_item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `entrada_doacao_id` INT NOT NULL,
   `item_id` INT NOT NULL,
@@ -269,21 +282,21 @@ CREATE TABLE IF NOT EXISTS `entrada_doacao_item` (
   INDEX `fk_doacao_item_item1_idx` (`item_id` ASC),
   CONSTRAINT `fk_doacao_item_doacao1`
     FOREIGN KEY (`entrada_doacao_id`)
-    REFERENCES `entrada_doacao` (`id`)
+    REFERENCES `mydb`.`entrada_doacao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_doacao_item_item1`
     FOREIGN KEY (`item_id`)
-    REFERENCES `item` (`id`)
+    REFERENCES `mydb`.`item` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `kit_item`
+-- Table `mydb`.`kit_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kit_item` (
+CREATE TABLE IF NOT EXISTS `mydb`.`kit_item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `quantidade` DECIMAL(12,4) NOT NULL DEFAULT 0,
   `item_kit_id` INT NOT NULL,
@@ -293,23 +306,23 @@ CREATE TABLE IF NOT EXISTS `kit_item` (
   INDEX `fk_kit_item_item2_idx` (`item_composicao_id` ASC),
   CONSTRAINT `fk_kit_item_item1`
     FOREIGN KEY (`item_kit_id`)
-    REFERENCES `item` (`id`)
+    REFERENCES `mydb`.`item` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_kit_item_item2`
     FOREIGN KEY (`item_composicao_id`)
-    REFERENCES `item` (`id`)
+    REFERENCES `mydb`.`item` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `conta_a_pagar`
+-- Table `mydb`.`conta_a_pagar`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `conta_a_pagar` (
+CREATE TABLE IF NOT EXISTS `mydb`.`conta_a_pagar` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+  `data` DATE NOT NULL DEFAULT CURRENT_DATE,
   `valor_a_pagar` DECIMAL(12,2) NOT NULL DEFAULT 0,
   `pessoa_id` INT NOT NULL,
   `valor_pago` DECIMAL(12,2) NOT NULL DEFAULT 0,
@@ -317,18 +330,18 @@ CREATE TABLE IF NOT EXISTS `conta_a_pagar` (
   INDEX `fk_conta_a_pagar_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_conta_a_pagar_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `conta_a_receber`
+-- Table `mydb`.`conta_a_receber`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `conta_a_receber` (
+CREATE TABLE IF NOT EXISTS `mydb`.`conta_a_receber` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NULL,
+  `data` DATE NULL DEFAULT CURRENT_DATE,
   `valor_a_receber` DECIMAL(12,2) NOT NULL DEFAULT 0,
   `valor_recebido` DECIMAL(12,2) NOT NULL DEFAULT 0,
   `pessoa_id` INT NOT NULL,
@@ -336,16 +349,16 @@ CREATE TABLE IF NOT EXISTS `conta_a_receber` (
   INDEX `fk_conta_a_receber_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_conta_a_receber_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `enfermidade`
+-- Table `mydb`.`enfermidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `enfermidade` (
+CREATE TABLE IF NOT EXISTS `mydb`.`enfermidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cid` VARCHAR(45) NULL,
   `descricao` VARCHAR(120) NOT NULL,
@@ -354,11 +367,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `paciente_enfermidade`
+-- Table `mydb`.`paciente_enfermidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `paciente_enfermidade` (
+CREATE TABLE IF NOT EXISTS `mydb`.`paciente_enfermidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data_cadastro` DATE NOT NULL,
+  `data_cadastro` DATE NOT NULL DEFAULT CURRENT_DATE,
   `paciente_id` INT NOT NULL,
   `enfermidade_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -366,38 +379,38 @@ CREATE TABLE IF NOT EXISTS `paciente_enfermidade` (
   INDEX `fk_paciente_doenca_doenca1_idx` (`enfermidade_id` ASC),
   CONSTRAINT `fk_paciente_doenca_paciente1`
     FOREIGN KEY (`paciente_id`)
-    REFERENCES `paciente` (`id`)
+    REFERENCES `mydb`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_paciente_doenca_doenca1`
     FOREIGN KEY (`enfermidade_id`)
-    REFERENCES `enfermidade` (`id`)
+    REFERENCES `mydb`.`enfermidade` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saida_doacao`
+-- Table `mydb`.`saida_doacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saida_doacao` (
+CREATE TABLE IF NOT EXISTS `mydb`.`saida_doacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+  `data` DATE NOT NULL DEFAULT CURRENT_DATE,
   `pessoa_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_saida_doacao_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_saida_doacao_pessoa1`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `pessoa` (`id`)
+    REFERENCES `mydb`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saida_doacao_item`
+-- Table `mydb`.`saida_doacao_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saida_doacao_item` (
+CREATE TABLE IF NOT EXISTS `mydb`.`saida_doacao_item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `saida_doacao_id` INT NOT NULL,
   `item_id` INT NOT NULL,
@@ -407,39 +420,39 @@ CREATE TABLE IF NOT EXISTS `saida_doacao_item` (
   INDEX `fk_saida_doacao_item_item1_idx` (`item_id` ASC),
   CONSTRAINT `fk_saida_doacao_item_saida_doacao1`
     FOREIGN KEY (`saida_doacao_id`)
-    REFERENCES `saida_doacao` (`id`)
+    REFERENCES `mydb`.`saida_doacao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_saida_doacao_item_item1`
     FOREIGN KEY (`item_id`)
-    REFERENCES `item` (`id`)
+    REFERENCES `mydb`.`item` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `acomodacao_paciente`
+-- Table `mydb`.`acomodacao_paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `acomodacao_paciente` (
+CREATE TABLE IF NOT EXISTS `mydb`.`acomodacao_paciente` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data_entrada` DATE NOT NULL,
+  `data_entrada` DATE NOT NULL DEFAULT CURRENT_DATE,
   `data_saida` DATE NULL,
   `paciente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_acomodacao_paciente_paciente1_idx` (`paciente_id` ASC),
   CONSTRAINT `fk_acomodacao_paciente_paciente1`
     FOREIGN KEY (`paciente_id`)
-    REFERENCES `paciente` (`id`)
+    REFERENCES `mydb`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `acomodacao`
+-- Table `mydb`.`acomodacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `acomodacao` (
+CREATE TABLE IF NOT EXISTS `mydb`.`acomodacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(45) NOT NULL,
   `leitos` INT NOT NULL DEFAULT 1,
@@ -450,16 +463,16 @@ CREATE TABLE IF NOT EXISTS `acomodacao` (
   INDEX `fk_acomodacao_acomodacao_paciente1_idx` (`acomodacao_paciente_id` ASC),
   CONSTRAINT `fk_acomodacao_acomodacao_paciente1`
     FOREIGN KEY (`acomodacao_paciente_id`)
-    REFERENCES `acomodacao_paciente` (`id`)
+    REFERENCES `mydb`.`acomodacao_paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `refeicao`
+-- Table `mydb`.`refeicao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `refeicao` (
+CREATE TABLE IF NOT EXISTS `mydb`.`refeicao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data` DATE NOT NULL,
   `tipo` VARCHAR(1) NOT NULL,
@@ -471,13 +484,29 @@ CREATE TABLE IF NOT EXISTS `refeicao` (
   INDEX `fk_refeicao_acompanhante1_idx` (`acompanhante_id` ASC),
   CONSTRAINT `fk_refeicao_paciente1`
     FOREIGN KEY (`paciente_id`)
-    REFERENCES `paciente` (`id`)
+    REFERENCES `mydb`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_refeicao_acompanhante1`
     FOREIGN KEY (`acompanhante_id`)
-    REFERENCES `acompanhante` (`id`)
+    REFERENCES `mydb`.`acompanhante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `mydb`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL,
+  `senha` TEXT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
