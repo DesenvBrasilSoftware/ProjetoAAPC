@@ -74,7 +74,7 @@
 
                     <li><a href="medicamento.index"><i class="ti-support"></i>Medicamentos</a></li>
 
-                    <li><a><i class="ti-close"></i> Logout</a></li>
+                    <li><a href="{{ route('logout') }}" ><i class="ti-close"></i> Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -271,7 +271,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="{{ route('logout') }}">
                                                     <i class="ti-power-off"></i>
                                                     <span>Logout</span>
                                                 </a>
