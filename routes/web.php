@@ -12,6 +12,7 @@ use App\Http\Controllers\GrupoItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\PacienteController;
 
 
 /*
@@ -105,4 +106,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
 
+    // Paciente
+    Route::get('/paciente.index', [PacienteController::class, 'index']);
+    Route::get('/paciente.create', [PacienteController::class, 'create']);
+    Route::get('/paciente.retrieveAll', [PacienteController::class, 'retrieveAll']);
+    Route::post('/paciente.store', [PacienteController::class, 'store']);
+    Route::get('/paciente.delete.{i}', [PacienteController::class, 'delete']);
+    Route::get('/paciente.edit.{i}', [PacienteController::class, 'edit']);
 });

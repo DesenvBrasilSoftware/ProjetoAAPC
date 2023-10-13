@@ -36,13 +36,45 @@
 
   <body>
     <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-      <div class="nano">
-        <div class="nano-content">
-          <ul>
-            <div class="logo">
-              <a href="/">
-                <span>AAPC</span>
-              </a>
+        <div class="nano">
+            <div class="nano-content">
+                <ul>
+                    <div class="logo">
+                        <a href="/">
+                            <span>AAPC</span>
+                        </a>
+                    </div>
+
+                    <li><a href="acomodacao.index"><i class="ti-clipboard"></i> Acomodação </a></li>
+
+                    <li class="label"></li>
+                    <li><a class="sidebar-sub-toggle"><i class="ti-location-pin"></i>Localidade<span
+                                class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="bairro.index">Bairro</a></li>
+                            <li><a href="cidade.index">Cidade</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="classeTerapeutica.index"><i class="ti-paint-bucket"></i>Classe terapêutica</a></li>
+
+                    <li><a href="enfermidade.index"><i class="ti-pulse"></i>Enfermidade</a></li>
+
+                    <li class="label"></li>
+                    <li><a class="sidebar-sub-toggle"><i class="ti-server"></i>Estoque<span
+                                class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="grupoItem.index">Grupo Item</a></li>
+                            <li><a href="item.index">Item</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="medicamento.index"><i class="ti-support"></i>Medicamentos</a></li>
+
+                    <li><a href="paciente.index"><i class="ti-user"></i>Paciente</a></li>
+
+                    <li><a href="{{ route('logout') }}"><i class="ti-close"></i> Logout</a></li>
+                </ul>
             </div>
 
             <li>
