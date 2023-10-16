@@ -276,7 +276,9 @@
     <div class="content-wrap">
       <div class="main">
         <div class="container-fluid">
-          @yield('conteudo')
+            <div class="card">
+                @yield('conteudo')
+            </div>
         </div>
       </div>
     </div>
@@ -314,6 +316,8 @@
     --}}
 
     <!-- scripit init-->
-    {{--<script src="/js/dashboard2.js"></script>--}}
+    {{--
+    <script src="/js/dashboard2.js"></script>
+    --}}
   </body>
 </html>
