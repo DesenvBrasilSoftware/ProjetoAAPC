@@ -29,11 +29,14 @@ class GrupoItemController extends Controller
         $obj->perecivel = $request['perecivel'];
         $obj->refrigerado = $request['refrigerado'];
 
-        $msg = 'Registro salvo no banco de dados';
         try {
+            // Tenta salvar o objeto no banco de dados
             $obj->save();
+            $msg = 'Registro salvo com sucesso.';
         } catch (\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
+            // Em caso de erro, define a mensagem de erro e armazena os dados do formulário na sessão
+            $msg = $e->getMessage(); // Obtém a mensagem de erro da exceção
+            session()->flash('error', $msg);
             session()->flashInput($request->input());
         }
 
