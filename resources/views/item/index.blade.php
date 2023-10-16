@@ -1,7 +1,4 @@
 @extends('template') @section('conteudo')
-
-
-
 <table id="dataTable" class="table table-stripped">
   <thead>
     <tr>
