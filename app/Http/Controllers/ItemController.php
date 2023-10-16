@@ -16,35 +16,48 @@ class ItemController extends Controller
 
     public function create($msg = '')
     {
-        return view('item.create')->with(['msg' => $msg]);
+        $listaGrupoItem = GrupoItem::all();
+
+        return view('item.create', compact('listaGrupoItem', 'msg'));
     }
 
     public function store(Request $request)
     {
+        // Cria um novo objeto Item
         $obj = new Item();
+
+        // Verifica se está atualizando um registro existente
         if ($request['id']) {
             $obj = Item::find($request['id']);
         }
-        $obj->grupo_item_id = $request['grupo_item_id'];
+
+        // Preenche os campos do objeto com os dados do formulário
         $obj->descricao = $request['descricao'];
+        $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->fabricacao = $request['fabricacao'];
         $obj->validade = $request['validade'];
         $obj->kit = $request['kit'];
         $obj->medicamento_id = $request['medicamento_id'];
 
-        $msg = 'Registro salvo no banco de dados';
         try {
+            // Tenta salvar o objeto no banco de dados
             $obj->save();
+            $msg = 'Registro salvo com sucesso.';
         } catch (\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
+            // Em caso de erro, define a mensagem de erro e armazena os dados do formulário na sessão
+            $msg = $e->getMessage(); // Obtém a mensagem de erro da exceção
+            session()->flash('error', $msg);
             session()->flashInput($request->input());
         }
 
+        // Redireciona para a página de edição se estiver atualizando, caso contrário, volta para a página de criação
         if ($request['id']) {
             return redirect('/item.edit.' . $obj->id);
         }
-        return redirect('/item.create');
+
+        return redirect('/item.create')->with('success', $msg);
     }
+
 
     public function edit(string $id, $msg = '')
     {
