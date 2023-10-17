@@ -73,12 +73,12 @@ class ItemController extends Controller
     public function delete($id)
     {
         $obj = Item::find($id);
-        $msg = "{$obj->descricao} excluída.";
+        $msg = "Item ({$obj->descricao}) excluído.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o item. ';
         }
-        return redirect('/item.index')->with(['msg' => $msg]);
+        return redirect('/item.index')->with('success', $msg);
     }
 }
