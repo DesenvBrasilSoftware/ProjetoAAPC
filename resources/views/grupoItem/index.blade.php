@@ -1,5 +1,8 @@
 @extends('template')
 @section('conteudo')
+<div class="form-group">
+  <a type="button" href="/grupoItem.create" class="btn btn-primary">Incluir</a>
+</div>
 <table id="dataTable" class="table table-stripped">
   <thead>
     <tr>
@@ -34,7 +37,4 @@
     @endforeach
   </tbody>
 </table>
-<div class="form-group">
-  <a type="button" href="/grupoItem.create" class="btn btn-primary">Incluir</a>
-</div>
 @endsection
