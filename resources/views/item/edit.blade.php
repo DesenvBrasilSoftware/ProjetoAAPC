@@ -1,6 +1,5 @@
 @extends('template')
 @section('conteudo')
-
 <form class="needs-validation" novalidate id="form" action="/item.store" method="post">
   @csrf
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}" />
