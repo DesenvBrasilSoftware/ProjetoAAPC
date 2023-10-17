@@ -70,8 +70,8 @@
             <li>
               <a class="sidebar-sub-toggle"><i class="ti-server"></i>Estoque<span class="sidebar-collapse-icon ti-angle-down"></span></a>
               <ul>
+                  <li><a href="item.index">Item</a></li>
                 <li><a href="grupoItem.index">Grupo Item</a></li>
-                <li><a href="item.index">Item</a></li>
               </ul>
             </li>
 
