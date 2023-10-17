@@ -5,7 +5,7 @@
   <div class="form-group">
     <label for="descricao">Descrição:</label>
     <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="120"
-      value="{{ old('descricao') }}" autofocus placeholder="Digite a descrição do item">
+      value="{{ old('descricao') }}" autofocus placeholder="Digite a descrição do grupo do item">
   </div>
   <div class="form-group">
     <label for="perecivel">Perecível</label>

@@ -38,7 +38,7 @@
     <div class="form-group">
         <label for="kit">Kit:</label>
         <input type="checkbox" name="kit" id="kit" data-toggle="toggle" data-on="Sim"
-        data-off="Não" {{ old('kit') ? 'checked' : 'ssss' }}>
+        data-off="Não" {{ old('kit') ? 'checked' : '' }}>
     </div>
     <div class="form-group">
       <a href="/item.index" class="btn btn-warning">Fechar</a>

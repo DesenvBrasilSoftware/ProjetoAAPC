@@ -54,7 +54,7 @@ class ItemController extends Controller
 
         // Redireciona para a página de edição se estiver atualizando, caso contrário, volta para a página de criação
         if ($request['id']) {
-            return redirect('/item.edit.' . $obj->id);
+            return redirect('/item.edit.' . $obj->id)->with('success', $msg);
         }
 
         return redirect('/item.create')->with('success', $msg);
