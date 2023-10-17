@@ -70,8 +70,8 @@
             <li>
               <a class="sidebar-sub-toggle"><i class="ti-server"></i>Estoque<span class="sidebar-collapse-icon ti-angle-down"></span></a>
               <ul>
+                  <li><a href="item.index">Item</a></li>
                 <li><a href="grupoItem.index">Grupo Item</a></li>
-                <li><a href="item.index">Item</a></li>
               </ul>
             </li>
 
@@ -276,7 +276,45 @@
     <div class="content-wrap">
       <div class="main">
         <div class="container-fluid">
-          @yield('conteudo')
+            <div class="card">
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                @endif
+                @yield('conteudo')
+                <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                        }, false);
+                    });
+                    }, false);
+                })();
+                </script>
+            </div>
         </div>
       </div>
     </div>
@@ -314,6 +352,8 @@
     --}}
 
     <!-- scripit init-->
-    {{--<script src="/js/dashboard2.js"></script>--}}
+    {{--
+    <script src="/js/dashboard2.js"></script>
+    --}}
   </body>
 </html>
