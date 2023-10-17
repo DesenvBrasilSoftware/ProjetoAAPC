@@ -10,9 +10,9 @@
     <div class="form-group">
       <label for="grupo_item_id">Grupo do item:</label>
       <select required name="grupo_item_id" class="form-control" id="grupo_item_id" maxlength="45">
-        <option value="" label="Selecione um grupo de item" selected></option>
+        <option value="" label="Selecione um grupo de item..." selected></option>
         @foreach ($listaGrupoItem as $grupoItem)
-        <option value="{{ $grupoItem->id }}" @if(old('grupo_item_id') == $grupoItem->id) selected @endif>{{ $grupoItem->descricao }}</option>
+        <option value="{{ $grupoItem->id }}" label="{{ $grupoItem->descricao }}">{{ $grupoItem->descricao }}</option>
         @endforeach
       </select>
     </div>
@@ -28,8 +28,8 @@
     </div>
     <div class="form-group">
       <label for="medicamento_id">Medicamento:</label>
-      <select required name="medicamento_id" class="form-control" id="medicamento_id" maxlength="45">
-        <option value="" label="Selecione o medicamento" selected></option>
+      <select name="medicamento_id" class="form-control" id="medicamento_id" maxlength="45">
+        <option value="" label="Selecione o medicamento..." selected></option>
         @foreach ($listaMedicamento as $medicamento)
         <option value="{{ $medicamento->id }}" label="{{ $medicamento->nome }}">{{ $medicamento->nome }}</option>
         @endforeach
@@ -38,7 +38,7 @@
     <div class="form-group">
         <label for="kit">Kit:</label>
         <input type="checkbox" name="kit" id="kit" data-toggle="toggle" data-on="Sim"
-        data-off="Não" {{ old('kit') ? 'checked' : '' }}>
+        data-off="Não" {{ old('kit') ? 'checked' : 'ssss' }}>
     </div>
     <div class="form-group">
       <a href="/item.index" class="btn btn-warning">Fechar</a>

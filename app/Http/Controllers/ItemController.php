@@ -63,9 +63,11 @@ class ItemController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $obj = Item::find($id);
+        $item = Item::find($id);
+        $listaGrupoItem = GrupoItem::all();
+        $listaMedicamento = Medicamento::all();
 
-        return view('item.edit')->with(['msg' => $msg, 'obj' => $obj]);
+        return view('item.edit', compact('listaGrupoItem', 'listaMedicamento', 'msg', 'item'));
     }
 
     public function delete($id)
