@@ -4,7 +4,7 @@
   @csrf
   <div class="form-group">
     <label for="descricao">Descrição:</label>
-    <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="120" value="{{ old('descricao') }}" autofocus placeholder="Digite a descrição do item" />
+    <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="60" value="{{ old('descricao') }}" autofocus placeholder="Digite a descrição do item" />
   </div>
   <div class="form-group">
     <label for="grupo_item_id">Grupo do item:</label>
@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <label for="kit">Kit:</label>
-    <input required type="text" name="kit" class="form-control" id="kit" maxlength="120" value="{{ old('kit') }}" autofocus placeholder="Digite o nome do kit" />
+    <input type="text" name="kit" class="form-control" id="kit" maxlength="120" value="{{ old('kit') }}" autofocus placeholder="Digite o nome do kit" />
   </div>
   <div class="form-group">
     <label for="medicacao_id">Medicamento:</label>

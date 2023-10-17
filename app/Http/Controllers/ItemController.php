@@ -39,15 +39,15 @@ class ItemController extends Controller
         $obj->kit = $request['kit'];
         $obj->medicamento_id = $request['medicamento_id'];
 
+        $msg = 'Registro salvo com sucesso.';
+
         try {
             // Tenta salvar o objeto no banco de dados
             $obj->save();
-            $msg = 'Registro salvo com sucesso.';
         } catch (\Exception $e) {
             // Em caso de erro, define a mensagem de erro e armazena os dados do formulário na sessão
             $msg = $e->getMessage(); // Obtém a mensagem de erro da exceção
-            session()->flash('error', $msg);
-            session()->flashInput($request->input());
+            return redirect('/item.create')->with('error', $msg);
         }
 
         // Redireciona para a página de edição se estiver atualizando, caso contrário, volta para a página de criação
@@ -62,6 +62,7 @@ class ItemController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Item::find($id);
+
         return view('item.edit')->with(['msg' => $msg, 'obj' => $obj]);
     }
 
