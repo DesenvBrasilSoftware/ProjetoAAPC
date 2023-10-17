@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\GrupoItem;
+use App\Models\Medicamento;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -17,8 +18,9 @@ class ItemController extends Controller
     public function create($msg = '')
     {
         $listaGrupoItem = GrupoItem::all();
+        $listaMedicamento = Medicamento::all();
 
-        return view('item.create', compact('listaGrupoItem', 'msg'));
+        return view('item.create', compact('listaGrupoItem', 'listaMedicamento', 'msg'));
     }
 
     public function store(Request $request)
@@ -36,7 +38,7 @@ class ItemController extends Controller
         $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->fabricacao = $request['fabricacao'];
         $obj->validade = $request['validade'];
-        $obj->kit = $request['kit'];
+        $obj->kit = isset($request['kit']) ? 1 : 0;
         $obj->medicamento_id = $request['medicamento_id'];
 
         $msg = 'Registro salvo com sucesso.';
