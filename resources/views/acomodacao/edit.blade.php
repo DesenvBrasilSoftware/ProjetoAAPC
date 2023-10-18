@@ -1,6 +1,6 @@
 @extends('template')
 @section('conteudo')
-<form id="form" action="/acomodacao.store" method="post">
+<form class="needs-validation" novalidate id="form" action="/acomodacao.store" method="post">
   @csrf
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}">
   <div class="form-group">
