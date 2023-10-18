@@ -25,21 +25,23 @@
     </div>
     <div class="form-group">
         <label for="data_cadastro">Data de cadastro:</label>
-        <input type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro">
+        <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro">
     </div>
-  <div class="form-group">
-    <label for="sexo">Sexo</label><br>
-    <label>
-    <input type="radio" name="sexo" id="masculino" value="0"
-    {{ old('sexo') == '0' ? 'checked' : '' }}>
-    Masculino
-    </label>
-    <label>
-    <input type="radio" name="sexo" id="feminino" value="1"
-    {{ old('sexo') == '1' ? 'checked' : '' }}>
-    Feminino
-    </label>
-  </div>
+    <div class="form-group">
+        <label for="sexo">Sexo:</label><br>
+        <div class="form-check">
+          <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="0" {{ old('sexo') == '0' ? 'checked' : '' }}>
+          <label class="form-check-label" for="masculino">
+              Masculino
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" required type="radio" name="sexo" id="feminino" value="1" {{ old('sexo') == '1' ? 'checked' : '' }}>
+          <label class="form-check-label" for="feminino">
+              Feminino
+          </label>
+        </div>
+    </div>
   <div class="form-group">
     <label for="quantidade_filhos">Quantidade de filhos:</label>
     <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
@@ -47,33 +49,28 @@
         placeholder="Informe a quantidade de filhos">
   </div>
   <div class="form-group">
-    <label for="estado_civil">Estado civil</label><br>
-    <label>
-    <input type="radio" name="estado_civil" id="solteiro" value="0"
-    {{ old('estado_civil') == '0' ? 'checked' : '' }}>
-    Solteiro
-    </label>
-    <label>
-    <input type="radio" name="estado_civil" id="casado" value="1"
-    {{ old('estado_civil') == '1' ? 'checked' : '' }}>
-    Casado
-    </label>
-    <label>
-    <input type="radio" name="estado_civil" id="separado" value="2"
-    {{ old('estado_civil') == '2' ? 'checked' : '' }}>
-    Separado
-    </label>
-    <label>
-    <input type="radio" name="estado_civil" id="divorciado" value="3"
-    {{ old('estado_civil') == '3' ? 'checked' : '' }}>
-    Divorciado
-    </label>
-    <label>
-    <input type="radio" name="estado_civil" id="viuvo" value="4"
-    {{ old('estado_civil') == '4' ? 'checked' : '' }}>
-    Viúvo
-    </label>
-  </div>
+    <label for="estado_civil">Estado Civil:</label><br>
+    <div class="form-check">
+        <input required class="form-check-input" type="radio" name="estado_civil" id="solteiro" value="0" {{ old('estado_civil') == '0' ? 'checked' : '' }}>
+        <label class="form-check-label" for="solteiro">Solteiro</label>
+    </div>
+    <div class="form-check">
+        <input required class="form-check-input" type="radio" name="estado_civil" id="casado" value="1" {{ old('estado_civil') == '1' ? 'checked' : '' }}>
+        <label class="form-check-label" for="casado">Casado</label>
+    </div>
+    <div class="form-check">
+        <input required class="form-check-input" type="radio" name="estado_civil" id="separado" value="2" {{ old('estado_civil') == '2' ? 'checked' : '' }}>
+        <label class="form-check-label" for="separado">Separado</label>
+    </div>
+    <div class="form-check">
+        <input required class="form-check-input" type="radio" name="estado_civil" id="divorciado" value="3" {{ old('estado_civil') == '3' ? 'checked' : '' }}>
+        <label class="form-check-label" for="divorciado">Divorciado</label>
+    </div>
+    <div class="form-check">
+        <input required class="form-check-input" type="radio" name="estado_civil" id="viuvo" value="4" {{ old('estado_civil') == '4' ? 'checked' : '' }}>
+        <label class="form-check-label" for="viuvo">Viúvo</label>
+    </div>
+</div>
   <div class="form-group">
     <label for="conjuge">Conjuge</label>
     <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50" placeholder="Digite o nome do cônjuge" value="{{ old('conjuge') }}" autofocus>
