@@ -7,13 +7,6 @@
     <input type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
     value="{{ old('descricao') }}" autofocus placeholder="Informe a descrição" />
   </div>
-   <!-- Mudar para um select acomodação paciente -->
-  <div class="form-group">
-    <label for="acomodacao_paciente_id">Acomodação paciente</label>
-    <input type="text" name="acomodacao_paciente_id" class="form-control"
-    id="acomodacao_paciente_id" maxlength="45" value="{{ old('acomodacao_paciente_id') }}"
-    placeholder="Informe a acomodação do paciente" />
-  </div>
   <div class="form-group">
     <label for="leitos">Leitos:</label>
     <input type="text" name="leitos" class="form-control" id="leitos" maxlength="11"

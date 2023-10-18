@@ -8,12 +8,6 @@
     <input type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
       value="{{ $obj->descricao }}" autofocus placeholder="Informe a descrição">
   </div>
-  <!-- Mudar para um select acomodação paciente -->
-  <div class="form-group">
-    <label for="acomodacao_paciente_id">Acomodação paciente:</label>
-    <input type="text" name="acomodacao_paciente_id" class="form-control" id="acomodacao_paciente_id"
-      maxlength="45" value="{{ $obj->acomodacao_paciente_id }}" placeholder="Informe a acomodação do paciente">
-  </div>
   <div class="form-group">
     <label for="leitos">Leitos:</label>
     <input type="text" name="leitos" class="form-control" id="leitos" maxlength="11"
@@ -30,8 +24,8 @@
     data-off="Não" {{ $obj->refrigerado ? 'checked' : '' }}>
   </div>
   <div class="form-group">
-      <button type="submit" class="btn btn-primary">Salvar</button>
       <a type="button" href="/acomodacao.index" class="btn btn-warning">Fechar</a>
+      <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
