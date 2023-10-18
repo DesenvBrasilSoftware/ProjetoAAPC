@@ -41,7 +41,7 @@ class AcomodacaoController extends Controller
         if ($request['id']) {
             return redirect('/acomodacao.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('/acomodacao.create.' . $obj->id)->with('success', $msg);
+        return redirect('/acomodacao.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
