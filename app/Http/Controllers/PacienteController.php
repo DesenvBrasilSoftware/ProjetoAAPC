@@ -4,26 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Models\Bairro;
 
 class PacienteController extends Controller
-{    
+{
     public function index($msg='')
-    {                  
+    {
         $lista = Paciente::orderBy('nome')->get();
         return view('paciente.index')->with(['lista' => $lista]);
     }
-       
+
     public function create($msg = '')
     {
-        return view('paciente.create')->with(['msg' => $msg]);
+        $listaBairro = Bairro::all();
+
+        return view('paciente.create', compact('listaBairro', 'msg'));
     }
 
     public function store(Request $request)
     {
-        $obj = new Paciente();        
+        $obj = new Paciente();
         if ($request['id']) {
             $obj = Paciente::find($request['id']);
         }
+
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
         $obj->cpf = $request['cpf'];
@@ -43,36 +47,40 @@ class PacienteController extends Controller
         $obj->complemento = $request['complemento'];
         $obj->ponto_referencia = $request['ponto_referencia'];
         $obj->bairro_id = $request['bairro_id'];
-        $obj->consulta_id = $request['consulta_id'];
-        $msg = 'Registro salvo no banco de dados';
+
+        $msg = 'Registro salvo com sucesso.';
+
         try {
             $obj->save();
         }catch(\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
-            session()->flashInput($request->input());
+            $msg = $e->getMessage();
+            return redirect('/paciente.create')->with('error', $msg);
         }
-        
+
         if ($request['id']){
-            return redirect('/paciente.edit.'.$obj->id);
+            return redirect('/paciente.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('/paciente.create');
+        return redirect('/paciente.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
     {
         $obj = Paciente::find($id);
-        return view('paciente.edit')->with(['msg' => $msg,'obj' => $obj]);
+        $listaBairro = Bairro::all();
+
+        return view('paciente.edit', compact('listaBairro','msg', 'obj'));
     }
 
     public function delete($id)
     {
         $obj = Paciente::find($id);
-        $msg = "{$obj->nome} excluída.";
+        $msg = "Paciente ({$obj->nome}) excluído.";
         try {
             $obj->delete();
         }catch(\Exception $e) {
             $msg = 'Não foi possível excluir o paciente. ';
+            return redirect('/paciente.index')->with('error', $msg);
         }
-        return redirect('/paciente.index')->with(['msg' => $msg]);
+        return redirect('/paciente.index')->with('success', $msg);
     }
 }
