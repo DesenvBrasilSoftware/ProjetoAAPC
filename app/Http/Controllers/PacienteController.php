@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Models\Bairro;
 
 class PacienteController extends Controller
 {
@@ -15,7 +16,9 @@ class PacienteController extends Controller
 
     public function create($msg = '')
     {
-        return view('paciente.create')->with(['msg' => $msg]);
+        $listaBairro = Bairro::all();
+
+        return view('paciente.create', compact('listaBairro', 'msg'));
     }
 
     public function store(Request $request)
@@ -63,8 +66,9 @@ class PacienteController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Paciente::find($id);
+        $listaBairro = Bairro::all();
 
-        return view('paciente.edit', compact('msg', 'obj'));
+        return view('paciente.edit', compact('listaBairro','msg', 'obj'));
     }
 
     public function delete($id)

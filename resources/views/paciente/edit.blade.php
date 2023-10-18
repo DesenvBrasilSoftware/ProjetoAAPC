@@ -142,9 +142,17 @@
         value="{{ $obj->ponto_referencia }}" autofocus placeholder="Informe um ponto de referência">
     </div>
     <div class="form-group">
-    <label for="bairro_id">Bairro:</label>
-    <input type="text" name="bairro_id" class="form-control" id="bairro_id"
-        required value="{{ $obj->bairro_id }}" autofocus placeholder="Informe o bairro">
+      <label for="bairro_id">Bairro:</label>
+      <select name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
+        <option value="" label="Selecione o bairro..."></option>
+        @foreach ($listaBairro as $bairro)
+        <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}"
+        @if($obj->bairro_id == $bairro->id)
+            selected
+        @endif
+        >{{ $bairro->nome }}</option>
+        @endforeach
+      </select>
     </div>
   <div class="form-group">
       <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>

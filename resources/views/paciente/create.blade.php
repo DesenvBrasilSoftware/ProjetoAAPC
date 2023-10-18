@@ -135,10 +135,14 @@
     <label for="ponto_referencia">Ponto de referência:</label>
     <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
 </div>
-
 <div class="form-group">
     <label for="bairro_id">Bairro:</label>
-    <input required type="text" name="bairro_id" class="form-control" id="bairro_id" placeholder="Digite o bairro" value="{{ old('bairro_id') }}" autofocus>
+    <select name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
+    <option value="" label="Selecione o bairro..." selected></option>
+    @foreach ($listaBairro as $bairro)
+    <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
+    @endforeach
+    </select>
 </div>
 
 <div class="form-group">
