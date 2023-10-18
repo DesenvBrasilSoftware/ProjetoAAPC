@@ -5,7 +5,7 @@
   <div class="form-group">
         <label for="nome">Nome:</label>
         <input type="text" name="nome" class="form-control" id="nome" maxlength="50"
-        value="{{ old('nome') }}" autofocus placeholder="Insira seu nome">
+        required value="{{ old('nome') }}" autofocus placeholder="Insira seu nome">
     </div>
     <div class="form-group">
         <label for="data_nascimento">Data de nascimento:</label>
@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="data_cadastro">Data de cadastro:</label>
-        <input type="date" class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro">
+        <input type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro">
     </div>
   <div class="form-group">
     <label for="sexo">Sexo</label><br>
@@ -141,7 +141,7 @@
 
 <div class="form-group">
     <label for="bairro_id">Bairro:</label>
-    <input type="text" name="bairro_id" class="form-control" id="bairro_id" placeholder="Digite o bairro" value="{{ old('bairro_id') }}" autofocus>
+    <input required type="text" name="bairro_id" class="form-control" id="bairro_id" placeholder="Digite o bairro" value="{{ old('bairro_id') }}" autofocus>
 </div>
 
 <div class="form-group">
