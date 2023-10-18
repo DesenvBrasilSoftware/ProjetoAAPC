@@ -25,8 +25,8 @@ class AcomodacaoController extends Controller
             $obj = Acomodacao::find($request['id']);
         }
         $obj->descricao = $request['descricao'];
-        $obj->leitos = $request['leitos'] ?? '';
-        $obj->leitos_livres = $request['leitos_livres'] ?? '';
+        $obj->leitos = $request['leitos'];
+        $obj->leitos_livres = $request['leitos_livres'];
         $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
 
         $msg = 'Registro salvo com sucesso.';
