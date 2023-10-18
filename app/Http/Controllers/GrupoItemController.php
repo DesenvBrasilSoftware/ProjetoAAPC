@@ -49,9 +49,9 @@ class GrupoItemController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $grupo_item = GrupoItem::find($id);
+        $obj = GrupoItem::find($id);
 
-        return view('grupoItem.edit', compact('msg', 'grupo_item'));
+        return view('grupoItem.edit', compact('msg', 'obj'));
     }
 
     public function delete($id)
@@ -62,6 +62,7 @@ class GrupoItemController extends Controller
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o Grupo de item. ';
+            return redirect('/grupoItem.index')->with('error', $msg);
         }
         return redirect('/grupoItem.index')->with('success', $msg);
     }

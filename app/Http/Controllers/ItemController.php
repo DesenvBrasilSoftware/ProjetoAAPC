@@ -63,11 +63,11 @@ class ItemController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $item = Item::find($id);
+        $obj = Item::find($id);
         $listaGrupoItem = GrupoItem::all();
         $listaMedicamento = Medicamento::all();
 
-        return view('item.edit', compact('listaGrupoItem', 'listaMedicamento', 'msg', 'item'));
+        return view('item.edit', compact('listaGrupoItem', 'listaMedicamento', 'msg', 'obj'));
     }
 
     public function delete($id)
@@ -78,6 +78,7 @@ class ItemController extends Controller
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o item. ';
+            return redirect('/item.index')->with('error', $msg);
         }
         return redirect('/item.index')->with('success', $msg);
     }

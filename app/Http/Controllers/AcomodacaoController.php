@@ -24,23 +24,24 @@ class AcomodacaoController extends Controller
         if ($request['id']) {
             $obj = Acomodacao::find($request['id']);
         }
-        $obj->acomodacao_paciente_id = $request['acomodacao_paciente_id'];
         $obj->descricao = $request['descricao'];
         $obj->leitos = $request['leitos'];
         $obj->leitos_livres = $request['leitos_livres'];
-        $obj->refrigerado = $request['refrigerado'];
-        $msg = 'Registro salvo no banco de dados';
+        $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
+
+        $msg = 'Registro salvo com sucesso.';
+
         try {
             $obj->save();
         } catch (\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
-            session()->flashInput($request->input());
+            $msg = $e->getMessage();
+            return redirect('/acomodacao.create')->with('error', $msg);
         }
 
         if ($request['id']) {
-            return redirect('/acomodacao.edit.' . $obj->id);
+            return redirect('/acomodacao.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('acomodacao.create');
+        return redirect('/acomodacao.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
@@ -52,12 +53,13 @@ class AcomodacaoController extends Controller
     public function delete($id)
     {
         $obj = Acomodacao::find($id);
-        $msg = "{$obj->descricao} excluída.";
+        $msg = "Acomodação ({$obj->descricao}) excluída.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir a acomodação. ';
+            return redirect('/acomodacao.index')->with('error', $msg);
         }
-        return redirect('/acomodacao.index')->with(['msg' => $msg]);
+        return redirect('/acomodacao.index')->with('success', $msg);
     }
 }
