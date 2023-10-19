@@ -73,8 +73,10 @@ class PacienteController extends Controller
         $listaAcomodacao = Acomodacao::all();
         $listaAcomodacaoPaciente = DB::select("
             SELECT
+                ap.id,
                 ap.data_entrada,
                 ap.data_saida,
+                a.id as acomodacao_id,
                 a.descricao as acomodacao
             FROM
                 acomodacao_paciente ap
@@ -104,6 +106,9 @@ class PacienteController extends Controller
     public function adicionarAcomodacaoPaciente(Request $request)
     {
         $acomodacaoPaciente = new AcomodacaoPaciente();
+        if ($request['acomodacao_paciente_id']) {
+            $acomodacaoPaciente = AcomodacaoPaciente::find($request['acomodacao_paciente_id']);
+        }
 
         $acomodacaoPaciente->paciente_id = $request['paciente_id'];
         $acomodacaoPaciente->data_entrada = $request['data_entrada_id'];

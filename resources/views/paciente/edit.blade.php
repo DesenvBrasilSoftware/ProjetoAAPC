@@ -174,6 +174,15 @@
         <td>
           {{ $acomodacaoPaciente->acomodacao }}
         </td>
+        <td width="1%">
+          <a data-toggle="modal" data-target="#modalAcomodacao" onclick="abreModalEditarAcomodacao(
+            '{{ $acomodacaoPaciente->id }}',
+            '{{ $acomodacaoPaciente->data_entrada }}',
+            '{{ $acomodacaoPaciente->data_saida }}',
+            '{{ $acomodacaoPaciente->acomodacao_id }}')
+            "><i class="fa fa-edit"></i></a>
+        </td>
+        <td width="1%"><i class="fa fa-trash"></i></td>
       </tr>
       @endforeach
     </tbody>
@@ -203,7 +212,8 @@
         <!-- Adicione um formulário aqui -->
         @csrf <!-- Adicione o token CSRF -->
         <div class="modal-body">
-          <input type="hidden" name="paciente_id" value="{{ $obj->id }}">
+          <input id="acomodacao_paciente_id" type="hidden" name="acomodacao_paciente_id">
+          <input id="paciente_id" type="hidden" name="paciente_id" value="{{ $obj->id }}">
           <div class="form-group">
             <label for="data_entrada_id">Entrada:</label>
             <input type="date" class="form-control" id="data_entrada_id" name="data_entrada_id" placeholder="Informe a data de entrada">
@@ -218,17 +228,14 @@
               <option value="" label="Selecione a acomodação..."></option>
               @foreach ($listaAcomodacao as $acomodacao)
               <option value="{{ $acomodacao->id }}" label="{{ $acomodacao->descricao }}"
-              @if($obj->acomodacao_id == $acomodacao->id)
-              selected
-              @endif
-              >{{ $acomodacao->descricao }}</option>
+                >{{ $acomodacao->descricao }}</option>
               @endforeach
             </select>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Adicionar</button> <!-- Use type="submit" para enviar o formulário -->
+          <button type="submit" class="btn btn-primary">Adicionar</button>
         </div>
       </form>
     </div>
@@ -237,16 +244,29 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $('#modalAcomodacao').on('shown.bs.modal', function () {
-    $('#data_entrada').trigger('focus');
+    $('#data_entrada_id').trigger('focus');
   });
+
+  function abreModalEditarAcomodacao(id, dataEntrada, dataSaida, acomodacao_id) {
+        $('#modalAcomodacao').on('shown.bs.modal', function () {
+            $('#acomodacao_paciente_id').val(id);
+            $('#data_entrada_id').val(dataEntrada);
+            $('#data_saida_id').val(dataSaida);
+            $('#acomodacao_id').val(acomodacao_id);
+
+            $('#data_entrada_id').trigger('focus');
+        });
+    }
 
   function adicionarAcomodacaoPaciente() {
   var entrada = $('#data_entrada_id').val();
   var saida = $('#data_saida_id').val();
   var acomodacao_id = $('#acomodacao_id').val();
   var paciente_id = $('#paciente_id').val();
+  var acomodacao_paciente_id = $('#acomodacao_paciente_id').val();
 
   var dados = {
+      acomodacao_paciente_id: acomodacao_paciente_id,
       paciente_id: paciente_id,
       entrada: entrada,
       saida: saida,
