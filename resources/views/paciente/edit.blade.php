@@ -154,9 +154,119 @@
         @endforeach
       </select>
     </div>
-  <div class="form-group">
-      <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
-      <button type="submit" class="btn btn-primary">Salvar</button>
-  </div>
+
+  <table id="dataTable" class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Entrada</th>
+      <th>Saída</th>
+      <th>Acomodação</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($listaAcomodacaoPaciente as $acomodacaoPaciente)
+    <tr>
+      <td>
+        {{ $acomodacaoPaciente->entrada }}
+      </td>
+      <td>
+        {{ $acomodacaoPaciente->saida }}
+      </td>
+      <td>
+        {{ $acomodacaoPaciente->descricao }}
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+<div class="form-group">
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAcomodacao">
+      Adicionar acomodação
+    </button>
+</div>
+<div class="form-group">
+    <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</div>
 </form>
+<!-- Modal -->
+<div class="modal fade" id="modalAcomodacao" tabindex="-1" role="dialog" aria-labelledby="labelModalAcomodacao" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelModalAcomodacao">Adicionar acomodação do paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="/paciente.adicionarAcomodacao"> <!-- Adicione um formulário aqui -->
+        @csrf <!-- Adicione o token CSRF -->
+        <div class="modal-body">
+            <input type="hidden" name="paciente_id" value="{{ $obj->id }}">
+          <div class="form-group">
+            <label for="data_entrada_id">Entrada:</label>
+            <input type="date" class="form-control" id="data_entrada_id" name="data_entrada_id" placeholder="Informe a data de entrada">
+          </div>
+          <div class="form-group">
+            <label for="data_saida_id">Saída:</label>
+            <input type="date" class="form-control" id="data_saida_id" name="data_saida_id" placeholder="Informe a data de saída">
+          </div>
+          <div class="form-group">
+            <label for="acomodacao_id">Acomodação:</label>
+            <select name="acomodacao_id" class="form-control" id="acomodacao_id" maxlength="45">
+              <option value="" label="Selecione a acomodação..."></option>
+              @foreach ($listaAcomodacao as $acomodacao)
+              <option value="{{ $acomodacao->id }}" label="{{ $acomodacao->descricao }}"
+              @if($obj->acomodacao_id == $acomodacao->id)
+                  selected
+              @endif
+              >{{ $acomodacao->descricao }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Adicionar</button> <!-- Use type="submit" para enviar o formulário -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#modalAcomodacao').on('shown.bs.modal', function () {
+    $('#data_entrada').trigger('focus');
+    });
+
+    function adicionarAcomodacaoPaciente() {
+    var entrada = $('#data_entrada_id').val();
+    var saida = $('#data_saida_id').val();
+    var acomodacao_id = $('#acomodacao_id').val();
+    var paciente_id = $('#paciente_id').val();
+
+    var dados = {
+        paciente_id: paciente_id,
+        entrada: entrada,
+        saida: saida,
+        acomodacao_id: acomodacao_id
+    };
+
+    var url = '/paciente.adicionarAcomodacao';
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: dados,
+        dataType: 'json',
+        success: function(response) {
+        console.log(response);
+        },
+        error: function(error) {
+        console.error(error);
+        }
+    });
+    }
+</script>
 @endsection

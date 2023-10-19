@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Bairro;
+use App\Models\Acomodacao;
+use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
@@ -67,8 +69,15 @@ class PacienteController extends Controller
     {
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
+        $listaAcomodacao = Acomodacao::all();
+        $listaAcomodacaoPaciente = DB::select("
+        SELECT
+            *
+        FROM
+            acomodacao_paciente
+        ");
 
-        return view('paciente.edit', compact('listaBairro','msg', 'obj'));
+        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaAcomodacao', 'msg', 'obj'));
     }
 
     public function delete($id)
@@ -83,4 +92,17 @@ class PacienteController extends Controller
         }
         return redirect('/paciente.index')->with('success', $msg);
     }
+
+    public function adicionarAcomodacaoPaciente(Request $request)
+    {
+        // Processar os dados da solicitação e realizar a lógica necessária
+
+        // Por exemplo, você pode salvar os dados no banco de dados:
+        // $novoRegistro = Modelo::create($request->all());
+
+        // Em seguida, você pode retornar uma resposta JSON para o cliente:
+        return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
+
+    }
+
 }
