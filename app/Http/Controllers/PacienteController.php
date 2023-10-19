@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Bairro;
 use App\Models\Acomodacao;
+use App\Models\AcomodacaoPaciente;
 use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
@@ -71,11 +72,18 @@ class PacienteController extends Controller
         $listaBairro = Bairro::all();
         $listaAcomodacao = Acomodacao::all();
         $listaAcomodacaoPaciente = DB::select("
-        SELECT
-            *
-        FROM
-            acomodacao_paciente
-        ");
+            SELECT
+                ap.data_entrada,
+                ap.data_saida,
+                a.descricao as acomodacao
+            FROM
+                acomodacao_paciente ap
+                INNER JOIN acomodacao a
+                ON a.id = ap.acomodacao_id
+            WHERE
+                paciente_id = :paciente_id
+        ", ['paciente_id' => $id]);
+
 
         return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaAcomodacao', 'msg', 'obj'));
     }
@@ -95,12 +103,15 @@ class PacienteController extends Controller
 
     public function adicionarAcomodacaoPaciente(Request $request)
     {
-        // Processar os dados da solicitação e realizar a lógica necessária
+        $acomodacaoPaciente = new AcomodacaoPaciente();
 
-        // Por exemplo, você pode salvar os dados no banco de dados:
-        // $novoRegistro = Modelo::create($request->all());
+        $acomodacaoPaciente->paciente_id = $request['paciente_id'];
+        $acomodacaoPaciente->data_entrada = $request['data_entrada_id'];
+        $acomodacaoPaciente->data_saida = $request['data_saida_id'];
+        $acomodacaoPaciente->acomodacao_id = $request['acomodacao_id'];
 
-        // Em seguida, você pode retornar uma resposta JSON para o cliente:
+        $acomodacaoPaciente->save();
+
         return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
     }
 }

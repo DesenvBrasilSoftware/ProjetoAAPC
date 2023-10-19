@@ -166,13 +166,13 @@
       @foreach ($listaAcomodacaoPaciente as $acomodacaoPaciente)
       <tr>
         <td>
-          {{ $acomodacaoPaciente->entrada }}
+          {{ $acomodacaoPaciente->data_entrada }}
         </td>
         <td>
-          {{ $acomodacaoPaciente->saida }}
+          {{ $acomodacaoPaciente->data_saida }}
         </td>
         <td>
-          {{ $acomodacaoPaciente->descricao }}
+          {{ $acomodacaoPaciente->acomodacao }}
         </td>
       </tr>
       @endforeach
