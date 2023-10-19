@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
-    public function index($msg='')
+    public function index($msg = '')
     {
         $lista = Paciente::orderBy('nome')->get();
         return view('paciente.index')->with(['lista' => $lista]);
@@ -54,12 +54,12 @@ class PacienteController extends Controller
 
         try {
             $obj->save();
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = $e->getMessage();
             return redirect('/paciente.create')->with('error', $msg);
         }
 
-        if ($request['id']){
+        if ($request['id']) {
             return redirect('/paciente.edit.' . $obj->id)->with('success', $msg);
         }
         return redirect('/paciente.create')->with('success', $msg);
@@ -86,7 +86,7 @@ class PacienteController extends Controller
         $msg = "Paciente ({$obj->nome}) excluído.";
         try {
             $obj->delete();
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o paciente. ';
             return redirect('/paciente.index')->with('error', $msg);
         }
@@ -102,7 +102,5 @@ class PacienteController extends Controller
 
         // Em seguida, você pode retornar uma resposta JSON para o cliente:
         return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
-
     }
-
 }
