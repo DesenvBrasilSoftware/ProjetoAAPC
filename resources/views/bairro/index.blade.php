@@ -25,7 +25,7 @@
                                                 style="align-content: center"></i></a>
                                     </td>
                                     <td width="1%">
-                                        <a href="/bairro.delete.{{ $obj->id }}"><i class="fa fa-trash"></i></a>
+                                        <a href="/bairro.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-trash"></i></a>
                                     </td>
                                     <td>
                                         {{ $obj->nome }}

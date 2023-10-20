@@ -7,12 +7,15 @@ use Illuminate\Http\Response;
 
 use App\Models\Acompanhante;
 use App\Models\Bairro;
+use App\Models\Acomodacao;
+use App\Models\AcomodacaoPaciente;
+use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Pessoa;
 
 class PacienteController extends Controller
 {
-    public function index($msg='')
+    public function index($msg = '')
     {
         $lista = Paciente::orderBy('nome')->get();
         return view('paciente.index')->with(['lista' => $lista]);
@@ -62,13 +65,13 @@ class PacienteController extends Controller
 
         try {
             $obj->save();
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = $e->getMessage();
 
             return redirect('/paciente.create')->with('error', $msg);
         }
 
-        if ($request['id']){
+        if ($request['id']) {
             return redirect('/paciente.edit.' . $obj->id)->with('success', $msg);
         }
 
@@ -79,6 +82,23 @@ class PacienteController extends Controller
     {
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
+        $listaAcomodacao = Acomodacao::all();
+        $listaAcomodacaoPaciente = DB::select("
+            SELECT
+                ap.id,
+                ap.data_entrada,
+                ap.data_saida,
+                a.id as acomodacao_id,
+                a.descricao as acomodacao
+            FROM
+                acomodacao_paciente ap
+                INNER JOIN acomodacao a
+                ON a.id = ap.acomodacao_id
+            WHERE
+                paciente_id = :paciente_id
+        ", ['paciente_id' => $id]);
+
+
         $listaPessoa = Pessoa::all();
 
         $listaAcompanhante = Acompanhante::where('paciente_id', $id)
@@ -86,16 +106,9 @@ class PacienteController extends Controller
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
 
-        return view(
-            'paciente.edit',
-            compact(
-                'listaBairro',
-                'msg',
-                'obj',
-                'listaPessoa',
-                'listaAcompanhante',
-            )
-        );
+        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaAcomodacao', 'msg', 'obj', 'listaPessoa',
+                'listaAcompanhante',));
+
     }
 
     public function delete($id)
@@ -113,5 +126,35 @@ class PacienteController extends Controller
         }
 
         return redirect('/paciente.index')->with('success', $msg);
+    }
+
+    public function deletarAcomodacao(Request $request)
+    {
+        $obj = AcomodacaoPaciente::find($request->delete_acomodacao_paciente_id);
+        $msg = "Acomodação do paciente excluída.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir a acomodação do paciente. ';
+            return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+        }
+        return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+    }
+
+    public function adicionarAcomodacao(Request $request)
+    {
+        $acomodacaoPaciente = new AcomodacaoPaciente();
+        if ($request['acomodacao_paciente_id']) {
+            $acomodacaoPaciente = AcomodacaoPaciente::find($request['acomodacao_paciente_id']);
+        }
+
+        $acomodacaoPaciente->paciente_id = $request['paciente_id'];
+        $acomodacaoPaciente->data_entrada = $request['data_entrada_id'];
+        $acomodacaoPaciente->data_saida = $request['data_saida_id'];
+        $acomodacaoPaciente->acomodacao_id = $request['acomodacao_id'];
+
+        $acomodacaoPaciente->save();
+
+        return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
     }
 }
