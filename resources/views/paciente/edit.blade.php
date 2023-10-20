@@ -1,5 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 @extends('template')
+
 @section('conteudo')
+
 <form class="needs-validation" novalidate id="form" action="/paciente.store" method="post">
   @csrf
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}">
@@ -277,5 +281,91 @@
             // Não faz nada se o usuário clicar em "Cancelar"
         }
     }
+
+    <div class="form-group pt-3" id="acompanhanteDiv">
+        <label for="acompanhante" class="w-100 p-2 rounded" style="background-color: #999999a8">Acompanhante(s):</label>
+
+        @if(count($listaAcompanhante) > 0)
+            <table id="tabela-acompanhantes" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Acompanhante</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($listaAcompanhante as $acompanhante)
+                        <tr>
+                            <td>{{ $acompanhante->nome_acompanhante }}</td>
+
+                            <td width="1%">
+                                <a href="/acompanhante.delete.{{$acompanhante->id}}"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+
+        <div id="paciente-container">
+            <select name="acompanhante" class="form-control" id="acompanhante">
+                <option value="" label="Selecione um acompanhante..." selected></option>
+
+                @foreach ($listaPessoa as $pessoa)
+                    <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <button class="btn btn-sm btn-success mt-3" type="button" id="adicionar-acompanhante">Adicionar Acompanhante</button>
+    </div>
+
+    <div class="d-flex form-group justify-content-end">
+        <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
+        <button type="submit" class="btn btn-primary mx-2">Salvar</button>
+    </div>
+
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-top-right'
+        };
+
+        const botaoAdicionar = document.getElementById("adicionar-acompanhante");
+        const selectAcompanhante = document.getElementById("acompanhante");
+
+        botaoAdicionar.addEventListener("click", async function () {
+            const acompanhanteId = selectAcompanhante.value;
+
+            if(acompanhanteId == "") {
+                toastr.error('Selecione uma pessoa para acompanhante.', 'Erro');
+                return;
+            }
+
+            const response = await fetch('/acompanhante.store.' + {{$obj->id}} + '.' + acompanhanteId, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                toastr.success(data.message, 'Sucesso');
+                window.location.href = '/paciente.edit.' + {{$obj->id}};
+            } else {
+                const data = await response.json();
+                toastr.error(data.message, 'Erro');
+            }
+        });
+    });
 </script>
 @endsection

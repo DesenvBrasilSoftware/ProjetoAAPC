@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AcomodacaoController;
+use App\Http\Controllers\AcompanhanteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BairroController;
 use App\Http\Controllers\CidadeController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PacienteController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -115,4 +115,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/paciente.edit.{i}', [PacienteController::class, 'edit']);
     Route::post('/paciente.adicionarAcomodacao', [PacienteController::class, 'adicionarAcomodacao']);
     Route::post('/paciente.deletarAcomodacao', [PacienteController::class, 'deletarAcomodacao']);
+
+    // Acompanhante
+    Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
+    Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
+    Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
 });
