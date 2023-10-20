@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Paciente;
+use Illuminate\Http\Response;
+
+use App\Models\Acompanhante;
 use App\Models\Bairro;
+use App\Models\Paciente;
+use App\Models\Pessoa;
 
 class PacienteController extends Controller
 {
@@ -18,7 +22,13 @@ class PacienteController extends Controller
     {
         $listaBairro = Bairro::all();
 
-        return view('paciente.create', compact('listaBairro', 'msg'));
+        return view(
+            'paciente.create',
+            compact(
+                'listaBairro',
+                'msg',
+            )
+        );
     }
 
     public function store(Request $request)
@@ -54,33 +64,54 @@ class PacienteController extends Controller
             $obj->save();
         }catch(\Exception $e) {
             $msg = $e->getMessage();
+
             return redirect('/paciente.create')->with('error', $msg);
         }
 
         if ($request['id']){
             return redirect('/paciente.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('/paciente.create')->with('success', $msg);
+
+        return redirect('/paciente.edit.' . $obj->id)->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
     {
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
+        $listaPessoa = Pessoa::all();
 
-        return view('paciente.edit', compact('listaBairro','msg', 'obj'));
+        $listaAcompanhante = Acompanhante::where('paciente_id', $id)
+            ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
+            ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
+            ->get();
+
+        return view(
+            'paciente.edit',
+            compact(
+                'listaBairro',
+                'msg',
+                'obj',
+                'listaPessoa',
+                'listaAcompanhante',
+            )
+        );
     }
 
     public function delete($id)
     {
         $obj = Paciente::find($id);
+
         $msg = "Paciente ({$obj->nome}) excluído.";
+
         try {
             $obj->delete();
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             $msg = 'Não foi possível excluir o paciente. ';
+
             return redirect('/paciente.index')->with('error', $msg);
         }
+
         return redirect('/paciente.index')->with('success', $msg);
     }
 }
