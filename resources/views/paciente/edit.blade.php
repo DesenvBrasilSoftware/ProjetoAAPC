@@ -175,20 +175,24 @@
           {{ $acomodacaoPaciente->acomodacao }}
         </td>
         <td width="1%">
-          <a data-toggle="modal" data-target="#modalAcomodacao" onclick="abreModalEditarAcomodacao(
+          <a data-toggle="modal" data-target="#modalAcomodacaoPaciente" onclick="abreModalAcomodacaoPaciente(
             '{{ $acomodacaoPaciente->id }}',
             '{{ $acomodacaoPaciente->data_entrada }}',
             '{{ $acomodacaoPaciente->data_saida }}',
             '{{ $acomodacaoPaciente->acomodacao_id }}')
             "><i class="fa fa-edit"></i></a>
         </td>
-        <td width="1%"><i class="fa fa-trash"></i></td>
+        <td width="1%">
+        <a onclick="deletarAcomodacaoPaciente('{{ $acomodacaoPaciente->id }}', '{{ $obj->id }}')">
+            <i class="fa fa-trash"></i>
+        </a>
+        </td>
       </tr>
       @endforeach
     </tbody>
   </table>
   <div class="form-group">
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAcomodacao">
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAcomodacaoPaciente">
     Adicionar acomodação
     </button>
   </div>
@@ -198,7 +202,7 @@
   </div>
 </form>
 <!-- Modal -->
-<div class="modal fade" id="modalAcomodacao" tabindex="-1" role="dialog" aria-labelledby="labelModalAcomodacao" aria-hidden="true">
+<div class="modal fade" id="modalAcomodacaoPaciente" tabindex="-1" role="dialog" aria-labelledby="labelModalAcomodacao" aria-hidden="true">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
@@ -241,52 +245,34 @@
     </div>
   </div>
 </div>
+<form id="deletarAcomodacaoForm" method="POST" action="/paciente.deletarAcomodacao">
+    @csrf
+    <input type="hidden" name="delete_acomodacao_paciente_id" id="delete_acomodacao_paciente_id">
+    <input type="hidden" name="delete_paciente_id" id="delete_paciente_id">
+</form>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $('#modalAcomodacao').on('shown.bs.modal', function () {
+  $('#modalAcomodacaoPaciente').on('shown.bs.modal', function () {
     $('#data_entrada_id').trigger('focus');
   });
 
-  function abreModalEditarAcomodacao(id, dataEntrada, dataSaida, acomodacao_id) {
-        $('#modalAcomodacao').on('shown.bs.modal', function () {
-            $('#acomodacao_paciente_id').val(id);
-            $('#data_entrada_id').val(dataEntrada);
-            $('#data_saida_id').val(dataSaida);
-            $('#acomodacao_id').val(acomodacao_id);
+  function abreModalAcomodacaoPaciente(id, dataEntrada, dataSaida, acomodacao_id) {
+    $('#modalAcomodacaoPaciente').on('shown.bs.modal', function () {
+        $('#acomodacao_paciente_id').val(id);
+        $('#data_entrada_id').val(dataEntrada);
+        $('#data_saida_id').val(dataSaida);
+        $('#acomodacao_id').val(acomodacao_id);
 
-            $('#data_entrada_id').trigger('focus');
-        });
-    }
-
-  function adicionarAcomodacaoPaciente() {
-  var entrada = $('#data_entrada_id').val();
-  var saida = $('#data_saida_id').val();
-  var acomodacao_id = $('#acomodacao_id').val();
-  var paciente_id = $('#paciente_id').val();
-  var acomodacao_paciente_id = $('#acomodacao_paciente_id').val();
-
-  var dados = {
-      acomodacao_paciente_id: acomodacao_paciente_id,
-      paciente_id: paciente_id,
-      entrada: entrada,
-      saida: saida,
-      acomodacao_id: acomodacao_id
-  };
-
-  var url = '/paciente.adicionarAcomodacao';
-
-  $.ajax({
-      url: url,
-      type: 'POST',
-      data: dados,
-      dataType: 'json',
-      success: function(response) {
-          console.log(response);
-      },
-      error: function(error) {
-          console.error(error);
-      }
-  });
+        $('#data_entrada_id').trigger('focus');
+    });
   }
+
+  function deletarAcomodacaoPaciente(acomodacao_paciente_id, paciente_id) {
+        $('#delete_acomodacao_paciente_id').val(acomodacao_paciente_id);
+        $('#delete_paciente_id').val(paciente_id);
+
+        $('#deletarAcomodacaoForm').submit();
+    }
 </script>
 @endsection

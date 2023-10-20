@@ -103,7 +103,20 @@ class PacienteController extends Controller
         return redirect('/paciente.index')->with('success', $msg);
     }
 
-    public function adicionarAcomodacaoPaciente(Request $request)
+    public function deletarAcomodacao(Request $request)
+    {
+        $obj = AcomodacaoPaciente::find($request->delete_acomodacao_paciente_id);
+        $msg = "Acomodação do paciente excluída.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir a acomodação do paciente. ';
+            return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+        }
+        return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+    }
+
+    public function adicionarAcomodacao(Request $request)
     {
         $acomodacaoPaciente = new AcomodacaoPaciente();
         if ($request['acomodacao_paciente_id']) {

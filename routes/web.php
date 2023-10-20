@@ -113,5 +113,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/paciente.store', [PacienteController::class, 'store']);
     Route::get('/paciente.delete.{i}', [PacienteController::class, 'delete']);
     Route::get('/paciente.edit.{i}', [PacienteController::class, 'edit']);
-    Route::post('/paciente.adicionarAcomodacao', [PacienteController::class, 'adicionarAcomodacaoPaciente']);
+    Route::post('/paciente.adicionarAcomodacao', [PacienteController::class, 'adicionarAcomodacao']);
+    Route::post('/paciente.deletarAcomodacao', [PacienteController::class, 'deletarAcomodacao']);
 });
