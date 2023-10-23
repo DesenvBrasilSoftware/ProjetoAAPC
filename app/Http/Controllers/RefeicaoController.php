@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Refeicao;
+use App\Models\Paciente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,9 @@ class RefeicaoController extends Controller
 
     public function create($msg = '')
     {
-        return view('refeicao.create')->with(['msg' => $msg]);
+        $listaPaciente = Paciente::all();
+
+        return view('refeicao.create', compact('listaPaciente', 'msg'));
     }
 
     public function store(Request $request)
@@ -83,7 +86,7 @@ class RefeicaoController extends Controller
         try {
             $obj->delete();
         } catch (\Exception $e) {
-            $msg = 'Não foi possível excluir a refeição. ';
+            $msg = 'Não foi possível excluir a refeição.';
             return redirect('/refeicao.index')->with('error', $msg);
         }
         return redirect('/refeicao.index')->with('success', $msg);
