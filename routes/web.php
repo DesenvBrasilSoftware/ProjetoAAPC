@@ -106,6 +106,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
 
+    // Refeição
+    Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
+
     // Paciente
     Route::get('/paciente.index', [PacienteController::class, 'index']);
     Route::get('/paciente.create', [PacienteController::class, 'create']);
