@@ -14,6 +14,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\RefeicaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Refeição
     Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
+    Route::get('/refeicao.create', [RefeicaoController::class, 'create']);
 
     // Paciente
     Route::get('/paciente.index', [PacienteController::class, 'index']);
