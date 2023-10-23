@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Refeicao;
 use App\Models\Paciente;
+use App\Models\Acompanhante;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -43,8 +44,16 @@ class RefeicaoController extends Controller
     public function create($msg = '')
     {
         $listaPaciente = Paciente::all();
+        $listaAcompanhante = DB::select("
+            SELECT
+                a.id,
+                p.nome
+            FROM
+            acompanhante a
+            INNER JOIN pessoa p ON a.pessoa_id = p.id
+        ");
 
-        return view('refeicao.create', compact('listaPaciente', 'msg'));
+        return view('refeicao.create', compact('listaPaciente', 'listaAcompanhante', 'msg'));
     }
 
     public function store(Request $request)
@@ -53,10 +62,17 @@ class RefeicaoController extends Controller
         if ($request['id']) {
             $obj = Refeicao::find($request['id']);
         }
-        $obj->descricao = $request['descricao'];
-        $obj->leitos = $request['leitos'];
-        $obj->leitos_livres = $request['leitos_livres'];
-        $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
+
+        $obj->data = $request['data'];
+        $obj->tipo = $request['tipo'];
+        if ($request['tipo'] == 'Paciente') {
+            $obj->paciente_id = $request['paciente_id'];
+            $obj->acompanhante_id = null;
+        } else {
+            $obj->acompanhante_id = $request['acompanhante_id'];
+            $obj->paciente_id = null;
+        }
+        $obj->servida = isset($request['servida']) ? 1 : 0;
 
         $msg = 'Registro salvo com sucesso.';
 
