@@ -31,9 +31,9 @@ class RefeicaoController extends Controller
                 r.servida
             FROM
                 refeicao r
-            INNER JOIN acompanhante a ON r.acompanhante_id = a.id
-            INNER JOIN pessoa pe ON a.pessoa_id = pe.id
-            INNER JOIN paciente pa ON r.paciente_id = pa.id
+            LEFT JOIN acompanhante a ON r.acompanhante_id = a.id
+            LEFT JOIN pessoa pe ON a.pessoa_id = pe.id
+            LEFT JOIN paciente pa ON r.paciente_id = pa.id
             ORDER BY
                 r.data;
         ");
@@ -58,6 +58,7 @@ class RefeicaoController extends Controller
 
     public function store(Request $request)
     {
+
         $obj = new Refeicao();
         if ($request['id']) {
             $obj = Refeicao::find($request['id']);
@@ -65,7 +66,7 @@ class RefeicaoController extends Controller
 
         $obj->data = $request['data'];
         $obj->tipo = $request['tipo'];
-        if ($request['tipo'] == 'Paciente') {
+        if ($request['refeicao_para'] == 'Paciente') {
             $obj->paciente_id = $request['paciente_id'];
             $obj->acompanhante_id = null;
         } else {
@@ -92,7 +93,17 @@ class RefeicaoController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Refeicao::find($id);
-        return view('refeicao.edit')->with(['msg' => $msg, 'obj' => $obj]);
+        $listaPaciente = Paciente::all();
+        $listaAcompanhante = DB::select("
+            SELECT
+                a.id,
+                p.nome
+            FROM
+            acompanhante a
+            INNER JOIN pessoa p ON a.pessoa_id = p.id
+        ");
+
+        return view('refeicao.edit', compact('listaPaciente', 'listaAcompanhante', 'msg', 'obj'));
     }
 
     public function delete($id)

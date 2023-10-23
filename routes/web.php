@@ -111,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
     Route::get('/refeicao.create', [RefeicaoController::class, 'create']);
     Route::post('/refeicao.store', [RefeicaoController::class, 'store']);
+    Route::get('/refeicao.edit.{i}', [RefeicaoController::class, 'edit']);
 
     // Paciente
     Route::get('/paciente.index', [PacienteController::class, 'index']);

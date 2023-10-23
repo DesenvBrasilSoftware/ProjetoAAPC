@@ -19,17 +19,17 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="escolher_tipo">Refeição para:</label><br>
+        <label for="refeicao_para">Refeição para:</label><br>
         <div class="form-check">
-            <input class="form-check-input" required type="radio" id="escolher_paciente" name="escolher_tipo"
-            value="0" {{ old('escolher_tipo') == '0' ? 'checked' : '' }}>
+            <input class="form-check-input" required type="radio" id="escolher_paciente" name="refeicao_para"
+            value="Paciente" {{ old('refeicao_para') == '0' ? 'checked' : '' }}>
             <label class="form-check-label" for="escolher_paciente">
             Paciente
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" required type="radio" id="escolher_acompanhante" name="escolher_tipo"
-            value="1" {{ old('escolher_tipo') == '0' ? 'checked' : '' }}>
+            <input class="form-check-input" required type="radio" id="escolher_acompanhante" name="refeicao_para"
+            value="Acompanhante" {{ old('refeicao_para') == '0' ? 'checked' : '' }}>
             <label class="form-check-label" for="escolher_acompanhante">
             Acompanhante
             </label>
