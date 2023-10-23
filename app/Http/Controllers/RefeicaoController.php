@@ -109,7 +109,7 @@ class RefeicaoController extends Controller
     public function delete($id)
     {
         $obj = Refeicao::find($id);
-        $msg = "Refeição ({$obj->descricao}) excluída.";
+        $msg = "Refeição excluída.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
