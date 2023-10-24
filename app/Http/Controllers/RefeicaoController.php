@@ -118,4 +118,11 @@ class RefeicaoController extends Controller
         }
         return redirect('/refeicao.index')->with('success', $msg);
     }
+
+    public function servirRefeicao($id)
+    {
+        Refeicao::where('id', $id)->update(['servida' => 1]);
+
+        return redirect('/refeicao.index');
+    }
 }

@@ -184,11 +184,11 @@
             '{{ $acomodacaoPaciente->data_entrada }}',
             '{{ $acomodacaoPaciente->data_saida }}',
             '{{ $acomodacaoPaciente->acomodacao_id }}')
-            "><i class="fa fa-edit"></i></a>
+            "><i class="fa fa-lg fa-edit"></i></a>
         </td>
         <td width="1%">
         <a onclick="deletarAcomodacaoPaciente('{{ $acomodacaoPaciente->id }}', '{{ $obj->id }}')">
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-lg fa-trash"></i>
         </a>
         </td>
       </tr>
@@ -300,7 +300,7 @@
                             <td>{{ $acompanhante->nome_acompanhante }}</td>
 
                             <td width="1%">
-                                <a href="/acompanhante.delete.{{$acompanhante->id}}"><i class="fa fa-trash"></i></a>
+                                <a href="/acompanhante.delete.{{$acompanhante->id}}"><i class="fa fa-lg fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

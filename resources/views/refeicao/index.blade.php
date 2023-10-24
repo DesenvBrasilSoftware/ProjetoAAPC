@@ -20,11 +20,10 @@
     <input type="hidden" id="id_{{ $obj->id }}" value="{{ $obj->id }}">
     <tr>
       <td width="1%">
-        <a href="/refeicao.edit.{{ $obj->id }}"><i class="fa fa-edit"
-          style="align-content: center"></i></a>
+        <a href="/refeicao.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit" style="align-content: center"></i></a>
       </td>
       <td width="1%">
-        <a href="/refeicao.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-trash"></i></a>
+        <a href="/refeicao.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
         {{ $obj->data }}
@@ -34,12 +33,16 @@
       </td>
       <td>
         {{ $obj->paciente }}
-      </td>
-      <td>
+    </td>
+    <td>
         {{ $obj->acompanhante }}
       </td>
       <td>
-        {{ $obj->servida }}
+        @if($obj->servida == 0)
+            <a href="/refeicao.servir.{{ $obj->id }}" onclick="return confirm('Confirmar que a refeição foi servida?');"><i class="fa fa-lg fa-square-o" aria-hidden="true"></i></a>
+        @else
+            <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
       </td>
     </tr>
     @endforeach

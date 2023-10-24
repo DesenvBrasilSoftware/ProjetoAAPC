@@ -19,10 +19,10 @@
     <input type="hidden" id="id_{{ $obj->id }}" value="{{ $obj->id }}" />
     <tr>
       <td width="1%">
-        <a href="/item.edit.{{ $obj->id }}"><i class="fa fa-edit" style="align-content: center;"></i></a>
+        <a href="/item.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit" style="align-content: center;"></i></a>
       </td>
       <td width="1%">
-        <a href="/item.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-trash"></i></a>
+        <a href="/item.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
         {{ $obj->descricao }}
