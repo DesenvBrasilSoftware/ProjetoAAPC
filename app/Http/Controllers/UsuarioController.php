@@ -17,7 +17,7 @@ class UsuarioController extends Controller
     public function create($msg = '')
     {
 
-        return view('usuario.create')->with();
+        return view('usuario.create');
     }
 
     public function store(Request $request)
@@ -26,6 +26,8 @@ class UsuarioController extends Controller
         $obj = $id ? Usuario::find($id) : new Usuario();
 
         $obj->nome = $request['nome'];
+        $obj->login = $request['login'];
+        $obj->senha = $request['senha'];
 
         $msg = 'Registro salvo no banco de dados';
 
@@ -34,11 +36,10 @@ class UsuarioController extends Controller
 
         }catch(\Exception $e) {
             $msg = 'Não foi possível salvar o usuário no banco de dados.';
-
-            session()->flashInput($request->input());
+            return back()->with('error', $msg);
         }
 
-        return redirect('/usuario.index')->with('msg', $msg);
+        return redirect('/usuario.index')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')

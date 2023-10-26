@@ -14,6 +14,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,4 +121,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
     Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
+
+    // Usuário
+    Route::get('/usuario.index', [UsuarioController::class, 'index']);
+    Route::get('/usuario.create', [UsuarioController::class, 'create']);
+    Route::post('/usuario.store', [UsuarioController::class, 'store']);
 });

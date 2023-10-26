@@ -80,6 +80,9 @@
             </li>
 
                     <li><a href="paciente.index"><i class="ti-user"></i>Paciente</a></li>
+            <li>
+              <a href="usuario.index"><i class=""></i>Usuários</a>
+            </li>
 
                     <li><a href="{{ route('logout') }}"><i class="ti-close"></i> Logout</a></li>
                 </ul>
