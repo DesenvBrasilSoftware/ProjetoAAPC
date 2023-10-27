@@ -124,6 +124,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/paciente.edit.{i}', [PacienteController::class, 'edit']);
     Route::post('/paciente.adicionarAcomodacao', [PacienteController::class, 'adicionarAcomodacao']);
     Route::post('/paciente.deletarAcomodacao', [PacienteController::class, 'deletarAcomodacao']);
+    Route::post('/paciente.adicionarEnfermidade', [PacienteController::class, 'adicionarEnfermidade']);
+    Route::post('/paciente.deletarEnfermidade', [PacienteController::class, 'deletarEnfermidade']);
 
     // Acompanhante
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);

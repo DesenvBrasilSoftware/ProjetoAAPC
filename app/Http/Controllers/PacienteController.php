@@ -8,7 +8,9 @@ use Illuminate\Http\Response;
 use App\Models\Acompanhante;
 use App\Models\Bairro;
 use App\Models\Acomodacao;
+use App\Models\Enfermidade;
 use App\Models\AcomodacaoPaciente;
+use App\Models\EnfermidadePaciente;
 use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Pessoa;
@@ -83,6 +85,7 @@ class PacienteController extends Controller
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
         $listaAcomodacao = Acomodacao::all();
+        $listaEnfermidade = Enfermidade::all();
         $listaAcomodacaoPaciente = DB::select("
             SELECT
                 ap.id,
@@ -98,6 +101,20 @@ class PacienteController extends Controller
                 paciente_id = :paciente_id
         ", ['paciente_id' => $id]);
 
+        $listaEnfermidadePaciente = DB::select("
+            SELECT
+                ep.id,
+                ep.data_cadastro,
+                e.id as enfermidade_id,
+                e.descricao as enfermidade
+            FROM
+                paciente_enfermidade ep
+                INNER JOIN enfermidade e
+                ON e.id = ep.enfermidade_id
+            WHERE
+                paciente_id = :paciente_id
+        ", ['paciente_id' => $id]);
+
 
         $listaPessoa = Pessoa::all();
 
@@ -106,7 +123,7 @@ class PacienteController extends Controller
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
 
-        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaAcomodacao', 'msg', 'obj', 'listaPessoa',
+        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaEnfermidadePaciente', 'listaAcomodacao', 'listaEnfermidade', 'msg', 'obj', 'listaPessoa',
                 'listaAcompanhante',));
 
     }
@@ -156,5 +173,34 @@ class PacienteController extends Controller
         $acomodacaoPaciente->save();
 
         return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
+    }
+
+    public function deletarEnfermidade(Request $request)
+    {
+        $obj = EnfermidadePaciente::find($request->delete_enfermidade_paciente_id);
+        $msg = "Enfermidade do paciente excluída.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir a enfermidade do paciente. ';
+            return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+        }
+        return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+    }
+
+    public function adicionarEnfermidade(Request $request)
+    {
+        $enfermidadePaciente = new EnfermidadePaciente();
+        if ($request['enfermidade_paciente_id']) {
+            $enfermidadePaciente = EnfermidadePaciente::find($request['enfermidade_paciente_id']);
+        }
+
+        $enfermidadePaciente->paciente_id = $request['paciente_id'];
+        $enfermidadePaciente->data_cadastro = $request['data_cadastro_id'];
+        $enfermidadePaciente->enfermidade_id = $request['enfermidade_id'];
+
+        $enfermidadePaciente->save();
+
+        return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Enfermidade do paciente adicionada com sucesso');
     }
 }
