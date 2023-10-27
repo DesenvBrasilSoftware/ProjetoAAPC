@@ -202,6 +202,8 @@
         <th>Entrada</th>
         <th>Saída</th>
         <th>Acomodação</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -244,9 +246,10 @@
   <table id="dataTable" class="table table-stripped">
     <thead>
       <tr>
-        <th>Entrada</th>
-        <th>Saída</th>
+        <th>Data Cadastro</th>
         <th>Enfermidade</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
