@@ -14,6 +14,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\RefeicaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pessoa.store', [PessoaController::class, 'store']);
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
+
+    // Refeição
+    Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
+    Route::get('/refeicao.create', [RefeicaoController::class, 'create']);
+    Route::post('/refeicao.store', [RefeicaoController::class, 'store']);
+    Route::get('/refeicao.edit.{i}', [RefeicaoController::class, 'edit']);
+    Route::get('/refeicao.delete.{i}', [RefeicaoController::class, 'delete']);
+    Route::get('/refeicao.servir.{i}', [RefeicaoController::class, 'servirRefeicao']);
 
     // Paciente
     Route::get('/paciente.index', [PacienteController::class, 'index']);
