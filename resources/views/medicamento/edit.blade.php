@@ -6,7 +6,7 @@
   <div class="form-group">
     <label for="nome">Nome:</label>
     <input type="text" name="nome" class="form-control" id="nome" maxlength="120"
-      value="{{ $obj->nome }}" autofocus placeholder="Informe o nome do medicamento...>
+      value="{{ $obj->nome }}" autofocus placeholder="Informe o nome do medicamento...">
   </div>
   <div class="form-group">
     <label for="principio_ativo">Princípio ativo:</label>
