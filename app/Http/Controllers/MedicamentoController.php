@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
+use App\Models\ClasseTerapeutica;
 use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
@@ -15,7 +16,9 @@ class MedicamentoController extends Controller
 
     public function create($msg = '')
     {
-        return view('medicamento.create')->with(['msg' => $msg]);
+        $listaClasseTerapeutica = ClasseTerapeutica::all();
+
+        return view('medicamento.create', compact('listaClasseTerapeutica', 'msg'));
     }
 
     public function store(Request $request)
@@ -46,13 +49,15 @@ class MedicamentoController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Medicamento::find($id);
-        return view('medicamento.edit')->with(['msg' => $msg, 'obj' => $obj]);
+        $listaClasseTerapeutica = ClasseTerapeutica::all();
+
+        return view('medicamento.edit', compact('listaClasseTerapeutica', 'msg', 'obj'));
     }
 
     public function delete($id)
     {
         $obj = Medicamento::find($id);
-        $msg = "{$obj->nome} excluída.";
+        $msg = "Medicamento ({$obj->nome}) excluído.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
