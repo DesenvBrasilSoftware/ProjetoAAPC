@@ -32,7 +32,7 @@
       placeholder="Informe a data de cadastro">
   </div>
   <div class="form-group">
-    <label for="sexo">Sexo:</label><br>
+    <label>Sexo:</label><br>
     <div class="form-check">
       <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="0"
       {{ $obj->sexo == '0' ? 'checked' : '' }}>
@@ -55,7 +55,7 @@
       oninput="this.value = this.value.replace(/[^0-9]/g, '');">
   </div>
   <div class="form-group">
-    <label for="estado_civil">Estado Civil:</label><br>
+    <label>Estado Civil:</label><br>
     <div class="form-check">
       <input required class="form-check-input" type="radio" name="estado_civil" id="solteiro" value="0"
       {{ $obj->estado_civil == '0' ? 'checked' : '' }}>
@@ -88,7 +88,7 @@
       value="{{ $obj->conjuge }}" autofocus>
   </div>
   <div class="form-group">
-    <label for="escolaridade">Escolaridade</label><br>
+    <label>Escolaridade</label><br>
     <label>
     <input type="radio" name="escolaridade" id="ensinoMedio" value="0"
     {{ $obj->escolaridade == '0' ? 'checked' : '' }}>
@@ -241,12 +241,54 @@
     Adicionar acomodação
     </button>
   </div>
+  <table id="dataTable" class="table table-stripped">
+    <thead>
+      <tr>
+        <th>Entrada</th>
+        <th>Saída</th>
+        <th>Enfermidade</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($listaEnfermidadePaciente as $enfermidadePaciente)
+      <tr>
+        <td>
+          {{ $enfermidadePaciente->data_cadastro }}
+        </td>
+        <td>
+          {{ $enfermidadePaciente->enfermidade }}
+        </td>
+        <td width="1%">
+          <a data-toggle="modal" data-target="#modalEnfermidadePaciente"
+            onclick="abreModalEditEnfermidadePaciente(
+            '{{ $enfermidadePaciente->id }}',
+            '{{ $enfermidadePaciente->data_cadastro }}',
+            '{{ $enfermidadePaciente->enfermidade_id }}')
+            "><i
+            class="fa fa-lg fa-edit"></i></a>
+        </td>
+        <td width="1%">
+          <a
+            onclick="deletarEnfermidadePaciente('{{ $enfermidadePaciente->id }}', '{{ $obj->id }}')">
+          <i class="fa fa-lg fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+  <div class="form-group">
+    <button onclick="abreModalEnfermidadePaciente()" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalEnfermidadePaciente">
+    Cadastrar enfermidade
+    </button>
+  </div>
   <div class="form-group">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
     <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>
 @include('paciente/modal_acomodacao')
+@include('paciente/modal_enfermidade')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>

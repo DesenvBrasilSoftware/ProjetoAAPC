@@ -1,4 +1,5 @@
 <!-- Modal Acomodacao Paciente -->
+<div>
 <div class="modal fade" id="modalAcomodacaoPaciente" tabindex="-1" role="dialog"
     aria-labelledby="labelModalAcomodacao" aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -50,6 +51,7 @@
     <input type="hidden" name="delete_acomodacao_paciente_id" id="delete_acomodacao_paciente_id">
     <input type="hidden" name="delete_paciente_id" id="delete_paciente_id">
 </form>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $('#modalAcomodacaoPaciente').on('shown.bs.modal', function() {

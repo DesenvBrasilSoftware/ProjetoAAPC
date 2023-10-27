@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use App\Models\Acompanhante;
 use App\Models\Bairro;
 use App\Models\Acomodacao;
+use App\Models\Enfermidade;
 use App\Models\AcomodacaoPaciente;
 use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
@@ -83,6 +84,7 @@ class PacienteController extends Controller
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
         $listaAcomodacao = Acomodacao::all();
+        $listaEnfermidade = Enfermidade::all();
         $listaAcomodacaoPaciente = DB::select("
             SELECT
                 ap.id,
@@ -98,6 +100,20 @@ class PacienteController extends Controller
                 paciente_id = :paciente_id
         ", ['paciente_id' => $id]);
 
+        $listaEnfermidadePaciente = DB::select("
+            SELECT
+                ep.id,
+                ep.data_cadastro,
+                e.id as enfermidade_id,
+                e.descricao as enfermidade
+            FROM
+                paciente_enfermidade ep
+                INNER JOIN enfermidade e
+                ON e.id = ep.enfermidade_id
+            WHERE
+                paciente_id = :paciente_id
+        ", ['paciente_id' => $id]);
+
 
         $listaPessoa = Pessoa::all();
 
@@ -106,7 +122,7 @@ class PacienteController extends Controller
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
 
-        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaAcomodacao', 'msg', 'obj', 'listaPessoa',
+        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaEnfermidadePaciente', 'listaAcomodacao', 'listaEnfermidade', 'msg', 'obj', 'listaPessoa',
                 'listaAcompanhante',));
 
     }
