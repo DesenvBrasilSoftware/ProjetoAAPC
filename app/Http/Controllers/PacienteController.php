@@ -11,6 +11,7 @@ use App\Models\Acomodacao;
 use App\Models\Enfermidade;
 use App\Models\AcomodacaoPaciente;
 use App\Models\EnfermidadePaciente;
+use App\Models\Consulta;
 use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Pessoa;
@@ -115,6 +116,24 @@ class PacienteController extends Controller
                 paciente_id = :paciente_id
         ", ['paciente_id' => $id]);
 
+        $listaConsultaPaciente = DB::select("
+            SELECT
+                c.id,
+                c.data as data_consulta,
+                c.realizada,
+                c.observacoes,
+                pe.id as pessoa_id,
+                pe.nome as pessoa
+            FROM
+                consulta c
+                INNER JOIN paciente pa
+                ON pa.id = c.paciente_id
+                INNER JOIN pessoa pe
+                ON pe.id = c.pessoa_id
+            WHERE
+                paciente_id = :paciente_id
+        ", ['paciente_id' => $id]);
+
 
         $listaPessoa = Pessoa::all();
 
@@ -123,9 +142,16 @@ class PacienteController extends Controller
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
 
-        return view('paciente.edit', compact('listaBairro', 'listaAcomodacaoPaciente', 'listaEnfermidadePaciente', 'listaAcomodacao', 'listaEnfermidade', 'msg', 'obj', 'listaPessoa',
-                'listaAcompanhante',));
-
+        return view('paciente.edit', compact('listaBairro',
+                                             'listaAcomodacaoPaciente',
+                                             'listaEnfermidadePaciente',
+                                             'listaConsultaPaciente',
+                                             'listaAcomodacao',
+                                             'listaEnfermidade',
+                                             'msg',
+                                             'obj',
+                                             'listaPessoa',
+                                             'listaAcompanhante',));
     }
 
     public function delete($id)
@@ -202,5 +228,38 @@ class PacienteController extends Controller
         $enfermidadePaciente->save();
 
         return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Enfermidade do paciente adicionada com sucesso');
+    }
+
+    public function deletarConsulta(Request $request)
+    {
+        $obj = Consulta::find($request->delete_consulta_paciente_id);
+        $msg = "Consulta do paciente excluída.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir a consulta do paciente. ';
+            return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+        }
+        return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
+    }
+
+    public function adicionarConsulta(Request $request)
+    {
+        $consultaPaciente = new Consulta();
+        if ($request['consulta_paciente_id']) {
+            $consultaPaciente = Consulta::find($request['consulta_paciente_id']);
+        }
+
+        dd($request['realizada']);
+
+        $consultaPaciente->paciente_id = $request['paciente_id'];
+        $consultaPaciente->pessoa_id = $request['pessoa_id'];
+        $consultaPaciente->data = $request['data_consulta_id'];
+        $consultaPaciente->realizada = $request['realizada'];
+        $consultaPaciente->observacoes = $request['observacoes'];
+
+        $consultaPaciente->save();
+
+        return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Consulta do paciente adicionada com sucesso');
     }
 }

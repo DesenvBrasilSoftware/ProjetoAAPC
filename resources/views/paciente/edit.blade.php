@@ -285,13 +285,67 @@
     Cadastrar enfermidade
     </button>
   </div>
+  <table id="dataTable" class="table table-stripped">
+    <thead>
+      <tr>
+        <th>Data Consulta</th>
+        <th>Pessoa</th>
+        <th>Realizada</th>
+        <th>Observações</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($listaConsultaPaciente as $consultaPaciente)
+      <tr>
+        <td>
+          {{ $consultaPaciente->data_consulta }}
+        </td>
+        <td>
+          {{ $consultaPaciente->pessoa }}
+        </td>
+        <td>
+          {{ $consultaPaciente->realizada }}
+        </td>
+        <td>
+          {{ $consultaPaciente->observacoes }}
+        </td>
+        <td width="1%">
+          <a data-toggle="modal" data-target="#modalConsultaPaciente"
+            onclick="abreModalEditConsultaPaciente(
+            '{{ $consultaPaciente->id }}',
+            '{{ $consultaPaciente->data_consulta }}',
+            '{{ $consultaPaciente->pessoa_id }}',
+            '{{ $consultaPaciente->realizada }}',
+            '{{ $consultaPaciente->observacoes }}')
+            "><i
+            class="fa fa-lg fa-edit"></i></a>
+        </td>
+        <td width="1%">
+          <a
+            onclick="deletarConsultaPaciente('{{ $consultaPaciente->id }}', '{{ $obj->id }}')">
+          <i class="fa fa-lg fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+  <div class="form-group">
+    <button onclick="abreModalConsultaPaciente()" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalConsultaPaciente">
+    Cadastrar consulta
+    </button>
+  </div>
   <div class="form-group">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
     <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>
+<!-- Colocar modais fora do form de edit -->
 @include('paciente/modal_acomodacao')
 @include('paciente/modal_enfermidade')
+@include('paciente/modal_consulta')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
