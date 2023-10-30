@@ -75,7 +75,7 @@
   function deletarAcomodacaoPaciente(acomodacao_paciente_id, paciente_id) {
       if (confirm('Tem certeza de que deseja excluir este item?')) {
           $('#delete_acomodacao_paciente_id').val(acomodacao_paciente_id);
-          $('#delete_paciente_id').val(paciente_id);
+          $("#deletarAcomodacaoForm #delete_paciente_id").val(paciente_id);
           $('#deletarAcomodacaoForm').submit();
       } else {
           // Não faz nada se o usuário clicar em "Cancelar"

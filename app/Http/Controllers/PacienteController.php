@@ -232,6 +232,7 @@ class PacienteController extends Controller
 
     public function deletarConsulta(Request $request)
     {
+        dd($request);
         $obj = Consulta::find($request->delete_consulta_paciente_id);
         $msg = "Consulta do paciente excluída.";
         try {
@@ -240,6 +241,8 @@ class PacienteController extends Controller
             $msg = 'Não foi possível excluir a consulta do paciente. ';
             return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
         }
+
+
         return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
     }
 
@@ -250,12 +253,10 @@ class PacienteController extends Controller
             $consultaPaciente = Consulta::find($request['consulta_paciente_id']);
         }
 
-        dd($request['realizada']);
-
         $consultaPaciente->paciente_id = $request['paciente_id'];
         $consultaPaciente->pessoa_id = $request['pessoa_id'];
         $consultaPaciente->data = $request['data_consulta_id'];
-        $consultaPaciente->realizada = $request['realizada'];
+        $consultaPaciente->realizada = isset($request['realizada']) ? 1 : 0;
         $consultaPaciente->observacoes = $request['observacoes'];
 
         $consultaPaciente->save();

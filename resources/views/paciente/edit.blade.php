@@ -306,9 +306,9 @@
           {{ $consultaPaciente->pessoa }}
         </td>
         <td>
-          {{ $consultaPaciente->realizada }}
+          {{ $consultaPaciente->realizada ? 'Sim' : 'Não'}}
         </td>
-        <td>
+        <td style="max-width: 264px; word-wrap: break-word;">
           {{ $consultaPaciente->observacoes }}
         </td>
         <td width="1%">

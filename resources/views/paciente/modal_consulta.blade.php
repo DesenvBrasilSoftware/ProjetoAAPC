@@ -81,7 +81,7 @@
   function deletarConsultaPaciente(consulta_paciente_id, paciente_id) {
       if (confirm('Tem certeza de que deseja excluir este item?')) {
           $('#delete_consulta_paciente_id').val(consulta_paciente_id);
-          $('#delete_paciente_id').val(paciente_id);
+          $("#deletarConsultaForm #delete_paciente_id").val(paciente_id);
           $('#deletarConsultaForm').submit();
       } else {
           // Não faz nada se o usuário clicar em "Cancelar"
