@@ -22,12 +22,12 @@
                 placeholder="Informe a data da consulta...">
             </div>
             <div class="form-group">
-            <label for="pessoa_id">Pessoa:</label>
-            <select name="pessoa_id" class="form-control" id="pessoa_id" maxlength="45">
-                <option value="" label="Selecione a pessoa..."></option>
-                @foreach ($listaPessoa as $pessoa)
-                <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">
-                {{ $pessoa->nome }}
+            <label for="profissional">Profissional:</label>
+            <select name="profissional" class="form-control" id="profissional" maxlength="45">
+                <option value="" label="Selecione o profissonal..."></option>
+                @foreach ($listaProfissional as $profissional)
+                <option value="{{ $profissional->id }}" label="{{ $profissional->nome }}">
+                {{ $profissional->nome }}
                 </option>
                 @endforeach
             </select>
@@ -62,18 +62,18 @@
     $('#data_consulta_id').trigger('focus');
   });
 
-  function abreModalEditConsultaPaciente(id, dataConsulta, pessoa_id, realizada, observacoes) {
+  function abreModalEditConsultaPaciente(id, dataConsulta, profissional_id, realizada, observacoes) {
     $('#consulta_paciente_id').val(id);
     $('#data_consulta_id').val(dataConsulta);
-    $('#pessoa_id').val(pessoa_id);
+    $('#profissional_id').val(profissional_id);
     $('#realizada').val(realizada);
     $('#observacoes').val(observacoes);
   }
 
-  function abreModalConsultaPaciente(id, dataConsulta, pessoa_id, realizada, observacoes) {
+  function abreModalConsultaPaciente(id, dataConsulta, profissional_id, realizada, observacoes) {
     $('#consulta_paciente_id').val('');
     $('#data_consulta_id').val('');
-    $('#pessoa_id').val('');
+    $('#profissional_id').val('');
     $('#realizada').val('');
     $('#observacoes').val('');
   }

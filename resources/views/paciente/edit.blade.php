@@ -289,7 +289,7 @@
     <thead>
       <tr>
         <th>Data Consulta</th>
-        <th>Pessoa</th>
+        <th>Profissional</th>
         <th>Realizada</th>
         <th>Observações</th>
         <th></th>
@@ -303,7 +303,7 @@
           {{ $consultaPaciente->data_consulta }}
         </td>
         <td>
-          {{ $consultaPaciente->pessoa }}
+          {{ $consultaPaciente->profissional }}
         </td>
         <td>
           {{ $consultaPaciente->realizada ? 'Sim' : 'Não'}}

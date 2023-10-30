@@ -123,7 +123,7 @@ class PacienteController extends Controller
                 c.realizada,
                 c.observacoes,
                 pe.id as pessoa_id,
-                pe.nome as pessoa
+                pe.nome as profissional
             FROM
                 consulta c
                 INNER JOIN paciente pa
@@ -135,7 +135,9 @@ class PacienteController extends Controller
         ", ['paciente_id' => $id]);
 
 
-        $listaPessoa = Pessoa::all();
+        $listaPessoa = Pessoa::all(); // Isso trará todas as pessoas
+        $listaProfissional = Pessoa::where('profissional', 1)->get(); // Isso trará apenas as pessoas onde o campo "profissional" é igual a 1
+
 
         $listaAcompanhante = Acompanhante::where('paciente_id', $id)
             ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
@@ -151,6 +153,7 @@ class PacienteController extends Controller
                                              'msg',
                                              'obj',
                                              'listaPessoa',
+                                             'listaProfissional',
                                              'listaAcompanhante',));
     }
 
@@ -254,7 +257,7 @@ class PacienteController extends Controller
         }
 
         $consultaPaciente->paciente_id = $request['paciente_id'];
-        $consultaPaciente->pessoa_id = $request['pessoa_id'];
+        $consultaPaciente->pessoa_id = $request['profissional_id'];
         $consultaPaciente->data = $request['data_consulta_id'];
         $consultaPaciente->realizada = isset($request['realizada']) ? 1 : 0;
         $consultaPaciente->observacoes = $request['observacoes'];
