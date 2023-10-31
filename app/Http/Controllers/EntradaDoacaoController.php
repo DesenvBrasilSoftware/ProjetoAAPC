@@ -29,19 +29,18 @@ class EntradaDoacaoController extends Controller
     public function create($msg = '')
     {
         $listaPessoa = Pessoa::all();
-        $listaItem = Item::all();
 
-        return view('entradaDoacao.create', compact('listaPessoa', 'listaItem', 'msg',));
+        return view('entradaDoacao.create', compact('listaPessoa', 'msg',));
     }
 
     public function store(Request $request)
     {
-        $obj = new Enfermidade();        
+        $obj = new EntradaDoacao();        
         if ($request['id']) {
-            $obj = Enfermidade::find($request['id']);
+            $obj = EntradaDoacao::find($request['id']);
         }
-        $obj->descricao = $request['descricao'];
-        $obj->cid = $request['cid'];
+        $obj->pessoa_id = $request['pessoa_id'];
+        $obj->data = $request['data'];
         $msg = 'Registro salvo no banco de dados';
         try {
             $obj->save();
@@ -51,9 +50,10 @@ class EntradaDoacaoController extends Controller
         }
         
         if ($request['id']){
-            return redirect('/enfermidade.edit.'.$obj->id);
+            return redirect('/entradaDoacao.edit.'.$obj->id);
         }
-        return redirect('/enfermidade.create');
+        
+        return redirect('/entradaDoacao.create');
     }
 
     public function edit(string $id, $msg = '')

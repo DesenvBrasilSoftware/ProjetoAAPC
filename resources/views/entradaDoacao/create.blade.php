@@ -1,6 +1,6 @@
 @extends('template')
 @section('conteudo')
-<form class="needs-validation" novalidate id="form" action="/item.store" method="post">
+<form class="needs-validation" novalidate id="form" action="/entradaDoacao.store" method="post">
   @csrf
   <div class="form-group">
     <label for="pessoa_id">Doador:</label>
@@ -15,25 +15,10 @@
     <label for="data">Data:</label>
     <input type="date" class="form-control" id="data" name="data" placeholder="Informe a data da doação..." />
   </div>
-  <table id="tabela_itens" class="table table-stripped">
-    <caption>Lista de itens para doação</caption>
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Quantidade</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-      </tr>
-    </tbody>
-  </table>
+  <div class="form-group">
+      <a href="/item.index" class="btn btn-warning">Fechar</a>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
 </form>
-<div class="form-group">
-  <button onclick="abreModalItem()" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalItem">
-  Adicionar item
-  </button>
-</div>
 @include('entradaDoacao/modal_item')
 @endsection
