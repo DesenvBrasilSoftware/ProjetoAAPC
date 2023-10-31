@@ -71,7 +71,7 @@
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
-                <li><a href="bairro.index">Entrada por doação</a></li>
+                <li><a href="entradaDoacao.index">Entrada por doação</a></li>
                 <li><a href="cidade.index">Saída por doação</a></li>
               </ul>
             </li>
