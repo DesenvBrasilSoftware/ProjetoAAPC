@@ -13,6 +13,7 @@ use App\Http\Controllers\GrupoItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\EntradaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RefeicaoController;
 
@@ -106,6 +107,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pessoa.store', [PessoaController::class, 'store']);
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
+    
+    // Entrada Doação
+    Route::get('/entradaDoacao.index', [EntradaDoacaoController::class, 'index']);
+    Route::get('/entradaDoacao.create', [EntradaDoacaoController::class, 'create']);
+    Route::get('/entradaDoacao.retrieveAll', [EntradaDoacaoController::class, 'retrieveAll']);
+    Route::post('/entradaDoacao.store', [EntradaDoacaoController::class, 'store']);
+    Route::get('/entradaDoacao.delete.{i}', [EntradaDoacaoController::class, 'delete']);
+    Route::get('/entradaDoacao.edit.{i}', [EntradaDoacaoController::class, 'edit']);
+    Route::post('/entradaDoacao.adicionarItem', [EntradaDoacaoController::class, 'adicionarItem']);
+    Route::post('/entradaDoacao.deletarItem', [EntradaDoacaoController::class, 'deletarItem']);
 
     // Refeição
     Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
