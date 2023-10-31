@@ -68,7 +68,7 @@
   function deletarEnfermidadePaciente(enfermidade_paciente_id, paciente_id) {
       if (confirm('Tem certeza de que deseja excluir este item?')) {
           $('#delete_enfermidade_paciente_id').val(enfermidade_paciente_id);
-          $('#delete_paciente_id').val(paciente_id);
+          $("#deletarEnfermidadeForm #delete_paciente_id").val(paciente_id);
           $('#deletarEnfermidadeForm').submit();
       } else {
           // Não faz nada se o usuário clicar em "Cancelar"
