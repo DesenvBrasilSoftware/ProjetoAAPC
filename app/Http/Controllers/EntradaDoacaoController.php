@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EntradaDoacao;
+use App\Models\EntradaDoacaoItem;
 use App\Models\Pessoa;
 use App\Models\Item;
 use Illuminate\Support\Facades\DB;
@@ -52,25 +53,70 @@ class EntradaDoacaoController extends Controller
         if ($request['id']){
             return redirect('/entradaDoacao.edit.'.$obj->id);
         }
-        
+
         return redirect('/entradaDoacao.create');
     }
 
     public function edit(string $id, $msg = '')
     {
-        $obj = Enfermidade::find($id);
-        return view('enfermidade.edit')->with(['msg' => $msg,'obj' => $obj]);
+        $obj = EntradaDoacao::find($id);
+        $listaPessoa = Pessoa::all();
+        $listaItem = Item::all();
+        $listaEntradaDoacaoItem = DB::select("
+            SELECT
+                edi.id,
+                edi.quantidade,
+                i.id as item_id,
+                i.descricao as item
+            FROM
+                entrada_doacao_item edi
+                INNER JOIN item i
+                ON i.id = edi.item_id
+            WHERE
+                entrada_doacao_id = :entrada_doacao_id
+        ", ['entrada_doacao_id' => $id]);
+
+        return view('entradaDoacao.edit', compact('listaItem', 'listaEntradaDoacaoItem', 'listaPessoa','obj', 'msg',));
     }
 
     public function delete($id)
     {
-        $obj = Enfermidade::find($id);
+        $obj = EntradaDoacao::find($id);
         $msg = "{$obj->descricao} excluída.";
         try {
             $obj->delete();
         }catch(\Exception $e) {
-            $msg = 'Não foi possível excluir a enfermidade. ';
+            $msg = 'Não foi possível excluir a doação.';
         }
-        return redirect('/enfermidade.index')->with(['msg' => $msg]);
+        return redirect('/entradaDoacao.index')->with(['msg' => $msg]);
+    }
+
+    public function deletarItem(Request $request)
+    {
+        $obj = EntradaDoacaoItem::find($request->delete_entrada_doacao_item_id);
+        $msg = "Item da doação excluído excluída.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluiro item da doação. ';
+            return redirect('/entradaDoacao.edit.' . $request->delete_entrada_doacao_id)->with('mensagem', $msg);
+        }
+        return redirect('/entradaDoacao.edit.' . $request->delete_entrada_doacao_id)->with('mensagem', $msg);
+    }
+
+    public function adicionarItem(Request $request)
+    {
+        $entradaDoacaoItem = new EntradaDoacaoItem();
+        if ($request['entrada_doacao_item_id']) {
+            $entradaDoacaoItem = EntradaDoacaoItem::find($request['entrada_doacao_item_id']);
+        }
+
+        $entradaDoacaoItem->entrada_doacao_id = $request['entrada_doacao_id'];
+        $entradaDoacaoItem->item_id = $request['item_id'];
+        $entradaDoacaoItem->quantidade = $request['quantidade'];
+
+        $entradaDoacaoItem->save();
+
+        return redirect('/entradaDoacao.edit.' . $request->entrada_doacao_id)->with('mensagem', 'Item adicionado com sucesso');
     }
 }

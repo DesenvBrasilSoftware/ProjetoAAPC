@@ -115,6 +115,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/entradaDoacao.store', [EntradaDoacaoController::class, 'store']);
     Route::get('/entradaDoacao.delete.{i}', [EntradaDoacaoController::class, 'delete']);
     Route::get('/entradaDoacao.edit.{i}', [EntradaDoacaoController::class, 'edit']);
+    Route::post('/entradaDoacao.adicionarItem', [EntradaDoacaoController::class, 'adicionarItem']);
+    Route::post('/entradaDoacao.deletarItem', [EntradaDoacaoController::class, 'deletarItem']);
 
     // Refeição
     Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
