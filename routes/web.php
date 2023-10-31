@@ -16,6 +16,7 @@ use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\EntradaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RefeicaoController;
+use App\Http\Controllers\ContasAPagarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,4 +145,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
     Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
+
+    // Contas a pagar
+    Route::get('/contasAPagar.index', [ContasAPagarController::class, 'index']);
+    Route::get('/contasAPagar.create', [ContasAPagarController::class, 'create']);
+    Route::post('/contasAPagar.store', [ContasAPagarController::class, 'store']);
+    Route::get('/contasAPagar.edit.{i}', [ContasAPagarController::class, 'edit']);
+    Route::get('/contasAPagar.delete.{i}', [ContasAPagarController::class, 'delete']);
 });
