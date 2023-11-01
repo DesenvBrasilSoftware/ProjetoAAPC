@@ -20,5 +20,4 @@
       <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>
-@include('entradaDoacao/modal_item')
 @endsection
