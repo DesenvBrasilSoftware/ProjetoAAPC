@@ -106,6 +106,16 @@
               </a>
             </li>
             <li>
+              <a class="sidebar-sub-toggle">
+                <i class="ti-money"></i> Financeiro
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas A Receber</a></li>
+              </ul>
+            </li>
+            <li>
               <a href="{{ route('logout') }}">
                 <i class="ti-close"></i> Logout
               </a>
