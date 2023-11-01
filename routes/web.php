@@ -14,6 +14,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\EntradaDoacaoController;
+use App\Http\Controllers\SaidaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RefeicaoController;
 use App\Http\Controllers\ContasAPagarController;
@@ -109,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pessoa.store', [PessoaController::class, 'store']);
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
-    
+
     // Entrada Doação
     Route::get('/entradaDoacao.index', [EntradaDoacaoController::class, 'index']);
     Route::get('/entradaDoacao.create', [EntradaDoacaoController::class, 'create']);
@@ -119,6 +120,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/entradaDoacao.edit.{i}', [EntradaDoacaoController::class, 'edit']);
     Route::post('/entradaDoacao.adicionarItem', [EntradaDoacaoController::class, 'adicionarItem']);
     Route::post('/entradaDoacao.deletarItem', [EntradaDoacaoController::class, 'deletarItem']);
+
+    // Saída Doação
+    Route::get('/saidaDoacao.index', [SaidaDoacaoController::class, 'index']);
+    Route::get('/saidaDoacao.create', [SaidaDoacaoController::class, 'create']);
+    Route::get('/saidaDoacao.retrieveAll', [SaidaDoacaoController::class, 'retrieveAll']);
+    Route::post('/saidaDoacao.store', [SaidaDoacaoController::class, 'store']);
+    Route::get('/saidaDoacao.delete.{i}', [SaidaDoacaoController::class, 'delete']);
+    Route::get('/saidaDoacao.edit.{i}', [SaidaDoacaoController::class, 'edit']);
+    Route::post('/saidaDoacao.adicionarItem', [SaidaDoacaoController::class, 'adicionarItem']);
+    Route::post('/saidaDoacao.deletarItem', [SaidaDoacaoController::class, 'deletarItem']);
 
     // Refeição
     Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
