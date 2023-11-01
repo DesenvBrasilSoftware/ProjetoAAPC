@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Refeicao;
 use App\Models\Pessoa;
 use App\Models\ContasAPagar;
 use Illuminate\Support\Facades\DB;
@@ -79,8 +78,8 @@ class ContasAPagarController extends Controller
         try {
             $obj->delete();
         } catch (\Exception $e) {
-            $msg = 'Não foi possível excluir a refeição.';
-            return redirect('/refeicao.index')->with('error', $msg);
+            $msg = 'Não foi possível excluir a conta.';
+            return redirect('/contasAPagar.index')->with('error', $msg);
         }
         return redirect('/contasAPagar.index')->with('success', $msg);
     }

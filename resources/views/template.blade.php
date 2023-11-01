@@ -112,6 +112,7 @@
               </a>
               <ul>
                 <li><a href="contasAPagar.index">Contas A Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas A Receber</a></li>
               </ul>
             </li>
             <li>

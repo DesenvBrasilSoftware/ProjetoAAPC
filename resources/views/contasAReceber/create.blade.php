@@ -1,6 +1,6 @@
 @extends('template')
 @section('conteudo')
-<form class="needs-validation" novalidate id="form" action="/contasAPagar.store" method="post">
+<form class="needs-validation" novalidate id="form" action="/contasAReceber.store" method="post">
     @csrf
     <div class="form-group">
         <label for="data">Data:</label>
@@ -17,12 +17,12 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="valor_pagar">Valor a pagar:</label>
-        <input type="float" name="valor_pagar" id="valor_pagar" class="form-control">
+        <label for="valor_pagar">Valor a receber:</label>
+        <input type="float" name="valor_receber" id="valor_receber" class="form-control">
     </div>
     <div class="form-group">
-        <label for="valor_pago">Valor Pago:</label>
-        <input type="float" name="valor_pago" id="valor_pago" class="form-control">
+        <label for="valor_pago">Valor recebido:</label>
+        <input type="float" name="valor_recebido" id="valor_recebido" class="form-control">
     </div>
     <div class="form-group">
         <a type="button" href="/" class="btn btn-warning">Fechar</a>

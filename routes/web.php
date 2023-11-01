@@ -17,6 +17,7 @@ use App\Http\Controllers\EntradaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RefeicaoController;
 use App\Http\Controllers\ContasAPagarController;
+use App\Http\Controllers\ContasAReceberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,4 +153,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/contasAPagar.store', [ContasAPagarController::class, 'store']);
     Route::get('/contasAPagar.edit.{i}', [ContasAPagarController::class, 'edit']);
     Route::get('/contasAPagar.delete.{i}', [ContasAPagarController::class, 'delete']);
+
+    // Contas a receber
+    Route::get('/contasAReceber.index', [ContasAReceberController::class, 'index']);
+    Route::get('/contasAReceber.create', [ContasAReceberController::class, 'create']);
+    Route::post('/contasAReceber.store', [ContasAReceberController::class, 'store']);
+    Route::get('/contasAReceber.edit.{i}', [ContasAReceberController::class, 'edit']);
+    Route::get('/contasAReceber.delete.{i}', [ContasAReceberController::class, 'delete']);
 });
