@@ -82,13 +82,19 @@ class SaidaDoacaoController extends Controller
     public function delete($id)
     {
         $obj = SaidaDoacao::find($id);
-        $msg = "{$obj->descricao} excluída.";
+        $msg = "Doação excluída.";
         try {
             $obj->delete();
-        }catch(\Exception $e) {
-            $msg = 'Não foi possível excluir a doação.';
+        } catch (\PDOException $e) {
+            // Verifica se a exceção é devido a uma violação de chave estrangeira
+            if (strpos($e->getMessage(), 'Integrity constraint violation') !== false) {
+                $msg = 'Não é possível excluir a doação, pois existem itens cadastrados nessa saída de doação. Remova os itens antes de excluí-la.';
+            } else {
+                $msg = 'Não foi possível excluir a doação.';
+            }
+            return redirect('/saidaDoacao.index')->with(['error' => $msg]);
         }
-        return redirect('/saidaDoacao.index')->with(['msg' => $msg]);
+        return redirect('/saidaDoacao.index')->with(['success' => $msg]);
     }
 
     public function deletarItem(Request $request)
