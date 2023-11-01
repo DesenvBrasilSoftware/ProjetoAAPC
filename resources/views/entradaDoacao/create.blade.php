@@ -16,7 +16,7 @@
     <input type="date" class="form-control" id="data" name="data" placeholder="Informe a data da doação..." />
   </div>
   <div class="form-group">
-      <a href="/item.index" class="btn btn-warning">Fechar</a>
+      <a href="/entradaDoacao.index" class="btn btn-warning">Fechar</a>
       <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>

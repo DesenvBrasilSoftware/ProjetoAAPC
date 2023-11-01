@@ -10,9 +10,9 @@ use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 
 class EntradaDoacaoController extends Controller
-{    
+{
     public function index($msg='')
-    {                  
+    {
         $lista = DB::select("
         SELECT
             ed.id,
@@ -26,7 +26,7 @@ class EntradaDoacaoController extends Controller
 
         return view('entradaDoacao.index')->with(['lista' => $lista]);
     }
-       
+
     public function create($msg = '')
     {
         $listaPessoa = Pessoa::all();
@@ -36,7 +36,7 @@ class EntradaDoacaoController extends Controller
 
     public function store(Request $request)
     {
-        $obj = new EntradaDoacao();        
+        $obj = new EntradaDoacao();
         if ($request['id']) {
             $obj = EntradaDoacao::find($request['id']);
         }
@@ -49,12 +49,12 @@ class EntradaDoacaoController extends Controller
             $msg = 'Não foi possível salvar o registro no banco de dados';
             session()->flashInput($request->input());
         }
-        
+
         if ($request['id']){
             return redirect('/entradaDoacao.edit.'.$obj->id);
         }
 
-        return redirect('/entradaDoacao.create');
+        return redirect('/entradaDoacao.edit.'.$obj->id);
     }
 
     public function edit(string $id, $msg = '')
