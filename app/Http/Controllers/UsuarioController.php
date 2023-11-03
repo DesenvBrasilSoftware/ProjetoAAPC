@@ -35,7 +35,7 @@ class UsuarioController extends Controller
             $obj->save();
 
         }catch(\Exception $e) {
-            $msg = 'Não foi possível salvar o usuário no banco de dados.';
+            $msg = 'Não foi possível salvar/alterar o usuário no banco de dados.';
             return back()->with('error', $msg);
         }
 
@@ -51,16 +51,18 @@ class UsuarioController extends Controller
 
     public function delete($id)
     {
-        $obj = Usuario::find($id);
-
-        $msg = "Usuário [{$obj->nome}] excluído.";
-
         try {
+            $obj = Usuario::find($id);
+
+            $tipoMsg = 'success';
+            $msg = "Usuário [{$obj->nome}] excluído.";
+
             $obj->delete();
         }catch(\Exception $e) {
             $msg = 'Não foi possível excluir o usuário.';
+            $tipoMsg = 'error';
         }
 
-        return redirect('/usuario.index')->with(['msg' => $msg]);
+        return redirect('/usuario.index')->with([$tipoMsg => $msg]);
     }
 }

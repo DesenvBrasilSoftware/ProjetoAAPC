@@ -125,5 +125,7 @@ Route::middleware(['auth'])->group(function () {
     // Usuário
     Route::get('/usuario.index', [UsuarioController::class, 'index']);
     Route::get('/usuario.create', [UsuarioController::class, 'create']);
+    Route::get('/usuario.edit.{i}', [UsuarioController::class, 'edit']);
     Route::post('/usuario.store', [UsuarioController::class, 'store']);
+    Route::get('/usuario.delete.{i}', [UsuarioController::class, 'delete']);
 });
