@@ -205,7 +205,7 @@ body {
 /* Hide to Small bar */
 
 .sidebar-hide .sidebar.sidebar-hide-to-small {
-    position: absolute;
+    position: fixed;
     width: 60px;
     left: 0;
     top: 0px;
@@ -594,18 +594,18 @@ html.rtl .sidebar-hide .sidebar.sidebar-shrink.sidebar-hide-to-small~.content-wr
 }
 
 .hamburger.is-active .line:nth-child(2) {
-    -webkit-transform: translateX(-5px);
-    transform: translateX(-5px);
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
     width: 20px;
     height: 3px;
 }
 
 .hamburger.is-active .line:nth-child(1) {
-    -webkit-transform: translateY(3px) rotate(45deg);
-    transform: translateY(3px) rotate(45deg);
+    -webkit-transform: translateY(3px) rotate(-45deg);
+    transform: translateY(3px) rotate(-45deg);
 }
 
 .hamburger.is-active .line:nth-child(3) {
-    -webkit-transform: translateY(-3px) rotate(-45deg);
-    transform: translateY(-3px) rotate(-45deg);
+    -webkit-transform: translateY(-3px) rotate(45deg);
+    transform: translateY(-3px) rotate(45deg);
 }
