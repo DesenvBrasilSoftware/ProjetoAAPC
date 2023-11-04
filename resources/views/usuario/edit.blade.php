@@ -42,6 +42,7 @@
                                     autofocus
                                     required
                                     >
+                                    <span id="login-error" style="color: red;"></span>
                         </div>
                     </div>
 
@@ -70,5 +71,28 @@
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#login').on('input', function() {
+            const login = $(this).val();
+            if (login) {
+                $.ajax({
+                    url: '/verificaLogin',
+                    method: 'GET',
+                    data: { login: login, id: $('#id').val() },
+                    success: function(data) {
+                        if (data.exists) {
+                            $('#login-error').text('Login já está em uso.');
+                        } else {
+                            $('#login-error').text('');
+                        }
+                    },
+                });
+            } else {
+                $('#login-error').text('');
+            }
+        });
+    });
+</script>
 @endsection

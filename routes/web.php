@@ -128,4 +128,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuario.edit.{i}', [UsuarioController::class, 'edit']);
     Route::post('/usuario.store', [UsuarioController::class, 'store']);
     Route::get('/usuario.delete.{i}', [UsuarioController::class, 'delete']);
+    Route::get('/verificaLogin', [UsuarioController::class, 'verificaLogin']);
 });
