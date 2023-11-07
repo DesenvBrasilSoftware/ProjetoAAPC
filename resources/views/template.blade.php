@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
   </head>
   <body>
     <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
@@ -41,6 +42,7 @@
           <ul>
             <li class="logo">
               <a href="/">
+                <img src="/favicon.png" alt="">
                 <span>AAPC</span>
               </a>
             </li>

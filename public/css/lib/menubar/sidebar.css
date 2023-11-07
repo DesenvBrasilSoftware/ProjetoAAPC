@@ -94,7 +94,7 @@
 }
 
 .sidebar .nano-content>ul li>a:hover {
-  background: linear-gradient(to right, #5772FE , #6D85FB);
+  background: #fff;
 }
 
 .sidebar .nano-content>ul li>a>.sidebar-collapse-icon {
@@ -120,14 +120,15 @@
     position: relative;
 }
 
+/* Comentado por Davi Jatobá (07/11/2023) - Esse css cria uma linha vertical azul clara no campo da logo do menu lateral */
 .sidebar .nano-content>ul li.active>a::before {
-    background: #03A9F5;
+    /* background: #03A9F5;
     content: "";
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    width: 3px;
+    width: 3px; */
 }
 
 .sidebar .nano-content>ul li.open>a>.sidebar-collapse-icon {
@@ -146,7 +147,7 @@ html.rtl .sidebar .nano-content>ul>li.label, html.rtl .sidebar .nano-content>ul>
 }
 
 .sidebar .nano-content>ul>li.active>a, .sidebar .nano-content>ul>li.open>a, .sidebar .nano-content>ul>li>ul {
-    background: linear-gradient(to right, #5772FE , #6D85FB);
+    background: #fff;
 }
 
 .sidebar .nano-content>ul>li>ul>li.label, .sidebar .nano-content>ul>li>ul>li.content, .sidebar .nano-content>ul>li>ul>li>a {
