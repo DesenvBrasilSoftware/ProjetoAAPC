@@ -17,6 +17,7 @@ use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\EntradaDoacaoController;
 use App\Http\Controllers\SaidaDoacaoController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RefeicaoController;
 use App\Http\Controllers\ContasAPagarController;
 use App\Http\Controllers\ContasAReceberController;
@@ -159,6 +160,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
 
+    // Usuário
+    Route::get('/usuario.index', [UsuarioController::class, 'index']);
+    Route::get('/usuario.create', [UsuarioController::class, 'create']);
+    Route::get('/usuario.edit.{i}', [UsuarioController::class, 'edit']);
+    Route::post('/usuario.store', [UsuarioController::class, 'store']);
+    Route::get('/usuario.delete.{i}', [UsuarioController::class, 'delete']);
+    Route::get('/verificaLogin', [UsuarioController::class, 'verificaLogin']);
     // Contato
     Route::get('/contatos/{id}', [ContatoController::class, 'index']);
     Route::post('/contato.store.{pacienteId}.{contatoId}', [ContatoController::class, 'store']);
