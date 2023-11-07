@@ -6,6 +6,7 @@ use App\Http\Controllers\AcomodacaoController;
 use App\Http\Controllers\AcompanhanteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BairroController;
+use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\ClasseTerapeuticaController;
 use App\Http\Controllers\EnfermidadeController;
@@ -157,6 +158,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
     Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
+
+    // Contato
+    Route::get('/contatos/{id}', [ContatoController::class, 'index']);
+    Route::post('/contato.store.{pacienteId}.{contatoId}', [ContatoController::class, 'store']);
+    Route::get('/contato.delete.{i}', [ContatoController::class, 'delete']);
 
     // Contas a pagar
     Route::get('/contasAPagar.index', [ContasAPagarController::class, 'index']);

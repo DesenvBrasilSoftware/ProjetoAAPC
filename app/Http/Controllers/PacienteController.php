@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 
 use App\Models\Acompanhante;
 use App\Models\Bairro;
+use App\Models\Contato;
 use App\Models\Acomodacao;
 use App\Models\Enfermidade;
 use App\Models\AcomodacaoPaciente;
@@ -144,17 +145,28 @@ class PacienteController extends Controller
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
 
-        return view('paciente.edit', compact('listaBairro',
-                                             'listaAcomodacaoPaciente',
-                                             'listaEnfermidadePaciente',
-                                             'listaConsultaPaciente',
-                                             'listaAcomodacao',
-                                             'listaEnfermidade',
-                                             'msg',
-                                             'obj',
-                                             'listaPessoa',
-                                             'listaProfissional',
-                                             'listaAcompanhante',));
+        $listaContato = Contato::where('paciente_id', $id)
+            ->join('pessoa', 'contato.pessoa_id', '=', 'pessoa.id')
+            ->select('contato.*', 'pessoa.nome as nome_contato')
+            ->get();
+
+        return view(
+            'paciente.edit',
+            compact(
+                'listaBairro',
+                'listaAcomodacaoPaciente',
+                'listaEnfermidadePaciente',
+                'listaConsultaPaciente',
+                'listaAcomodacao',
+                'listaEnfermidade',
+                'msg',
+                'obj',
+                'listaPessoa',
+                'listaProfissional',
+                'listaAcompanhante',
+                'listaContato',
+            )
+        );
     }
 
     public function delete($id)
