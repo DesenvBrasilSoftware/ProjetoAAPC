@@ -1,16 +1,15 @@
 @extends('template')
 @section('conteudo')
 <div class="form-group">
-  <a type="button" href="/grupoItem.create" class="btn btn-primary">Incluir</a>
+  <a type="button" href="/saidaDoacao.create" class="btn btn-primary">Incluir</a>
 </div>
 <table id="dataTable" class="table table-stripped">
   <thead>
     <tr>
       <th>Alterar</th>
       <th>Excluir</th>
-      <th>Descrição</th>
-      <th>Perecivel</th>
-      <th>Refrigerado</th>
+      <th>Data</th>
+      <th>Doador</th>
     </tr>
   </thead>
   <tbody>
@@ -18,20 +17,17 @@
     <input type="hidden" id="id_{{ $obj->id }}" value="{{ $obj->id }}">
     <tr>
       <td width="1%">
-        <a href="/grupoItem.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit"
+        <a href="/saidaDoacao.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit"
           style="align-content: center"></i></a>
       </td>
       <td width="1%">
-        <a href="/grupoItem.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
+        <a href="/saidaDoacao.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
-        {{ $obj->descricao }}
+        {{ $obj->data }}
       </td>
       <td>
-        {{ $obj->perecivel }}
-      </td>
-      <td>
-        {{ $obj->refrigerado }}
+        {{ $obj->doador }}
       </td>
     </tr>
     @endforeach

@@ -13,8 +13,13 @@ use App\Http\Controllers\GrupoItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\EntradaDoacaoController;
+use App\Http\Controllers\SaidaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RefeicaoController;
+use App\Http\Controllers\ContasAPagarController;
+use App\Http\Controllers\ContasAReceberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +112,34 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pessoa.delete.{i}', [PessoaController::class, 'delete']);
     Route::get('/pessoa.edit.{i}', [PessoaController::class, 'edit']);
 
+    // Entrada Doação
+    Route::get('/entradaDoacao.index', [EntradaDoacaoController::class, 'index']);
+    Route::get('/entradaDoacao.create', [EntradaDoacaoController::class, 'create']);
+    Route::get('/entradaDoacao.retrieveAll', [EntradaDoacaoController::class, 'retrieveAll']);
+    Route::post('/entradaDoacao.store', [EntradaDoacaoController::class, 'store']);
+    Route::get('/entradaDoacao.delete.{i}', [EntradaDoacaoController::class, 'delete']);
+    Route::get('/entradaDoacao.edit.{i}', [EntradaDoacaoController::class, 'edit']);
+    Route::post('/entradaDoacao.adicionarItem', [EntradaDoacaoController::class, 'adicionarItem']);
+    Route::post('/entradaDoacao.deletarItem', [EntradaDoacaoController::class, 'deletarItem']);
+
+    // Saída Doação
+    Route::get('/saidaDoacao.index', [SaidaDoacaoController::class, 'index']);
+    Route::get('/saidaDoacao.create', [SaidaDoacaoController::class, 'create']);
+    Route::get('/saidaDoacao.retrieveAll', [SaidaDoacaoController::class, 'retrieveAll']);
+    Route::post('/saidaDoacao.store', [SaidaDoacaoController::class, 'store']);
+    Route::get('/saidaDoacao.delete.{i}', [SaidaDoacaoController::class, 'delete']);
+    Route::get('/saidaDoacao.edit.{i}', [SaidaDoacaoController::class, 'edit']);
+    Route::post('/saidaDoacao.adicionarItem', [SaidaDoacaoController::class, 'adicionarItem']);
+    Route::post('/saidaDoacao.deletarItem', [SaidaDoacaoController::class, 'deletarItem']);
+
+    // Refeição
+    Route::get('/refeicao.index', [RefeicaoController::class, 'index']);
+    Route::get('/refeicao.create', [RefeicaoController::class, 'create']);
+    Route::post('/refeicao.store', [RefeicaoController::class, 'store']);
+    Route::get('/refeicao.edit.{i}', [RefeicaoController::class, 'edit']);
+    Route::get('/refeicao.delete.{i}', [RefeicaoController::class, 'delete']);
+    Route::get('/refeicao.servir.{i}', [RefeicaoController::class, 'servirRefeicao']);
+
     // Paciente
     Route::get('/paciente.index', [PacienteController::class, 'index']);
     Route::get('/paciente.create', [PacienteController::class, 'create']);
@@ -116,6 +149,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/paciente.edit.{i}', [PacienteController::class, 'edit']);
     Route::post('/paciente.adicionarAcomodacao', [PacienteController::class, 'adicionarAcomodacao']);
     Route::post('/paciente.deletarAcomodacao', [PacienteController::class, 'deletarAcomodacao']);
+    Route::post('/paciente.adicionarEnfermidade', [PacienteController::class, 'adicionarEnfermidade']);
+    Route::post('/paciente.deletarEnfermidade', [PacienteController::class, 'deletarEnfermidade']);
+    Route::post('/paciente.adicionarConsulta', [PacienteController::class, 'adicionarConsulta']);
+    Route::post('/paciente.deletarConsulta', [PacienteController::class, 'deletarConsulta']);
 
     // Acompanhante
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
@@ -129,4 +166,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/usuario.store', [UsuarioController::class, 'store']);
     Route::get('/usuario.delete.{i}', [UsuarioController::class, 'delete']);
     Route::get('/verificaLogin', [UsuarioController::class, 'verificaLogin']);
+    // Contas a pagar
+    Route::get('/contasAPagar.index', [ContasAPagarController::class, 'index']);
+    Route::get('/contasAPagar.create', [ContasAPagarController::class, 'create']);
+    Route::post('/contasAPagar.store', [ContasAPagarController::class, 'store']);
+    Route::get('/contasAPagar.edit.{i}', [ContasAPagarController::class, 'edit']);
+    Route::get('/contasAPagar.delete.{i}', [ContasAPagarController::class, 'delete']);
+
+    // Contas a receber
+    Route::get('/contasAReceber.index', [ContasAReceberController::class, 'index']);
+    Route::get('/contasAReceber.create', [ContasAReceberController::class, 'create']);
+    Route::post('/contasAReceber.store', [ContasAReceberController::class, 'store']);
+    Route::get('/contasAReceber.edit.{i}', [ContasAReceberController::class, 'edit']);
+    Route::get('/contasAReceber.delete.{i}', [ContasAReceberController::class, 'delete']);
 });
