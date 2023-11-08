@@ -124,7 +124,7 @@
             </li>
             <hr style="border-top: 1px solid rgba(255,255,255,0.6);">
             <li>
-              <a href="{{ route('logout') }}">
+              <a onclick="return confirm('Tem certeza de que deseja sair?');" href="{{ route('logout') }}">
                 <i class='bx bx-log-out'></i>Logout
               </a>
             </li>
