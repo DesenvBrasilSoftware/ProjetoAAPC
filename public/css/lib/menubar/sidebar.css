@@ -562,7 +562,7 @@ html.rtl .sidebar-hide .sidebar.sidebar-shrink.sidebar-hide-to-small~.content-wr
     display: inline-block;
     left: 0px;
     position: relative;
-    top: 10px;
+    top: 6px;
     -webkit-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
     width: 37px;
@@ -573,8 +573,8 @@ html.rtl .sidebar-hide .sidebar.sidebar-shrink.sidebar-hide-to-small~.content-wr
     background-color: #252525;
     display: block;
     height: 3px;
-    margin: 4px auto;
-    width: 22px;
+    margin: 6px auto;
+    width: 24px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -603,10 +603,10 @@ html.rtl .sidebar-hide .sidebar.sidebar-shrink.sidebar-hide-to-small~.content-wr
 
 .hamburger.is-active .line:nth-child(1) {
     -webkit-transform: translateY(3px) rotate(-45deg);
-    transform: translateY(3px) rotate(-45deg);
+    transform: translateY(4px) rotate(-45deg);
 }
 
 .hamburger.is-active .line:nth-child(3) {
     -webkit-transform: translateY(-3px) rotate(45deg);
-    transform: translateY(-3px) rotate(45deg);
+    transform: translateY(-4px) rotate(45deg);
 }

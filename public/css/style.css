@@ -701,10 +701,17 @@ a.dt-button.active:not(.disabled) {
 ---------------*/
 .header {
   background: #ffffff;
-  z-index: 990;
   margin-left: 250px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   transition: margin-left 300ms ease-in-out 0s;
+}
+.header .profile {
+    display: flex;
+    align-items: center;
+}
+.header .profile i {
+    font-size: 36px;
+    margin: 4px;
 }
 .logo {
   background: #343957;
@@ -743,7 +750,7 @@ a.dt-button.active:not(.disabled) {
 }
 .header-icon i,
 .header-icon img,
-.header-icon span {
+.icon span {
   cursor: pointer;
 }
 .header-icon.active,
