@@ -697,6 +697,25 @@ a.dt-button.active:not(.disabled) {
   padding: 0 10px;
   font-size: 14px;
 }
+/*  Forms card title
+---------------*/
+.card-title {
+    display: flex;
+    align-items: center;
+    background-color: #343957;
+    color: #BDBDC7;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 2.75rem !important;
+}
+.card-title i {
+    font-size: 1.75em;
+    margin-right: 12px;
+}
+.card-title h3 {
+    /* margin: 0px; */
+}
+
 /*    Header
 ---------------*/
 .header {
