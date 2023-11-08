@@ -29,7 +29,7 @@
 }
 
 .sidebar i {
-    font-size: 1.12em;
+    font-size: 1.62em;
     margin-right: 5px;
     vertical-align: middle;
     width: 1.4em;
@@ -238,7 +238,7 @@ body {
 
 .sidebar-hide .sidebar.sidebar-hide-to-small .nano-content>ul>li>a>i {
     width: auto;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .sidebar-hide .sidebar.sidebar-hide-to-small .nano-content>ul>li>a, .sidebar-hide .sidebar.sidebar-hide-to-small .nano-content>ul>li>a>.sidebar-collapse-icon {

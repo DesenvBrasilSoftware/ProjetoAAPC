@@ -48,17 +48,17 @@
             </li>
             <li>
               <a href="acomodacao.index">
-                <i class="ti-clipboard"></i> Acomodação
+                <i class='bx bxs-bed'></i>Acomodação
               </a>
             </li>
             <li>
               <a href="refeicao.index">
-                <i class='bx bx-dish'></i> Refeição
+                <i class='bx bxs-dish'></i>Refeição
               </a>
             </li>
             <li>
               <a class="sidebar-sub-toggle">
-                <i class="ti-location-pin"></i> Localidade
+                <i class='bx bxs-map'></i>Localidade
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
@@ -69,7 +69,7 @@
             <li>
             <li>
               <a class="sidebar-sub-toggle">
-                <i class='bx bx-donate-heart'></i> Doações
+                <i class='bx bxs-donate-heart'></i>Doações
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
@@ -78,18 +78,28 @@
               </ul>
             </li>
             <li>
+              <a class="sidebar-sub-toggle">
+                <i class='bx bx-dollar'></i>Financeiro
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas A Receber</a></li>
+              </ul>
+            </li>
+            <li>
               <a href="classeTerapeutica.index">
-                <i class="ti-paint-bucket"></i> Classe terapêutica
+                <i class='bx bxs-vial' ></i>Classe terapêutica
               </a>
             </li>
             <li>
               <a href="enfermidade.index">
-                <i class="ti-pulse"></i> Enfermidade
+                <i class='bx bx-pulse' ></i>Enfermidade
               </a>
             </li>
             <li>
               <a class="sidebar-sub-toggle">
-                <i class="ti-server"></i> Estoque
+                <i class='bx bx-data'></i>Estoque
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
@@ -99,30 +109,23 @@
             </li>
             <li>
               <a href="medicamento.index">
-                <i class="ti-support"></i> Medicamentos
+                <i class='bx bxs-first-aid'></i></i>Medicamentos
               </a>
             </li>
             <li>
                 <a href="paciente.index">
-                    <i class="ti-user"></i> Paciente
+                    <i class='bx bx-face'></i>Paciente
                 </a>
             </li>
             <li>
-              <a href="usuario.index"><i class=""></i>Usuários</a>
+                <a href="usuario.index">
+                    <i class='bx bxs-group'></i>Usuários
+                </a>
             </li>
-            <li>
-              <a class="sidebar-sub-toggle">
-                <i class="ti-money"></i> Financeiro
-                <span class="sidebar-collapse-icon ti-angle-down"></span>
-              </a>
-              <ul>
-                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
-                <li><a href="contasAReceber.index">Contas A Receber</a></li>
-              </ul>
-            </li>
+            <hr style="border-top: 1px solid rgba(255,255,255,0.6);">
             <li>
               <a href="{{ route('logout') }}">
-                <i class="ti-close"></i> Logout
+                <i class='bx bx-log-out-circle' ></i>Logout
               </a>
             </li>
           </ul>
@@ -144,7 +147,7 @@
             <div class="float-right">
                 <div class="profile">
                     <span class="user-avatar">{{ Auth::user()->nome }}</span>
-                    <i class='bx bx-user-circle'></i>
+                    <i class='bx bxs-user-circle'></i>
                 </div>
             </div>
           </div>
