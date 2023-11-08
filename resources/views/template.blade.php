@@ -125,7 +125,7 @@
             <hr style="border-top: 1px solid rgba(255,255,255,0.6);">
             <li>
               <a href="{{ route('logout') }}">
-                <i class='bx bx-log-out-circle' ></i>Logout
+                <i class='bx bx-log-out'></i>Logout
               </a>
             </li>
           </ul>
