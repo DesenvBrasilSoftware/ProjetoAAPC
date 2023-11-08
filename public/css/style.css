@@ -717,6 +717,7 @@ a.dt-button.active:not(.disabled) {
 .logo a {
     display: flex !important;
     align-items: center;
+    background: #fff !important;
 }
 .logo span {
   color: #159148;

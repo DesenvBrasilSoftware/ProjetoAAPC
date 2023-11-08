@@ -94,7 +94,7 @@
 }
 
 .sidebar .nano-content>ul li>a:hover {
-  background: #fff;
+    background: linear-gradient(to right, #5772FE , #6D85FB);
 }
 
 .sidebar .nano-content>ul li>a>.sidebar-collapse-icon {
@@ -147,7 +147,7 @@ html.rtl .sidebar .nano-content>ul>li.label, html.rtl .sidebar .nano-content>ul>
 }
 
 .sidebar .nano-content>ul>li.active>a, .sidebar .nano-content>ul>li.open>a, .sidebar .nano-content>ul>li>ul {
-    background: #fff;
+    background: linear-gradient(to right, #5772FE , #6D85FB);
 }
 
 .sidebar .nano-content>ul>li>ul>li.label, .sidebar .nano-content>ul>li>ul>li.content, .sidebar .nano-content>ul>li>ul>li>a {
