@@ -174,6 +174,10 @@
               </button>
             </div>
             @endif
+            <div class="card-title">
+                <i class="bx" id="card-title-icon"></i>
+                <h3 id="card-title-title"></h3>
+            </div>
             @yield('conteudo')
             <script>
               // Example starter JavaScript for disabling form submissions if there are invalid fields
