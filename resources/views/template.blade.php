@@ -43,6 +43,121 @@
                             <a href="/">
                             <span>AAPC</span>
                             </a>
+            </li>
+            <li>
+              <a href="acomodacao.index">
+                <i class="ti-clipboard"></i> Acomodação
+              </a>
+            </li>
+            <li>
+              <a href="refeicao.index">
+                <i class='bx bx-dish'></i> Refeição
+              </a>
+            </li>
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class="ti-location-pin"></i> Localidade
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="bairro.index">Bairro</a></li>
+                <li><a href="cidade.index">Cidade</a></li>
+              </ul>
+            </li>
+            <li>
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class='bx bx-donate-heart'></i> Doações
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="entradaDoacao.index">Entrada por doação</a></li>
+                <li><a href="saidaDoacao.index">Saída por doação</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="classeTerapeutica.index">
+                <i class="ti-paint-bucket"></i> Classe terapêutica
+              </a>
+            </li>
+            <li>
+              <a href="enfermidade.index">
+                <i class="ti-pulse"></i> Enfermidade
+              </a>
+            </li>
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class="ti-server"></i> Estoque
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="item.index">Item</a></li>
+                <li><a href="grupoItem.index">Grupo Item</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="medicamento.index">
+                <i class="ti-support"></i> Medicamentos
+              </a>
+            </li>
+            <li>
+                <a href="paciente.index">
+                    <i class="ti-user"></i> Paciente
+                </a>
+            </li>
+            <li>
+              <a href="usuario.index"><i class=""></i>Usuários</a>
+            </li>
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class="ti-money"></i> Financeiro
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas A Receber</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="{{ route('logout') }}">
+                <i class="ti-close"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /# sidebar -->
+    <div class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="float-left">
+              <div class="hamburger sidebar-toggle">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+              </div>
+            </div>
+            <div class="float-right">
+              <div class="dropdown dib">
+                <div class="header-icon" data-toggle="dropdown">
+                  <i class="ti-bell"></i>
+                  <div class="drop-down dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-content-heading">
+                      <span class="text-left">Recent Notifications</span>
+                    </div>
+                    <div class="dropdown-content-body">
+                      <ul>
+                        <li>
+                          <a href="#">
+                            <img class="pull-left m-r-10 avatar-img" src="images/avatar/3.jpg" alt="" />
+                            <div class="notification-content">
+                              <small class="notification-timestamp pull-right">02:34 PM</small>
+                              <div class="notification-heading">Mr. John</div>
+                              <div class="notification-text">5 members joined today</div>
+                            </div>
+                          </a>
                         </li>
                         <li>
                             <a href="acomodacao.index">
