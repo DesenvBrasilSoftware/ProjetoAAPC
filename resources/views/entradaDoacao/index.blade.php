@@ -24,7 +24,9 @@
         <a href="/entradaDoacao.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
-        {{ $obj->data }}
+      @if ($obj->data)
+            {{ date('d/m/Y', strtotime($obj->data)) }}
+        @endif
       </td>
       <td>
         {{ $obj->doador }}

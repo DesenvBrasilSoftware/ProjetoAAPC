@@ -26,7 +26,9 @@
         {{ $obj->nome }}
       </td>
       <td>
-        {{ $obj->data_nascimento }}
+        @if ($obj->data_nascimento)
+            {{ date('d/m/Y', strtotime($obj->data_nascimento)) }}
+        @endif
       </td>
     </tr>
     @endforeach

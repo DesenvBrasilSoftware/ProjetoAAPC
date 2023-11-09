@@ -11,7 +11,11 @@ class ItemController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Item::orderBy('descricao')->get();
+        $lista = Item::orderBy('descricao')
+        ->join('grupo_item', 'item.grupo_item_id', '=', 'grupo_item.id')
+        ->join('medicamento', 'item.medicamento_id', '=', 'medicamento.id')
+        ->select('item.*', 'grupo_item.descricao as grupo_item', 'medicamento.nome as medicamento')
+        ->get();
         return view('item.index')->with(['lista' => $lista]);
     }
 
