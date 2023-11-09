@@ -10,7 +10,10 @@ class MedicamentoController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Medicamento::orderBy('nome')->get();
+        $lista = Medicamento::orderBy('nome')
+        ->join('classe_terapeutica', 'medicamento.classe_terapeutica_id', '=', 'classe_terapeutica.id')
+        ->select('medicamento.*', 'classe_terapeutica.descricao as classe_terapeutica')
+        ->get();
         return view('medicamento.index')->with(['lista' => $lista]);
     }
 

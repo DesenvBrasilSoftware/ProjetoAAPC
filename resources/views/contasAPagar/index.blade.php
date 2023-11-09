@@ -36,7 +36,6 @@
     <td>
         {{ $obj->pessoa }}
     </td>
-      
     </tr>
     @endforeach
   </tbody>

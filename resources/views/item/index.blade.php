@@ -10,8 +10,8 @@
       <th>Descrição</th>
       <th>Grupo de item</th>
       <th>Validade</th>
-      <th>Kit</th>
       <th>Medicamento</th>
+      <th>Kit</th>
     </tr>
   </thead>
   <tbody>
@@ -25,19 +25,25 @@
         <a href="/item.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
-        {{ $obj->descricao }}
+          {{ $obj->descricao }}
       </td>
       <td>
-        {{ $obj->Validade }}
+          {{ $obj->grupo_item }}
       </td>
       <td>
-        {{ $obj->grupo_item_id }}
+        @if ($obj->data_nascimento)
+            {{ date('d/m/Y', strtotime($obj->data_nascimento)) }}
+        @endif
       </td>
       <td>
-        {{ $obj->kit }}
+          {{ $obj->medicamento }}
       </td>
       <td>
-        {{ $obj->medicamento_id }}
+        @if($obj->kit == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true">
+        @endif
       </td>
     </tr>
     @endforeach

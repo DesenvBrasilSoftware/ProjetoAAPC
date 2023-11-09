@@ -36,10 +36,14 @@
                                         {{ $obj->principio_ativo }}
                                     </td>
                                     <td>
-                                        {{ $obj->classificacao }}
+                                        {{
+                                            $obj->classificacao === 'R' ? 'Referência' :
+                                            ($obj->classificacao === 'S' ? 'Similar' :
+                                            ($obj->classificacao === 'G' ? 'Genérico' : 'Desconhecido'))
+                                        }}
                                     </td>
                                     <td>
-                                        {{ $obj->classe_terapeutica_id }}
+                                        {{ $obj->classe_terapeutica }}
                                     </td>
                                 </tr>
                             @endforeach
