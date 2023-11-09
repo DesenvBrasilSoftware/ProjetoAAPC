@@ -20,7 +20,7 @@ class AuthController extends Controller
         $credentials = $request->only('login', 'password');
 
         $usuario = Usuario::where('login', $credentials['login'])
-            ->where('senha', $credentials['password'])
+            ->where('senha', md5($credentials['password']))
             ->first();
 
         if ($usuario) {
