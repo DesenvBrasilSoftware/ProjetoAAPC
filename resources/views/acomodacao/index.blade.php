@@ -36,7 +36,11 @@
         {{$obj->leitos_livres}}
       </td>
       <td>
-        {{$obj->refrigerado}}
+        @if($obj->refrigerado == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true">
+        @endif
       </td>
     </tr>
     @endforeach
