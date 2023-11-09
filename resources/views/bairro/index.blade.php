@@ -27,7 +27,7 @@
         {{ $obj->nome }}
       </td>
       <td>
-        {{ $obj->cidade_id }}
+        {{ $obj->cidade }}
       </td>
     </tr>
     @endforeach

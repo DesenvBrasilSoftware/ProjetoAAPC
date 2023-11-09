@@ -9,7 +9,11 @@ class BairroController extends Controller
 {
     public function index($msg = '')
     {
-        $lista = Bairro::orderBy('nome')->get();
+        $lista = Bairro::orderBy('nome')
+        ->join('cidade', 'bairro.cidade_id', '=', 'cidade.id')
+        ->select('bairro.*', 'cidade.nome as cidade')
+        ->get();
+
         return view('bairro.index')->with(['lista' => $lista]);
     }
 
