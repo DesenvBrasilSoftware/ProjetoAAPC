@@ -13,8 +13,10 @@
     <div class="min-vh-100 d-flex justify-content-center align-items-center">
         <div class="col-md-5">
             <div class="card">
-                <div class="card-header">Login AAPC</div>
-
+                <div class="card-header" style="display: flex; align-items: center;">
+                    <img width="32px" style="margin-right: 8px" src="/favicon.png" alt="">
+                    Login AAPC
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
