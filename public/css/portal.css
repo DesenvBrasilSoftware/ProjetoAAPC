@@ -12,3 +12,22 @@
     margin-right: 6px;
     margin-top: 2px;
 }
+
+.principal {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.qrcode-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #02903f;
+    border-radius: 8px;
+    padding: 1rem 0rem;
+    margin: 0px auto;
+    max-width: 360px;
+    height: 100%;
+}
