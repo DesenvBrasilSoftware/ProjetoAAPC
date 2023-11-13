@@ -28,7 +28,7 @@ class AuthController extends Controller
 
             session(['usuarioLogado' => $usuario]);
 
-            return redirect('/');
+            return redirect('/app');
         } else {
             return back()->withErrors([
                 'login' => 'Senha ou Login inválidos.',

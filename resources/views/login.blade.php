@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal AAPC</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/portal.js"></script>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/portal.css" rel="stylesheet" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <a href="/login" style="margin-right: 16px;">
-        <img width="200" src="/images/logo_aapc.png" alt="" />
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="https://maps.app.goo.gl/fa3Z9JXUVZ5Kiyoz5" target="_blank"> Localização</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Contatos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div><i class="bx bxl-whatsapp" style="color: #00d15c;"></i><span>WhatsApp: (75)99211-1055</span></div>
-              <div><i class="bx bxs-phone"></i><span>Telefone: (75) 3623-6488</span></div>
-              <div><i class="bx bx-envelope"></i><span>Email: aapc@gmail.com</span></div>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login AAPC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+<body>
+    <div class="min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header" style="display: flex; align-items: center;">
+                    <img width="32px" style="margin-right: 8px" src="/favicon.png" alt="">
+                    Login AAPC
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input type="text" class="form-control" id="login" name="login" placeholder="Digite seu Login">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua Senha">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                </div>
             </div>
-          </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
         </div>
-      </div>
-    </nav>
-    <div class="container-fluid"></div>
-  </body>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-right'
+            };
+
+            @if($errors->has('login'))
+                toastr.error('Senha ou Login inválidos.', 'Erro');
+            @endif
+        });
+    </script>
+
+</body>
 </html>
