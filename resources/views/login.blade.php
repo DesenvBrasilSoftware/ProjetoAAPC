@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="/css/portal.css" rel="stylesheet" />
   </head>
   <body>
@@ -21,17 +22,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://maps.app.goo.gl/fa3Z9JXUVZ5Kiyoz5" target="_blank">
+            <a class="nav-link active" href="https://maps.app.goo.gl/fa3Z9JXUVZ5Kiyoz5" target="_blank">
             Localização</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Contatos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Telefone: (75) 3623-6488</a>
-              <a class="dropdown-item" href="#">WhatsApp: 75992111055</a>
-              <a class="dropdown-item" href="#">Email: aapc@gmail.com</a>
+              <div><i class='bx bxl-whatsapp' style='color:#00d15c'></i><span>WhatsApp: (75)99211-1055</span></div>
+              <div><i class='bx bxs-phone'></i><span>Telefone: (75) 3623-6488</span></div>
+              <div><i class='bx bx-envelope'></i><span>Email: aapc@gmail.com</span></div>
             </div>
           </li>
         </ul>
@@ -42,4 +43,35 @@
     </nav>
     <div class="container-fluid"></div>
   </body>
+  <script>
+    $(document).ready(function(){
+        var isTextSelecting = false;
+
+        // Impede o clique nos itens do dropdown
+        $('.dropdown-menu div').on('click', function(e){
+        e.stopPropagation();
+        });
+
+        // Impede o fechamento do dropdown ao clicar fora dele
+        $(document).on('mousedown', function(e){
+        var dropdownMenu = $('.dropdown-menu');
+
+        // Verifica se está selecionando texto dentro do dropdown
+        isTextSelecting = dropdownMenu.has(e.target).length > 0;
+
+        if (!isTextSelecting) {
+            dropdownMenu.removeClass('show');
+        }
+        });
+
+        // Adiciona evento ao término da seleção de texto para reabrir o dropdown
+        $(document).on('mouseup', function(){
+        if (isTextSelecting) {
+            $('.dropdown-menu').addClass('show');
+            isTextSelecting = false;
+        }
+        });
+    });
+  </script>
+
 </html>
