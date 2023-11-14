@@ -36,10 +36,11 @@ use App\Http\Controllers\ContasAReceberController;
 Route::get('/login', [AuthController::class, 'loginView'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/', function () { return view('portal'); });
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () { return view('index'); });
+    Route::get('/app', function () { return view('index'); });
 
     // Enfermidade
     Route::get('/enfermidade.index', [EnfermidadeController::class, 'index']);
