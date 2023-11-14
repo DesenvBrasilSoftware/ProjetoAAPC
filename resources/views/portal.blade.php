@@ -14,8 +14,8 @@
     <link href="/css/portal.css" rel="stylesheet" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <a href="/login" style="margin-right: 16px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+      <a href="/" style="margin-right: 16px;">
         <img width="200" src="/images/logo_aapc.png" alt="" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,17 +58,59 @@
         </div>
       </div>
     </div>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1 mr-2">
-        <img style="filter: grayscale(100%);" width="32px"src="/favicon.png" alt="">
-      </a>
-      <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+<footer class="text-center text-lg-start bg-light text-muted">
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <div class="me-5 d-none d-lg-block">
+      <span>Nossas redes sociais:</span>
     </div>
+    <div>
+      <a href="https://www.instagram.com/aapcoficial/" target="_blank" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </section>
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            Quem somos?
+          </h6>
+          <p>
+            Uma instituição sem fins lucrativos que tem como intenção acolher pacientes
+            e seus familiares, contribuindo assim na luta contra o câncer.
+          </p>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold">
+            Apoio
+          </h6>
+          <p>
+            <img style="max-width: 120px" src="/images/icon-brasil.png" alt="">
+          </p>
+          <p>
+            <img style="max-width: 120px" src="/images/icon-hostoo.png" alt="">
+          </p>
+        </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <li style="font-size: 2rem" class="ms-3"><a class="text-muted" href="#">Instagram <i class='bx bxl-instagram-alt' ></i></a></li>
-    </ul>
-  </footer>
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">Contato</h6>
+          <p><i class="fas fa-home me-3"></i> R. Thereza Cunha Santana, 174 - São JOÃO, Feira de Santana - BA, 44051-738</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            aapc@gmail.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i>(75) 3623-6488</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+     © 2023 AAPC.
+    <span class="text-reset fw-bold">Todos os Direitos Reservados.</span>
+  </div>
+</footer>
   </body>
 </html>
