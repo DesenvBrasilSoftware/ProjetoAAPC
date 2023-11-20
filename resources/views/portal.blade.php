@@ -52,22 +52,26 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-auto m-auto" src="/images/slides/slide1.jpg" alt="First slide" />
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide1.jpg" alt="First slide" />
           </div>
           <div class="carousel-item">
-            <img class="d-block w-auto m-auto" src="/images/slides/slide2.jpg" alt="Second slide" />
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide2.jpg" alt="Second slide" />
           </div>
           <div class="carousel-item">
-            <img class="d-block w-auto m-auto" src="/images/slides/slide3.jpg" alt="Third slide" />
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide3.jpg" alt="Third slide" />
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <div class="arrow-container">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </div>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <div class="arrow-container">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
+          </div>
         </a>
       </div>
       <div class="row" style="margin: 2rem 0;">
