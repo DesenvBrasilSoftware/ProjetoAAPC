@@ -44,7 +44,7 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div id="carouselExampleControls" class="carousel slide" style="margin: 2rem 0;" data-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide" style="margin: 1.5rem 0;" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -52,13 +52,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-auto m-auto" src="/images/c1.jpg" alt="First slide" />
+            <img class="d-block w-auto m-auto" src="/images/slides/slide1.jpg" alt="First slide" />
           </div>
           <div class="carousel-item">
-            <img class="d-block w-auto m-auto" src="/images/c2.jpg" alt="Second slide" />
+            <img class="d-block w-auto m-auto" src="/images/slides/slide2.jpg" alt="Second slide" />
           </div>
           <div class="carousel-item">
-            <img class="d-block w-auto m-auto" src="/images/c3.jpg" alt="Third slide" />
+            <img class="d-block w-auto m-auto" src="/images/slides/slide3.jpg" alt="Third slide" />
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
