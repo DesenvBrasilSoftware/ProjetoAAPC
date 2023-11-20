@@ -44,7 +44,37 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="row" style="margin: 2rem 0">
+      <div id="carouselExampleControls" class="carousel slide" style="margin: 1.5rem 0;" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide1.jpg" alt="First slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide2.jpg" alt="Second slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-auto m-auto" height="450px" src="/images/slides/slide3.jpg" alt="Third slide" />
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <div class="arrow-container">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </div>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <div class="arrow-container">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+          </div>
+        </a>
+      </div>
+      <div class="row" style="margin: 2rem 0;">
         <div class="col d-flex justify-content-center mb-4">
           <img width="360px" src="/images/card-doacao.png" alt="" />
         </div>
@@ -58,59 +88,56 @@
         </div>
       </div>
     </div>
-<footer class="text-center text-lg-start bg-light text-muted">
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <div class="me-5 d-none d-lg-block">
-      <span>Nossas redes sociais:</span>
-    </div>
-    <div>
-      <a href="https://www.instagram.com/aapcoficial/" target="_blank" class="me-4 text-reset">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
-  </section>
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <div class="row mt-3">
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
-            Quem somos?
-          </h6>
-          <p>
-            Uma instituição sem fins lucrativos que tem como intenção acolher pacientes
-            e seus familiares, contribuindo assim na luta contra o câncer.
-          </p>
+    <footer class="text-center text-lg-start bg-light text-muted">
+      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <div class="me-5 d-none d-lg-block">
+          <span>Nossas redes sociais:</span>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold">
-            Apoio
-          </h6>
-          <p>
-            <img style="max-width: 120px" src="/images/icon-brasil.png" alt="">
-          </p>
-          <p>
-            <img style="max-width: 120px" src="/images/icon-hostoo.png" alt="">
-          </p>
+        <div>
+          <a href="https://www.instagram.com/aapcoficial/" target="_blank" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+          </a>
         </div>
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
+      </section>
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">
+                Quem somos?
+              </h6>
+              <p>
+                Uma instituição sem fins lucrativos que tem como intenção acolher pacientes e seus familiares, contribuindo assim na luta contra o câncer.
+              </p>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold">
+                Apoio
+              </h6>
+              <p>
+                <img style="max-width: 120px;" src="/images/icon-brasil.png" alt="" />
+              </p>
+              <p>
+                <img style="max-width: 120px;" src="/images/icon-hostoo.png" alt="" />
+              </p>
+            </div>
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4"></div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Contato</h6>
+              <p><i class="fas fa-home me-3"></i> R. Thereza Cunha Santana, 174 - São JOÃO, Feira de Santana - BA, 44051-738</p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                aapc@gmail.com
+              </p>
+              <p><i class="fas fa-phone me-3"></i>(75) 3623-6488</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">Contato</h6>
-          <p><i class="fas fa-home me-3"></i> R. Thereza Cunha Santana, 174 - São JOÃO, Feira de Santana - BA, 44051-738</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            aapc@gmail.com
-          </p>
-          <p><i class="fas fa-phone me-3"></i>(75) 3623-6488</p>
-        </div>
+      </section>
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2023 AAPC.
+        <span class="text-reset fw-bold">Todos os Direitos Reservados.</span>
       </div>
-    </div>
-  </section>
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-     © 2023 AAPC.
-    <span class="text-reset fw-bold">Todos os Direitos Reservados.</span>
-  </div>
-</footer>
+    </footer>
   </body>
 </html>
