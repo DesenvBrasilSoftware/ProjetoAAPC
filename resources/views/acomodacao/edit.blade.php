@@ -4,18 +4,18 @@
   @csrf
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}">
   <div class="form-group">
-    <label required for="descricao">Descrição:</label>
-    <input type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
+    <label for="descricao">Descrição:</label>
+    <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
       value="{{ $obj->descricao }}" autofocus placeholder="Informe a descrição">
   </div>
   <div class="form-group">
     <label for="leitos">Leitos:</label>
-    <input type="text" name="leitos" class="form-control" id="leitos" maxlength="11"
+    <input required type="number" name="leitos" class="numero form-control" id="leitos"
       value="{{ $obj->leitos }}" placeholder="Informe o número de leitos">
   </div>
   <div class="form-group">
     <label for="leitos_livres">Leitos livres:</label>
-    <input type="text" name="leitos_livres" class="form-control" id="leitos_livres" maxlength="11"
+    <input required type="number" name="leitos_livres" class="numero form-control" id="leitos_livres"
       value="{{ $obj->leitos_livres }}" placeholder="Informe o número de leitos livres">
   </div>
   <div class="form-group">
@@ -29,11 +29,13 @@
   </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
   $(function() {
       $("[data-toggle='toggle']").bootstrapToggle({
           size: "small",
       });
   });
+  $(".numero").mask("000000000");
 </script>
 @endsection

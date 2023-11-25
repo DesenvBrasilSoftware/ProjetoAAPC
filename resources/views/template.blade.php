@@ -52,11 +52,6 @@
               </a>
             </li>
             <li>
-              <a href="refeicao.index">
-                <i class='bx bxs-dish'></i>Refeição
-              </a>
-            </li>
-            <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-map'></i>Localidade
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
@@ -67,6 +62,11 @@
               </ul>
             </li>
             <li>
+            <li>
+              <a href="refeicao.index">
+                <i class='bx bxs-dish'></i>Refeição
+              </a>
+            </li>
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-donate-heart'></i>Doações

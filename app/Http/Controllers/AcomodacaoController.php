@@ -35,7 +35,10 @@ class AcomodacaoController extends Controller
             $obj->save();
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            return redirect('/acomodacao.create')->with('error', $msg);
+            if ($request['id']) {
+                return redirect('/acomodacao.edit.' . $obj->id)->with('error', $msg)->withInput();
+            }
+            return redirect('/acomodacao.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {
