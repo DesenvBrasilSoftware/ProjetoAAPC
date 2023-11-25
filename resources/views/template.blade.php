@@ -62,6 +62,10 @@
               </ul>
             </li>
             <li>
+                <a href="paciente.index">
+                    <i class='bx bx-face'></i>Paciente
+                </a>
+            </li>
             <li>
               <a href="refeicao.index">
                 <i class='bx bxs-dish'></i>Refeição
@@ -111,11 +115,6 @@
               <a href="medicamento.index">
                 <i class='bx bxs-first-aid'></i></i>Medicamentos
               </a>
-            </li>
-            <li>
-                <a href="paciente.index">
-                    <i class='bx bx-face'></i>Paciente
-                </a>
             </li>
             <li>
                 <a href="usuario.index">
