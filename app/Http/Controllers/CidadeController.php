@@ -18,9 +18,9 @@ class CidadeController extends Controller
 
     public function create($msg = '')
     {
-        $ufLista = UF::all();
+        $estados = UF::all();
 
-        return view('cidade.create')->with(['estados' => $ufLista]);
+        return view('cidade.create')->with(['estados' => $estados]);
     }
 
     public function store(Request $request)
@@ -35,36 +35,38 @@ class CidadeController extends Controller
 
         try {
             $obj->save();
-
         }catch(\Exception $e) {
-            $msg = 'Não foi possível salvar a cidade no banco de dados.';
-
-            session()->flashInput($request->input());
+            $msg = $e->getMessage();
+            if ($request['id']) {
+                return redirect('/cidade.edit.' . $obj->id)->with('error', $msg)->withInput();
+            }
+            return redirect('/cidade.create')->with('error', $msg)->withInput();
         }
 
-        return redirect('/cidade.index')->with('msg', $msg);
+        if ($request['id']) {
+            return redirect('/cidade.edit.' . $obj->id)->with('success', $msg);
+        }
+        return redirect('/cidade.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
     {
         $obj = Cidade::find($id);
-        $ufLista = UF::all();
+        $estados = UF::all();
 
-        return view('cidade.edit')->with(['msg' => $msg,'obj' => $obj, 'estados' => $ufLista]);
+        return view('cidade.edit')->with(['msg' => $msg,'obj' => $obj, 'estados' => $estados]);
     }
 
     public function delete($id)
     {
         $obj = Cidade::find($id);
-
-        $msg = "{$obj->nome} excluída.";
-
+        $msg = "Cidade ({$obj->nome}) excluída.";
         try {
             $obj->delete();
-        }catch(\Exception $e) {
-            $msg = 'Não foi possível excluir a cidade.';
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir a cidade. ';
+            return redirect('/cidade.index')->with('error', $msg);
         }
-
-        return redirect('/cidade.index')->with(['msg' => $msg]);
+        return redirect('/cidade.index')->with('success', $msg);
     }
 }

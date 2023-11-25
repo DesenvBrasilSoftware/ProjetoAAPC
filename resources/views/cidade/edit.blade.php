@@ -3,7 +3,7 @@
 <form class="needs-validation" novalidate id="form" action="/cidade.store" method="post">
   @csrf
   <input type="hidden" id="id" name="id" value="{{$obj->id}}">
-    <div class="form-group">
+  <div class="form-group">
       <label for="nome">Nome:</label>
       <input
         type="text"
@@ -16,12 +16,14 @@
         placeholder="Informe o nome da cidade..."
         >
   </div>
-    <div class="form-group">
+  <div class="form-group">
       <label for="cid">Estado</label>
       <select name="uf_id" class="form-control" id="uf" required>
-        @foreach($estados as $estado)
-        <option value="{{ $estado->id }}">{{ $estado->nome }}</option>
-        @endforeach
+      @foreach($estados as $estado)
+          <option value="{{ $estado->id }}" {{ $estado->id == $obj->uf_id ? 'selected' : '' }}>
+              {{ $estado->nome }}
+          </option>
+      @endforeach
       </select>
   </div>
   <div class="form-group">
