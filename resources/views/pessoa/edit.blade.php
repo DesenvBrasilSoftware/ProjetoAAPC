@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="nome" id="labelNome">Nome:</label>
     <input required type="text" name="nome" class="form-control" id="nome" maxlength="120"
-      value="{{ $obj->nome }}" readonly placeholder="Informe o nome da pessoa">
+      value="{{ $obj->nome }}" readonly placeholder="Informe o nome">
   </div>
   <div class="form-group">
     <label for="rg">RG:</label>
