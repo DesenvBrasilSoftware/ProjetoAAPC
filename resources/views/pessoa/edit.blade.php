@@ -7,55 +7,72 @@
     data-off="Pessoa jurídica" {{ $obj->cnpj ? 'checked' : '' }}>
   </div>
   <div class="form-group">
-    <label for="cpf/cnpj" id="labelCpfCnpj">CPF</label>
-    <input type="text" name="cpf/cnpj" class="form-control" id="fornecedor" maxlength="45"
-      value="{{ $obj->cpf ? $obj->cpf : $obj->cnpj }}" readonly>
-  </div>
-  <div class="form-group">
-    <label for="nome" id="labelNome">Nome</label>
-    <input type="text" name="nome" class="form-control" id="nome" maxlength="120"
-      value="{{ $obj->nome }}" readonly>
-  </div>
-  <div class="form-group">
-    <label for="rg">RG</label>
+    <label for="rg">RG:</label>
     <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
       value="{{ $obj->rg }}" readonly>
   </div>
   <div class="form-group">
-    <label for="colaborador">Colaborador</label>
-    <select name="colaborador" class="form-control" id="colaborador">
-      <option value="" label="Selecione um colaborador"></option>
-      <option value="{{ $obj->colaborador }}" label="{{ $obj->colaborador }}" selected></option>
-    </select>
+    <label for="cpf/cnpj" id="labelCpfCnpj">CPF:</label>
+    <input type="text" name="cpf/cnpj" class="form-control" id="fornecedor" maxlength="45"
+      value="{{ $obj->cpf ? $obj->cpf : $obj->cnpj }}" readonly>
   </div>
   <div class="form-group">
-    <label for="profissional">Profissional</label>
-    <select name="profissional" class="form-control" id="profissional">
-      <option value="" label="Selecione um profissional" selected></option>
-      <option value="{{ $obj->profissional }}" label="{{ $obj->profissional }}" selected></option>
-    </select>
+    <label for="nome" id="labelNome">Nome:</label>
+    <input required type="text" name="nome" class="form-control" id="nome" maxlength="120"
+      value="{{ $obj->nome }}" readonly placeholder="Informe o nome">
   </div>
   <div class="form-group">
-    <label for="voluntario">Voluntário</label>
-    <select name="voluntario" class="form-control" id="voluntario">
-      <option value="" label="Selecione um voluntário" selected></option>
-      <option value="{{ $obj->voluntario }}" label="{{ $obj->voluntario }}" selected></option>
-    </select>
+    <label for="data_cadastro">Data de cadastro:</label>
+    <input required type="date" class="form-control" id="data_cadastro" name="data_cadastro"
+        placeholder="Informe a data de cadastro" value="{{ $obj->data_cadastro }}">
   </div>
-  <div class="form-group">
-    <label for="fornecedor">Fornecedor</label>
-    <select name="fornecedor" class="form-control" id="fornecedor">
-      <option value="" label="Selecione um fornecedor" selected></option>
-      <option value="{{ $obj->fornecedor }}" label="{{ $obj->fornecedor }}" selected></option>
-    </select>
+  <div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="colaborador">Colaborador:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="colaborador" id="colaborador"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->colaborador ? 'checked' : '' }}>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="clinica">Clínica</label>
-    <select name="clinica" class="form-control" id="clinica">
-      <option value="" label="Selecione uma clínica" selected></option>
-      <option value="{{ $obj->clinica }}" label="{{ $obj->clinica }}" selected></option>
-    </select>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="profissional">Profissional:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="profissional" id="profissional"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->profissional ? 'checked' : '' }}>
+      </div>
+    </div>
   </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="voluntario">Voluntário:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="voluntario" id="voluntario"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->voluntario ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="fornecedor">Fornecedor:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="fornecedor" id="fornecedor"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->fornecedor ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="clinica">Clínica:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="clinica" id="clinica"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->clinica ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="form-group">
     <a type="button" href="/pessoa.index" class="btn btn-warning">Fechar</a>
     <button type="submit" class="btn btn-primary">Salvar</button>

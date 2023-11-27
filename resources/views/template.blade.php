@@ -52,11 +52,6 @@
               </a>
             </li>
             <li>
-              <a href="refeicao.index">
-                <i class='bx bxs-dish'></i>Refeição
-              </a>
-            </li>
-            <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-map'></i>Localidade
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
@@ -67,6 +62,20 @@
               </ul>
             </li>
             <li>
+                <a href="pessoa.index">
+                    <i class='bx bxs-user'></i>Pessoa
+                </a>
+            </li>
+            <li>
+                <a href="paciente.index">
+                    <i class='bx bx-face'></i>Paciente
+                </a>
+            </li>
+            <li>
+              <a href="refeicao.index">
+                <i class='bx bxs-dish'></i>Refeição
+              </a>
+            </li>
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-donate-heart'></i>Doações
@@ -83,8 +92,8 @@
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
-                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
-                <li><a href="contasAReceber.index">Contas A Receber</a></li>
+                <li><a href="contasAPagar.index">Contas a Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas a Receber</a></li>
               </ul>
             </li>
             <li>
@@ -111,11 +120,6 @@
               <a href="medicamento.index">
                 <i class='bx bxs-first-aid'></i></i>Medicamentos
               </a>
-            </li>
-            <li>
-                <a href="paciente.index">
-                    <i class='bx bx-face'></i>Paciente
-                </a>
             </li>
             <li>
                 <a href="usuario.index">

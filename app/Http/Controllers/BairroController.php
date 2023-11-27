@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bairro;
+use App\Models\Cidade;
 use Illuminate\Http\Request;
 
 class BairroController extends Controller
@@ -19,7 +20,9 @@ class BairroController extends Controller
 
     public function create($msg = '')
     {
-        return view('bairro.create')->with(['msg' => $msg]);
+        $cidades = Cidade::all();
+
+        return view('bairro.create')->with(['cidades' => $cidades]);
     }
 
     public function store(Request $request)
@@ -35,31 +38,37 @@ class BairroController extends Controller
         try {
             $obj->save();
         } catch (\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
-            session()->flashInput($request->input());
+            $msg = $e->getMessage();
+            if ($request['id']) {
+                return redirect('/bairro.edit.' . $obj->id)->with('error', $msg)->withInput();
+            }
+            return redirect('/bairro.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {
-            return redirect('/bairro.edit.' . $obj->id);
+            return redirect('/bairro.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('/bairro.create');
+        return redirect('/bairro.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
     {
         $obj = Bairro::find($id);
-        return view('bairro.edit')->with(['msg' => $msg, 'obj' => $obj]);
+        $cidades = Cidade::all();
+
+        return view('bairro.edit')->with(['msg' => $msg, 'obj' => $obj, 'cidades' => $cidades]);
     }
 
     public function delete($id)
     {
         $obj = Bairro::find($id);
-        $msg = "{$obj->nome} excluída.";
+        $msg = "Bairro ({$obj->nome}) excluída.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o bairro. ';
+            return redirect('/bairro.index')->with('error', $msg);
         }
-        return redirect('/bairro.index')->with(['msg' => $msg]);
+        return redirect('/bairro.index')->with('success', $msg);
     }
 }
