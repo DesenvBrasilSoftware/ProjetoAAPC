@@ -507,6 +507,65 @@ CREATE TABLE IF NOT EXISTS `aapc`.`usuario` (
 ENGINE = InnoDB;
 
 
+INSERT INTO uf (nome, sigla)
+VALUES
+('Acre', 'AC'),
+('Alagoas', 'AL'),
+('Amazonas', 'AM'),
+('Amapá', 'AP'),
+('Bahia', 'BA'),
+('Ceará', 'CE'),
+('Distrito Federal', 'DF'),
+('Espírito Santo', 'ES'),
+('Goiás', 'GO'),
+('Maranhão', 'MA'),
+('Minas Gerais', 'MG'),
+('Mato Grosso do Sul', 'MS'),
+('Mato Grosso', 'MT'),
+('Pará', 'PA'),
+('Paraíba', 'PB'),
+('Pernambuco', 'PE'),
+('Piauí', 'PI'),
+('Paraná', 'PR'),
+('Rio de Janeiro', 'RJ'),
+('Rio Grande do Norte', 'RN'),
+('Rondônia', 'RO'),
+('Roraima', 'RR'),
+('Rio Grande do Sul', 'RS'),
+('Santa Catarina', 'SC'),
+('Sergipe', 'SE'),
+('São Paulo', 'SP'),
+('Tocantins', 'TO'),
+('Exterior', 'EX');
+
+INSERT INTO cidade (nome, uf_id)
+VALUES
+('Feira de Santana', 5),
+('Salvador', 5),
+('Cachoeira', 5),
+('Santo Amaro', 5),
+('São Gonçalo dos Campos', 5),
+('Conceição do Jacuípe', 5),
+('Riachão do Jacuípe', 5),
+('Tanquinho', 5),
+('Irará', 5),
+('Coração de Maria', 5),
+('Conceição da Feira', 5),
+('Amélia Rodrigues', 5),
+('Serra Preta', 5),
+('Santa Bárbara', 5),
+('Antônio Cardoso', 5),
+('São Sebastião do Passé', 5),
+('Terra Nova', 5),
+('Santa Terezinha', 5),
+('Pé de Serra', 5),
+('Ipirá', 5),
+('Anguera', 5);
+
+ALTER TABLE pessoa
+    CHANGE COLUMN profissional profissional
+    TINYINT(3) NOT NULL DEFAULT '0' AFTER colaborador;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
