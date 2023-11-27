@@ -126,6 +126,17 @@
                     <i class='bx bxs-group'></i>Usuários
                 </a>
             </li>
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class='bx bxs-spreadsheet'></i>Relatórios
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="#">Financeiro</a></li>
+                <li><a href="#">Estoque</a></li>
+                <li><a href="#">Pacientes</a></li>
+              </ul>
+            </li>
             <hr style="border-top: 1px solid rgba(255,255,255,0.6);">
             <li>
               <a onclick="return confirm('Tem certeza de que deseja sair?');" href="{{ route('logout') }}">
