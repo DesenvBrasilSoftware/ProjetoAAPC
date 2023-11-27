@@ -566,6 +566,12 @@ ALTER TABLE pessoa
     CHANGE COLUMN profissional profissional
     TINYINT(3) NOT NULL DEFAULT '0' AFTER colaborador;
 
+ALTER TABLE `paciente`
+	ADD COLUMN `cidade_id` INT(10) NOT NULL AFTER `bairro_id`,
+	ADD INDEX `cidade_id` (`cidade_id`),
+	ADD CONSTRAINT `fk_paciente_cidade1` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

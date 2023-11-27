@@ -26,7 +26,7 @@
   <div class="form-group">
     <label for="data_cadastro">Data de cadastro:</label>
     <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
-    value="{{ old('data_cadastro') }}">
+      value="{{ old('data_cadastro') }}">
   </div>
   <div class="form-group">
     <label for="sexo">Sexo:</label><br>
@@ -108,6 +108,24 @@
     <input type="text" name="cep" class="form-control" id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');">
   </div>
   <div class="form-group">
+    <label for="cidade_id">Cidade:</label>
+    <select required name="cidade_id" class="form-control" id="cidade_id" maxlength="45" onchange="handleSelectCidade()">
+      <option value="" label="Selecione a cidade..." selected></option>
+      @foreach ($listaCidade as $cidade)
+      <option value="{{ $cidade->id }}" label="{{ $cidade->nome }}">{{ $cidade->nome }}</option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="bairro_id">Bairro:</label>
+    <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45" onchange="handleSelectBairro()">
+      <option value="" label="Selecione o bairro..." selected></option>
+      @foreach ($listaBairro as $bairro)
+      <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}" data-cidade-id="{{ $bairro->cidade_id }}">{{ $bairro->nome }}</option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group">
     <label for="logradouro">Logradouro:</label>
     <input type="text" name="logradouro" class="form-control" id="logradouro" maxlength="60" placeholder="Digite o logradouro" value="{{ old('logradouro') }}" autofocus>
   </div>
@@ -124,15 +142,6 @@
     <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
   </div>
   <div class="form-group">
-    <label for="bairro_id">Bairro:</label>
-    <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
-      <option value="" label="Selecione o bairro..." selected></option>
-      @foreach ($listaBairro as $bairro)
-      <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
-      @endforeach
-    </select>
-  </div>
-  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
@@ -141,4 +150,44 @@
     <button type="submit" class="btn btn-primary mx-2">Salvar</button>
   </div>
 </form>
+<script>
+  function handleSelectBairro() {
+      var select_cidade = document.getElementById('cidade_id');
+      var select_bairro = document.getElementById('bairro_id');
+      var bairro_selecionado_id = select_bairro.value;
+
+      var cidade_id = '';
+
+      @foreach ($listaBairro as $bairro)
+      var bairro_id = '{{$bairro->id}}'
+          if (bairro_selecionado_id == bairro_id) {
+              cidade_id = '{{$bairro->cidade_id}}';
+          }
+      @endforeach
+
+      select_cidade.value = cidade_id;
+  }
+
+  function handleSelectCidade() {
+      var select_cidade = document.getElementById('cidade_id');
+      var select_bairro = document.getElementById('bairro_id');
+      var cidade_selecionada_id = select_cidade.value;
+
+      // Limpar opções anteriores
+      while (select_bairro.options.length > 1) {
+          select_bairro.remove(1);
+      }
+
+      // Adicionar opções de bairro com base na cidade selecionada ou mostrar todos
+      @foreach ($listaBairro as $bairro)
+          var option = document.createElement('option');
+          option.value = '{{ $bairro->id }}';
+          option.label = '{{ $bairro->nome }}';
+
+          if ({{ $bairro->cidade_id }} == cidade_selecionada_id || cidade_selecionada_id === "") {
+              select_bairro.add(option);
+          }
+      @endforeach
+  }
+</script>
 @endsection
