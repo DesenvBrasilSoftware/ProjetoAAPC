@@ -3,6 +3,11 @@
 <form class="needs-validation" novalidate id="form" action="/paciente.store" method="post">
   @csrf
   <div class="form-group">
+    <label for="data_cadastro">Data de cadastro:</label>
+    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
+    value="{{ now()->toDateString() }}" readonly>
+  </div>
+  <div class="form-group">
     <label for="nome">Nome:</label>
     <input type="text" name="nome" class="form-control" id="nome" maxlength="50"
       required value="{{ old('nome') }}" autofocus placeholder="Insira seu nome">
@@ -26,11 +31,6 @@
     <input type="text" name "rg" class="form-control" id="rg" maxlength="20"
       value="{{ old('rg') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
       placeholder="Informe o RG">
-  </div>
-  <div class="form-group">
-    <label for="data_cadastro">Data de cadastro:</label>
-    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
-      value="{{ old('data_cadastro') }}">
   </div>
   <div class="form-group">
     <label for="sexo">Sexo:</label><br>
