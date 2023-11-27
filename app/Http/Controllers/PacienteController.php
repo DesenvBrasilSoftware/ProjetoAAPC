@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 
 use App\Models\Acompanhante;
 use App\Models\Bairro;
+use App\Models\Cidade;
 use App\Models\Contato;
 use App\Models\Acomodacao;
 use App\Models\Enfermidade;
@@ -28,10 +29,12 @@ class PacienteController extends Controller
     public function create($msg = '')
     {
         $listaBairro = Bairro::all();
+        $listaCidade = Cidade::all();
 
         return view(
             'paciente.create',
             compact(
+                'listaCidade',
                 'listaBairro',
                 'msg',
             )
@@ -47,6 +50,7 @@ class PacienteController extends Controller
 
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
+        $obj->data_obito = $request['data_obito'];
         $obj->cpf = $request['cpf'];
         $obj->rg = $request['rg'];
         $obj->data_cadastro = $request['data_cadastro'];
@@ -64,6 +68,7 @@ class PacienteController extends Controller
         $obj->complemento = $request['complemento'];
         $obj->ponto_referencia = $request['ponto_referencia'];
         $obj->bairro_id = $request['bairro_id'];
+        $obj->cidade_id = $request['cidade_id'];
 
         $msg = 'Registro salvo com sucesso.';
 
@@ -88,6 +93,7 @@ class PacienteController extends Controller
     {
         $obj = Paciente::find($id);
         $listaBairro = Bairro::all();
+        $listaCidade = Cidade::all();
         $listaAcomodacao = Acomodacao::all();
         $listaEnfermidade = Enfermidade::all();
         $listaAcomodacaoPaciente = DB::select("
@@ -156,6 +162,7 @@ class PacienteController extends Controller
             'paciente.edit',
             compact(
                 'listaBairro',
+                'listaCidade',
                 'listaAcomodacaoPaciente',
                 'listaEnfermidadePaciente',
                 'listaConsultaPaciente',
