@@ -12,14 +12,19 @@
       value="{{ old('cadPessoa') }}">
   </div>
   <div class="form-group">
+    <label for="rg">RG:</label>
+    <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
+      value="{{ old('rg') }}">
+  </div>
+  <div class="form-group">
     <label for="nome" id="labelNome">Nome:</label>
     <input required type="text" name="nome" class="form-control" id="nome" maxlength="120"
       value="{{ old('nome') }}" autofocus placeholder="Informe o nome">
   </div>
   <div class="form-group">
-    <label for="rg">RG:</label>
-    <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
-      value="{{ old('rg') }}">
+    <label for="data_cadastro">Data de cadastro:</label>
+    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
+    value="{{ old('data_cadastro') }}">
   </div>
   <div class="row">
     <div class="col-md-2">

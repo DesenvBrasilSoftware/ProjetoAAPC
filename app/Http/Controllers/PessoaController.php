@@ -25,19 +25,19 @@ class PessoaController extends Controller
             $obj = Pessoa::find($request['id']);
         }
         $obj->nome = $request['nome'];
-        $obj->colaborador = $request['colaborador'];
-        $obj->profissional = $request['profissional'];
-        $obj->voluntario = $request['voluntario'];
-        $obj->fornecedor = $request['fornecedor'];
-        $obj->clinica = $request['clinica'];
+        $obj->colaborador = ($request['colaborador'] === null) ? 0 : 1;
+        $obj->profissional = ($request['profissional'] === null) ? 0 : 1;
+        $obj->voluntario = ($request['voluntario'] === null) ? 0 : 1;
+        $obj->fornecedor = ($request['fornecedor'] === null) ? 0 : 1;
+        $obj->clinica = ($request['clinica'] === null) ? 0 : 1;
         if ($request['cpfCnpj']) {
             $obj->cnpj = $request['cadPessoa'];
         } else {
             $obj->cpf = $request['cadPessoa'];
         }
-
         $obj->rg = $request['rg'];
-        $obj->data_cadastro = $request['data_Cadastro'];
+        $obj->data_cadastro = $request['data_cadastro'];
+
         $msg = 'Registro salvo no banco de dados';
         try {
             $obj->save();
@@ -50,9 +50,9 @@ class PessoaController extends Controller
         }
 
         if ($request['id']) {
-            return redirect('/pessoa.edit.' . $obj->id);
+            return redirect('/pessoa.edit.' . $obj->id)->with('success', $msg);
         }
-        return redirect('pessoa.create');
+        return redirect('pessoa.create')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')

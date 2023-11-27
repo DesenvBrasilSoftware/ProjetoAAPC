@@ -92,8 +92,8 @@
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
-                <li><a href="contasAPagar.index">Contas A Pagar</a></li>
-                <li><a href="contasAReceber.index">Contas A Receber</a></li>
+                <li><a href="contasAPagar.index">Contas a Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas a Receber</a></li>
               </ul>
             </li>
             <li>

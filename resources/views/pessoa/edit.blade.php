@@ -7,7 +7,12 @@
     data-off="Pessoa jurídica" {{ $obj->cnpj ? 'checked' : '' }}>
   </div>
   <div class="form-group">
-    <label for="cpf/cnpj" id="labelCpfCnpj">CPF</label>
+    <label for="rg">RG:</label>
+    <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
+      value="{{ $obj->rg }}" readonly>
+  </div>
+  <div class="form-group">
+    <label for="cpf/cnpj" id="labelCpfCnpj">CPF:</label>
     <input type="text" name="cpf/cnpj" class="form-control" id="fornecedor" maxlength="45"
       value="{{ $obj->cpf ? $obj->cpf : $obj->cnpj }}" readonly>
   </div>
@@ -17,9 +22,9 @@
       value="{{ $obj->nome }}" readonly placeholder="Informe o nome">
   </div>
   <div class="form-group">
-    <label for="rg">RG:</label>
-    <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
-      value="{{ $obj->rg }}" readonly>
+    <label for="data_cadastro">Data de cadastro:</label>
+    <input required type="date" class="form-control" id="data_cadastro" name="data_cadastro"
+        placeholder="Informe a data de cadastro" value="{{ $obj->data_cadastro }}">
   </div>
   <div class="row">
   <div class="col-md-4">
