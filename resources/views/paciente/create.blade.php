@@ -12,6 +12,10 @@
     <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Insira sua data de nascimento">
   </div>
   <div class="form-group">
+    <label for="data_obito">Data de óbito:</label>
+    <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
+  </div>
+  <div class="form-group">
     <label for="cpf">CPF:</label>
     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="11"
       value="{{ old('cpf') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"

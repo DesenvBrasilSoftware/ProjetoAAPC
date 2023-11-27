@@ -50,6 +50,7 @@ class PacienteController extends Controller
 
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
+        $obj->data_obito = $request['data_obito'];
         $obj->cpf = $request['cpf'];
         $obj->rg = $request['rg'];
         $obj->data_cadastro = $request['data_cadastro'];

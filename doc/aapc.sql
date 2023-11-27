@@ -571,6 +571,8 @@ ALTER TABLE `paciente`
 	ADD INDEX `cidade_id` (`cidade_id`),
 	ADD CONSTRAINT `fk_paciente_cidade1` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
+ALTER TABLE `paciente`
+	ADD COLUMN `data_obito` DATE NOT NULL AFTER `data_cadastro`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

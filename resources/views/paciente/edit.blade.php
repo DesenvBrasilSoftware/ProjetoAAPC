@@ -15,6 +15,11 @@
       placeholder="Informe a data de nascimento" value="{{ $obj->data_nascimento }}">
   </div>
   <div class="form-group">
+    <label for="data_obito">Data de óbito:</label>
+    <input type="date" class="form-control" id="data_obito" name="data_obito"
+      placeholder="Informe a data de óbito" value="{{ $obj->data_obito }}">
+  </div>
+  <div class="form-group">
     <label for="cpf">CPF:</label>
     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="11"
       value="{{ $obj->cpf }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
