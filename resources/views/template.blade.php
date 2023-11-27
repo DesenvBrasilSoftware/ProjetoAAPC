@@ -62,6 +62,11 @@
               </ul>
             </li>
             <li>
+                <a href="pessoa.index">
+                    <i class='bx bxs-user'></i>Pessoa
+                </a>
+            </li>
+            <li>
                 <a href="paciente.index">
                     <i class='bx bx-face'></i>Paciente
                 </a>

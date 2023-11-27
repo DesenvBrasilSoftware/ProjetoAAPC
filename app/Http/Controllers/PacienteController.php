@@ -71,8 +71,10 @@ class PacienteController extends Controller
             $obj->save();
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-
-            return redirect('/paciente.create')->with('error', $msg);
+            if ($request['id']) {
+                return redirect('/paciente.edit.' . $obj->id)->with('error', $msg)->withInput();
+            }
+            return redirect('/paciente.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {

@@ -25,7 +25,8 @@
   </div>
   <div class="form-group">
     <label for="data_cadastro">Data de cadastro:</label>
-    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro">
+    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
+    value="{{ old('data_cadastro') }}">
   </div>
   <div class="form-group">
     <label for="sexo">Sexo:</label><br>
@@ -44,7 +45,7 @@
   </div>
   <div class="form-group">
     <label for="quantidade_filhos">Quantidade de filhos:</label>
-    <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
+    <input required type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
       value="{{ old('quantidade_filhos') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g,');"
       placeholder="Informe a quantidade de filhos">
   </div>
@@ -100,11 +101,7 @@
   </div>
   <div class="form-group">
     <label for="renda_mensal">Renda mensal:</label>
-    <input type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal" placeholder="Digite a renda mensal" value="{{ old('renda_mensal') }}" autofocus>
-  </div>
-  <div class="form-group">
-    <label for="observacao">Observação:</label>
-    <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
+    <input required type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal" placeholder="Digite a renda mensal" value="{{ old('renda_mensal') }}" autofocus>
   </div>
   <div class="form-group">
     <label for="cep">CEP:</label>
@@ -128,12 +125,16 @@
   </div>
   <div class="form-group">
     <label for="bairro_id">Bairro:</label>
-    <select name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
+    <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
       <option value="" label="Selecione o bairro..." selected></option>
       @foreach ($listaBairro as $bairro)
       <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
       @endforeach
     </select>
+  </div>
+  <div class="form-group">
+    <label for="observacao">Observação:</label>
+    <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
   <div class="d-flex form-group justify-content-end">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>

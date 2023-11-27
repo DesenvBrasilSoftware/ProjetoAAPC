@@ -128,5 +128,9 @@ switch (route) {
         icon.classList.add('bxs-group');
         title.innerText = "Cadastro de usuário"
         break;
+    case '/pessoa':
+        icon.classList.add('bxs-user');
+        title.innerText = "Cadastro de pessoa"
+        break;
     default:
 }

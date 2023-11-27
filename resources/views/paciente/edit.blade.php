@@ -12,7 +12,7 @@
         <div class="form-group">
             <label for="data_nascimento">Data de nascimento:</label>
             <input type="date" class="form-control" id="data_nascimento" name="data_nascimento"
-                placeholder="Informe a data de nascimento">
+                placeholder="Informe a data de nascimento" value="{{ $obj->data_nascimento }}">
         </div>
         <div class="form-group">
             <label for="cpf">CPF:</label>
@@ -29,7 +29,7 @@
         <div class="form-group">
             <label for="data_cadastro">Data de cadastro:</label>
             <input required type="date" class="form-control" id="data_cadastro" name="data_cadastro"
-                placeholder="Informe a data de cadastro">
+                placeholder="Informe a data de cadastro" value="{{ $obj->data_cadastro }}">
         </div>
         <div class="form-group">
             <label>Sexo:</label><br>
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="conjuge">Conjuge</label>
+            <label for="conjuge">Cônjuge</label>
             <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50"
                 value="{{ $obj->conjuge }}" autofocus>
         </div>
@@ -117,13 +117,13 @@
         </div>
         <div class="form-group">
             <label for="renda_mensal">Renda mensal:</label>
-            <input type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal"
+            <input required type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal"
                 value="{{ $obj->renda_mensal }}" autofocus placeholder="Informe a renda mensal">
         </div>
         <div class="form-group">
             <label for="observacao">Observação:</label>
-            <input type="text" name="observacao" class "form-control" id="observacao" value="{{ $obj->observacao }}"
-                autofocus placeholder="Insira alguma observação, se necessário">
+            <input type="text" name="observacao" class="form-control" id="observacao"
+             value="{{ $obj->observacao }}" autofocus placeholder="Insira alguma observação, se necessário">
         </div>
         <div class="form-group">
             <label for="cep">CEP:</label>
@@ -153,7 +153,7 @@
         </div>
         <div class="form-group">
             <label for="bairro_id">Bairro:</label>
-            <select name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
+            <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45">
                 <option value="" label="Selecione o bairro..."></option>
                 @foreach ($listaBairro as $bairro)
                     <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}"

@@ -42,8 +42,11 @@ class PessoaController extends Controller
         try {
             $obj->save();
         } catch (\Exception $e) {
-            $msg = 'Não foi possível salvar o registro no banco de dados';
-            session()->flashInput($request->input());
+            $msg = $e->getMessage();
+            if ($request['id']) {
+                return redirect('/pessoa.edit.' . $obj->id)->with('error', $msg)->withInput();
+            }
+            return redirect('/pessoa.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {
@@ -61,11 +64,12 @@ class PessoaController extends Controller
     public function delete($id)
     {
         $obj = Pessoa::find($id);
-        $msg = "{$obj->descricao} excluída.";
+        $msg = "Pessoa ({$obj->nome}) excluída.";
         try {
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir a pessoa. ';
+            return redirect('/pessoa.index')->with('error', $msg);
         }
         return redirect('/pessoa.index')->with(['msg' => $msg]);
     }

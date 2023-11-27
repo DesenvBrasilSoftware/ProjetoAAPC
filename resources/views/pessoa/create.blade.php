@@ -7,55 +7,61 @@
     data-off="Pessoa física" {{ old('cpfCnpj') ? 'checked' : '' }}>
   </div>
   <div class="form-group">
-    <label for="cadPessoa" id="labelCpfCnpj">CPF</label>
+    <label for="cadPessoa" id="labelCpfCnpj">CPF:</label>
     <input type="text" name="cadPessoa" class="form-control" id="cadPessoa" maxlength="45"
       value="{{ old('cadPessoa') }}">
   </div>
   <div class="form-group">
-    <label for="nome" id="labelNome">Nome</label>
-    <input type="text" name="nome" class="form-control" id="nome" maxlength="120"
-      value="{{ old('nome') }}" autofocus>
+    <label for="nome" id="labelNome">Nome:</label>
+    <input required type="text" name="nome" class="form-control" id="nome" maxlength="120"
+      value="{{ old('nome') }}" autofocus placeholder="Informe o nome da pessoa">
   </div>
   <div class="form-group">
-    <label for="rg">RG</label>
+    <label for="rg">RG:</label>
     <input type="text" name="rg" class="form-control" id="rg" maxlength="45"
       value="{{ old('rg') }}">
   </div>
-  {{-- Os Selects deverão ter os dados vindo de uma listagem dos dados requeridos --}}
-  <div class="form-group">
-    <label for="colaborador">Colaborador</label>
-    <select name="colaborador" class="form-control" id="colaborador">
-      <option value="" label="Selecione um colaborador" selected></option>
-      <option value="1" label="Teste"></option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="profissional">Profissional</label>
-    <select name="profissional" class="form-control" id="profissional">
-      <option value="" label="Selecione um profissional" selected></option>
-      <option value="1" label="Teste"></option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="voluntario">Voluntário</label>
-    <select name="voluntario" class="form-control" id="voluntario">
-      <option value="" label="Selecione um voluntário" selected></option>
-      <option value="1" label="Teste"></option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="fornecedor">Fornecedor</label>
-    <select name="fornecedor" class="form-control" id="fornecedor">
-      <option value="" label="Selecione um fornecedor" selected></option>
-      <option value="1" label="Teste"></option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="clinica">Clínica</label>
-    <select name="clinica" class="form-control" id="clinica">
-      <option value="" label="Selecione uma clínica" selected></option>
-      <option value="1" label="Teste"></option>
-    </select>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="colaborador">Colaborador:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="colaborador" id="colaborador" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('colaborador') ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="profissional">Profissional:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="profissional" id="profissional" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('profissional') ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="voluntario">Voluntário:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="voluntario" id="voluntario" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('voluntario') ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="fornecedor">Fornecedor:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="fornecedor" id="fornecedor" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('fornecedor') ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="clinica">Clínica:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="clinica" id="clinica" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('clinica') ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <a type="button" href="/pessoa.index" class="btn btn-warning">Fechar</a>
