@@ -43,6 +43,8 @@ class EntradaDoacaoController extends Controller
         $obj->pessoa_id = $request['pessoa_id'];
         $obj->data = $request['data'];
         $msg = 'Registro salvo no banco de dados';
+
+
         try {
             $obj->save();
         }catch(\Exception $e) {
@@ -116,12 +118,26 @@ class EntradaDoacaoController extends Controller
         if ($request['entrada_doacao_item_id']) {
             $entradaDoacaoItem = EntradaDoacaoItem::find($request['entrada_doacao_item_id']);
         }
+        $novaQuantidade = $request['quantidade'];
+        $antigaQuantidade = $entradaDoacaoItem->quantidade;
 
         $entradaDoacaoItem->entrada_doacao_id = $request['entrada_doacao_id'];
         $entradaDoacaoItem->item_id = $request['item_id'];
-        $entradaDoacaoItem->quantidade = $request['quantidade'];
+        $entradaDoacaoItem->quantidade = $novaQuantidade;
 
         $entradaDoacaoItem->save();
+
+        if ($request['entrada_doacao_item_id']) {
+          // Edição da quantidade
+          $diferenca = $novaQuantidade - $antigaQuantidade;
+
+          $item = Item::find($request['item_id']);
+          $item->quantidade += $diferenca;
+        } else {
+          $item = Item::find($request['item_id']);
+          $item->quantidade += $request['quantidade'];
+        }
+        $item->save();
 
         return redirect('/entradaDoacao.edit.' . $request->entrada_doacao_id)->with('mensagem', 'Item adicionado com sucesso');
     }

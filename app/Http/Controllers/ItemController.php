@@ -13,9 +13,10 @@ class ItemController extends Controller
     {
         $lista = Item::orderBy('descricao')
         ->join('grupo_item', 'item.grupo_item_id', '=', 'grupo_item.id')
-        ->join('medicamento', 'item.medicamento_id', '=', 'medicamento.id')
+        ->leftJoin('medicamento', 'item.medicamento_id', '=', 'medicamento.id')
         ->select('item.*', 'grupo_item.descricao as grupo_item', 'medicamento.nome as medicamento')
         ->get();
+
         return view('item.index')->with(['lista' => $lista]);
     }
 
@@ -39,6 +40,7 @@ class ItemController extends Controller
 
         // Preenche os campos do objeto com os dados do formulário
         $obj->descricao = $request['descricao'];
+        $obj->quantidade = $request['quantidade'];
         $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->fabricacao = $request['fabricacao'];
         $obj->validade = $request['validade'];
