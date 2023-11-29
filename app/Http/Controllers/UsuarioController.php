@@ -29,7 +29,7 @@ class UsuarioController extends Controller
         $rules = [
             'login' => 'required|unique:usuario,login',
         ];
-    
+
         if (!is_null($id)) {
             // caso seja alteracao, exclue a regra 'unique' para o próprio registro sendo atualizado
             $rules['login'] = [
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
                 Rule::unique('usuario')->ignore($id),
             ];
         }
-    
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -49,19 +49,37 @@ class UsuarioController extends Controller
 
         $obj->nome = $request['nome'];
         $obj->login = $request['login'];
-        $obj->senha = $request['senha'];
+        $obj->senha = md5($request['senha']);
+        $obj->visualiza_acomodacao = isset($request['visualiza_acomodacao']) ? 1 : 0;
+        $obj->visualiza_localidade = isset($request['visualiza_localidade']) ? 1 : 0;
+        $obj->visualiza_pessoa = isset($request['visualiza_pessoa']) ? 1 : 0;
+        $obj->visualiza_paciente = isset($request['visualiza_paciente']) ? 1 : 0;
+        $obj->visualiza_refeicao = isset($request['visualiza_refeicao']) ? 1 : 0;
+        $obj->visualiza_doacoes = isset($request['visualiza_doacoes']) ? 1 : 0;
+        $obj->visualiza_financeiro = isset($request['visualiza_financeiro']) ? 1 : 0;
+        $obj->visualiza_classe_terapeutica = isset($request['visualiza_classe_terapeutica']) ? 1 : 0;
+        $obj->visualiza_enfermidade = isset($request['visualiza_enfermidade']) ? 1 : 0;
+        $obj->visualiza_estoque = isset($request['visualiza_estoque']) ? 1 : 0;
+        $obj->visualiza_medicamentos = isset($request['visualiza_medicamentos']) ? 1 : 0;
+        $obj->visualiza_usuarios = isset($request['visualiza_usuarios']) ? 1 : 0;
+        $obj->visualiza_relatorios = isset($request['visualiza_relatorios']) ? 1 : 0;
 
         $msg = 'Registro salvo no banco de dados';
 
         try {
             $obj->save();
-
         }catch(\Exception $e) {
-            $msg = 'Não foi possível salvar/alterar o usuário no banco de dados.';
-            return back()->with('error', $msg);
+          $msg = $e->getMessage();
+          if ($request['id']) {
+              return redirect('/usuario.edit.' . $obj->id)->with('error', $msg)->withInput();
+          }
+          return redirect('/usuario.create')->with('error', $msg)->withInput();
         }
 
-        return redirect('/usuario.index')->with('success', $msg);
+        if ($request['id']) {
+          return redirect('/usuario.edit.' . $obj->id)->with('success', $msg);
+      }
+      return redirect('usuario.index')->with('success', $msg);
     }
 
     public function edit(string $id, $msg = '')
@@ -108,5 +126,5 @@ class UsuarioController extends Controller
             return response()->json(['exists' => false]);
         }
     }
-    
+
 }
