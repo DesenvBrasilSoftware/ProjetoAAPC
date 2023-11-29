@@ -246,7 +246,7 @@
     <button class="btn btn-sm btn-success mt-3" type="button" id="adicionar-contato">Adicionar
     Contato</button>
   </div>
-  <table id="dataTable" class="table table-stripped">
+  <table id="dataTable" class="table-responsive table-stripped table-bordered">
     <thead>
       <tr>
         <th>Entrada</th>
@@ -295,7 +295,7 @@
     Adicionar acomodação
     </button>
   </div>
-  <table id="dataTable" class="table table-stripped">
+  <table id="dataTable" class="table-responsive table-stripped table-bordered">
     <thead>
       <tr>
         <th>Data Cadastro</th>
@@ -338,7 +338,7 @@
     Cadastrar enfermidade
     </button>
   </div>
-  <table id="dataTable" class="table table-stripped">
+  <table id="dataTable" class="table-responsive table-stripped table-bordered">
     <thead>
       <tr>
         <th>Data Consulta</th>

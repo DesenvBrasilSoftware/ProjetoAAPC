@@ -4544,3 +4544,18 @@ h6.h1 {
     display: inline-block !important;
   }
 }
+
+table td {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+table th {
+  white-space: nowrap;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
