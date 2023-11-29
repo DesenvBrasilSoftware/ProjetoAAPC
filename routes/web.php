@@ -18,6 +18,7 @@ use App\Http\Controllers\EntradaDoacaoController;
 use App\Http\Controllers\SaidaDoacaoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\RefeicaoController;
 use App\Http\Controllers\ContasAPagarController;
 use App\Http\Controllers\ContasAReceberController;
@@ -41,6 +42,12 @@ Route::get('/', function () { return view('portal'); });
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/app', function () { return view('index'); });
+
+    // Relatorios
+    Route::get('/relatorio.financeiro', [RelatorioController::class, 'financeiro']);
+    Route::get('/relatorio.relatorioFinanceiro', [RelatorioController::class, 'relatorioFinanceiro']);
+    Route::get('/relatorio.estoque', [RelatorioController::class, 'estoque']);
+    Route::get('/relatorio.pacientes', [RelatorioController::class, 'pacientes']);
 
     // Enfermidade
     Route::get('/enfermidade.index', [EnfermidadeController::class, 'index']);
