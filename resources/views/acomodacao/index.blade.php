@@ -2,7 +2,7 @@
 <div class="form-group">
   <a type="button" href="/acomodacao.create" class="btn btn-primary">Incluir</a>
 </div>
-<table id="dataTable" class="table table-stripped">
+<table id="dataTable" class="table-responsive table-stripped table-bordered">
   <thead>
     <tr>
       <th>Alterar</th>

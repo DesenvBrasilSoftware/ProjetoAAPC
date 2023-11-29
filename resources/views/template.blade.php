@@ -46,11 +46,14 @@
                 <span>AAPC</span>
               </a>
             </li>
+            @if(Auth::user()->visualiza_acomodacao)
             <li>
               <a href="acomodacao.index">
                 <i class='bx bxs-bed'></i>Acomodação
               </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_localidade)
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-map'></i>Localidade
@@ -61,21 +64,29 @@
                 <li><a href="cidade.index">Cidade</a></li>
               </ul>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_pessoa)
             <li>
-                <a href="pessoa.index">
-                    <i class='bx bxs-user'></i>Pessoa
-                </a>
+              <a href="pessoa.index">
+                <i class='bx bxs-user'></i>Pessoa
+              </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_paciente)
             <li>
                 <a href="paciente.index">
                     <i class='bx bx-face'></i>Paciente
                 </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_refeicao)
             <li>
               <a href="refeicao.index">
                 <i class='bx bxs-dish'></i>Refeição
               </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_doacoes)
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-donate-heart'></i>Doações
@@ -86,6 +97,8 @@
                 <li><a href="saidaDoacao.index">Saída por doação</a></li>
               </ul>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_financeiro)
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bx-dollar'></i>Financeiro
@@ -96,16 +109,22 @@
                 <li><a href="contasAReceber.index">Contas a Receber</a></li>
               </ul>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_classe_terapeutica)
             <li>
               <a href="classeTerapeutica.index">
                 <i class='bx bxs-vial' ></i>Classe terapêutica
               </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_enfermidade)
             <li>
               <a href="enfermidade.index">
                 <i class='bx bx-pulse' ></i>Enfermidade
               </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_estoque)
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bx-data'></i>Estoque
@@ -116,16 +135,22 @@
                 <li><a href="grupoItem.index">Grupo Item</a></li>
               </ul>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_medicamentos)
             <li>
               <a href="medicamento.index">
                 <i class='bx bxs-first-aid'></i></i>Medicamentos
               </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_usuarios)
             <li>
                 <a href="usuario.index">
                     <i class='bx bxs-group'></i>Usuários
                 </a>
             </li>
+            @endif
+            @if(Auth::user()->visualiza_relatorios)
             <li>
               <a class="sidebar-sub-toggle">
                 <i class='bx bxs-spreadsheet'></i>Relatórios
@@ -137,6 +162,7 @@
                 <li><a href="#">Pacientes</a></li>
               </ul>
             </li>
+            @endif
             <hr style="border-top: 1px solid rgba(255,255,255,0.6);">
             <li>
               <a onclick="return confirm('Tem certeza de que deseja sair?');" href="{{ route('logout') }}">

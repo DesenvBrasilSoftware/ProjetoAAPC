@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <a type="button" href="/medicamento.create" class="btn btn-primary">Incluir</a>
 
-                    <table id="dataTable" class="table table-stripped">
+                    <table id="dataTable" class="table-responsive table-stripped table-bordered">
                         <thead>
                             <tr>
                                 <th>Alterar</th>
