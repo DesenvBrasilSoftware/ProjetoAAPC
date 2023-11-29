@@ -116,12 +116,27 @@ class SaidaDoacaoController extends Controller
         if ($request['saida_doacao_item_id']) {
             $saidaDoacaoItem = SaidaDoacaoItem::find($request['saida_doacao_item_id']);
         }
+        $novaQuantidade = $request['quantidade'];
+        $antigaQuantidade = $saidaDoacaoItem->quantidade;
 
         $saidaDoacaoItem->saida_doacao_id = $request['saida_doacao_id'];
         $saidaDoacaoItem->item_id = $request['item_id'];
-        $saidaDoacaoItem->quantidade = $request['quantidade'];
+        $saidaDoacaoItem->quantidade = $novaQuantidade;
 
         $saidaDoacaoItem->save();
+
+        if ($request['saida_doacao_item_id']) {
+          // Edição da quantidade
+          $diferenca = $novaQuantidade - $antigaQuantidade;
+
+          $item = Item::find($request['item_id']);
+          $item->quantidade -= $diferenca;
+          $item->save();
+        } else {
+          $item = Item::find($request['item_id']);
+          $item->quantidade -= $request['quantidade'];
+          $item->save();
+        }
 
         return redirect('/saidaDoacao.edit.' . $request->saida_doacao_id)->with('mensagem', 'Item adicionado com sucesso');
     }

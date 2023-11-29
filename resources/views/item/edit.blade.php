@@ -8,6 +8,11 @@
     <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="120" value="{{ $obj->descricao }}" autofocus />
   </div>
   <div class="form-group">
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ $obj->quantidade }}"
+          placeholder="Informe a quantidade...">
+    </div>
+  <div class="form-group">
     <label for="grupo_item_id">Grupo do item:</label>
     <select required name="grupo_item_id" class="form-control" id="grupo_item_id" maxlength="45">
       <option value="" label="Selecione o grupo de item..."></option>

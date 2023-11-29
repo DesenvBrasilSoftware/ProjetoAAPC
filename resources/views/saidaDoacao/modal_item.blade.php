@@ -11,14 +11,14 @@
             </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="/saidaDoacao.adicionarItem">
+            <form class="needs-validation" novalidate method="POST" action="/saidaDoacao.adicionarItem">
             @csrf
             <div class="modal-body">
                 <input id="saida_doacao_item_id" type="hidden" name="saida_doacao_item_id">
                 <input id="saida_doacao_id" type="hidden" name="saida_doacao_id" value="{{ $obj->id }}">
                 <div class="form-group">
                 <label for="item_id">Item:</label>
-                <select name="item_id" class="form-control" id="item_id" maxlength="45">
+                <select required name="item_id" class="form-control" id="item_id" maxlength="45">
                     <option value="" label="Selecione o item da doação..."></option>
                     @foreach ($listaItem as $item)
                     <option value="{{ $item->id }}" label="{{ $item->descricao }}">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                 <label for="quantidade">Quantidade:</label>
-                <input type="number" class="form-control" id="quantidade" name="quantidade"
+                <input required type="number" class="form-control" id="quantidade" name="quantidade"
                     placeholder="Informe a quantidade...">
                 </div>
             </div>

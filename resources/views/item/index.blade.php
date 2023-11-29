@@ -8,6 +8,7 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Descrição</th>
+      <th>Quantidade</th>
       <th>Grupo de item</th>
       <th>Validade</th>
       <th>Medicamento</th>
@@ -28,11 +29,14 @@
           {{ $obj->descricao }}
       </td>
       <td>
+          {{ $obj->quantidade }}
+      </td>
+      <td>
           {{ $obj->grupo_item }}
       </td>
       <td>
-        @if ($obj->data_nascimento)
-            {{ date('d/m/Y', strtotime($obj->data_nascimento)) }}
+        @if ($obj->validade)
+            {{ date('d/m/Y', strtotime($obj->validade)) }}
         @endif
       </td>
       <td>
