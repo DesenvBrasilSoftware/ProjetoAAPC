@@ -102,6 +102,11 @@ class EntradaDoacaoController extends Controller
     public function deletarItem(Request $request)
     {
         $obj = EntradaDoacaoItem::find($request->delete_entrada_doacao_item_id);
+
+        $item = Item::find($obj->item_id);
+        $item->quantidade -= $obj->quantidade;
+        $item->save();
+
         $msg = "Item da doação excluído excluída.";
         try {
             $obj->delete();
