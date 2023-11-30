@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Relatorios
     Route::get('/relatorio.financeiro', [RelatorioController::class, 'financeiro']);
-    Route::get('/relatorio.relatorioFinanceiro', [RelatorioController::class, 'relatorioFinanceiro']);
+    Route::post('/relatorio.relatorioFinanceiro', [RelatorioController::class, 'relatorioFinanceiro']);
     Route::get('/relatorio.estoque', [RelatorioController::class, 'estoque']);
     Route::get('/relatorio.pacientes', [RelatorioController::class, 'pacientes']);
 
