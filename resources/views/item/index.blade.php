@@ -40,7 +40,7 @@
         {{ $obj->medicamento }}
       </td>
       <td style="text-align: right;">
-        {{ rtrim(number_format($obj->quantidade, 4, ',', '.')) }}
+        {{ number_format($obj->quantidade, 4, ',', '.') }}
       </td>
       <td style="text-align: center;">
         @if($obj->kit == 0)

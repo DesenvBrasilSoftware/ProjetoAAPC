@@ -12,13 +12,13 @@ class ContasAPagarController extends Controller
     public function index($msg = '')
     {
         $lista = DB::select("
-        SELECT 
+        SELECT
             cp.id,
             cp.data,
             cp.valor_a_pagar,
             cp.valor_pago,
             p.nome AS pessoa
-        FROM 
+        FROM
             conta_a_pagar cp
         LEFT JOIN pessoa p
         ON cp.pessoa_id = p.id;
@@ -45,16 +45,19 @@ class ContasAPagarController extends Controller
 
         $obj->data = $request['data'];
         $obj->pessoa_id = $request['pessoa_id'];
-        $obj->valor_a_pagar = $request['valor_pagar'];
-        $obj->valor_pago = $request['valor_pago'];
+        $obj->valor_a_pagar =  $this->formataPrecoParaSalvar($request->get('valor_pagar'));
+        $obj->valor_pago =  $this->formataPrecoParaSalvar($request->get('valor_pago'));
 
         $msg = 'Registro salvo com sucesso.';
 
         try {
             $obj->save();
         } catch (\Exception $e) {
-            $msg = $e->getMessage();
-            return redirect('/contasAPagar.create')->with('error', $msg);
+          $msg = $e->getMessage();
+          if ($request['id']) {
+              return redirect('/contasAPagar.edit.' . $obj->id)->with('error', $msg)->withInput();
+          }
+          return redirect('/contasAPagar.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {

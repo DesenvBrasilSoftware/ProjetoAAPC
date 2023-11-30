@@ -28,11 +28,11 @@
         {{ $obj->data }}
       </td>
       <td>
-        {{ $obj->valor_a_receber }}
+        {{ number_format($obj->valor_a_receber, 2, ',', '.') }}
       </td>
       <td>
-        {{ $obj->valor_recebido }}
-    </td>
+        {{ number_format($obj->valor_recebido, 2, ',', '.') }}
+      </td>
     <td>
         {{ $obj->pessoa }}
     </td>
