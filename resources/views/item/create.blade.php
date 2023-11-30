@@ -10,7 +10,7 @@
     <div class="form-group">
       <label for="quantidade">Quantidade:</label>
       <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}"
-          placeholder="Informe a quantidade...">
+          placeholder="Informe a quantidade..." step="any">
     </div>
     <div class="form-group">
       <label for="grupo_item_id">Grupo do item:</label>

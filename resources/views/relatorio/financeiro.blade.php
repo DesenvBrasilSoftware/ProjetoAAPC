@@ -26,7 +26,7 @@
     </select>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-success">Gerar contrato</button>
+    <button type="submit" class="btn btn-success">Gerar relatório</button>
   </div>
 </form>
 <script>
