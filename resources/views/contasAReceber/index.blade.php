@@ -9,9 +9,9 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Data</th>
-      <th>Valor a Receber</th>
-      <th>Valor Recebido</th>
       <th>Pessoa</th>
+      <th style="text-align: right;">Valor a Receber</th>
+      <th style="text-align: right;">Valor Recebido</th>
     </tr>
   </thead>
   <tbody>
@@ -25,17 +25,20 @@
         <a href="/contasAReceber.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
-        {{ $obj->data }}
+        @if ($obj->data)
+        {{ date('d/m/Y', strtotime($obj->data)) }}
+        @endif
       </td>
-      <td>
-        {{ number_format($obj->valor_a_receber, 2, ',', '.') }}
-      </td>
-      <td>
-        {{ number_format($obj->valor_recebido, 2, ',', '.') }}
-      </td>
+
     <td>
         {{ $obj->pessoa }}
     </td>
+      <td style="text-align: right;">
+        {{ number_format($obj->valor_a_receber, 2, ',', '.') }}
+      </td>
+      <td style="text-align: right;">
+        {{ number_format($obj->valor_recebido, 2, ',', '.') }}
+      </td>
     </tr>
     @endforeach
   </tbody>
