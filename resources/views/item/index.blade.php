@@ -8,10 +8,10 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Descrição</th>
-      <th>Quantidade</th>
       <th>Grupo de item</th>
       <th>Validade</th>
       <th>Medicamento</th>
+      <th style="">Quantidade</th>
       <th>Kit</th>
     </tr>
   </thead>
@@ -29,20 +29,20 @@
           {{ $obj->descricao }}
       </td>
       <td>
-          {{ $obj->quantidade }}
-      </td>
-      <td>
-          {{ $obj->grupo_item }}
+        {{ $obj->grupo_item }}
       </td>
       <td>
         @if ($obj->validade)
-            {{ date('d/m/Y', strtotime($obj->validade)) }}
+        {{ date('d/m/Y', strtotime($obj->validade)) }}
         @endif
       </td>
       <td>
-          {{ $obj->medicamento }}
+        {{ $obj->medicamento }}
       </td>
-      <td>
+      <td style="text-align: right;">
+        {{ number_format($obj->quantidade, 4, ',', '.') }}
+      </td>
+      <td style="text-align: center;">
         @if($obj->kit == 0)
         <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
         @else

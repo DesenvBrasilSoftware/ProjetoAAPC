@@ -9,9 +9,9 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Data</th>
-      <th>Valor a Pagar</th>
-      <th>Valor Pago</th>
       <th>Pessoa</th>
+      <th style="text-align: right;">Valor a Pagar</th>
+      <th style="text-align: right;">Valor Pago</th>
     </tr>
   </thead>
   <tbody>
@@ -25,17 +25,19 @@
         <a href="/contasAPagar.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
-        {{ $obj->data }}
+        @if ($obj->data)
+        {{ date('d/m/Y', strtotime($obj->data)) }}
+        @endif
       </td>
       <td>
-        {{ $obj->valor_a_pagar }}
-      </td>
-      <td>
-        {{ $obj->valor_pago }}
-    </td>
-    <td>
         {{ $obj->pessoa }}
-    </td>
+      </td>
+      <td style="text-align: right;">
+        {{ number_format($obj->valor_a_pagar, 2, ',', '.') }}
+      </td>
+      <td style="text-align: right;">
+        {{ number_format($obj->valor_pago, 2, ',', '.') }}
+      </td>
     </tr>
     @endforeach
   </tbody>

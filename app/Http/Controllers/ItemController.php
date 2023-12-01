@@ -53,9 +53,11 @@ class ItemController extends Controller
             // Tenta salvar o objeto no banco de dados
             $obj->save();
         } catch (\Exception $e) {
-            // Em caso de erro, define a mensagem de erro e armazena os dados do formulário na sessão
-            $msg = $e->getMessage(); // Obtém a mensagem de erro da exceção
-            return redirect('/item.create')->with('error', $msg);
+          $msg = $e->getMessage();
+          if ($request['id']) {
+              return redirect('/item.edit.' . $obj->id)->with('error', $msg)->withInput();
+          }
+          return redirect('/item.create')->with('error', $msg)->withInput();
         }
 
         // Redireciona para a página de edição se estiver atualizando, caso contrário, volta para a página de criação

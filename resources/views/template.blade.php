@@ -157,9 +157,9 @@
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
-                <li><a href="#">Financeiro</a></li>
-                <li><a href="#">Estoque</a></li>
-                <li><a href="#">Pacientes</a></li>
+                <li><a href="/relatorio.financeiro">Financeiro</a></li>
+                <li><a href="/relatorio.estoque">Estoque</a></li>
+                <li><a href="/relatorio.pacientes">Pacientes</a></li>
               </ul>
             </li>
             @endif

@@ -12,13 +12,13 @@ class ContasAReceberController extends Controller
     public function index($msg = '')
     {
         $lista = DB::select("
-        SELECT 
+        SELECT
             cr.id,
             cr.data,
             cr.valor_a_receber,
             cr.valor_recebido,
             p.nome AS pessoa
-        FROM 
+        FROM
             conta_a_receber cr
         LEFT JOIN pessoa p
         ON cr.pessoa_id = p.id;
@@ -45,16 +45,19 @@ class ContasAReceberController extends Controller
 
         $obj->data = $request['data'];
         $obj->pessoa_id = $request['pessoa_id'];
-        $obj->valor_a_receber = $request['valor_receber'];
-        $obj->valor_recebido = $request['valor_recebido'];
+        $obj->valor_a_receber = $this->formataPrecoParaSalvar($request->get('valor_receber'));
+        $obj->valor_recebido = $this->formataPrecoParaSalvar($request->get('valor_recebido'));
 
         $msg = 'Registro salvo com sucesso.';
 
         try {
             $obj->save();
         } catch (\Exception $e) {
-            $msg = $e->getMessage();
-            return redirect('/contasAReceber.create')->with('error', $msg);
+          $msg = $e->getMessage();
+          if ($request['id']) {
+              return redirect('/contasAReceber.edit.' . $obj->id)->with('error', $msg)->withInput();
+          }
+          return redirect('/contasAReceber.create')->with('error', $msg)->withInput();
         }
 
         if ($request['id']) {
