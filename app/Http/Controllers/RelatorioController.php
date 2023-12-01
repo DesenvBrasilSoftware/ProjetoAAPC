@@ -22,6 +22,7 @@ class RelatorioController extends Controller
         $dataFinal = $request['data_final'];
         $pessoaId = $request['pessoa_id'];
 
+        $nomePessoa = "";
         $sql = "";
 
         if ($tipoRelatorio == 'contas_a_pagar') {
@@ -42,16 +43,21 @@ class RelatorioController extends Controller
 
         if ($pessoaId) {
             $sql .= " AND p.id = '{$pessoaId}'";
+            $nomePessoa = Pessoa::find($pessoaId)->nome;
         }
 
         $lista = DB::select($sql);
 
         $valorTotalPagar = 0;
         $valorTotalPago = 0;
+        $valorTotalReceber = 0;
+        $valorTotalRecebido = 0;
 
         foreach ($lista as $item) {
             $valorTotalPagar += $item->valor_a_pagar ?? 0;
             $valorTotalPago += $item->valor_pago ?? 0;
+            $valorTotalReceber += $item->valor_a_receber ?? 0;
+            $valorTotalRecebido += $item->valor_recebido ?? 0;
         }
 
         $valorTotalPagar = number_format($valorTotalPagar, 2, '.', '');
@@ -59,8 +65,14 @@ class RelatorioController extends Controller
 
         $pdf = PDF::loadView('pdf.relatorio_financeiro', [
             'lista' => $lista,
+            'data_inicial' => $dataInicial,
+            'data_final' => $dataFinal,
+            'pessoa' => $nomePessoa,
+            'tipo_relatorio' => $tipoRelatorio,
             'total_a_pagar' => $valorTotalPagar,
             'total_pago' => $valorTotalPago,
+            'total_a_receber' => $valorTotalReceber,
+            'total_recebido' => $valorTotalRecebido,
         ]);
 
         $pdf->setPaper('A4', 'portrait');
