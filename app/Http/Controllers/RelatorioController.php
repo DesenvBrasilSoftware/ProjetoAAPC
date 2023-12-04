@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pessoa;
 use App\Models\Cidade;
+use App\Models\GrupoItem;
+use App\Models\Medicamento;
 use Illuminate\Support\Facades\DB;
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -151,5 +153,101 @@ class RelatorioController extends Controller
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('relatorio_pacientes.pdf');
+    }
+
+    public function estoque(Request $request) {
+      $listaGrupoItem = GrupoItem::orderBy('descricao')->get();
+      $listaMedicamento = Medicamento::orderBy('nome')->get();
+      return view('relatorio.estoque')->with(['listaGrupoItem' => $listaGrupoItem,
+      'listaMedicamento' => $listaMedicamento]);
+    }
+
+    public function relatorioEstoque(Request $request) {
+      $grupoItemId = $request['grupo_item_id'];
+      $dataInicialFabricacao = $request['data_inicial_fabricacao'];
+      $dataFinalFabricacao = $request['data_final_fabricacao'];
+      $dataInicialValidade = $request['data_inicial_validade'];
+      $dataFinalValidade = $request['data_final_validade'];
+      $medicamentoId = $request['medicamento_id'];
+      $quantidadeMin = $request['quantidade_minima'];
+      $quantidadeMax = $request['quantidade_maxima'];
+      $kit = ($request['kit'] == 'on') ? 1 : 0;
+
+      $nomeMedicamento = "";
+      $descricaoGrupoItem = "";
+
+      // Início da consulta SQL
+      $sql = "SELECT item.*, medicamento.nome AS nome_medicamento, grupo_item.descricao AS descricao_grupo_item
+              FROM item
+              LEFT JOIN medicamento ON item.medicamento_id = medicamento.id
+              LEFT JOIN grupo_item ON item.grupo_item_id = grupo_item.id
+              WHERE 1";
+
+      if ($grupoItemId) {
+          $sql .= " AND item.grupo_item_id = $grupoItemId";
+      }
+
+      if ($dataInicialFabricacao) {
+          $sql .= " AND item.data_fabricacao >= '$dataInicialFabricacao'";
+      }
+
+      if ($dataFinalFabricacao) {
+          $sql .= " AND item.data_fabricacao <= '$dataFinalFabricacao'";
+      }
+
+      if ($dataInicialValidade) {
+          $sql .= " AND item.data_validade >= '$dataInicialValidade'";
+      }
+
+      if ($dataFinalValidade) {
+          $sql .= " AND item.data_validade <= '$dataFinalValidade'";
+      }
+
+      if ($medicamentoId) {
+          $sql .= " AND item.medicamento_id = $medicamentoId";
+      }
+
+      if ($quantidadeMin !== null) {
+          $sql .= " AND item.quantidade >= $quantidadeMin";
+      }
+
+      if ($quantidadeMax !== null) {
+          $sql .= " AND item.quantidade <= $quantidadeMax";
+      }
+
+      if ($kit !== null) {
+          $sql .= " AND item.kit = $kit";
+      }
+
+      $lista = DB::select($sql);
+
+      if ($grupoItemId) {
+        $sql .= " AND item.grupo_item_id = $grupoItemId";
+        $descricaoGrupoItem = GrupoItem::find($grupoItemId)->descricao;
+      }
+
+      if ($medicamentoId) {
+        $sql .= " AND item.medicamento_id = $medicamentoId";
+        $nomeMedicamento = Medicamento::find($medicamentoId)->nome;
+      }
+
+      $pdf = PDF::loadView('pdf.relatorio_estoque', [
+        'lista' => $lista,
+        'grupo_item_id' => $grupoItemId,
+        'data_inicial_fabricacao' => $dataInicialFabricacao,
+        'data_final_fabricacao' => $dataFinalFabricacao,
+        'data_inicial_validade' => $dataInicialValidade,
+        'data_final_validade' => $dataFinalValidade,
+        'medicamento_id' => $medicamentoId,
+        'quantidade_minima' => $quantidadeMin,
+        'quantidade_maxima' => $quantidadeMax,
+        'kit' => $kit,
+        'nome_medicamento' => $nomeMedicamento,
+        'descricao_grupo_item' => $descricaoGrupoItem,
+      ]);
+
+      $pdf->setPaper('A4', 'portrait');
+
+      return $pdf->download('relatorio_estoque.pdf');
     }
 }
