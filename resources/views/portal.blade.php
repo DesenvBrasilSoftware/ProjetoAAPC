@@ -117,9 +117,6 @@
               <p>
                 <img style="max-width: 120px;" src="/images/icon-brasil.png" alt="" />
               </p>
-              <p>
-                <img style="max-width: 120px;" src="/images/icon-hostoo.png" alt="" />
-              </p>
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4"></div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

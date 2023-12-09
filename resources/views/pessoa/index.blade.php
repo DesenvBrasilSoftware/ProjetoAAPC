@@ -1,5 +1,4 @@
-@extends('template')
-@section('conteudo')
+@extends('template') @section('conteudo')
 <div class="form-group">
   <a type="button" href="/pessoa.create" class="btn btn-primary">Incluir</a>
 </div>
@@ -20,7 +19,7 @@
   </thead>
   <tbody>
     @foreach($lista as $obj)
-    <input type="hidden" id="id_{{$obj->id}}" value="{{$obj->id}}">
+    <input type="hidden" id="id_{{$obj->id}}" value="{{$obj->id}}" />
     <tr>
       <td width="1%">
         <a href="/pessoa.edit.{{$obj->id}}"><i class="fa fa-lg fa-edit"></i></a>
@@ -32,25 +31,49 @@
         {{$obj->nome}}
       </td>
       <td>
-        {{$obj->colaborador}}
+        @if($obj->colaborador == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
+      </td>
+
+      <td>
+        @if($obj->profissional == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
+      </td>
+
+      <td>
+        @if($obj->voluntario == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
+      </td>
+
+      <td>
+        @if($obj->fornecedor == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
+      </td>
+
+      <td>
+        @if($obj->clinica == 0)
+        <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
+        @else
+        <i class="fa fa-lg fa-check-square-o" aria-hidden="true"></i>
+        @endif
       </td>
       <td>
-        {{$obj->profissional}}
+        {{ $obj->cpf ? preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $obj->cpf) : preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $obj->cnpj) }}
       </td>
       <td>
-        {{$obj->voluntario}}
-      </td>
-      <td>
-        {{$obj->fornecedor}}
-      </td>
-      <td>
-        {{$obj->clinica}}
-      </td>
-      <td>
-        {{ $obj->cpf ? $obj->cpf : $obj->cnpj }}
-      </td>
-      <td>
-        {{$obj->data_cadastro}}
+        @if ($obj->data_cadastro) {{ date('d/m/Y', strtotime($obj->data_cadastro)) }} @endif
       </td>
     </tr>
     @endforeach
