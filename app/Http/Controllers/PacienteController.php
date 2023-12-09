@@ -51,8 +51,13 @@ class PacienteController extends Controller
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
         $obj->data_obito = $request['data_obito'];
-        $obj->cpf = $request['cpf'];
-        $obj->rg = $request['rg'];
+
+        $cpf = preg_replace('/\D/', '', $request['cpf']);
+        $obj->cpf = '' ? null : $cpf;
+
+        $rg = preg_replace('/\D/', '', $request['rg']);
+        $obj->rg = '' ? null : $rg;
+
         $obj->data_cadastro = $request['data_cadastro'];
         $obj->sexo = $request['sexo'];
         $obj->quantidade_filhos = $request['quantidade_filhos'];
@@ -60,9 +65,17 @@ class PacienteController extends Controller
         $obj->conjuge = $request['conjuge'];
         $obj->escolaridade = $request['escolaridade'];
         $obj->profissao = $request['profissao'];
-        $obj->renda_mensal = $request['renda_mensal'];
+
+        $renda_mensal = $request['renda_mensal'];
+        $renda_mensal = trim($renda_mensal);
+        $renda_mensal = preg_replace('/(?<=\d)\.(?=\d)/', '', $renda_mensal);
+        $obj->renda_mensal = str_replace(',', '.', $renda_mensal);
+
         $obj->observacao = $request['observacao'];
-        $obj->cep = $request['cep'];
+
+        $cep = preg_replace('/\D/', '', $request['cep']);
+        $obj->cep = '' ? null : $cep;
+
         $obj->logradouro = $request['logradouro'];
         $obj->numero = $request['numero'];
         $obj->complemento = $request['complemento'];
