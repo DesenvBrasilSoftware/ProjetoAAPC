@@ -36,7 +36,7 @@
           {{ $saidaDoacaoItem->item }}
         </td>
         <td>
-          {{ $saidaDoacaoItem->quantidade }}
+          {{ number_format($saidaDoacaoItem->quantidade, 4, ',', '.') }}
         </td>
         <td width="1%">
           <a data-toggle="modal" data-target="#modalSaidaDoacaoItem"

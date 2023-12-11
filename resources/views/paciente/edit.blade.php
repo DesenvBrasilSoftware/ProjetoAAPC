@@ -26,15 +26,15 @@
   </div>
   <div class="form-group">
     <label for="cpf">CPF:</label>
-    <input type="text" name="cpf" class="form-control" id="cpf" maxlength="11"
-      value="{{ $obj->cpf }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-      placeholder="Informe o CPF">
+    <input type="text" name="cpf" class="form-control cpf" id="cpf"
+      value="{{ $obj->cpf }}" autofocuS
+      placeholder="Informe o CPF...">
   </div>
   <div class="form-group">
     <label for="rg">RG:</label>
-    <input type="text" name="rg" class="form-control" id="rg" maxlength="20"
-      value="{{ $obj->rg }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-      placeholder="Informe o RG">
+    <input type="text" name="rg" class="form-control rg" id="rg"
+      value="{{ $obj->rg }}" autofocus
+      placeholder="Informe o RG...">
   </div>
   <div class="form-group">
     <label>Sexo:</label><br>
@@ -122,8 +122,8 @@
   </div>
   <div class="form-group">
     <label for="renda_mensal">Renda mensal:</label>
-    <input required type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal"
-      value="{{ $obj->renda_mensal }}" autofocus placeholder="Informe a renda mensal">
+    <input required type="text" name="renda_mensal" class="form-control dinheiro" id="renda_mensal"
+      value="{{ $obj->renda_mensal }}" autofocus placeholder="Informe a renda mensal...">
   </div>
   <div class="form-group">
     <label for="observacao">Observação:</label>
@@ -132,9 +132,9 @@
   </div>
   <div class="form-group">
     <label for="cep">CEP:</label>
-    <input type="text" name="cep" class="form-control" id="cep" maxlength="8"
-      value="{{ $obj->cep }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-      placeholder="Informe o CEP (somente números)">
+    <input type="text" name="cep" class="form-control cep" id="cep"
+      value="{{ $obj->cep }}" autofocus
+      placeholder="Informe o CEP...">
   </div>
   <div class="form-group">
     <label for="cidade_id">Cidade:</label>
@@ -509,5 +509,13 @@
           }
       @endforeach
   }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+  $(".cpf").mask("000.000.000-00");
+  $(".rg").mask("00.000.000-0");
+  $(".cep").mask("00.000-000");
+  $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
 </script>
 @endsection

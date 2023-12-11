@@ -4,7 +4,7 @@
   @csrf
   <div class="form-group">
     <label for="descricao">Descrição</label>
-    <input type="text" name="descricao" class="form-control" id="nome" maxlength="120"
+    <input required type="text" name="descricao" class="form-control" id="nome" maxlength="120"
       value="{{ old('descricao') }}" autofocus>
   </div>
   <div class="form-group">

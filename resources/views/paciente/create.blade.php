@@ -10,7 +10,7 @@
   <div class="form-group">
     <label for="nome">Nome:</label>
     <input type="text" name="nome" class="form-control" id="nome" maxlength="50"
-      required value="{{ old('nome') }}" autofocus placeholder="Insira seu nome">
+      required value="{{ old('nome') }}" autofocus placeholder="Informe o Nome do Paciente...">
   </div>
   <div class="form-group">
     <label for="data_nascimento">Data de nascimento:</label>
@@ -21,17 +21,15 @@
     <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
   </div>
   <div class="form-group">
-    <label for="cpf">CPF:</label>
-    <input type="text" name="cpf" class="form-control" id="cpf" maxlength="11"
-      value="{{ old('cpf') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-      placeholder="Informe o CPF">
-  </div>
-  <div class="form-group">
-    <label for="rg">RG:</label>
-    <input type="text" name "rg" class="form-control" id="rg" maxlength="20"
-      value="{{ old('rg') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-      placeholder="Informe o RG">
-  </div>
+      <label for="cpf" id="labelCpfCnpj">CPF:</label>
+      <input type="text" name="cpf" placeholder="Informe o CPF..."
+      class="form-control cpf" id="cpf" maxlength="45" value="{{ old('cpf') }}" />
+    </div>
+    <div class="form-group">
+      <label for="rg">RG:</label>
+      <input type="text" name="rg" class="form-control rg" placeholder="Informe o RG..."
+       id="rg" maxlength="45" value="{{ old('rg') }}" />
+    </div>
   <div class="form-group">
     <label for="sexo">Sexo:</label><br>
     <div class="form-check">
@@ -51,7 +49,7 @@
     <label for="quantidade_filhos">Quantidade de filhos:</label>
     <input required type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
       value="{{ old('quantidade_filhos') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g,');"
-      placeholder="Informe a quantidade de filhos">
+      placeholder="Informe a quantidade de filhos...">
   </div>
   <div class="form-group">
     <label for="estado_civil">Estado Civil:</label><br>
@@ -105,11 +103,14 @@
   </div>
   <div class="form-group">
     <label for="renda_mensal">Renda mensal:</label>
-    <input required type="number" step="0.01" name="renda_mensal" class="form-control" id="renda_mensal" placeholder="Digite a renda mensal" value="{{ old('renda_mensal') }}" autofocus>
+    <input required type="text" name="renda_mensal" class="form-control dinheiro" id="renda_mensal"
+    placeholder="Digite a renda mensal" value="{{ old('renda_mensal') }}" autofocus>
   </div>
   <div class="form-group">
     <label for="cep">CEP:</label>
-    <input type="text" name="cep" class="form-control" id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    <input type="text" name="cep" class="form-control cep"
+    id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}"
+    autofocus>
   </div>
   <div class="form-group">
     <label for="cidade_id">Cidade:</label>
@@ -193,5 +194,13 @@
           }
       @endforeach
   }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+  $(".cpf").mask("000.000.000-00");
+  $(".rg").mask("00.000.000-0");
+  $(".cep").mask("00.000-000");
+  $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
 </script>
 @endsection

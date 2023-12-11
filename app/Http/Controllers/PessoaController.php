@@ -22,7 +22,7 @@ class PessoaController extends Controller
     {
         $obj = new Pessoa();
         if ($request['id']) {
-            $obj = Pessoa::find($request['id']);
+          $obj = Pessoa::find($request['id']);
         }
         $obj->nome = $request['nome'];
         $obj->colaborador = ($request['colaborador'] === null) ? 0 : 1;
@@ -30,12 +30,14 @@ class PessoaController extends Controller
         $obj->voluntario = ($request['voluntario'] === null) ? 0 : 1;
         $obj->fornecedor = ($request['fornecedor'] === null) ? 0 : 1;
         $obj->clinica = ($request['clinica'] === null) ? 0 : 1;
-        if ($request['cpfCnpj']) {
-            $obj->cnpj = $request['cadPessoa'];
+        if ($request['cpfCnpj'] == 'off') {
+          $cnpj = preg_replace('/\D/', '', $request['cnpj']);
+          $obj->cnpj = '' ? null : $cnpj;
         } else {
-            $obj->cpf = $request['cadPessoa'];
+          $cpf = preg_replace('/\D/', '', $request['cpf']);
+          $obj->cpf = '' ? null : $cpf;
         }
-        $obj->rg = $request['rg'];
+        $obj->rg = preg_replace('/\D/', '', $request['rg']);
         $obj->data_cadastro = $request['data_cadastro'];
 
         $msg = 'Registro salvo no banco de dados';

@@ -8,7 +8,7 @@
     <tr>
       <th>Alterar</th>
       <th>Excluir</th>
-      <th>Descrição</th>
+      <th style="text-align: left">Descrição</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
       <td width="1%">
         <a href="/classeTerapeutica.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
-      <td>
+      <td style="text-align: left">
         {{ $obj->descricao }}
       </td>
     </tr>

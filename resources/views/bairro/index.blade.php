@@ -9,7 +9,7 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Nome</th>
-      <th>Cidade</th>
+      <th style="text-align:left">Cidade</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
       <td>
         {{ $obj->nome }}
       </td>
-      <td>
+      <td style="text-align:left">
         {{ $obj->cidade }}
       </td>
     </tr>

@@ -9,7 +9,7 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Nome</th>
-      <th>UF</th>
+      <th style="text-align:left">UF</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
       <td>
         {{$obj->nome}}
       </td>
-      <td>
+      <td style="text-align:left">
         @foreach($estados as $estado)
         @if($estado->id == $obj->uf_id)
         {{$estado->nome}}
