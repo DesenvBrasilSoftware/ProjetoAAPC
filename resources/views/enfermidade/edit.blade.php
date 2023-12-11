@@ -5,7 +5,7 @@
   <input type="hidden" id="id" name="id" value="{{$obj->id}}">
   <div class="form-group">
     <label for="descricao">Descrição</label>
-    <input type="text"
+    <input type="text" required
       name="descricao"
       class="form-control"
       id="descricao"

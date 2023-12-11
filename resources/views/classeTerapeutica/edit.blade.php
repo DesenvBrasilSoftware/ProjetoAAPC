@@ -5,7 +5,7 @@
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}">
   <div class="form-group">
     <label for="descricao">Descrição</label>
-    <input type="text" name="descricao" class="form-control" id="descricao" maxlength="120"
+    <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="120"
       value="{{ $obj->descricao }}" autofocus>
   </div>
   <div class="form-group">

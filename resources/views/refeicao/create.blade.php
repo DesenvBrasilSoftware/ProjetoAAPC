@@ -59,7 +59,7 @@
         data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('servida') ? 'checked' : '' }}>
     </div>
     <div class="form-group">
-        <a type="button" href="/medicamento.index" class="btn btn-warning">Fechar</a>
+        <a type="button" href="/refeicao.index" class="btn btn-warning">Fechar</a>
         <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
 </form>
