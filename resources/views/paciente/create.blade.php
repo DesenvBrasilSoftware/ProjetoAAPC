@@ -52,50 +52,31 @@
       placeholder="Informe a quantidade de filhos...">
   </div>
   <div class="form-group">
-    <label for="estado_civil">Estado Civil:</label><br>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="solteiro" value="0" {{ old('estado_civil') == '0' ? 'checked' : '' }}>
-      <label class="form-check-label" for="solteiro">Solteiro</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="casado" value="1" {{ old('estado_civil') == '1' ? 'checked' : '' }}>
-      <label class="form-check-label" for="casado">Casado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="separado" value="2" {{ old('estado_civil') == '2' ? 'checked' : '' }}>
-      <label class="form-check-label" for="separado">Separado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="divorciado" value="3" {{ old('estado_civil') == '3' ? 'checked' : '' }}>
-      <label class="form-check-label" for="divorciado">Divorciado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="viuvo" value="4" {{ old('estado_civil') == '4' ? 'checked' : '' }}>
-      <label class="form-check-label" for="viuvo">Viúvo</label>
-    </div>
+    <label for="estado_civil">Estado Civil:</label>
+    <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
+      <option value="" label="Nenhum" selected></option>
+      <option value="1" label="Solteiro" >Solteiro</option>
+      <option value="2" label="Casado" >Casado</option>
+      <option value="3" label="Convivio" >Convivio</option>
+      <option value="4" label="Viúvo" >Viúvo</option>
+      <option value="5" label="Separado" >Separado</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="conjuge">Cônjuge</label>
     <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50" placeholder="Digite o nome do cônjuge" value="{{ old('conjuge') }}" autofocus>
   </div>
   <div class="form-group">
-    <label for="escolaridade">Escolaridade</label><br>
-    <label>
-    <input type="radio" name="escolaridade" id="ensinoMedio" value="0" {{ old('escolaridade') == '0' ? 'checked' : '' }}>
-    Ensino médio
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="superior" value="1" {{ old('escolaridade') == '1' ? 'checked' : '' }}>
-    Superior
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="mestrado" value="2" {{ old('escolaridade') == '2' ? 'checked' : '' }}>
-    Mestrado
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="doutorado" value="3" {{ old('escolaridade') == '3' ? 'checked' : '' }}>
-    Doutorado
-    </label>
+    <label for="escolaridade">Escolaridade:</label>
+    <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
+      <option value="" label="Nenhuma" selected >Nenhuma</option>
+      <option value="1" label="Fundamental Incompleto" >Fundamental Incompleto</option>
+      <option value="2" label="Fundamental completo" >Fundamental completo</option>
+      <option value="3" label="Médio Incompleto" >Médio Incompleto</option>
+      <option value="4" label="Médio completo" >Médio completo</option>
+      <option value="5" label="Superior incompleto" >Superior incompleto</option>
+      <option value="6" label="Superior completo" >Superior completo</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="profissao">Profissão:</label>

@@ -60,32 +60,15 @@
       oninput="this.value = this.value.replace(/[^0-9]/g, '');">
   </div>
   <div class="form-group">
-    <label>Estado Civil:</label><br>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="solteiro" value="0"
-      {{ $obj->estado_civil == '0' ? 'checked' : '' }}>
-      <label class="form-check-label" for="solteiro">Solteiro</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="casado" value="1"
-      {{ $obj->estado_civil == '1' ? 'checked' : '' }}>
-      <label class="form-check-label" for="casado">Casado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="separado" value="2"
-      {{ $obj->estado_civil == '2' ? 'checked' : '' }}>
-      <label class="form-check-label" for="separado">Separado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="divorciado"
-      value="3" {{ $obj->estado_civil == '3' ? 'checked' : '' }}>
-      <label class="form-check-label" for="divorciado">Divorciado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="viuvo"
-      value="4" {{ $obj->estado_civil == '4' ? 'checked' : '' }}>
-      <label class="form-check-label" for="viuvo">Viúvo</label>
-    </div>
+    <label for="estado_civil">Estado Civil:</label>
+    <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
+      <option value="" label="Nenhum" {{ $obj->estado_civil ? '' : 'selected' }}></option>
+      <option value="1" label="Solteiro" {{ $obj->estado_civil == 1? 'selected' : '' }}>Solteiro</option>
+      <option value="2" label="Casado" {{ $obj->estado_civil == 2? 'selected' : '' }}>Casado</option>
+      <option value="3" label="Convivio" {{ $obj->estado_civil == 3? 'selected' : '' }}>Convivio</option>
+      <option value="4" label="Viúvo" {{ $obj->estado_civil == 4? 'selected' : '' }} >Viúvo</option>
+      <option value="5" label="Separado" {{ $obj->estado_civil == 5? 'selected' : '' }}>Separado</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="conjuge">Cônjuge</label>
@@ -93,27 +76,16 @@
       value="{{ $obj->conjuge }}" autofocus>
   </div>
   <div class="form-group">
-    <label>Escolaridade</label><br>
-    <label>
-    <input type="radio" name="escolaridade" id="ensinoMedio" value="0"
-    {{ $obj->escolaridade == '0' ? 'checked' : '' }}>
-    Ensino médio
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="superior" value="1"
-    {{ $obj->escolaridade == '1' ? 'checked' : '' }}>
-    Superior
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="mestrado" value="2"
-    {{ $obj->escolaridade == '2' ? 'checked' : '' }}>
-    Mestrado
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="doutorado" value="3"
-    {{ $obj->escolaridade == '3' ? 'checked' : '' }}>
-    Doutorado
-    </label>
+    <label for="escolaridade">Escolaridade:</label>
+    <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
+      <option value="" label="Nenhuma" {{ $obj->escolaridade ? '' : 'selected' }} >Nenhuma</option>
+      <option value="1" label="Fundamental Incompleto" {{ $obj->escolaridade == 1? 'selected' : '' }}>Fundamental Incompleto</option>
+      <option value="2" label="Fundamental completo" {{ $obj->escolaridade == 2? 'selected' : '' }}>Fundamental completo</option>
+      <option value="3" label="Médio Incompleto" {{ $obj->escolaridade == 3? 'selected' : '' }}>Médio Incompleto</option>
+      <option value="4" label="Médio completo" {{ $obj->escolaridade == 4? 'selected' : '' }}>Médio completo</option>
+      <option value="5" label="Superior incompleto" {{ $obj->escolaridade == 5? 'selected' : '' }}>Superior incompleto</option>
+      <option value="6" label="Superior completo" {{ $obj->escolaridade == 6? 'selected' : '' }}>Superior completo</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="profissao">Profissão:</label>

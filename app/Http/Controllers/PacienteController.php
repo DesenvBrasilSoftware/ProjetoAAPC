@@ -64,9 +64,9 @@ class PacienteController extends Controller
         $obj->data_cadastro = $request['data_cadastro'];
         $obj->sexo = $request['sexo'];
         $obj->quantidade_filhos = $request['quantidade_filhos'];
-        $obj->estado_civil = $request['estado_civil'];
+        $obj->estado_civil = ($request['estado_civil'] === '') ? null : $request['estado_civil'];
         $obj->conjuge = $request['conjuge'];
-        $obj->escolaridade = $request['escolaridade'];
+        $obj->escolaridade = ($request['escolaridade'] === '') ? null : $request['escolaridade'];
         $obj->profissao = $request['profissao'];
 
         $renda_mensal = $request['renda_mensal'];
