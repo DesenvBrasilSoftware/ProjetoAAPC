@@ -149,7 +149,7 @@
   <div class="form-group">
     <label for="moradia">Moradia:</label>
     <select name="moradia" class="form-control" id="moradia" maxlength="45">
-      <option value="" label="Selecione o tipo de moradia..." selected></option>
+      <option value="" label="Nenhuma" selected></option>
       <option value="P" label="Própria" >Própria</option>
       <option value="A" label="Alugada" >Alugada</option>
     </select>

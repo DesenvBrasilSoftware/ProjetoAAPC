@@ -179,7 +179,7 @@
   <div class="form-group">
     <label for="moradia">Moradia:</label>
     <select name="moradia" class="form-control" id="moradia" maxlength="45">
-      <option value="" label="Selecione o tipo de moradia..." {{ $obj->moradia ? '' : 'selected' }}></option>
+      <option value="" label="Nenhuma" {{ $obj->moradia ? '' : 'selected' }}></option>
       <option value="P" label="Própria" {{ $obj->moradia == 'P'? 'selected' : '' }}>Própria</option>
       <option value="A" label="Alugada" {{ $obj->moradia == 'A'? 'selected' : '' }}>Alugada</option>
     </select>
