@@ -135,6 +135,14 @@
     </select>
   </div>
   <div class="form-group">
+     <label for="medicamentos">Medicamentos:</label>
+    <input type="text" name="medicamentos" class="form-control" id="medicamentos" maxlength="60" placeholder="Medicamentos..." value="{{ old('medicamentos') }}" autofocus>
+  </div>
+  <div class="form-group">
+     <label for="telefone">Telefone:</label>
+    <input type="text" name="telefone" class="form-control" id="telefone" maxlength="40" placeholder="Digite o telefone" value="{{ old('telefone') }}" autofocus>
+  </div>
+  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
