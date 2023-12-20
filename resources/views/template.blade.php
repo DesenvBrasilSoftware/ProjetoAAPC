@@ -60,7 +60,6 @@
                 <span class="sidebar-collapse-icon ti-angle-down"></span>
               </a>
               <ul>
-                <li><a href="bairro.index">Bairro</a></li>
                 <li><a href="cidade.index">Cidade</a></li>
               </ul>
             </li>

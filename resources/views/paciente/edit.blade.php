@@ -127,14 +127,8 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="bairro_id">Bairro:</label>
-    <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45" onchange="handleSelectBairro()">
-      <option value="" label="Selecione o bairro..."></option>
-      @foreach ($listaBairro as $bairro)
-      <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}"
-      @if ($obj->bairro_id == $bairro->id) selected @endif>{{ $bairro->nome }}</option>
-      @endforeach
-    </select>
+     <label for="bairro">Bairro:</label>
+    <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" placeholder="Digite o bairro" value="{{ $obj->bairro }}" autofocus>
   </div>
   <div class="form-group">
     <label for="endereco">Endereço:</label>
@@ -472,44 +466,7 @@
   });
 </script>
 <script>
-  function handleSelectBairro() {
-      var select_cidade = document.getElementById('cidade_id');
-      var select_bairro = document.getElementById('bairro_id');
-      var bairro_selecionado_id = select_bairro.value;
 
-      var cidade_id = '';
-
-      @foreach ($listaBairro as $bairro)
-      var bairro_id = '{{$bairro->id}}'
-          if (bairro_selecionado_id == bairro_id) {
-              cidade_id = '{{$bairro->cidade_id}}';
-          }
-      @endforeach
-
-      select_cidade.value = cidade_id;
-  }
-
-  function handleSelectCidade() {
-      var select_cidade = document.getElementById('cidade_id');
-      var select_bairro = document.getElementById('bairro_id');
-      var cidade_selecionada_id = select_cidade.value;
-
-      // Limpar opções anteriores
-      while (select_bairro.options.length > 1) {
-          select_bairro.remove(1);
-      }
-
-      // Adicionar opções de bairro com base na cidade selecionada ou mostrar todos
-      @foreach ($listaBairro as $bairro)
-          var option = document.createElement('option');
-          option.value = '{{ $bairro->id }}';
-          option.label = '{{ $bairro->nome }}';
-
-          if ({{ $bairro->cidade_id }} == cidade_selecionada_id || cidade_selecionada_id === "") {
-              select_bairro.add(option);
-          }
-      @endforeach
-  }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

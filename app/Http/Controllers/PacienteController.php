@@ -28,14 +28,12 @@ class PacienteController extends Controller
 
     public function create($msg = '')
     {
-        $listaBairro = Bairro::all();
         $listaCidade = Cidade::all();
 
         return view(
             'paciente.create',
             compact(
                 'listaCidade',
-                'listaBairro',
                 'msg',
             )
         );
@@ -84,7 +82,7 @@ class PacienteController extends Controller
         $obj->endereco = $request['endereco'];
         $obj->complemento = $request['complemento'];
         $obj->ponto_referencia = $request['ponto_referencia'];
-        $obj->bairro_id = $request['bairro_id'];
+        $obj->bairro = $request['bairro'];
         $obj->cidade_id = $request['cidade_id'];
 
         $msg = 'Registro salvo com sucesso.';
@@ -109,7 +107,6 @@ class PacienteController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Paciente::find($id);
-        $listaBairro = Bairro::all();
         $listaCidade = Cidade::all();
         $listaAcomodacao = Acomodacao::all();
         $listaEnfermidade = Enfermidade::all();
@@ -178,7 +175,6 @@ class PacienteController extends Controller
         return view(
             'paciente.edit',
             compact(
-                'listaBairro',
                 'listaCidade',
                 'listaAcomodacaoPaciente',
                 'listaEnfermidadePaciente',
