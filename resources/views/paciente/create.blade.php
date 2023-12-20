@@ -150,6 +150,24 @@
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
+  <div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="radio">Radioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('radio') ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="quimio">Quimioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('quimio') ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
+  </div>
   <div class="d-flex form-group justify-content-end">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
     <button type="submit" class="btn btn-primary mx-2">Salvar</button>

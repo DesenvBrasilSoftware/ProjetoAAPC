@@ -51,6 +51,8 @@ class PacienteController extends Controller
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
         $obj->data_obito = $request['data_obito'];
+        $obj->radioterapia = ($request['radio'] === null) ? 0 : 1;
+        $obj->quimioterapia = ($request['quimio'] === null) ? 0 : 1;
 
         $cpf = preg_replace('/\D/', '', $request['cpf']);
         $obj->cpf = '' ? null : $cpf;

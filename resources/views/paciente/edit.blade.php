@@ -176,6 +176,24 @@
     <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45"
       value="{{ $obj->ponto_referencia }}" autofocus placeholder="Informe um ponto de referência">
   </div>
+  <div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="radio">Radioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="quimio">Quimioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
+  </div>
   <div class="form-group pt-3" id="acompanhanteDiv">
     <label for="acompanhante" class="w-100 p-2 rounded"
       style="background-color: #999999a8">Acompanhante(s):</label>
