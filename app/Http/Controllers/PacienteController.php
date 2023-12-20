@@ -79,8 +79,7 @@ class PacienteController extends Controller
         $cep = preg_replace('/\D/', '', $request['cep']);
         $obj->cep = '' ? null : $cep;
 
-        $obj->logradouro = $request['logradouro'];
-        $obj->numero = $request['numero'];
+        $obj->endereco = $request['endereco'];
         $obj->complemento = $request['complemento'];
         $obj->ponto_referencia = $request['ponto_referencia'];
         $obj->bairro_id = $request['bairro_id'];

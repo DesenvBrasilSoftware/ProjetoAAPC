@@ -112,12 +112,8 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="logradouro">Logradouro:</label>
-    <input type="text" name="logradouro" class="form-control" id="logradouro" maxlength="60" placeholder="Digite o logradouro" value="{{ old('logradouro') }}" autofocus>
-  </div>
-  <div class="form-group">
-    <label for="numero">Número:</label>
-    <input type="text" name="numero" class="form-control" id="numero" maxlength="6" placeholder="Digite o número" value="{{ old('numero') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    <label for="endereco">Endereço:</label>
+    <input type="text" name="endereco" class="form-control" id="endereco" maxlength="60" placeholder="Digite o endereço" value="{{ old('endereco') }}" autofocus>
   </div>
   <div class="form-group">
     <label for="complemento">Complemento:</label>
