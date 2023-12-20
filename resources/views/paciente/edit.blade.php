@@ -25,6 +25,14 @@
       placeholder="Informe a data de óbito" value="{{ $obj->data_obito }}">
   </div>
   <div class="form-group">
+    <label for="data_biopsia">Data de Biopsia:</label>
+    <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia"  value="{{ $obj->data_biopsia }}">
+  </div>
+  <div class="form-group">
+    <label for="data_alta">Data de Alta:</label>
+    <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta"  value="{{ $obj->data_alta }}">
+  </div>
+  <div class="form-group">
     <label for="cpf">CPF:</label>
     <input type="text" name="cpf" class="form-control cpf" id="cpf"
       value="{{ $obj->cpf }}" autofocuS
@@ -60,32 +68,15 @@
       oninput="this.value = this.value.replace(/[^0-9]/g, '');">
   </div>
   <div class="form-group">
-    <label>Estado Civil:</label><br>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="solteiro" value="0"
-      {{ $obj->estado_civil == '0' ? 'checked' : '' }}>
-      <label class="form-check-label" for="solteiro">Solteiro</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="casado" value="1"
-      {{ $obj->estado_civil == '1' ? 'checked' : '' }}>
-      <label class="form-check-label" for="casado">Casado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="separado" value="2"
-      {{ $obj->estado_civil == '2' ? 'checked' : '' }}>
-      <label class="form-check-label" for="separado">Separado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="divorciado"
-      value="3" {{ $obj->estado_civil == '3' ? 'checked' : '' }}>
-      <label class="form-check-label" for="divorciado">Divorciado</label>
-    </div>
-    <div class="form-check">
-      <input required class="form-check-input" type="radio" name="estado_civil" id="viuvo"
-      value="4" {{ $obj->estado_civil == '4' ? 'checked' : '' }}>
-      <label class="form-check-label" for="viuvo">Viúvo</label>
-    </div>
+    <label for="estado_civil">Estado Civil:</label>
+    <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
+      <option value="" label="Nenhum" {{ $obj->estado_civil ? '' : 'selected' }}></option>
+      <option value="1" label="Solteiro" {{ $obj->estado_civil == 1? 'selected' : '' }}>Solteiro</option>
+      <option value="2" label="Casado" {{ $obj->estado_civil == 2? 'selected' : '' }}>Casado</option>
+      <option value="3" label="Convivio" {{ $obj->estado_civil == 3? 'selected' : '' }}>Convivio</option>
+      <option value="4" label="Viúvo" {{ $obj->estado_civil == 4? 'selected' : '' }} >Viúvo</option>
+      <option value="5" label="Separado" {{ $obj->estado_civil == 5? 'selected' : '' }}>Separado</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="conjuge">Cônjuge</label>
@@ -93,27 +84,16 @@
       value="{{ $obj->conjuge }}" autofocus>
   </div>
   <div class="form-group">
-    <label>Escolaridade</label><br>
-    <label>
-    <input type="radio" name="escolaridade" id="ensinoMedio" value="0"
-    {{ $obj->escolaridade == '0' ? 'checked' : '' }}>
-    Ensino médio
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="superior" value="1"
-    {{ $obj->escolaridade == '1' ? 'checked' : '' }}>
-    Superior
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="mestrado" value="2"
-    {{ $obj->escolaridade == '2' ? 'checked' : '' }}>
-    Mestrado
-    </label>
-    <label>
-    <input type="radio" name="escolaridade" id="doutorado" value="3"
-    {{ $obj->escolaridade == '3' ? 'checked' : '' }}>
-    Doutorado
-    </label>
+    <label for="escolaridade">Escolaridade:</label>
+    <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
+      <option value="" label="Nenhuma" {{ $obj->escolaridade ? '' : 'selected' }} >Nenhuma</option>
+      <option value="1" label="Fundamental Incompleto" {{ $obj->escolaridade == 1? 'selected' : '' }}>Fundamental Incompleto</option>
+      <option value="2" label="Fundamental completo" {{ $obj->escolaridade == 2? 'selected' : '' }}>Fundamental completo</option>
+      <option value="3" label="Médio Incompleto" {{ $obj->escolaridade == 3? 'selected' : '' }}>Médio Incompleto</option>
+      <option value="4" label="Médio completo" {{ $obj->escolaridade == 4? 'selected' : '' }}>Médio completo</option>
+      <option value="5" label="Superior incompleto" {{ $obj->escolaridade == 5? 'selected' : '' }}>Superior incompleto</option>
+      <option value="6" label="Superior completo" {{ $obj->escolaridade == 6? 'selected' : '' }}>Superior completo</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="profissao">Profissão:</label>
@@ -147,24 +127,13 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="bairro_id">Bairro:</label>
-    <select required name="bairro_id" class="form-control" id="bairro_id" maxlength="45" onchange="handleSelectBairro()">
-      <option value="" label="Selecione o bairro..."></option>
-      @foreach ($listaBairro as $bairro)
-      <option value="{{ $bairro->id }}" label="{{ $bairro->nome }}"
-      @if ($obj->bairro_id == $bairro->id) selected @endif>{{ $bairro->nome }}</option>
-      @endforeach
-    </select>
+     <label for="bairro">Bairro:</label>
+    <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" placeholder="Digite o bairro" value="{{ $obj->bairro }}" autofocus>
   </div>
   <div class="form-group">
-    <label for="logradouro">Logradouro:</label>
-    <input type="text" name="logradouro" class="form-control" id="logradouro" maxlength="60"
-      value="{{ $obj->logradouro }}" autofocus placeholder="Informe o logradouro">
-  </div>
-  <div class="form-group">
-    <label for="numero">Número:</label>
-    <input type="text" name="numero" class="form-control" id="numero" maxlength="6"
-      value="{{ $obj->numero }}" autofocus placeholder="Informe o número">
+    <label for="endereco">Endereço:</label>
+    <input type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
+      value="{{ $obj->endereco }}" autofocus placeholder="Informe o endereço">
   </div>
   <div class="form-group">
     <label for="complemento">Complemento:</label>
@@ -175,6 +144,44 @@
     <label for="ponto_referencia">Ponto de referência:</label>
     <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45"
       value="{{ $obj->ponto_referencia }}" autofocus placeholder="Informe um ponto de referência">
+  </div>
+  <div class="form-group">
+    <label for="moradia">Moradia:</label>
+    <select name="moradia" class="form-control" id="moradia" maxlength="45">
+      <option value="" label="Nenhuma" {{ $obj->moradia ? '' : 'selected' }}></option>
+      <option value="P" label="Própria" {{ $obj->moradia == 'P'? 'selected' : '' }}>Própria</option>
+      <option value="A" label="Alugada" {{ $obj->moradia == 'A'? 'selected' : '' }}>Alugada</option>
+    </select>
+  </div>
+  <div class="form-group">
+     <label for="medicamentos">Medicamentos:</label>
+    <input type="text" name="medicamentos" class="form-control" id="medicamentos" maxlength="60" placeholder="Medicamentos..." value="{{ $obj->medicamento }}" autofocus>
+  </div>
+  <div class="form-group">
+     <label for="clinica">Clinica:</label>
+    <input type="text" name="clinica" class="form-control" id="clinica" maxlength="60" placeholder="Clinica..." value="{{ $obj->clinica }}" autofocus>
+  </div>
+  <div class="form-group">
+     <label for="telefone">Telefone:</label>
+    <input type="text" name="telefone" class="form-control" id="telefone" maxlength="40" placeholder="Digite o telefone" value="{{ $obj->telefone }}" autofocus>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="radio">Radioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="quimio">Quimioterapia:</label>
+          <div class="checkbox-toggle">
+            <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
+          </div>
+        </div>
+    </div>
   </div>
   <div class="form-group pt-3" id="acompanhanteDiv">
     <label for="acompanhante" class="w-100 p-2 rounded"
@@ -471,44 +478,7 @@
   });
 </script>
 <script>
-  function handleSelectBairro() {
-      var select_cidade = document.getElementById('cidade_id');
-      var select_bairro = document.getElementById('bairro_id');
-      var bairro_selecionado_id = select_bairro.value;
 
-      var cidade_id = '';
-
-      @foreach ($listaBairro as $bairro)
-      var bairro_id = '{{$bairro->id}}'
-          if (bairro_selecionado_id == bairro_id) {
-              cidade_id = '{{$bairro->cidade_id}}';
-          }
-      @endforeach
-
-      select_cidade.value = cidade_id;
-  }
-
-  function handleSelectCidade() {
-      var select_cidade = document.getElementById('cidade_id');
-      var select_bairro = document.getElementById('bairro_id');
-      var cidade_selecionada_id = select_cidade.value;
-
-      // Limpar opções anteriores
-      while (select_bairro.options.length > 1) {
-          select_bairro.remove(1);
-      }
-
-      // Adicionar opções de bairro com base na cidade selecionada ou mostrar todos
-      @foreach ($listaBairro as $bairro)
-          var option = document.createElement('option');
-          option.value = '{{ $bairro->id }}';
-          option.label = '{{ $bairro->nome }}';
-
-          if ({{ $bairro->cidade_id }} == cidade_selecionada_id || cidade_selecionada_id === "") {
-              select_bairro.add(option);
-          }
-      @endforeach
-  }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

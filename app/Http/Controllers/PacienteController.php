@@ -28,14 +28,12 @@ class PacienteController extends Controller
 
     public function create($msg = '')
     {
-        $listaBairro = Bairro::all();
         $listaCidade = Cidade::all();
 
         return view(
             'paciente.create',
             compact(
                 'listaCidade',
-                'listaBairro',
                 'msg',
             )
         );
@@ -51,6 +49,14 @@ class PacienteController extends Controller
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
         $obj->data_obito = $request['data_obito'];
+        $obj->data_biopsia = $request['data_biopsia'];
+        $obj->data_alta = $request['data_alta'];
+        $obj->radioterapia = ($request['radio'] === null) ? 0 : 1;
+        $obj->quimioterapia = ($request['quimio'] === null) ? 0 : 1;
+        $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];
+        $obj->telefone = $request['telefone'];
+        $obj->medicamento = $request['medicamentos'];
+        $obj->clinica = $request['clinica'];
 
         $cpf = preg_replace('/\D/', '', $request['cpf']);
         $obj->cpf = '' ? null : $cpf;
@@ -61,9 +67,9 @@ class PacienteController extends Controller
         $obj->data_cadastro = $request['data_cadastro'];
         $obj->sexo = $request['sexo'];
         $obj->quantidade_filhos = $request['quantidade_filhos'];
-        $obj->estado_civil = $request['estado_civil'];
+        $obj->estado_civil = ($request['estado_civil'] === '') ? null : $request['estado_civil'];
         $obj->conjuge = $request['conjuge'];
-        $obj->escolaridade = $request['escolaridade'];
+        $obj->escolaridade = ($request['escolaridade'] === '') ? null : $request['escolaridade'];
         $obj->profissao = $request['profissao'];
 
         $renda_mensal = $request['renda_mensal'];
@@ -76,11 +82,10 @@ class PacienteController extends Controller
         $cep = preg_replace('/\D/', '', $request['cep']);
         $obj->cep = '' ? null : $cep;
 
-        $obj->logradouro = $request['logradouro'];
-        $obj->numero = $request['numero'];
+        $obj->endereco = $request['endereco'];
         $obj->complemento = $request['complemento'];
         $obj->ponto_referencia = $request['ponto_referencia'];
-        $obj->bairro_id = $request['bairro_id'];
+        $obj->bairro = $request['bairro'];
         $obj->cidade_id = $request['cidade_id'];
 
         $msg = 'Registro salvo com sucesso.';
@@ -105,7 +110,6 @@ class PacienteController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Paciente::find($id);
-        $listaBairro = Bairro::all();
         $listaCidade = Cidade::all();
         $listaAcomodacao = Acomodacao::all();
         $listaEnfermidade = Enfermidade::all();
@@ -174,7 +178,6 @@ class PacienteController extends Controller
         return view(
             'paciente.edit',
             compact(
-                'listaBairro',
                 'listaCidade',
                 'listaAcomodacaoPaciente',
                 'listaEnfermidadePaciente',
