@@ -147,6 +147,14 @@
     <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
   </div>
   <div class="form-group">
+    <label for="moradia">Moradia:</label>
+    <select name="moradia" class="form-control" id="moradia" maxlength="45">
+      <option value="" label="Selecione o tipo de moradia..." selected></option>
+      <option value="P" label="Própria" >Própria</option>
+      <option value="A" label="Alugada" >Alugada</option>
+    </select>
+  </div>
+  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
