@@ -158,6 +158,10 @@
     <input type="text" name="medicamentos" class="form-control" id="medicamentos" maxlength="60" placeholder="Medicamentos..." value="{{ $obj->medicamento }}" autofocus>
   </div>
   <div class="form-group">
+     <label for="clinica">Clinica:</label>
+    <input type="text" name="clinica" class="form-control" id="clinica" maxlength="60" placeholder="Clinica..." value="{{ $obj->clinica }}" autofocus>
+  </div>
+  <div class="form-group">
      <label for="telefone">Telefone:</label>
     <input type="text" name="telefone" class="form-control" id="telefone" maxlength="40" placeholder="Digite o telefone" value="{{ $obj->telefone }}" autofocus>
   </div>

@@ -56,6 +56,7 @@ class PacienteController extends Controller
         $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];
         $obj->telefone = $request['telefone'];
         $obj->medicamento = $request['medicamentos'];
+        $obj->clinica = $request['clinica'];
 
         $cpf = preg_replace('/\D/', '', $request['cpf']);
         $obj->cpf = '' ? null : $cpf;
