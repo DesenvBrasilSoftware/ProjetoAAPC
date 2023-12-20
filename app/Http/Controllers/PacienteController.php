@@ -51,6 +51,8 @@ class PacienteController extends Controller
         $obj->nome = $request['nome'];
         $obj->data_nascimento = $request['data_nascimento'];
         $obj->data_obito = $request['data_obito'];
+        $obj->data_biopsia = $request['data_biopsia'];
+        $obj->data_alta = $request['data_alta'];
         $obj->radioterapia = ($request['radio'] === null) ? 0 : 1;
         $obj->quimioterapia = ($request['quimio'] === null) ? 0 : 1;
         $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];

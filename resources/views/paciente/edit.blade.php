@@ -25,6 +25,14 @@
       placeholder="Informe a data de óbito" value="{{ $obj->data_obito }}">
   </div>
   <div class="form-group">
+    <label for="data_biopsia">Data de Biopsia:</label>
+    <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia"  value="{{ $obj->data_biopsia }}">
+  </div>
+  <div class="form-group">
+    <label for="data_alta">Data de Alta:</label>
+    <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta"  value="{{ $obj->data_alta }}">
+  </div>
+  <div class="form-group">
     <label for="cpf">CPF:</label>
     <input type="text" name="cpf" class="form-control cpf" id="cpf"
       value="{{ $obj->cpf }}" autofocuS

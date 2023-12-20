@@ -21,6 +21,14 @@
     <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
   </div>
   <div class="form-group">
+    <label for="data_biopsia">Data de Biopsia:</label>
+    <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia">
+  </div>
+  <div class="form-group">
+    <label for="data_alta">Data de Alta:</label>
+    <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta">
+  </div>
+  <div class="form-group">
       <label for="cpf" id="labelCpfCnpj">CPF:</label>
       <input type="text" name="cpf" placeholder="Informe o CPF..."
       class="form-control cpf" id="cpf" maxlength="45" value="{{ old('cpf') }}" />
