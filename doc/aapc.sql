@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `aapc`.`cidade` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `aapc`.`bairro`
 -- -----------------------------------------------------
@@ -62,36 +61,77 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `aapc`.`paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
-  `data_nascimento` DATE NULL,
-  `cpf` VARCHAR(11) NULL,
-  `rg` VARCHAR(20) NULL,
-  `data_cadastro` DATE NOT NULL,
-  `sexo` VARCHAR(1) NOT NULL,
-  `quantidade_filhos` INT NOT NULL DEFAULT 0,
-  `estado_civil` VARCHAR(1) NOT NULL,
-  `conjuge` VARCHAR(50) NULL,
-  `escolaridade` VARCHAR(1) NULL,
-  `profissao` VARCHAR(45) NULL,
-  `renda_mensal` DECIMAL(12,2) NOT NULL DEFAULT 0,
-  `observacao` TEXT NULL,
-  `cep` VARCHAR(8) NULL,
-  `logradouro` VARCHAR(60) NULL,
-  `numero` VARCHAR(6) NULL,
-  `complemento` VARCHAR(45) NULL,
-  `ponto_referencia` VARCHAR(45) NULL,
-  `bairro_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_paciente_bairro1_idx` (`bairro_id` ASC),
-  CONSTRAINT `fk_paciente_bairro1`
-    FOREIGN KEY (`bairro_id`)
-    REFERENCES `aapc`.`bairro` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `nome` VARCHAR(50) NOT NULL,
+--   `data_nascimento` DATE NULL,
+--   `cpf` VARCHAR(11) NULL,
+--   `rg` VARCHAR(20) NULL,
+--   `data_cadastro` DATE NOT NULL,
+--   `sexo` VARCHAR(1) NOT NULL,
+--   `quantidade_filhos` INT NOT NULL DEFAULT 0,
+--   `estado_civil` VARCHAR(1) NOT NULL,
+--   `conjuge` VARCHAR(50) NULL,
+--   `escolaridade` VARCHAR(1) NULL,
+--   `profissao` VARCHAR(45) NULL,
+--   `renda_mensal` DECIMAL(12,2) NOT NULL DEFAULT 0,
+--   `observacao` TEXT NULL,
+--   `cep` VARCHAR(8) NULL,
+--   `logradouro` VARCHAR(60) NULL,
+--   `numero` VARCHAR(6) NULL,
+--   `complemento` VARCHAR(45) NULL,
+--   `ponto_referencia` VARCHAR(45) NULL,
+--   `bairro_id` INT NOT NULL,
+--   PRIMARY KEY (`id`),
+--   INDEX `fk_paciente_bairro1_idx` (`bairro_id` ASC),
+--   CONSTRAINT `fk_paciente_bairro1`
+--     FOREIGN KEY (`bairro_id`)
+--     REFERENCES `aapc`.`bairro` (`id`)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION)
+-- ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`nome` VARCHAR(50) NOT NULL COLLATE 'utf8mb3_general_ci',
+	`data_nascimento` DATE NULL DEFAULT NULL,
+	`cpf` VARCHAR(11) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`rg` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`data_cadastro` DATE NOT NULL,
+	`data_obito` DATE NULL DEFAULT NULL,
+	`sexo` VARCHAR(1) NOT NULL COLLATE 'utf8mb3_general_ci',
+	`quantidade_filhos` INT(10),
+	`estado_civil` VARCHAR(1) COLLATE 'utf8mb3_general_ci',
+	`conjuge` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`escolaridade` VARCHAR(1) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`profissao` VARCHAR(45) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`renda_mensal` DECIMAL(12,2),
+	`observacao` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`cep` VARCHAR(8) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`endereco` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`complemento` VARCHAR(45) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`ponto_referencia` VARCHAR(45) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`bairro` VARCHAR(60),
+	`cidade_id` INT(10),
+	`enfermidade_id` INT(10),
+  `radioterapia` TINYINT(3) NOT NULL DEFAULT '0',
+	`quimioterapia` TINYINT(3) NOT NULL DEFAULT '0',
+	`moradia` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`data_biopsia` DATE NULL DEFAULT NULL,
+	`data_alta` DATE NULL DEFAULT NULL,
+  `medicamento` VARCHAR(250) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`telefone` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`clinica` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `fk_paciente_enfermidade1_idx` (`enfermidade_id`) USING BTREE,
+	INDEX `cidade_id` (`cidade_id`) USING BTREE,
+	CONSTRAINT `fk_paciente_enfermidade1` FOREIGN KEY (`enfermidade_id`) REFERENCES `enfermidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	CONSTRAINT `fk_paciente_cidade1` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8mb3_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
 
 -- -----------------------------------------------------
 -- Table `aapc`.`pessoa`
@@ -334,11 +374,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `aapc`.`enfermidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `cid` VARCHAR(45) NULL,
-  `descricao` VARCHAR(120) NOT NULL,
+  `cid` VARCHAR(10) NULL,
+  `descricao` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `aapc`.`paciente_enfermidade`
@@ -541,15 +580,6 @@ VALUES
 ALTER TABLE pessoa
     CHANGE COLUMN profissional profissional
     TINYINT(3) NOT NULL DEFAULT '0' AFTER colaborador;
-
-ALTER TABLE `paciente`
-	ADD COLUMN `cidade_id` INT(10) NOT NULL AFTER `bairro_id`,
-	ADD INDEX `cidade_id` (`cidade_id`),
-	ADD CONSTRAINT `fk_paciente_cidade1` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-ALTER TABLE `paciente`
-	ADD COLUMN `data_obito` DATE NULL DEFAULT NULL AFTER `data_cadastro`;
-
 
 ALTER TABLE usuario
 ADD COLUMN visualiza_acomodacao TINYINT(3) NOT NULL DEFAULT 0,

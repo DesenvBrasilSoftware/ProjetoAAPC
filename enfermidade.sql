@@ -1,10 +1,3 @@
-CREATE TABLE `enfermidade` (
-    `id` INT(10) NOT NULL AUTO_INCREMENT,
-    `codigo_cid` VARCHAR(10) NOT NULL COLLATE 'utf8mb3_general_ci',
-    `descricao` VARCHAR(255) NOT NULL COLLATE 'utf8mb3_general_ci',
-    PRIMARY KEY (`id`) USING BTREE
-);
-
 INSERT INTO enfermidade (descricao) VALUES
 
 ('CANCER'),
@@ -86,7 +79,7 @@ INSERT INTO enfermidade (descricao) VALUES
 ('TUMOR RETROPERITONEAL'),
 ('TUMOR RINS');
 
-INSERT INTO enfermidade (codigo_cid, descricao)
+INSERT INTO enfermidade (cid, descricao)
 VALUES
 
 ('C00', 'Neoplasia maligna do lábio'),

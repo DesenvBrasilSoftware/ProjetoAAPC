@@ -1,12 +1,3 @@
-CREATE TABLE IF NOT EXISTS `cidade` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  `uf_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_cidade_uf_idx` (`uf_id`),
-  CONSTRAINT `fk_cidade_uf` FOREIGN KEY (`uf_id`) REFERENCES `uf` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb3;
-
 INSERT INTO `cidade` (`id`, `nome`, `uf_id`) VALUES
 	(1, 'Feira de Santana', 5),
 	(2, 'Salvador', 5),
