@@ -41,13 +41,13 @@
   <div class="form-group">
     <label for="sexo">Sexo:</label><br>
     <div class="form-check">
-      <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="0" {{ old('sexo') == '0' ? 'checked' : '' }}>
+      <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="M" {{ old('sexo') == '0' ? 'checked' : '' }}>
       <label class="form-check-label" for="masculino">
       Masculino
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" required type="radio" name="sexo" id="feminino" value="1" {{ old('sexo') == '1' ? 'checked' : '' }}>
+      <input class="form-check-input" required type="radio" name="sexo" id="feminino" value="F" {{ old('sexo') == '1' ? 'checked' : '' }}>
       <label class="form-check-label" for="feminino">
       Feminino
       </label>

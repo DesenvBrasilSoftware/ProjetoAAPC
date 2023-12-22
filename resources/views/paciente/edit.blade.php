@@ -47,15 +47,15 @@
   <div class="form-group">
     <label>Sexo:</label><br>
     <div class="form-check">
-      <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="0"
-      {{ $obj->sexo == '0' ? 'checked' : '' }}>
+      <input class="form-check-input" required type="radio" name="sexo" id="masculino" value="M"
+      {{ $obj->sexo == 'M' ? 'checked' : '' }}>
       <label class="form-check-label" for="masculino">
       Masculino
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" required type="radio" name="sexo" id="feminino" value="1"
-      {{ $obj->sexo == '1' ? 'checked' : '' }}>
+      <input class="form-check-input" required type="radio" name="sexo" id="feminino" value="F"
+      {{ $obj->sexo == 'F' ? 'checked' : '' }}>
       <label class="form-check-label" for="feminino">
       Feminino
       </label>
