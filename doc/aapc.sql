@@ -119,7 +119,6 @@ CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
 	`data_biopsia` DATE NULL DEFAULT NULL,
 	`data_alta` DATE NULL DEFAULT NULL,
   `medicamento` VARCHAR(250) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
-	`telefone` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
 	`clinica` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `cidade_id` (`cidade_id`) USING BTREE,

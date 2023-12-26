@@ -54,7 +54,6 @@ class PacienteController extends Controller
         $obj->radioterapia = ($request['radio'] === null) ? 0 : 1;
         $obj->quimioterapia = ($request['quimio'] === null) ? 0 : 1;
         $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];
-        $obj->telefone = $request['telefone'];
         $obj->medicamento = $request['medicamentos'];
         $obj->clinica = $request['clinica'];
 
