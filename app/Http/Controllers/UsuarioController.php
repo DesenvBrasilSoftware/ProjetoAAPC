@@ -46,10 +46,18 @@ class UsuarioController extends Controller
         }
 
         $obj = $id ? Usuario::find($id) : new Usuario();
+        
+        $senha = md5($request['senha']);
 
+        if (!is_null($id)) {
+            if($request['senha'] == $obj->senha){
+                $senha = $request['senha'];
+            }
+        }
+
+        $obj->senha = $senha;
         $obj->nome = $request['nome'];
         $obj->login = $request['login'];
-        $obj->senha = md5($request['senha']);
         $obj->visualiza_acomodacao = isset($request['visualiza_acomodacao']) ? 1 : 0;
         $obj->visualiza_localidade = isset($request['visualiza_localidade']) ? 1 : 0;
         $obj->visualiza_pessoa = isset($request['visualiza_pessoa']) ? 1 : 0;
