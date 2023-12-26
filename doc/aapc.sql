@@ -113,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
 	`ponto_referencia` VARCHAR(45) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
 	`bairro` VARCHAR(60),
 	`cidade_id` INT(10),
-	`enfermidade_id` INT(10),
   `radioterapia` TINYINT(3) NOT NULL DEFAULT '0',
 	`quimioterapia` TINYINT(3) NOT NULL DEFAULT '0',
 	`moradia` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
@@ -123,9 +122,7 @@ CREATE TABLE IF NOT EXISTS `aapc`.`paciente` (
 	`telefone` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
 	`clinica` VARCHAR(60) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
 	PRIMARY KEY (`id`) USING BTREE,
-	INDEX `fk_paciente_enfermidade1_idx` (`enfermidade_id`) USING BTREE,
 	INDEX `cidade_id` (`cidade_id`) USING BTREE,
-	CONSTRAINT `fk_paciente_enfermidade1` FOREIGN KEY (`enfermidade_id`) REFERENCES `enfermidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
 	CONSTRAINT `fk_paciente_cidade1` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 COLLATE='utf8mb3_general_ci'
