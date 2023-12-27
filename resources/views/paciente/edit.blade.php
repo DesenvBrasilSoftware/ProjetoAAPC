@@ -187,17 +187,38 @@
       <thead>
         <tr>
           <th>Acompanhante</th>
-          <th>Ação</th>
+          <th>Grau</th>
+          <th>Profissão</th>
+          <th>Telefone</th>
+          <th>Moradia</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         @foreach ($listaAcompanhante as $acompanhante)
         <tr>
           <td>{{ $acompanhante->nome_acompanhante }}</td>
-          <td width="1%">
-            <a href="/acompanhante.delete.{{ $acompanhante->id }}"><i
-              class="fa fa-trash"></i></a>
-          </td>
+          <td>{{ $acompanhante->grau }}</td>
+          <td>{{ $acompanhante->profissao }}</td>
+          <td>{{ $acompanhante->telefone }}</td>
+          <td>{{ $acompanhante->moradia == 1? 'Sim' : 'Não' }}</td>
+            <td width="1%">
+              <a data-toggle="modal"
+                onclick="abreModalEditAcompanhante(
+                '{{ $acompanhante->id }}',
+                '{{ $acompanhante->grau }}',
+                '{{ $acompanhante->profissao }}',
+                '{{ $acompanhante->telefone }}',
+                '{{ $acompanhante->moradia }}')
+                ">
+                <i class="fa fa-lg fa-edit"></i>
+              </a>
+            </td>
+            <td width="1%">
+              <a href="/acompanhante.delete.{{ $acompanhante->id }}"><i
+                class="fa fa-trash"></i></a>
+            </td>
         </tr>
         @endforeach
       </tbody>
@@ -211,8 +232,10 @@
         @endforeach
       </select>
     </div>
-    <button class="btn btn-sm btn-success mt-3" type="button" id="adicionar-acompanhante">Adicionar
-    Acompanhante</button>
+    <button id="adicionar-acompanhante" type="button" class="btn btn-sm btn-success mt-3" data-toggle="modal"
+      >
+    Adicionar acompanhante
+    </button>
   </div>
   <div class="form-group pt-3" id="contatoDiv">
     <label for="contato" class="w-100 p-2 rounded"
@@ -402,6 +425,7 @@
 @include('paciente/modal_acomodacao')
 @include('paciente/modal_enfermidade')
 @include('paciente/modal_consulta')
+@include('paciente/modal_acompanhante')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
@@ -422,24 +446,27 @@
               toastr.error('Selecione uma pessoa para acompanhante.', 'Erro');
               return;
           }
+          else{
 
-          const response = await fetch('/acompanhante.store.' + {{ $obj->id }} + '.' +
-              acompanhanteId, {
-                  method: 'POST',
-                  headers: {
-                      'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                      'Content-Type': 'application/json',
-                  },
-              });
-
-          if (response.ok) {
-              const data = await response.json();
-              toastr.success(data.message, 'Sucesso');
-              window.location.href = '/paciente.edit.' + {{ $obj->id }};
-          } else {
-              const data = await response.json();
-              toastr.error(data.message, 'Erro');
+            abreModalAcompanhante(acompanhanteId);
           }
+          // const response = await fetch('/acompanhante.store.' + {{ $obj->id }} + '.' +
+          //     acompanhanteId, {
+          //         method: 'POST',
+          //         headers: {
+          //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+          //             'Content-Type': 'application/json',
+          //         },
+          //     });
+
+          // if (response.ok) {
+          //     const data = await response.json();
+          //     toastr.success(data.message, 'Sucesso');
+          //     window.location.href = '/paciente.edit.' + {{ $obj->id }};
+          // } else {
+          //     const data = await response.json();
+          //     toastr.error(data.message, 'Erro');
+          // }
       });
 
       const adicionarContato = document.getElementById("adicionar-contato");

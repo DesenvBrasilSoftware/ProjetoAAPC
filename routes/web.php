@@ -167,7 +167,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Acompanhante
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
-    Route::post('/acompanhante.store.{pacienteId}.{acompanhanteId}', [AcompanhanteController::class, 'store']);
+    Route::post('/acompanhante.store', [AcompanhanteController::class, 'store']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
 
     // Usuário

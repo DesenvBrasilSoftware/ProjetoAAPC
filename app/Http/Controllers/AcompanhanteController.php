@@ -22,27 +22,31 @@ class AcompanhanteController extends Controller
     public function store(Request $req)
     {
         $acompanhante = new Acompanhante();
-        $acompanhante->paciente_id = $req['pacienteId'];
-        $acompanhante->pessoa_id = $req['acompanhanteId'];
 
-        $existingAcompanhante = Acompanhante::where('paciente_id', $acompanhante->paciente_id)
-            ->where('pessoa_id', $acompanhante->pessoa_id)
+        $existingAcompanhante = Acompanhante::where('paciente_id', $req['paciente_id'])
+            ->where('pessoa_id', $req['acompanhante_id'])
             ->first();
 
-        if ($existingAcompanhante) {
-            $msg = 'Este acompanhante já está associado a este paciente.';
-            return response()->json(['message' => $msg], 400);
+        if (!$existingAcompanhante) {
+            $acompanhante->paciente_id = $req['paciente_id'];
+            $acompanhante->pessoa_id = $req['acompanhante_id'];
         }
+    
+        $acompanhante->grau = $req['grau'];
+        $acompanhante->profissao = $req['profissaoAcom'];
+        $acompanhante->telefone = $req['telefone'];
+        $acompanhante->moradia = ($req['moraJunto'] === "on") ? 1 : 0;
+
 
         try {
             $acompanhante->save();
 
             $msg = 'Acompanhante salvo com sucesso.';
-            return response()->json(['message' => $msg]);
+            return redirect('/paciente.edit.' . $req['paciente_id'])->with('mensagem', $msg);
 
         } catch (\Exception $e) {
             $msg = 'Erro ao salvar o acompanhante: ' . $e->getMessage();
-            return response()->json(['message' => $msg], 400);
+            return redirect('/paciente.edit.' . $req['paciente_id'])->with('mensagem', $msg);
         }
     }
 
