@@ -7,6 +7,8 @@
     <!-- theme meta -->
     <meta name="theme-name" content="focus" />
     <title>AAPC</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff" />
@@ -20,6 +22,9 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff" />
     <!-- Styles -->
     <link href="/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet" />
+    <link href="/css/lib/data-table/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/lib/data-table/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="/css/lib/chartist/chartist.min.css" rel="stylesheet" />
     <link href="/css/lib/font-awesome.min.css" rel="stylesheet" />
     <link href="/css/lib/themify-icons.css" rel="stylesheet" />
@@ -283,5 +288,43 @@
     {{--
     <script src="/js/dashboard2.js"></script>
     --}}
+    <script src="/js/lib/data-table/jquery.dataTables.min.js"></script>
+    <script src="/css/lib/data-table/dataTables.bootstrap.min.css"></script>
+    <script>
+    $(document).ready(function () {
+    $('#dataTable').DataTable({
+      "language": {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sSearch": "Pesquisar",
+        "oPaginate": {
+          "sNext": "Próximo",
+          "sPrevious": "Anterior",
+          "sFirst": "Primeiro",
+          "sLast": "Último"
+        },
+        "oAria": {
+          "sSortAscending": ": Ordenar colunas de forma ascendente",
+          "sSortDescending": ": Ordenar colunas de forma descendente"
+        },
+        "select": {
+          "rows": {
+            "_": "Selecionado %d linhas",
+            "0": "Nenhuma linha selecionada",
+            "1": "Selecionado 1 linha"
+          }
+        }
+      }
+    });
+  });
+  </script>
   </body>
 </html>
