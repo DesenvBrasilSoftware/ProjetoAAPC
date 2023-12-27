@@ -151,25 +151,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `aapc`.`acompanhante`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aapc`.`acompanhante` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `paciente_id` INT NOT NULL,
-  `pessoa_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_contato_paciente1_idx` (`paciente_id` ASC),
-  INDEX `fk_contato_pessoa1_idx` (`pessoa_id` ASC),
-  CONSTRAINT `fk_contato_paciente1`
-    FOREIGN KEY (`paciente_id`)
-    REFERENCES `aapc`.`paciente` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contato_pessoa1`
-    FOREIGN KEY (`pessoa_id`)
-    REFERENCES `aapc`.`pessoa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+CREATE TABLE `acompanhante` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`paciente_id` INT(10) NOT NULL,
+	`pessoa_id` INT(10) NOT NULL,
+	`moradia` CHAR(1) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`telefone` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`profissao` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`grau` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `fk_contato_paciente1_idx` (`paciente_id`) USING BTREE,
+	INDEX `fk_contato_pessoa1_idx` (`pessoa_id`) USING BTREE,
+	CONSTRAINT `fk_contato_paciente1` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	CONSTRAINT `fk_contato_pessoa1` FOREIGN KEY (`pessoa_id`) REFERENCES `pessoa` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8mb3_general_ci'
+ENGINE=InnoDB
+;
 
 -- -----------------------------------------------------
 -- Table `aapc`.`contato`
@@ -595,7 +593,8 @@ ADD COLUMN visualiza_relatorios TINYINT(3) NOT NULL DEFAULT 0;
 ALTER TABLE item
 ADD COLUMN `quantidade` DECIMAL(12,4) NOT NULL DEFAULT '0.0000';
 
-
+INSERT INTO `usuario` (`id`, `nome`, `login`, `senha`, `visualiza_acomodacao`, `visualiza_localidade`, `visualiza_pessoa`, `visualiza_paciente`, `visualiza_refeicao`, `visualiza_doacoes`, `visualiza_financeiro`, `visualiza_classe_terapeutica`, `visualiza_enfermidade`, `visualiza_estoque`, `visualiza_medicamentos`, `visualiza_usuarios`, `visualiza_relatorios`) VALUES
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
