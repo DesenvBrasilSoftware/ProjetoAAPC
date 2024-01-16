@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/acomodacao.delete.{i}', [AcomodacaoController::class, 'delete']);
     Route::get('/acomodacao.edit.{i}', [AcomodacaoController::class, 'edit']);
     Route::post('/acomodacao.adicionarLeito', [AcomodacaoController::class, 'adicionarLeito']);
+    Route::post('/acomodacao.deletarLeito', [AcomodacaoController::class, 'deletarLeito']);
 
     // Pessoa
     Route::get('/pessoa.index', [PessoaController::class, 'index']);

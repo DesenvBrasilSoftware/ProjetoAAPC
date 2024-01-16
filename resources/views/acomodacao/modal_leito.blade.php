@@ -32,6 +32,7 @@
 </div>
 <form id="deletarLeitoForm" method="POST" action="/acomodacao.deletarLeito">
     @csrf
+    <input type="hidden" name="delete_acomodacao_leito_id" id="delete_acomodacao_leito_id">
     <input type="hidden" name="delete_leito_id" id="delete_leito_id">
 </form>
 </div>
@@ -42,7 +43,6 @@
   });
 
   function abreModalEditLeitoAcomodacao(id, descricao) {
-    console.log(descricao);
     $('#leito_id').val(id);
     $('#descricao_leito').val(descricao);
   }
@@ -52,9 +52,10 @@
     $('#descricao_leito').val('');
   }
 
-  function deletarLeitoAcomodacao(leito_id) {
+  function deletarLeitoAcomodacao(leito_id, acomodacao_leito_id) {
       if (confirm('Tem certeza de que deseja excluir este item?')) {
           $('#delete_leito_id').val(leito_id);
+          $('#delete_acomodacao_leito_id').val(acomodacao_leito_id);
           $('#deletarLeitoForm').submit();
       } else {
           // Não faz nada se o usuário clicar em "Cancelar"

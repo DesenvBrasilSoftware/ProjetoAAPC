@@ -87,4 +87,17 @@ class AcomodacaoController extends Controller
         return redirect('/acomodacao.edit.' . $request->acomodacao_id)->with('mensagem',
         'Leito cadastrado com sucesso');
     }
+
+    public function deletarLeito(Request $request)
+    {
+        $obj = Leito::find($request->delete_leito_id);
+        $msg = "Leito excluído.";
+        try {
+            $obj->delete();
+        } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir o leito.';
+            return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('mensagem', $msg);
+        }
+        return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('mensagem', $msg);
+    }
 }
