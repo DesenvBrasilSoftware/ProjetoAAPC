@@ -11,7 +11,6 @@
       <th>Código</th>
       <th>Nome</th>
       <th style="text-align:left">Data de cadastro</th>
-      <th style="text-align:left">Data de óbito</th>
     </tr>
   </thead>
   <tbody>
@@ -38,11 +37,6 @@
       <td style="text-align:left">
         @if ($obj->data_cadastro)
             {{ date('d/m/Y', strtotime($obj->data_cadastro)) }}
-        @endif
-      </td>
-      <td style="text-align:left">
-        @if ($obj->data_obito)
-            {{ date('d/m/Y', strtotime($obj->data_obito)) }}
         @endif
       </td>
     </tr>
