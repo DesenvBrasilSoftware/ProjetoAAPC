@@ -43,19 +43,16 @@ class RefeicaoController extends Controller
 
     public function create($msg = '')
     {
-        $listaPaciente = Paciente::all();
-        $listaAcompanhante = DB::select("
-            SELECT
-                a.id,
-                p.nome
-            FROM
-            acompanhante a
-            INNER JOIN pessoa p ON a.pessoa_id = p.id
-        ");
+      $listaPaciente = Paciente::orderBy('nome')->get();
 
-        return view('refeicao.create', compact('listaPaciente', 'listaAcompanhante', 'msg'));
+      $listaAcompanhante = DB::table('acompanhante')
+          ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
+          ->select('acompanhante.id', 'pessoa.nome')
+          ->orderBy('pessoa.nome')
+          ->get();
+
+      return view('refeicao.create', compact('listaPaciente', 'listaAcompanhante', 'msg'));
     }
-
     public function store(Request $request)
     {
 
