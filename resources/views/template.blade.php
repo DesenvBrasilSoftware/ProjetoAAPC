@@ -8,7 +8,7 @@
     <meta name="theme-name" content="focus" />
     <title>AAPC</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff" />
@@ -51,31 +51,6 @@
                 <span>AAPC</span>
               </a>
             </li>
-            @if(Auth::user()->visualiza_acomodacao)
-            <li>
-              <a href="acomodacao.index">
-                <i class='bx bxs-bed'></i>Acomodação
-              </a>
-            </li>
-            @endif
-            @if(Auth::user()->visualiza_localidade)
-            <li>
-              <a class="sidebar-sub-toggle">
-                <i class='bx bxs-map'></i>Localidade
-                <span class="sidebar-collapse-icon ti-angle-down"></span>
-              </a>
-              <ul>
-                <li><a href="cidade.index">Cidade</a></li>
-              </ul>
-            </li>
-            @endif
-            @if(Auth::user()->visualiza_pessoa)
-            <li>
-              <a href="pessoa.index">
-                <i class='bx bxs-user'></i>Pessoa
-              </a>
-            </li>
-            @endif
             @if(Auth::user()->visualiza_paciente)
             <li>
                 <a href="paciente.index">
@@ -83,10 +58,24 @@
                 </a>
             </li>
             @endif
+            @if(Auth::user()->visualiza_acomodacao)
+            <li>
+              <a href="acomodacao.index">
+                <i class='bx bxs-bed'></i>Acomodação
+              </a>
+            </li>
+            @endif
             @if(Auth::user()->visualiza_refeicao)
             <li>
               <a href="refeicao.index">
                 <i class='bx bxs-dish'></i>Refeição
+              </a>
+            </li>
+            @endif
+            @if(Auth::user()->visualiza_pessoa)
+            <li>
+              <a href="pessoa.index">
+                <i class='bx bxs-user'></i>Pessoa
               </a>
             </li>
             @endif
@@ -100,32 +89,6 @@
                 <li><a href="entradaDoacao.index">Entrada por doação</a></li>
                 <li><a href="saidaDoacao.index">Saída por doação</a></li>
               </ul>
-            </li>
-            @endif
-            @if(Auth::user()->visualiza_financeiro)
-            <li>
-              <a class="sidebar-sub-toggle">
-                <i class='bx bx-dollar'></i>Financeiro
-                <span class="sidebar-collapse-icon ti-angle-down"></span>
-              </a>
-              <ul>
-                <li><a href="contasAPagar.index">Contas a Pagar</a></li>
-                <li><a href="contasAReceber.index">Contas a Receber</a></li>
-              </ul>
-            </li>
-            @endif
-            @if(Auth::user()->visualiza_classe_terapeutica)
-            <li>
-              <a href="classeTerapeutica.index">
-                <i class='bx bxs-vial' ></i>Classe terapêutica
-              </a>
-            </li>
-            @endif
-            @if(Auth::user()->visualiza_enfermidade)
-            <li>
-              <a href="enfermidade.index">
-                <i class='bx bx-pulse' ></i>Enfermidade
-              </a>
             </li>
             @endif
             @if(Auth::user()->visualiza_estoque)
@@ -145,6 +108,43 @@
               <a href="medicamento.index">
                 <i class='bx bxs-first-aid'></i></i>Medicamentos
               </a>
+            </li>
+            @endif
+            @if(Auth::user()->visualiza_classe_terapeutica)
+            <li>
+              <a href="classeTerapeutica.index">
+                <i class='bx bxs-vial' ></i>Classe terapêutica
+              </a>
+            </li>
+            @endif
+            @if(Auth::user()->visualiza_enfermidade)
+            <li>
+              <a href="enfermidade.index">
+                <i class='bx bx-pulse' ></i>Enfermidade
+              </a>
+            </li>
+            @endif
+            @if(Auth::user()->visualiza_localidade)
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class='bx bxs-map'></i>Localidade
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="cidade.index">Cidade</a></li>
+              </ul>
+            </li>
+            @endif
+            @if(Auth::user()->visualiza_financeiro)
+            <li>
+              <a class="sidebar-sub-toggle">
+                <i class='bx bx-dollar'></i>Financeiro
+                <span class="sidebar-collapse-icon ti-angle-down"></span>
+              </a>
+              <ul>
+                <li><a href="contasAPagar.index">Contas a Pagar</a></li>
+                <li><a href="contasAReceber.index">Contas a Receber</a></li>
+              </ul>
             </li>
             @endif
             @if(Auth::user()->visualiza_usuarios)
@@ -328,7 +328,7 @@
           }
           });
         }
-        
+
     });
   </script>
   </body>
