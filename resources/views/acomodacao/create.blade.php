@@ -8,16 +8,6 @@
     value="{{ old('descricao') }}" autofocus placeholder="Informe a descrição" />
   </div>
   <div class="form-group">
-    <label for="leitos">Leitos:</label>
-    <input required type="number" name="leitos" class="numero form-control" id="leitos"
-    value="{{ old('leitos') }}" placeholder="Informe o número de leitos"/>
-  </div>
-  <div class="form-group">
-    <label for="leitos_livres">Leitos livres:</label>
-    <input required type="text" name="leitos_livres" class="numero form-control" id="leitos_livres"
-    value="{{ old('leitos_livres') }}" placeholder="Informe o número de leitos livres" />
-  </div>
-  <div class="form-group">
     <label for="refrigerado">Refrigerado:</label>
     <input type="checkbox" name="refrigerado" id="refrigerado"
     data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('refrigerado') ? 'checked' : '' }}>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acomodacao;
+use App\Models\Leito;
 use Illuminate\Http\Request;
 
 class AcomodacaoController extends Controller
@@ -25,8 +26,6 @@ class AcomodacaoController extends Controller
             $obj = Acomodacao::find($request['id']);
         }
         $obj->descricao = $request['descricao'];
-        $obj->leitos = $request['leitos'];
-        $obj->leitos_livres = $request['leitos_livres'];
         $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
 
         $msg = 'Registro salvo com sucesso.';
@@ -50,19 +49,42 @@ class AcomodacaoController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Acomodacao::find($id);
-        return view('acomodacao.edit')->with(['msg' => $msg, 'obj' => $obj]);
+        $listaLeitosAcomodacao = Leito::all();
+
+        return view(
+          'acomodacao.edit',
+          compact(
+              'obj',
+              'listaLeitosAcomodacao',
+          )
+      );
     }
 
     public function delete($id)
     {
-        $obj = Acomodacao::find($id);
-        $msg = "Acomodação ({$obj->descricao}) excluída.";
-        try {
-            $obj->delete();
-        } catch (\Exception $e) {
-            $msg = 'Não foi possível excluir a acomodação. ';
-            return redirect('/acomodacao.index')->with('error', $msg);
+      $obj = Acomodacao::find($id);
+      $msg = "Acomodação ({$obj->descricao}) excluída.";
+      try {
+        $obj->delete();
+      } catch (\Exception $e) {
+        $msg = 'Não foi possível excluir a acomodação. ';
+        return redirect('/acomodacao.index')->with('error', $msg);
+      }
+      return redirect('/acomodacao.index')->with('success', $msg);
+    }
+
+    public function adicionarLeito(Request $request)
+    {
+      $leitoAcomodacao = new Leito();
+        if ($request['leito_id']) {
+          $leitoAcomodacao = Leito::find($request['leito_id']);
         }
-        return redirect('/acomodacao.index')->with('success', $msg);
+        $leitoAcomodacao->descricao = $request['descricao_leito'];
+        $leitoAcomodacao->acomodacao_id = $request['acomodacao_id'];
+
+        $leitoAcomodacao->save();
+
+        return redirect('/acomodacao.edit.' . $request->acomodacao_id)->with('mensagem',
+        'Leito cadastrado com sucesso');
     }
 }
