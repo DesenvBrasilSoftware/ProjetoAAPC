@@ -8,14 +8,15 @@
     <tr>
       <th>Alterar</th>
       <th>Excluir</th>
+      <th>Código</th>
       <th>Nome</th>
-      <th style="text-align:left">Data de nascimento</th>
+      <th style="text-align:left">Data de cadastro</th>
+      <th style="text-align:left">Data de óbito</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($lista as $obj)
     <input type="hidden" id="id_{{ $obj->id }}" value="{{ $obj->id }}">
-    <tr>
       <td width="1%">
         <a href="/paciente.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit"></i></a>
       </td>
@@ -23,11 +24,25 @@
         <a href="/paciente.delete.{{ $obj->id }}" onclick="return confirm('Tem certeza de que deseja excluir este item?');"><i class="fa fa-lg fa-trash"></i></a>
       </td>
       <td>
+        {{ $obj->id }}
+      </td>
+      @if ($obj->data_obito != null || $obj->data_obito != '')
+      <td style="color: red">
         {{ $obj->nome }}
       </td>
+      @else
+      <td>
+        {{ $obj->nome }}
+      </td>
+    @endif
       <td style="text-align:left">
-        @if ($obj->data_nascimento)
-            {{ date('d/m/Y', strtotime($obj->data_nascimento)) }}
+        @if ($obj->data_cadastro)
+            {{ date('d/m/Y', strtotime($obj->data_cadastro)) }}
+        @endif
+      </td>
+      <td style="text-align:left">
+        @if ($obj->data_obito)
+            {{ date('d/m/Y', strtotime($obj->data_obito)) }}
         @endif
       </td>
     </tr>
