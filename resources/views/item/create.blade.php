@@ -1,6 +1,5 @@
 @extends('template')
 @section('conteudo')
-<div class="container">
   <form class="needs-validation" novalidate id="form" action="/item.store" method="post">
     @csrf
     <div class="form-group">
@@ -21,16 +20,6 @@
         @endforeach
       </select>
     </div>
-    <div class="form-row">
-      <div class="form-group col-6">
-        <label for="fabricacao">Data de fabricação:</label>
-        <input type="date" class="form-control" id="fabricacao" name="fabricacao" placeholder="Selecione a data de fabricação" />
-      </div>
-      <div class="form-group col-6">
-        <label for="validade">Data de Validade:</label>
-        <input type="date" class="form-control" id="validade" name="validade" placeholder="Selecione a data de validade" />
-      </div>
-    </div>
     <div class="form-group">
       <label for="medicamento_id">Medicamento:</label>
       <select name="medicamento_id" class="form-control" id="medicamento_id" maxlength="45">
@@ -50,5 +39,4 @@
       <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
   </form>
-</div>
 @endsection

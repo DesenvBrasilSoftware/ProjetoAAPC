@@ -27,16 +27,6 @@
       @endif
     </select>
   </div>
-  <div class="form-row">
-    <div class="form-group col-6">
-      <label for="fabricacao">Data de fabricação:</label>
-      <input type="date" class="form-control" id="fabricacao" name="fabricacao" value="{{ $obj->fabricacao }}" />
-    </div>
-    <div class="form-group col-6">
-      <label for="validade">Data de Validade:</label>
-      <input type="date" class="form-control" id="validade" name="validade" value="{{ $obj->validade }}" />
-    </div>
-  </div>
   <div class="form-group">
       <label for="medicamento_id">Medicamento:</label>
       <select name="medicamento_id" class="form-control" id="medicamento_id" maxlength="45">
