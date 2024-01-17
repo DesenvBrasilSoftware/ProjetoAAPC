@@ -110,9 +110,12 @@ class AcomodacaoController extends Controller
         $msg = "Leito excluído.";
         try {
             $obj->delete();
-        } catch (\Exception $e) {
+          } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o leito.';
-            return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('mensagem', $msg);
+            if ($obj->ocupado) {
+              $msg = 'Não foi possível excluir o leito, pois está ocupado por um paciente.';
+            }
+            return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('error', $msg);
         }
         return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('mensagem', $msg);
     }
