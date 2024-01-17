@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acomodacao;
 use App\Models\Leito;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AcomodacaoController extends Controller
 {
@@ -48,8 +49,23 @@ class AcomodacaoController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $obj = Acomodacao::find($id);
-        $listaLeitosAcomodacao = Leito::where('acomodacao_id', $id)->get();
+      $obj = Acomodacao::find($id);
+
+      $listaLeitosAcomodacao = DB::select("
+          SELECT
+              l.id,
+              l.descricao,
+              l.ocupado,
+              p.nome as paciente
+          FROM
+              leito l
+              LEFT JOIN leito_paciente lp ON l.id = lp.leito_id
+              LEFT JOIN paciente p ON lp.paciente_id = p.id
+          WHERE
+              lp.data_saida IS NULL AND
+              l.acomodacao_id = :acomodacao_id
+      ", ['acomodacao_id' => $id]);
+
 
         return view(
           'acomodacao.edit',

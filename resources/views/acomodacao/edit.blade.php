@@ -13,6 +13,7 @@
       <tr>
         <th>Leito</th>
         <th>Ocupado</th>
+        <th>Paciente</th>
         <th></th>
         <th></th>
       </tr>
@@ -25,6 +26,9 @@
         </td>
         <td>
           {{ $leitoAcomodacao->ocupado ? 'Sim' : 'Não' }}
+        </td>
+        <td>
+          {{ $leitoAcomodacao->paciente }}
         </td>
         <td width="1%">
         <a data-toggle="modal" data-target="#modalLeitoAcomodacao"
