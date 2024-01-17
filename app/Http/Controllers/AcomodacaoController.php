@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acomodacao;
+use App\Models\Leito;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AcomodacaoController extends Controller
 {
@@ -25,8 +27,6 @@ class AcomodacaoController extends Controller
             $obj = Acomodacao::find($request['id']);
         }
         $obj->descricao = $request['descricao'];
-        $obj->leitos = $request['leitos'];
-        $obj->leitos_livres = $request['leitos_livres'];
         $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
 
         $msg = 'Registro salvo com sucesso.';
@@ -49,20 +49,74 @@ class AcomodacaoController extends Controller
 
     public function edit(string $id, $msg = '')
     {
-        $obj = Acomodacao::find($id);
-        return view('acomodacao.edit')->with(['msg' => $msg, 'obj' => $obj]);
+      $obj = Acomodacao::find($id);
+
+      $listaLeitosAcomodacao = DB::select("
+          SELECT
+              l.id,
+              l.descricao,
+              l.ocupado,
+              p.nome as paciente
+          FROM
+              leito l
+              LEFT JOIN leito_paciente lp ON l.id = lp.leito_id
+              LEFT JOIN paciente p ON lp.paciente_id = p.id
+          WHERE
+              lp.data_saida IS NULL AND
+              l.acomodacao_id = :acomodacao_id
+      ", ['acomodacao_id' => $id]);
+
+
+        return view(
+          'acomodacao.edit',
+          compact(
+              'obj',
+              'listaLeitosAcomodacao',
+          )
+      );
     }
 
     public function delete($id)
     {
-        $obj = Acomodacao::find($id);
-        $msg = "Acomodação ({$obj->descricao}) excluída.";
+      $obj = Acomodacao::find($id);
+      $msg = "Acomodação ({$obj->descricao}) excluída.";
+      try {
+        $obj->delete();
+      } catch (\Exception $e) {
+        $msg = 'Não foi possível excluir a acomodação. ';
+        return redirect('/acomodacao.index')->with('error', $msg);
+      }
+      return redirect('/acomodacao.index')->with('success', $msg);
+    }
+
+    public function adicionarLeito(Request $request)
+    {
+      $leitoAcomodacao = new Leito();
+        if ($request['leito_id']) {
+          $leitoAcomodacao = Leito::find($request['leito_id']);
+        }
+        $leitoAcomodacao->descricao = $request['descricao_leito'];
+        $leitoAcomodacao->acomodacao_id = $request['acomodacao_id'];
+
+        $leitoAcomodacao->save();
+
+        return redirect('/acomodacao.edit.' . $request->acomodacao_id)->with('mensagem',
+        'Leito cadastrado com sucesso');
+    }
+
+    public function deletarLeito(Request $request)
+    {
+        $obj = Leito::find($request->delete_leito_id);
+        $msg = "Leito excluído.";
         try {
             $obj->delete();
-        } catch (\Exception $e) {
-            $msg = 'Não foi possível excluir a acomodação. ';
-            return redirect('/acomodacao.index')->with('error', $msg);
+          } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir o leito.';
+            if ($obj->ocupado) {
+              $msg = 'Não foi possível excluir o leito, pois está ocupado por um paciente.';
+            }
+            return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('error', $msg);
         }
-        return redirect('/acomodacao.index')->with('success', $msg);
+        return redirect('/acomodacao.edit.' . $request->delete_acomodacao_leito_id)->with('mensagem', $msg);
     }
 }

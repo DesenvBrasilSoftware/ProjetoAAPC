@@ -11,7 +11,8 @@ use App\Models\Cidade;
 use App\Models\Contato;
 use App\Models\Acomodacao;
 use App\Models\Enfermidade;
-use App\Models\AcomodacaoPaciente;
+use App\Models\Leito;
+use App\Models\LeitoPaciente;
 use App\Models\EnfermidadePaciente;
 use App\Models\Consulta;
 use Illuminate\Support\Facades\DB;
@@ -111,20 +112,23 @@ class PacienteController extends Controller
         $obj = Paciente::find($id);
         $listaCidade = Cidade::all();
         $listaAcomodacao = Acomodacao::all();
+        $listaLeito = Leito::where('ocupado', '!=', 1)->get();
         $listaEnfermidade = Enfermidade::all();
-        $listaAcomodacaoPaciente = DB::select("
-            SELECT
-                ap.id,
-                ap.data_entrada,
-                ap.data_saida,
-                a.id as acomodacao_id,
-                a.descricao as acomodacao
-            FROM
-                acomodacao_paciente ap
-                INNER JOIN acomodacao a
-                ON a.id = ap.acomodacao_id
-            WHERE
-                paciente_id = :paciente_id
+        $listaLeitoPaciente = DB::select("
+        SELECT
+          lp.id,
+          lp.data_entrada,
+          lp.data_saida,
+          l.id AS leito_id,
+          l.descricao AS leito,
+          a.id AS acomodacao_id,
+          a.descricao AS acomodacao
+        FROM
+          leito_paciente lp
+          INNER JOIN leito l ON l.id = lp.leito_id
+          INNER JOIN acomodacao a ON a.id = l.acomodacao_id
+        WHERE
+          lp.paciente_id = :paciente_id;
         ", ['paciente_id' => $id]);
 
         $listaEnfermidadePaciente = DB::select("
@@ -178,10 +182,11 @@ class PacienteController extends Controller
             'paciente.edit',
             compact(
                 'listaCidade',
-                'listaAcomodacaoPaciente',
+                'listaLeitoPaciente',
                 'listaEnfermidadePaciente',
                 'listaConsultaPaciente',
                 'listaAcomodacao',
+                'listaLeito',
                 'listaEnfermidade',
                 'msg',
                 'obj',
@@ -212,7 +217,9 @@ class PacienteController extends Controller
 
     public function deletarAcomodacao(Request $request)
     {
-        $obj = AcomodacaoPaciente::find($request->delete_acomodacao_paciente_id);
+        $obj = LeitoPaciente::find($request->delete_leito_paciente_id);
+        $leito_id = $obj->leito_id;
+        $data_saida = $obj->data_saida;
         $msg = "Acomodação do paciente excluída.";
         try {
             $obj->delete();
@@ -220,22 +227,33 @@ class PacienteController extends Controller
             $msg = 'Não foi possível excluir a acomodação do paciente. ';
             return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
         }
+        if($data_saida == null) {
+          $leito = Leito::find($leito_id);
+          $leito->ocupado = 0;
+          $leito->save();
+        }
         return redirect('/paciente.edit.' . $request->delete_paciente_id)->with('mensagem', $msg);
     }
 
     public function adicionarAcomodacao(Request $request)
     {
-        $acomodacaoPaciente = new AcomodacaoPaciente();
-        if ($request['acomodacao_paciente_id']) {
-            $acomodacaoPaciente = AcomodacaoPaciente::find($request['acomodacao_paciente_id']);
+        $leitoPaciente = new LeitoPaciente();
+        $leito = Leito::find($request['leito_id']);
+        if ($request['leito_paciente_id']) {
+          $leitoPaciente = LeitoPaciente::find($request['leito_paciente_id']);
         }
+        if($request['data_saida_id'] == null) {
+          $leito->ocupado = '1';
+        } else {
+          $leito->ocupado = '0';
+        }
+        $leitoPaciente->paciente_id = $request['paciente_id'];
+        $leitoPaciente->data_entrada = $request['data_entrada_id'];
+        $leitoPaciente->data_saida = $request['data_saida_id'];
+        $leitoPaciente->leito_id = $request['leito_id'];
 
-        $acomodacaoPaciente->paciente_id = $request['paciente_id'];
-        $acomodacaoPaciente->data_entrada = $request['data_entrada_id'];
-        $acomodacaoPaciente->data_saida = $request['data_saida_id'];
-        $acomodacaoPaciente->acomodacao_id = $request['acomodacao_id'];
-
-        $acomodacaoPaciente->save();
+        $leito->save();
+        $leitoPaciente->save();
 
         return redirect('/paciente.edit.' . $request->paciente_id)->with('mensagem', 'Acomodação do paciente adicionada com sucesso');
     }

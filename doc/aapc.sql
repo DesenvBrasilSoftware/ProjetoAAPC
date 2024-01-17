@@ -478,23 +478,23 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `aapc`.`acomodacao_paciente`
+-- Table `aapc`.`leito_paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aapc`.`acomodacao_paciente` (
+CREATE TABLE IF NOT EXISTS `aapc`.`leito_paciente` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data_entrada` DATE NOT NULL,
   `data_saida` DATE NULL,
   `paciente_id` INT NOT NULL,
   `acomodacao_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_acomodacao_paciente_paciente1_idx` (`paciente_id` ASC),
-  INDEX `fk_acomodacao_paciente_acomodacao1_idx` (`acomodacao_id` ASC),
-  CONSTRAINT `fk_acomodacao_paciente_paciente1`
+  INDEX `fk_leito_paciente_paciente1_idx` (`paciente_id` ASC),
+  INDEX `fk_leito_paciente_acomodacao1_idx` (`acomodacao_id` ASC),
+  CONSTRAINT `fk_leito_paciente_paciente1`
     FOREIGN KEY (`paciente_id`)
     REFERENCES `aapc`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_acomodacao_paciente_acomodacao1`
+  CONSTRAINT `fk_leito_paciente_acomodacao1`
     FOREIGN KEY (`acomodacao_id`)
     REFERENCES `aapc`.`acomodacao` (`id`)
     ON DELETE NO ACTION
@@ -539,38 +539,6 @@ CREATE TABLE IF NOT EXISTS `aapc`.`usuario` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
-INSERT INTO uf (nome, sigla)
-VALUES
-('Acre', 'AC'),
-('Alagoas', 'AL'),
-('Amazonas', 'AM'),
-('Amapá', 'AP'),
-('Bahia', 'BA'),
-('Ceará', 'CE'),
-('Distrito Federal', 'DF'),
-('Espírito Santo', 'ES'),
-('Goiás', 'GO'),
-('Maranhão', 'MA'),
-('Minas Gerais', 'MG'),
-('Mato Grosso do Sul', 'MS'),
-('Mato Grosso', 'MT'),
-('Pará', 'PA'),
-('Paraíba', 'PB'),
-('Pernambuco', 'PE'),
-('Piauí', 'PI'),
-('Paraná', 'PR'),
-('Rio de Janeiro', 'RJ'),
-('Rio Grande do Norte', 'RN'),
-('Rondônia', 'RO'),
-('Roraima', 'RR'),
-('Rio Grande do Sul', 'RS'),
-('Santa Catarina', 'SC'),
-('Sergipe', 'SE'),
-('São Paulo', 'SP'),
-('Tocantins', 'TO'),
-('Exterior', 'EX');
-
 ALTER TABLE pessoa
     CHANGE COLUMN profissional profissional
     TINYINT(3) NOT NULL DEFAULT '0' AFTER colaborador;
@@ -595,6 +563,36 @@ ADD COLUMN `quantidade` DECIMAL(12,4) NOT NULL DEFAULT '0.0000';
 
 INSERT INTO `usuario` (`id`, `nome`, `login`, `senha`, `visualiza_acomodacao`, `visualiza_localidade`, `visualiza_pessoa`, `visualiza_paciente`, `visualiza_refeicao`, `visualiza_doacoes`, `visualiza_financeiro`, `visualiza_classe_terapeutica`, `visualiza_enfermidade`, `visualiza_estoque`, `visualiza_medicamentos`, `visualiza_usuarios`, `visualiza_relatorios`) VALUES
 (1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+CREATE TABLE `leito` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`descricao` VARCHAR(45) NOT NULL COLLATE 'utf8mb3_general_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb3_general_ci'
+ENGINE=InnoDB
+;
+
+ALTER TABLE leito
+ADD COLUMN acomodacao_id INT(10) NOT NULL,
+ADD CONSTRAINT fk_acomodacao_leito
+  FOREIGN KEY (acomodacao_id)
+  REFERENCES acomodacao(id);
+
+ALTER TABLE `acomodacao`
+	DROP COLUMN `leitos`,
+	DROP COLUMN `leitos_livres`;
+
+ALTER TABLE `leito_paciente`
+	DROP FOREIGN KEY `fk_leito_paciente_acomodacao1`;
+ALTER TABLE `leito_paciente`
+	CHANGE COLUMN `acomodacao_id` `leito_id` INT(10) NOT NULL AFTER `paciente_id`,
+	DROP INDEX `fk_leito_paciente_acomodacao1_idx`,
+	ADD INDEX `fk_leito_paciente_acomodacao1_idx` (`leito_id`) USING BTREE,
+	ADD CONSTRAINT `FK_leito_paciente_aapc.leito` FOREIGN KEY (`leito_id`) REFERENCES `leito` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE `leito`
+	ADD COLUMN ocupado TINYINT(3) NOT NULL DEFAULT '0' AFTER `acomodacao_id`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -278,36 +278,42 @@
         <th>Entrada</th>
         <th>Saída</th>
         <th>Acomodação</th>
+        <th>Leito</th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      @foreach ($listaAcomodacaoPaciente as $acomodacaoPaciente)
+      @foreach ($listaLeitoPaciente as $leitoPaciente)
       <tr>
         <td>
-          {{ $acomodacaoPaciente->data_entrada }}
+          {{ $leitoPaciente->data_entrada }}
         </td>
         <td>
-          {{ $acomodacaoPaciente->data_saida }}
+          {{ $leitoPaciente->data_saida }}
         </td>
         <td>
-          {{ $acomodacaoPaciente->acomodacao }}
+          {{ $leitoPaciente->acomodacao }}
+        </td>
+        <td>
+          {{ $leitoPaciente->leito }}
         </td>
         <td width="1%">
-          <a data-toggle="modal" data-target="#modalAcomodacaoPaciente"
-            onclick="abreModalEditAcomodacaoPaciente(
-            '{{ $acomodacaoPaciente->id }}',
-            '{{ $acomodacaoPaciente->data_entrada }}',
-            '{{ $acomodacaoPaciente->data_saida }}',
-            '{{ $acomodacaoPaciente->acomodacao_id }}')
-            ">
+        <a data-toggle="modal" data-target="#modalAcomodacaoPaciente"
+          @if($leitoPaciente->data_saida != null) class="disabled-link" @endif
+          onclick="abreModalEditAcomodacaoPaciente(
+              '{{ $leitoPaciente->id }}',
+              '{{ $leitoPaciente->data_entrada }}',
+              '{{ $leitoPaciente->data_saida }}',
+              '{{ $leitoPaciente->acomodacao_id }}',
+              '{{ $leitoPaciente->leito_id }}'
+          )">
           <i class="fa fa-lg fa-edit"></i>
-          </a>
+        </a>
         </td>
         <td width="1%">
           <a
-            onclick="deletarAcomodacaoPaciente('{{ $acomodacaoPaciente->id }}', '{{ $obj->id }}')">
+            onclick="deletarAcomodacaoPaciente('{{ $leitoPaciente->id }}', '{{ $obj->id }}')">
           <i class="fa fa-lg fa-trash"></i>
           </a>
         </td>
@@ -511,4 +517,10 @@
   $(".cep").mask("00.000-000");
   $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
 </script>
+<style>
+    .disabled-link {
+        pointer-events: none; /* Desabilita interações do mouse e do teclado */
+        opacity: 0.6; /* Adiciona uma opacidade para indicar que está desativado */
+    }
+</style>
 @endsection
