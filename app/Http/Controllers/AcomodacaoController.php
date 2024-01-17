@@ -49,7 +49,7 @@ class AcomodacaoController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = Acomodacao::find($id);
-        $listaLeitosAcomodacao = Leito::all();
+        $listaLeitosAcomodacao = Leito::where('acomodacao_id', $id)->get();
 
         return view(
           'acomodacao.edit',

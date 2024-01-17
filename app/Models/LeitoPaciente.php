@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class AcomodacaoPaciente extends BaseModel
+class LeitoPaciente extends BaseModel
 {
-    protected $table = 'acomodacao_paciente';
+    protected $table = 'leito_paciente';
 }

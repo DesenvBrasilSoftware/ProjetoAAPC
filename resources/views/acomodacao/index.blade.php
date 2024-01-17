@@ -8,8 +8,6 @@
       <th>Alterar</th>
       <th>Excluir</th>
       <th>Descrição</th>
-      <th>Leitos</th>
-      <th>Leitos livres</th>
       <th>Refrigerado</th>
     </tr>
   </thead>
@@ -27,13 +25,6 @@
       </td>
       <td>
         {{$obj->descricao}}
-      </td>
-
-      <td>
-        {{$obj->leitos}}
-      </td>
-      <td>
-        {{$obj->leitos_livres}}
       </td>
       <td>
         @if($obj->refrigerado == 0)
