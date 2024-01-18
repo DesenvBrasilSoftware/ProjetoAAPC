@@ -137,6 +137,7 @@ class SaidaDoacaoController extends Controller
           $item = Item::find($request['item_id']);
           if ($item->kit == 1) {
             $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+            foreach($listaKitItem as $kitItem) {
               $itemComposicao = Item::find($kitItem->item_composicao_id);
               $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
               $itemComposicao->save();
