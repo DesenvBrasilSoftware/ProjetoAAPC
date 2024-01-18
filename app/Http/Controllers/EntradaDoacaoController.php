@@ -7,6 +7,7 @@ use App\Models\EntradaDoacao;
 use App\Models\EntradaDoacaoItem;
 use App\Models\Pessoa;
 use App\Models\Item;
+use App\Models\KitItem;
 use Illuminate\Support\Facades\DB;
 
 class EntradaDoacaoController extends Controller
@@ -143,8 +144,9 @@ class EntradaDoacaoController extends Controller
               $itemComposicao->quantidade += $kitItem->quantidade * $diferenca;
               $itemComposicao->save();
             }
+          } else {
+            $item->quantidade += $diferenca;
           }
-          $item->quantidade += $diferenca;
         } else {
           $item = Item::find($request['item_id']);
           if ($item->kit == 1) {
@@ -154,8 +156,9 @@ class EntradaDoacaoController extends Controller
               $itemComposicao->quantidade += $kitItem->quantidade * $novaQuantidade;
               $itemComposicao->save();
             }
+          } else {
+            $item->quantidade += $request['quantidade'];
           }
-          $item->quantidade += $request['quantidade'];
         }
         $item->save();
 

@@ -41,9 +41,11 @@ class ItemController extends Controller
 
         // Preenche os campos do objeto com os dados do formulário
         $obj->descricao = $request['descricao'];
-        $obj->quantidade = $request['quantidade'];
-        $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->kit = isset($request['kit']) ? 1 : 0;
+        if($obj->kit != 1) {
+          $obj->quantidade = $request['quantidade'];
+        }
+        $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->medicamento_id = $request['medicamento_id'];
 
         $msg = 'Registro salvo com sucesso.';

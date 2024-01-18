@@ -142,9 +142,10 @@ class SaidaDoacaoController extends Controller
               $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
               $itemComposicao->save();
             }
+          } else {
+            $item->quantidade -= $diferenca;
+            $item->save();
           }
-          $item->quantidade -= $diferenca;
-          $item->save();
         } else {
           $item = Item::find($request['item_id']);
           if ($item->kit == 1) {
@@ -154,9 +155,10 @@ class SaidaDoacaoController extends Controller
               $itemComposicao->quantidade -= $kitItem->quantidade * $novaQuantidade;
               $itemComposicao->save();
             }
+          } else{
+            $item->quantidade -= $novaQuantidade;
+            $item->save();
           }
-          $item->quantidade -= $novaQuantidade;
-          $item->save();
         }
 
         return redirect('/saidaDoacao.edit.' . $request->saida_doacao_id)->with('mensagem', 'Item adicionado com sucesso');

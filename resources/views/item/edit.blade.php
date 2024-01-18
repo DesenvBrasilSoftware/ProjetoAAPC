@@ -7,7 +7,7 @@
     <label for="descricao">Descrição:</label>
     <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="120" value="{{ $obj->descricao }}" autofocus />
   </div>
-  <div class="form-group">
+  <div class="form-group" id="quantidade_id">
     <label for="quantidade">Quantidade:</label>
     <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ $obj->quantidade }}"
       placeholder="Informe a quantidade..." step="any">
@@ -98,21 +98,26 @@
 @include('item/modal_kit')
 <script>
   $(document).ready(function(){
-      // Ocultar a tabela inicialmente
       if (!$('#kit').prop('checked')) {
           $('#dataTableContainer').hide();
       }
-      // Adicionar um ouvinte de eventos para o checkbox
       $('#kit').change(function(){
-          // Verificar se o checkbox está marcado
           if($(this).prop('checked')){
-              // Mostrar a tabela se o checkbox estiver marcado
               $('#dataTableContainer').show();
           } else {
-              // Ocultar a tabela se o checkbox não estiver marcado
               $('#dataTableContainer').hide();
           }
       });
+        if ($('#kit').prop('checked')) {
+          $('#quantidade_id').hide();
+        }
+        $('#kit').change(function(){
+            if($(this).prop('checked')){
+                $('#quantidade_id').hide();
+            } else {
+                $('#quantidade_id').show();
+            }
+        });
   });
 </script>
 @endsection

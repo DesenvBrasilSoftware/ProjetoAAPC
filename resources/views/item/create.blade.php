@@ -6,7 +6,7 @@
       <label for="descricao">Descrição:</label>
       <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="60" value="{{ old('descricao') }}" autofocus placeholder="Digite a descrição do item" />
     </div>
-    <div class="form-group">
+    <div class="form-group" id="quantidade_id">
       <label for="quantidade">Quantidade:</label>
       <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}"
           placeholder="Informe a quantidade..." step="any">
@@ -39,4 +39,15 @@
       <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
   </form>
+  <script>
+    $(document).ready(function(){
+        $('#kit').change(function(){
+            if($(this).prop('checked')){
+                $('#quantidade_id').hide();
+            } else {
+                $('#quantidade_id').show();
+            }
+        });
+    });
+</script>
 @endsection
