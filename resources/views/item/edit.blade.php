@@ -50,6 +50,7 @@
         <tr>
           <th>Item</th>
           <th>Quantidade</th>
+          <th >Quantidade</th>
           <th></th>
           <th></th>
         </tr>
@@ -60,8 +61,8 @@
           <td>
             {{ $kitItem->item }}
           </td>
-          <td>
-            {{ $kitItem->quantidade }}
+          <td style="text-align: right;">
+            {{ number_format($kitItem->quantidade, 4, ',', '.') }}
           </td>
           <td width="1%">
             <a data-toggle="modal" data-target="#modalKitItem"
