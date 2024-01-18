@@ -67,6 +67,7 @@
             <a data-toggle="modal" data-target="#modalKitItem"
               onclick="abreModalEditKitItem(
               '{{ $kitItem->id }}',
+              '{{ $kitItem->item_composicao_id }}',
               '{{ $kitItem->quantidade }}'
               )">
             <i class="fa fa-lg fa-edit"></i>

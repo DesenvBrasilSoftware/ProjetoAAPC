@@ -11,7 +11,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="/item.adicionarItemKit">
+            <form method="POST" action="/item.adicionarKitItem">
             @csrf
             <div class="modal-body">
                 <input id="kit_item_id" type="hidden" name="kit_item_id">
@@ -35,15 +35,15 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
             </form>
         </div>
         </div>
     </div>
-    <form id="deletarEnfermidadeForm" method="POST" action="/paciente.deletarEnfermidade">
+    <form id="deletarEnfermidadeForm" method="POST" action="/item.deletarKitItem">
         @csrf
-        <input type="hidden" name="delete_item_kit_id" id="delete_item_kit_id">
+        <input type="hidden" name="delete_kit_item_id" id="delete_kit_item_id">
         <input type="hidden" name="delete_item_id" id="delete_item_id">
     </form>
 </div>
@@ -53,22 +53,22 @@
     $('#item_composicao_id').trigger('focus');
   });
 
-  function abreModalEditKitItem(id, dataEntrada, item_kit_id) {
+  function abreModalEditKitItem(id, item_composicao_id, quantidade_item_composicao) {
     $('#kit_item_id').val(id);
-    $('#quantidade_item_composicao').val(dataEntrada);
-    $('#item_composicao_id').val(item_kit_id);
+    $('#item_composicao_id').val(item_composicao_id);
+    $('#quantidade_item_composicao').val(quantidade_item_composicao);
   }
 
   function abreModalKitItem() {
     $('#kit_item_id').val('');
-    $('#quantidade_item_composicao').val('');
     $('#item_composicao_id').val('');
+    $('#quantidade_item_composicao').val('');
   }
 
   function deletarKitItem(kit_item_id, item_kit_id) {
       if (confirm('Tem certeza de que deseja excluir este item?')) {
-          $('#delete_item_kit_id').val(kit_item_id);
-          $("#deletarEnfermidadeForm #delete_item_id").val(item_kit_id);
+          $('#delete_kit_item_id').val(kit_item_id);
+          $("#delete_item_id").val(item_kit_id);
           $('#deletarEnfermidadeForm').submit();
       } else {
           // Não faz nada se o usuário clicar em "Cancelar"

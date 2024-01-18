@@ -97,7 +97,7 @@ class ItemController extends Controller
         return redirect('/item.index')->with('success', $msg);
     }
 
-    public function adicionarItemKit(Request $request)
+    public function adicionarKitItem(Request $request)
     {
       $kitItem = new KitItem();
       if ($request['kit_item_id']) {
@@ -111,5 +111,18 @@ class ItemController extends Controller
 
       return redirect('/item.edit.' . $request->item_kit_id)->with('mensagem',
       'Item adicionado ao kit com sucesso');
+    }
+
+    public function deletarKitItem(Request $request)
+    {
+        $obj = KitItem::find($request->delete_kit_item_id);
+        $msg = "Item do kit excluído.";
+        try {
+            $obj->delete();
+          } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir o item do kit.';
+            return redirect('/item.edit.' . $request->delete_item_id)->with('error', $msg);
+        }
+        return redirect('/item.edit.' . $request->delete_item_id)->with('mensagem', $msg);
     }
 }
