@@ -49,8 +49,7 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Quantidade</th>
-          <th >Quantidade</th>
+          <th style="text-align: right;">Quantidade</th>
           <th></th>
           <th></th>
         </tr>

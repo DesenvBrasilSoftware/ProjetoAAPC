@@ -10,7 +10,7 @@
       <th>Descrição</th>
       <th>Grupo de item</th>
       <th>Medicamento</th>
-      <th style="">Quantidade</th>
+      <th style="text-align: right;">Quantidade</th>
       <th>Kit</th>
     </tr>
   </thead>
