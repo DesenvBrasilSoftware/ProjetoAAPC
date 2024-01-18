@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/item.store', [ItemController::class, 'store']);
     Route::get('/item.delete.{i}', [ItemController::class, 'delete']);
     Route::get('/item.edit.{i}', [ItemController::class, 'edit']);
+    Route::post('/item.adicionarItemKit', [ItemController::class, 'adicionarItemKit']);
+    Route::post('/item.deletarItemKit', [ItemController::class, 'deletarItemKit']);
 
     // Grupo Item
     Route::get('/grupoItem.index', [GrupoItemController::class, 'index']);
