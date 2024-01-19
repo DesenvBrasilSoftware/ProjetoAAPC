@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
   </head>
   <body>
@@ -288,48 +289,43 @@
     {{--
     <script src="/js/dashboard2.js"></script>
     --}}
-    <script src="/js/lib/data-table/jquery.dataTables.min.js"></script>
-    <script src="/css/lib/data-table/dataTables.bootstrap.min.css"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script>
-      $(document).ready(function () {
-        var urlAtual = window.location.href;
-
-        if (urlAtual.includes('index')) {
-          $('#dataTable').DataTable({
-          "language": {
-            "sEmptyTable": "Nenhum registro encontrado",
-            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "_MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "Pesquisar",
-            "oPaginate": {
-              "sNext": "Próximo",
-              "sPrevious": "Anterior",
-              "sFirst": "Primeiro",
-              "sLast": "Último"
-            },
-            "oAria": {
-              "sSortAscending": ": Ordenar colunas de forma ascendente",
-              "sSortDescending": ": Ordenar colunas de forma descendente"
-            },
-            "select": {
-              "rows": {
-                "_": "Selecionado %d linhas",
-                "0": "Nenhuma linha selecionada",
-                "1": "Selecionado 1 linha"
-              }
-            }
+      const customLanguage = {
+        processing: "Processando...",
+        search: "Pesquisar:",
+        lengthMenu: "Mostrar _MENU_ registros",
+        info: "Exibindo registros de _START_ a _END_ de um total de _TOTAL_ registros",
+        infoEmpty: "Exibindo registros de 0 a 0 de um total de 0 registros",
+        infoFiltered: "(filtrado de um total de _MAX_ registros)",
+        infoPostFix: "",
+        loadingRecords: "Carregando...",
+        zeroRecords: "Nenhum registro encontrado",
+        emptyTable: "Nenhum dado disponível na tabela",
+        paginate: {
+          first: "Primeiro",
+          previous: "Anterior",
+          next: "Próximo",
+          last: "Último",
+        },
+        aria: {
+          sortAscending: ": ativar para classificar a coluna em ordem crescente",
+          sortDescending: ": ativar para classificar a coluna em ordem decrescente",
+        },
+        decimal: ",",
+        thousands: ".",
+      };
+    $(document).ready(function() {
+      $('#dataTable').DataTable({
+        "order": [0, 'desc'],
+        "columnDefs": [{
+            "orderable": false,
+            "targets": [-2, -1]
           }
-          });
-        }
-
+        ],
+        "language": customLanguage // Aplicar as configurações de linguagem personalizadas
+      });
     });
-  </script>
+    </script>
   </body>
 </html>
