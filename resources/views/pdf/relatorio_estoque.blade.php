@@ -30,18 +30,6 @@
     @if($grupo_item_id)
     <h3>Grupo de Item ID: {{ $grupo_item_id }}</h3>
     @endif
-    @if($data_inicial_fabricacao)
-    <h3>Data Inicial de Fabricação: {{ date('d/m/Y', strtotime($data_inicial_fabricacao)) }}</h3>
-    @endif
-    @if($data_final_fabricacao)
-    <h3>Data Final de Fabricação: {{ date('d/m/Y', strtotime($data_final_fabricacao)) }}</h3>
-    @endif
-    @if($data_inicial_validade)
-    <h3>Data Inicial de Validade: {{ date('d/m/Y', strtotime($data_inicial_validade)) }}</h3>
-    @endif
-    @if($data_final_validade)
-    <h3>Data Final de Validade: {{ date('d/m/Y', strtotime($data_final_validade)) }}</h3>
-    @endif
     @if($medicamento_id)
     <h3>Medicamento ID: {{ $medicamento_id }}</h3>
     @endif
@@ -66,7 +54,6 @@
             <tr>
               <th>Grupo de Item</th>
               <th>Data de Fabricação</th>
-              <th>Data de Validade</th>
               <th>Quantidade</th>
               <th>Medicamento</th>
               <th>Kit</th>
@@ -76,8 +63,6 @@
             @foreach($lista as $item)
             <tr>
               <td>{{ $item->descricao_grupo_item }}</td>
-              <td>{{ date('d/m/Y', strtotime($item->fabricacao)) }}</td>
-              <td>{{ date('d/m/Y', strtotime($item->validade)) }}</td>
               <td>{{ number_format($item->quantidade, 4, ',', '.') }}</td>
               <td>{{ $item->nome_medicamento }}</td>
               <td>{{ $item->kit ? 'Sim' : 'Não' }}</td>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SaidaDoacao;
 use App\Models\SaidaDoacaoItem;
 use App\Models\Pessoa;
+use App\Models\KitItem;
 use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 
@@ -133,14 +134,31 @@ class SaidaDoacaoController extends Controller
         if ($request['saida_doacao_item_id']) {
           // Edição da quantidade
           $diferenca = $novaQuantidade - $antigaQuantidade;
-
           $item = Item::find($request['item_id']);
-          $item->quantidade -= $diferenca;
-          $item->save();
+          if ($item->kit == 1) {
+            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+            foreach($listaKitItem as $kitItem) {
+              $itemComposicao = Item::find($kitItem->item_composicao_id);
+              $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
+              $itemComposicao->save();
+            }
+          } else {
+            $item->quantidade -= $diferenca;
+            $item->save();
+          }
         } else {
           $item = Item::find($request['item_id']);
-          $item->quantidade -= $request['quantidade'];
-          $item->save();
+          if ($item->kit == 1) {
+            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+            foreach($listaKitItem as $kitItem) {
+              $itemComposicao = Item::find($kitItem->item_composicao_id);
+              $itemComposicao->quantidade -= $kitItem->quantidade * $novaQuantidade;
+              $itemComposicao->save();
+            }
+          } else{
+            $item->quantidade -= $novaQuantidade;
+            $item->save();
+          }
         }
 
         return redirect('/saidaDoacao.edit.' . $request->saida_doacao_id)->with('mensagem', 'Item adicionado com sucesso');

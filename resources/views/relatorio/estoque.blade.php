@@ -2,14 +2,6 @@
 <form class="needs-validation" novalidate id="form" action="/relatorio.relatorioEstoque" method="post">
   @csrf
   <div class="form-group">
-    <label for="data_inicial_validade">Filtro data inicial validade:</label>
-    <input type="date" class="form-control" id="data_inicial_validade" name="data_inicial_validade" />
-  </div>
-  <div class="form-group">
-    <label for="data_final_validade">Filtro data final validade:</label>
-    <input type="date" class="form-control" id="data_final_validade" name="data_final_validade" />
-  </div>
-  <div class="form-group">
     <label for="grupo_item_id">Grupo do item:</label>
     <select name="grupo_item_id" class="form-control" id="grupo_item_id" maxlength="45">
       <option value="" label="Selecione o grupo do item..." selected></option>

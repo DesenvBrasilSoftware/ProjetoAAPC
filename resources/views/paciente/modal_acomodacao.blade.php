@@ -39,9 +39,15 @@
                 <select required name="leito_id" class="form-control" id="leito_id" maxlength="45">
                   <option value="" label="Selecione o leito..."></option>
                   @foreach ($listaLeito as $leito)
-                  <option value="{{ $leito->id }}" label="{{ $leito->descricao }}" data-acomodacao-id="{{ $leito->acomodacao_id }}">
-                    {{ $leito->descricao }}
-                  </option>
+                    @if ($leito->ocupado != '1')
+                    <option value="{{ $leito->id }}" label="{{ $leito->descricao }}" data-acomodacao-id="{{ $leito->acomodacao_id }}">
+                      {{ $leito->descricao }}
+                    </option>
+                    @elseif($leito->ocupado == '1' && $leito->paciente_id == $obj->id)
+                    <option value="{{ $leito->id }}" label="{{ $leito->descricao }}" data-acomodacao-id="{{ $leito->acomodacao_id }}">
+                      {{ $leito->descricao }}
+                    </option>
+                    @endif
                   @endforeach
                 </select>
               </div>

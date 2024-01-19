@@ -9,9 +9,8 @@
       <th>Excluir</th>
       <th>Descrição</th>
       <th>Grupo de item</th>
-      <th>Validade</th>
       <th>Medicamento</th>
-      <th style="">Quantidade</th>
+      <th style="text-align: right;">Quantidade</th>
       <th>Kit</th>
     </tr>
   </thead>
@@ -30,11 +29,6 @@
       </td>
       <td>
         {{ $obj->grupo_item }}
-      </td>
-      <td>
-        @if ($obj->validade)
-        {{ date('d/m/Y', strtotime($obj->validade)) }}
-        @endif
       </td>
       <td>
         {{ $obj->medicamento }}

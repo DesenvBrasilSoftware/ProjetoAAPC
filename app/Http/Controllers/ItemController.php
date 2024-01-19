@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\GrupoItem;
+use App\Models\KitItem;
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
 
@@ -40,11 +41,11 @@ class ItemController extends Controller
 
         // Preenche os campos do objeto com os dados do formulário
         $obj->descricao = $request['descricao'];
-        $obj->quantidade = $request['quantidade'];
-        $obj->grupo_item_id = $request['grupo_item_id'];
-        $obj->fabricacao = $request['fabricacao'];
-        $obj->validade = $request['validade'];
         $obj->kit = isset($request['kit']) ? 1 : 0;
+        if($obj->kit != 1) {
+          $obj->quantidade = $request['quantidade'];
+        }
+        $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->medicamento_id = $request['medicamento_id'];
 
         $msg = 'Registro salvo com sucesso.';
@@ -73,9 +74,16 @@ class ItemController extends Controller
     {
         $obj = Item::find($id);
         $listaGrupoItem = GrupoItem::all();
+        $listaItem = Item::where('kit', '!=', 1)
+        ->whereNotIn('id', [$id])
+        ->get();
         $listaMedicamento = Medicamento::all();
+        $listaKitItem = KitItem::join('item', 'kit_item.item_composicao_id', '=', 'item.id')
+        ->where('kit_item.item_kit_id', '=', $id)
+        ->select('kit_item.*', 'item.descricao as item')
+        ->get();
 
-        return view('item.edit', compact('listaGrupoItem', 'listaMedicamento', 'msg', 'obj'));
+        return view('item.edit', compact('listaGrupoItem', 'listaItem', 'listaKitItem', 'listaMedicamento', 'msg', 'obj'));
     }
 
     public function delete($id)
@@ -89,5 +97,34 @@ class ItemController extends Controller
             return redirect('/item.index')->with('error', $msg);
         }
         return redirect('/item.index')->with('success', $msg);
+    }
+
+    public function adicionarKitItem(Request $request)
+    {
+      $kitItem = new KitItem();
+      if ($request['kit_item_id']) {
+        $kitItem = KitItem::find($request['kit_item_id']);
+      }
+      $kitItem->item_kit_id = $request['item_kit_id'];
+      $kitItem->item_composicao_id = $request['item_composicao_id'];
+      $kitItem->quantidade = $request['quantidade_item_composicao'];
+
+      $kitItem->save();
+
+      return redirect('/item.edit.' . $request->item_kit_id)->with('mensagem',
+      'Item adicionado ao kit com sucesso');
+    }
+
+    public function deletarKitItem(Request $request)
+    {
+        $obj = KitItem::find($request->delete_kit_item_id);
+        $msg = "Item do kit excluído.";
+        try {
+            $obj->delete();
+          } catch (\Exception $e) {
+            $msg = 'Não foi possível excluir o item do kit.';
+            return redirect('/item.edit.' . $request->delete_item_id)->with('error', $msg);
+        }
+        return redirect('/item.edit.' . $request->delete_item_id)->with('mensagem', $msg);
     }
 }

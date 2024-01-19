@@ -478,23 +478,23 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `aapc`.`leito_paciente`
+-- Table `aapc`.`acomodacao_paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aapc`.`leito_paciente` (
+CREATE TABLE IF NOT EXISTS `aapc`.`acomodacao_paciente` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data_entrada` DATE NOT NULL,
   `data_saida` DATE NULL,
   `paciente_id` INT NOT NULL,
   `acomodacao_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_leito_paciente_paciente1_idx` (`paciente_id` ASC),
-  INDEX `fk_leito_paciente_acomodacao1_idx` (`acomodacao_id` ASC),
-  CONSTRAINT `fk_leito_paciente_paciente1`
+  INDEX `fk_acomodacao_paciente_paciente1_idx` (`paciente_id` ASC),
+  INDEX `fk_acomodacao_paciente_acomodacao1_idx` (`acomodacao_id` ASC),
+  CONSTRAINT `fk_acomodacao_paciente_paciente1`
     FOREIGN KEY (`paciente_id`)
     REFERENCES `aapc`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_leito_paciente_acomodacao1`
+  CONSTRAINT `fk_acomodacao_paciente_acomodacao1`
     FOREIGN KEY (`acomodacao_id`)
     REFERENCES `aapc`.`acomodacao` (`id`)
     ON DELETE NO ACTION
@@ -573,6 +573,35 @@ COLLATE='utf8mb3_general_ci'
 ENGINE=InnoDB
 ;
 
+-- Renomear a tabela
+RENAME TABLE `aapc`.`acomodacao_paciente` TO `aapc`.`leito_paciente`;
+
+-- Renomear os índices
+ALTER TABLE `aapc`.`leito_paciente`
+  RENAME INDEX `fk_acomodacao_paciente_paciente1_idx` TO `fk_leito_paciente_paciente1_idx`,
+  RENAME INDEX `fk_acomodacao_paciente_acomodacao1_idx` TO `fk_leito_paciente_acomodacao1_idx`;
+
+-- Criar novas chaves estrangeiras
+ALTER TABLE `aapc`.`leito_paciente`
+  ADD CONSTRAINT `fk_leito_paciente_paciente1`
+    FOREIGN KEY (`paciente_id`)
+    REFERENCES `aapc`.`paciente` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+ALTER TABLE `aapc`.`leito_paciente`
+  ADD CONSTRAINT `fk_leito_paciente_acomodacao1`
+    FOREIGN KEY (`acomodacao_id`)
+    REFERENCES `aapc`.`acomodacao` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+-- Remover chaves estrangeiras antigas
+ALTER TABLE `aapc`.`leito_paciente`
+  DROP FOREIGN KEY `fk_acomodacao_paciente_paciente1`,
+  DROP FOREIGN KEY `fk_acomodacao_paciente_acomodacao1`;
+
+
 ALTER TABLE leito
 ADD COLUMN acomodacao_id INT(10) NOT NULL,
 ADD CONSTRAINT fk_acomodacao_leito
@@ -593,6 +622,10 @@ ALTER TABLE `leito_paciente`
 
 ALTER TABLE `leito`
 	ADD COLUMN ocupado TINYINT(3) NOT NULL DEFAULT '0' AFTER `acomodacao_id`;
+
+ALTER TABLE `item`
+	DROP COLUMN `fabricacao`,
+	DROP COLUMN `validade`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

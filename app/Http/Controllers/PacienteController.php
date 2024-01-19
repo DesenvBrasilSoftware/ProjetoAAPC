@@ -112,7 +112,15 @@ class PacienteController extends Controller
         $obj = Paciente::find($id);
         $listaCidade = Cidade::all();
         $listaAcomodacao = Acomodacao::all();
-        $listaLeito = Leito::where('ocupado', '!=', 1)->get();
+        $listaLeito = DB::select("
+        SELECT
+            l.*,
+            lp.paciente_id
+        FROM
+            leito l
+        LEFT JOIN
+            leito_paciente lp ON lp.leito_id = l.id;
+        ");
         $listaEnfermidade = Enfermidade::all();
         $listaLeitoPaciente = DB::select("
         SELECT
