@@ -8,7 +8,7 @@
     <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
       value="{{ $obj->descricao }}" autofocus placeholder="Informe a descrição">
   </div>
-  <table id="dataTable" class="display">
+  <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
         <th>Leito</th>

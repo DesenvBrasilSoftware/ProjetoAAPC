@@ -2,7 +2,7 @@
 <div class="form-group">
 <a type="button" href="/item.create" class="btn btn-primary">Incluir</a>
 </div>
-<table id="dataTable" class="display">
+<table id="dataTable" class="display table-responsive">
   <thead>
     <tr>
       <th>Alterar</th>

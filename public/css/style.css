@@ -702,6 +702,7 @@ a.dt-button.active:not(.disabled) {
 .card-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #343957;
   color: #bdbdc7;
   padding: 8px;
@@ -712,8 +713,10 @@ a.dt-button.active:not(.disabled) {
   font-size: 1.75em;
   margin-right: 12px;
 }
-.card-title h3 {
-  /* margin: 0px; */
+.card-title #card-title-title {
+  margin: 0px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
 }
 
 /*    Header

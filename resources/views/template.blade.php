@@ -221,8 +221,13 @@
             </div>
             @endif
             <div class="card-title">
+              <div style="display: flex; align-items: center">
                 <i class="bx" id="card-title-icon"></i>
-                <h3 id="card-title-title"></h3>
+                <h4 id="card-title-title"></h4>
+              </div>
+              <div>
+
+              </div>
             </div>
             @yield('conteudo')
             <script>

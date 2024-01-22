@@ -272,7 +272,7 @@
     <button class="btn btn-sm btn-success mt-3" type="button" id="adicionar-contato">Adicionar
     Contato</button>
   </div>
-  <table id="dataTable" class="display">
+  <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
         <th>Entrada</th>
@@ -327,7 +327,7 @@
     Adicionar acomodação
     </button>
   </div>
-  <table id="dataTable" class="display">
+  <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
         <th>Data Cadastro</th>
@@ -370,7 +370,7 @@
     Cadastrar enfermidade
     </button>
   </div>
-  <table id="dataTable" class="display">
+  <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
         <th>Data Consulta</th>
