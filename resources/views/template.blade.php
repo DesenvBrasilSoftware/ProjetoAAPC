@@ -201,6 +201,9 @@
       </div>
     </div>
     <div class="content-wrap">
+    <div id="loader" class="loader">
+    <div class="spinner"></div>
+    </div>
       <div class="main">
         <div class="container-fluid">
           <div class="card">
@@ -332,5 +335,18 @@
       });
     });
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var loader = document.querySelector(".loader");
+        setTimeout(function() {
+          if (loader) {
+              loader.style.opacity = "0";
+              setTimeout(function() {
+                  loader.style.display = "none";
+              }, 500);
+          }
+        }, 500);
+      });
+  </script>
   </body>
 </html>
