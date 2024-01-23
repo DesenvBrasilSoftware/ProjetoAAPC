@@ -57,6 +57,7 @@ class PacienteController extends Controller
         $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];
         $obj->medicamento = $request['medicamentos'];
         $obj->clinica = $request['clinica'];
+        $obj->telefone = $request['telefone'];
 
         $cpf = preg_replace('/\D/', '', $request['cpf']);
         $obj->cpf = '' ? null : $cpf;
@@ -171,19 +172,17 @@ class PacienteController extends Controller
                 paciente_id = :paciente_id
         ", ['paciente_id' => $id]);
 
-
-        $listaPessoa = Pessoa::all(); // Isso trará todas as pessoas
-        $listaProfissional = Pessoa::where('profissional', 1)->get(); // Isso trará apenas as pessoas onde o campo "profissional" é igual a 1
-
+        $listaPessoaContato = Pessoa::where('contato', 1)->orderBy('nome')->get();
+        $listaPessoaAcompanhante = Pessoa::where('acompanhante', 1)->orderBy('nome')->get();
+        $listaProfissional = Pessoa::where('profissional', 1)->orderBy('nome')->get();
 
         $listaAcompanhante = Acompanhante::where('paciente_id', $id)
             ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante')
             ->get();
-
         $listaContato = Contato::where('paciente_id', $id)
             ->join('pessoa', 'contato.pessoa_id', '=', 'pessoa.id')
-            ->select('contato.*', 'pessoa.nome as nome_contato')
+            ->select('contato.*', 'pessoa.nome as nome_contato', 'pessoa.telefone as telefone_contato')
             ->get();
 
         return view(
@@ -198,7 +197,8 @@ class PacienteController extends Controller
                 'listaEnfermidade',
                 'msg',
                 'obj',
-                'listaPessoa',
+                'listaPessoaContato',
+                'listaPessoaAcompanhante',
                 'listaProfissional',
                 'listaAcompanhante',
                 'listaContato',

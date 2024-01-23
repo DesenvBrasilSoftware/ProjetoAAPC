@@ -133,6 +133,11 @@
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <label for="telefone" id="labelTelefone">Telefone:</label>
+    <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+    id="telefone" maxlength="50" value="{{ $obj->telefone }}" />
+  </div>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
@@ -281,7 +286,7 @@
     <div id="paciente-container">
       <select name="acompanhante" class="form-control" id="acompanhante">
         <option value="" label="Selecione um acompanhante..." selected></option>
-        @foreach ($listaPessoa as $pessoa)
+        @foreach ($listaPessoaAcompanhante as $pessoa)
         <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
         @endforeach
       </select>
@@ -299,6 +304,7 @@
       <thead>
         <tr>
           <th>Contato</th>
+          <th>Telefone</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -306,6 +312,7 @@
         @foreach ($listaContato as $contato)
         <tr>
           <td>{{ $contato->nome_contato }}</td>
+          <td>{{ $contato->telefone_contato }}</td>
           <td width="1%">
             <a href="/contato.delete.{{ $contato->id }}"><i
               class="fa fa-trash"></i></a>
@@ -318,7 +325,7 @@
     <div id="paciente-container">
       <select name="contato" class="form-control" id="contato">
         <option value="" label="Selecione um contato..." selected></option>
-        @foreach ($listaPessoa as $pessoa)
+        @foreach ($listaPessoaContato as $pessoa)
         <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
         @endforeach
       </select>
@@ -566,6 +573,7 @@
   $(".cpf").mask("000.000.000-00");
   $(".rg").mask("00.000.000-0");
   $(".cep").mask("00.000-000");
+  $('.telefone').mask('00 00000-0000');
   $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
 </script>
 <style>

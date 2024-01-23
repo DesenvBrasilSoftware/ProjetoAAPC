@@ -202,6 +202,11 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="telefone" id="labelTelefone">Telefone:</label>
+    <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+    id="telefone" maxlength="50" value="{{ old('telefone') }}" />
+  </div>
+  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
@@ -235,6 +240,7 @@
   $(".cpf").mask("000.000.000-00");
   $(".rg").mask("00.000.000-0");
   $(".cep").mask("00.000-000");
+  $('.telefone').mask('00 00000-0000');
   $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
 </script>
 @endsection

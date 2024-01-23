@@ -40,8 +40,13 @@
     <input required type="date" class="form-control" id="data_cadastro" name="data_cadastro"
         placeholder="Informe a data de cadastro" value="{{ $obj->data_cadastro }}">
   </div>
+  <div class="form-group">
+      <label for="telefone" id="labelTelefone">Telefone:</label>
+      <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+      id="telefone" maxlength="50" value="{{ $obj->telefone }}" />
+    </div>
   <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label for="colaborador">Colaborador:</label>
       <div class="checkbox-toggle">
@@ -50,7 +55,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label for="profissional">Profissional:</label>
       <div class="checkbox-toggle">
@@ -59,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label for="voluntario">Voluntário:</label>
       <div class="checkbox-toggle">
@@ -68,7 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label for="fornecedor">Fornecedor:</label>
       <div class="checkbox-toggle">
@@ -77,12 +82,30 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label for="clinica">Clínica:</label>
       <div class="checkbox-toggle">
         <input type="checkbox" name="clinica" id="clinica"
         data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->clinica ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="acompanhante">Acompanhante:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="acompanhante" id="acompanhante"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->acompanhante ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="contato">Contato:</label>
+      <div class="checkbox-toggle">
+        <input type="checkbox" name="contato" id="contato"
+        data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->contato ? 'checked' : '' }}>
       </div>
     </div>
   </div>
@@ -98,6 +121,7 @@
   $(".cnpj").mask("00.000.000/0000-00");
   $(".cpf").mask("000.000.000-00");
   $(".rg").mask("00.000.000-0");
+  $('.telefone').mask('00 00000-0000');
 </script>
 <script>
   $(document).ready(function () {
