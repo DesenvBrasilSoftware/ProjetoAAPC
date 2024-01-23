@@ -20,7 +20,7 @@
     <label for="data">Data:</label>
     <input type="date" class="form-control" id="data" name="data" placeholder="Informe a data da doação..." value="{{ $obj->data }}"/>
   </div>
-  <table id="dataTable" class="table-responsive table-stripped table-bordered">
+  <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
         <th>Item</th>

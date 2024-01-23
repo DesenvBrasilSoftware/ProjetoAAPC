@@ -31,12 +31,10 @@ class AcompanhanteController extends Controller
             $acompanhante->paciente_id = $req['paciente_id'];
             $acompanhante->pessoa_id = $req['acompanhante_id'];
         }
-    
+
         $acompanhante->grau = $req['grau'];
         $acompanhante->profissao = $req['profissaoAcom'];
-        $acompanhante->telefone = $req['telefone'];
         $acompanhante->moradia = ($req['moraJunto'] === "on") ? 1 : 0;
-
 
         try {
             $acompanhante->save();

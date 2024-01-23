@@ -25,11 +25,6 @@
                 <input type="text" name="profissaoAcom" class="form-control" id="profissaoAcom" maxlength="60" placeholder="Digite a profissão do acompanhante" >
             </div>
             <div class="form-group">
-                <label for="telefone">Telefone:</label>
-                <input type="text" name="telefone" class="form-control" id="telefone" maxlength="60" placeholder="Digite o telefone do acompanhante" >
-            </div>
-            
-            <div class="form-group">
                     <label for="moraJunto">Mora com o paciente:</label>
                     <div class="checkbox-toggle">
                         <input type="checkbox" data-toggle="toggle" name="moraJunto" id="moraJunto" data-on="Sim" data-off="Não">
@@ -49,10 +44,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-  function abreModalEditAcompanhante(id, grau, profissao, telefone, moradia) {
+  function abreModalEditAcompanhante(id, grau, profissao, moradia) {
     $('#acompanhante_id').val(id);
     $('#grau').val(grau);
-    $('#telefone').val(telefone);
     $('#profissaoAcom').val(profissao);
 
     if (moradia == 1) {
@@ -62,11 +56,10 @@
 
   }
 
-  function abreModalAcompanhante(id) {      
+  function abreModalAcompanhante(id) {
     $('#acompanhante_id').val(id);
     $('#grau').val('');
     $('#profissao').val('');
-    $('#telefone').val('');
     $('#moradia').val('');
     $('#modalAcompanhante').modal("show");
   }
