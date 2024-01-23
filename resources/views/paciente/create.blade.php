@@ -53,8 +53,8 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="rg">RG:</label>
-        <input type="text" name="rg" class="form-control rg" placeholder="Informe o RG..."
-          id="rg" maxlength="45" value="{{ old('rg') }}" />
+        <input type="text" name="rg" class="form-control" placeholder="Informe o RG..."
+          id="rg" maxlength="15" value="{{ old('rg') }}" />
       </div>
     </div>
     <div class="col-md-6">
@@ -238,7 +238,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
   $(".cpf").mask("000.000.000-00");
-  $(".rg").mask("00.000.000-0");
+
   $(".cep").mask("00.000-000");
   $('.telefone').mask('00 00000-0000');
   $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });

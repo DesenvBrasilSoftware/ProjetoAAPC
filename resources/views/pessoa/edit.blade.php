@@ -16,8 +16,8 @@
     </div>
     <div class="form-group">
       <label for="rg">RG:</label>
-      <input type="text" name="rg" class="form-control rg" placeholder="00.000.000-0"
-       id="rg" maxlength="45" value="{{ $obj->rg }}" />
+      <input type="text" name="rg" class="form-control" placeholder="00.000.000-0"
+       id="rg" maxlength="15" value="{{ $obj->rg }}" />
     </div>
     <div class="form-group">
       <label for="nome" id="labelNome">Nome:</label>
@@ -120,7 +120,7 @@
 <script>
   $(".cnpj").mask("00.000.000/0000-00");
   $(".cpf").mask("000.000.000-00");
-  $(".rg").mask("00.000.000-0");
+
   $('.telefone').mask('00 00000-0000');
 </script>
 <script>
