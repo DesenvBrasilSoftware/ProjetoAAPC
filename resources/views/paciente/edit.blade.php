@@ -58,8 +58,8 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="rg">RG:</label>
-        <input type="text" name="rg" class="form-control rg" id="rg"
-          value="{{ $obj->rg }}" autofocus
+        <input type="text" name="rg" class="form-control" id="rg"
+          value="{{ $obj->rg }}" autofocus max-length="15"
           placeholder="Informe o RG...">
       </div>
     </div>
@@ -571,7 +571,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
   $(".cpf").mask("000.000.000-00");
-  $(".rg").mask("00.000.000-0");
+
   $(".cep").mask("00.000-000");
   $('.telefone').mask('00 00000-0000');
   $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
