@@ -47,14 +47,14 @@
       <div class="form-group">
         <label for="cpf" id="labelCpfCnpj">CPF:</label>
         <input type="text" name="cpf" placeholder="Informe o CPF..."
-          class="form-control cpf" id="cpf" maxlength="45" value="{{ old('cpf') }}" />
+          class="form-control cpf" required id="cpf" maxlength="45" value="{{ old('cpf') }}" />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
         <label for="rg">RG:</label>
         <input type="text" name="rg" class="form-control" placeholder="Informe o RG..."
-          id="rg" maxlength="15" value="{{ old('rg') }}" />
+          id="rg" required maxlength="15" value="{{ old('rg') }}" />
       </div>
     </div>
     <div class="col-md-6">

@@ -51,7 +51,7 @@
       <div class="form-group">
         <label for="cpf">CPF:</label>
         <input type="text" name="cpf" class="form-control cpf" id="cpf"
-          value="{{ $obj->cpf }}" autofocuS
+          value="{{ $obj->cpf }}" autofocus required
           placeholder="Informe o CPF...">
       </div>
     </div>
@@ -59,7 +59,7 @@
       <div class="form-group">
         <label for="rg">RG:</label>
         <input type="text" name="rg" class="form-control" id="rg"
-          value="{{ $obj->rg }}" autofocus max-length="15"
+          value="{{ $obj->rg }}" autofocus max-length="15" required
           placeholder="Informe o RG...">
       </div>
     </div>
