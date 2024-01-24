@@ -5,8 +5,8 @@
   <input type="hidden" id="id" name="id" value="{{ $obj->id }}">
   <div class="form-group">
     <input type="checkbox" name="cpfCnpj"
-    id="cpfCnpj" data-toggle="toggle" data-on="Pessoa jurídica"
-    data-off="Pessoa física" {{ $obj->cnpj ? '' : 'checked' }}>
+    id="cpfCnpj" data-toggle="toggle" data-on="Pessoa física"
+    data-off="Pessoa jurídica" {{ $obj->cnpj ? '' : 'checked' }}>
   </div>
   <div id="cpfGroup">
     <div class="form-group">

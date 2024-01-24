@@ -2,7 +2,7 @@
 <form class="needs-validation" novalidate id="form" action="/pessoa.store" method="post">
   @csrf
   <div class="form-group">
-    <input type="checkbox" name="cpfCnpj" id="cpfCnpj" data-toggle="toggle" data-on="Pessoa jurídica" data-off="Pessoa física" {{ old('cpfCnpj') ? 'checked' : 'checked' }}>
+    <input type="checkbox" name="cpfCnpj" id="cpfCnpj" data-toggle="toggle" data-on="Pessoa física" data-off="Pessoa jurídica" {{ old('cpfCnpj') ? 'checked' : 'checked' }}>
   </div>
   <div id="cpfGroup">
     <div class="form-group">
