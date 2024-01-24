@@ -31,8 +31,8 @@ class PessoaController extends Controller
         $obj->voluntario = ($request['voluntario'] === null) ? 0 : 1;
         $obj->fornecedor = ($request['fornecedor'] === null) ? 0 : 1;
         $obj->clinica = ($request['clinica'] === null) ? 0 : 1;
-        $obj->acompanhante = ($request['clinica'] === null) ? 0 : 1;
-        $obj->contato = ($request['clinica'] === null) ? 0 : 1;
+        $obj->acompanhante = ($request['acompanhante'] === null) ? 0 : 1;
+        $obj->contato = ($request['contato'] === null) ? 0 : 1;
         if ($request['cpfCnpj'] == 'off') {
           $cnpj = preg_replace('/\D/', '', $request['cnpj']);
           $obj->cnpj = '' ? null : $cnpj;
