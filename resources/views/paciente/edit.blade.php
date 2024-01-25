@@ -51,7 +51,7 @@
       <div class="form-group">
         <label for="cpf">CPF:</label>
         <input type="text" name="cpf" class="form-control cpf" id="cpf"
-          value="{{ $obj->cpf }}" autofocuS
+          value="{{ $obj->cpf }}" autofocus required
           placeholder="Informe o CPF...">
       </div>
     </div>
@@ -59,7 +59,7 @@
       <div class="form-group">
         <label for="rg">RG:</label>
         <input type="text" name="rg" class="form-control" id="rg"
-          value="{{ $obj->rg }}" autofocus max-length="15"
+          value="{{ $obj->rg }}" autofocus max-length="15" required
           placeholder="Informe o RG...">
       </div>
     </div>
@@ -125,11 +125,24 @@
           value="{{ $obj->profissao }}" autofocus placeholder="Informe a profissão">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
       <div class="form-group">
-        <label for="renda_mensal">Renda mensal:</label>
-        <input required type="text" name="renda_mensal" class="form-control dinheiro" id="renda_mensal"
-          value="{{ $obj->renda_mensal }}" autofocus placeholder="Informe a renda mensal...">
+    
+        <label for="vulnerabilidade">Vulnerabilidade Social:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->vulnerabilidade_social ? 'checked' : '' }}>
+        </div>
+  
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+    
+        <label for="aposentado">Aposentado(a):</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->aposentado ? 'checked' : '' }}>
+        </div>
+  
       </div>
     </div>
   </div>

@@ -54,6 +54,8 @@ class PacienteController extends Controller
         $obj->data_alta = $request['data_alta'];
         $obj->radioterapia = ($request['radio'] === null) ? 0 : 1;
         $obj->quimioterapia = ($request['quimio'] === null) ? 0 : 1;
+        $obj->vulnerabilidade_social = ($request['vulnerabilidade'] === null) ? 0 : 1;
+        $obj->aposentado = ($request['aposentado'] === null) ? 0 : 1;
         $obj->moradia = ($request['moradia'] === '') ? null : $request['moradia'];
         $obj->medicamento = $request['medicamentos'];
         $obj->clinica = $request['clinica'];
@@ -72,11 +74,6 @@ class PacienteController extends Controller
         $obj->conjuge = $request['conjuge'];
         $obj->escolaridade = ($request['escolaridade'] === '') ? null : $request['escolaridade'];
         $obj->profissao = $request['profissao'];
-
-        $renda_mensal = $request['renda_mensal'];
-        $renda_mensal = trim($renda_mensal);
-        $renda_mensal = preg_replace('/(?<=\d)\.(?=\d)/', '', $renda_mensal);
-        $obj->renda_mensal = str_replace(',', '.', $renda_mensal);
 
         $obj->observacao = $request['observacao'];
 
