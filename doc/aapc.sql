@@ -285,13 +285,14 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   `cidade_id` int DEFAULT NULL,
   `radioterapia` tinyint NOT NULL DEFAULT '0',
   `quimioterapia` tinyint NOT NULL DEFAULT '0',
-  `renda_mensal` decimal(12,2) DEFAULT NULL,
   `moradia` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `data_biopsia` date DEFAULT NULL,
   `data_alta` date DEFAULT NULL,
   `medicamento` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `clinica` varchar(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `telefone` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `vulnerabilidade_social` tinyint NOT NULL DEFAULT '0',
+  `aposentado` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_rg` (`rg`),
   UNIQUE KEY `unique_cpf` (`cpf`),
@@ -415,15 +416,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `visualiza_relatorios` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
-
--- Remover a coluna renda_mensal
-ALTER TABLE paciente
-DROP COLUMN renda_mensal;
-
--- Adicionar as novas colunas
-ALTER TABLE paciente
-ADD COLUMN vulnerabilidade_social tinyint NOT NULL DEFAULT 0,
-ADD COLUMN aposentado tinyint NOT NULL DEFAULT 0;
 
 -- Exportação de dados foi desmarcado.
 
