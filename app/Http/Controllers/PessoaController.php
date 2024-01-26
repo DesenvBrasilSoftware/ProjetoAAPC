@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acomodacao;
+use App\Models\Leito;
+use App\Models\LeitoAcompanhante;
 use App\Models\Pessoa;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PessoaController extends Controller
 {
@@ -62,8 +67,46 @@ class PessoaController extends Controller
 
     public function edit(string $id, $msg = '')
     {
+      $listaAcomodacao = Acomodacao::all();
+
+      $listaLeito = DB::select("
+      SELECT
+          l.*,
+          lp.acompanhante_id
+      FROM
+          leito l
+      LEFT JOIN
+          leito_acompanhante lp ON lp.leito_id = l.id;
+      ");
+
+      $listaLeitoAcompanhante = DB::select("
+        SELECT
+          lp.id,
+          lp.data_entrada,
+          lp.data_saida,
+          l.id AS leito_id,
+          l.descricao AS leito,
+          a.id AS acomodacao_id,
+          a.descricao AS acomodacao
+        FROM
+          leito_acompanhante lp
+          INNER JOIN leito l ON l.id = lp.leito_id
+          INNER JOIN acomodacao a ON a.id = l.acomodacao_id
+        WHERE
+          lp.acompanhante_id = :acompanhante_id;
+        ", ['acompanhante_id' => $id])
+      ;
+
         $obj = Pessoa::find($id);
-        return view('pessoa.edit')->with(['msg' => $msg, 'obj' => $obj]);
+
+        return view(
+          'pessoa.edit',
+          compact(
+            'listaLeitoAcompanhante',
+            'listaAcomodacao',
+            'listaLeito',
+        )
+        )->with(['msg' => $msg, 'obj' => $obj]);
     }
 
     public function delete($id)

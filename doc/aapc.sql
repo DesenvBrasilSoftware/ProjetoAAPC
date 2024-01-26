@@ -424,3 +424,18 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
+
+-- 26/01/2024 - Criação da tabela acompanhante_id
+CREATE TABLE IF NOT EXISTS `leito_acompanhante` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_entrada` date NOT NULL,
+  `data_saida` date DEFAULT NULL,
+  `acompanhante_id` int NOT NULL,
+  `leito_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_leito_acompanhante_acompanhante1_idx` (`acompanhante_id`),
+  KEY `fk_leito_acompanhante_acomodacao1_idx` (`leito_id`) USING BTREE,
+  CONSTRAINT `FK_leito_acompanhante_aapc.leito` FOREIGN KEY (`leito_id`) REFERENCES `leito` (`id`),
+  CONSTRAINT `fk_leito_acompanhante_acompanhante1` FOREIGN KEY (`acompanhante_id`) REFERENCES `acompanhante` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
