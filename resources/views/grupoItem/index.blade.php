@@ -6,8 +6,8 @@
     <tr>
       <th>Código</th>
       <th>Descrição</th>
-      <th>Perecivel</th>
-      <th>Refrigerado</th>
+      <!-- <th>Perecivel</th>
+      <th>Refrigerado</th> -->
       <th></th>
       <th></th>
     </tr>
@@ -22,7 +22,7 @@
       <td>
         {{ $obj->descricao }}
       </td>
-      <td>
+      <!-- <td>
         @if($obj->perecivel == 0)
         <i class="fa fa-lg fa-square-o" aria-hidden="true"></i>
         @else
@@ -35,7 +35,7 @@
         @else
         <i class="fa fa-lg fa-check-square-o" aria-hidden="true">
         @endif
-      </td>
+      </td> -->
       <td width="1%">
         <a href="/grupoItem.edit.{{ $obj->id }}"><i class="fa fa-lg fa-edit"
           style="align-content: center"></i></a>

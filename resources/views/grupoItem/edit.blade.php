@@ -8,7 +8,7 @@
     <input required type="text" name="descricao" class="form-control" id="descricao" maxlength="45"
       value="{{ $obj->descricao }}" autofocus placeholder="Digite a descrição do grupo do item">
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="perecivel">Perecível</label>
     <input type="checkbox" name="perecivel" id="perecivel" data-toggle="toggle" data-on="Sim" data-off="Não"
     {{ $obj->perecivel ? 'checked' : '' }}>
@@ -17,7 +17,7 @@
     <label for="refrigerado">Refrigerado</label>
     <input type="checkbox" name="refrigerado" id="refrigerado" data-toggle="toggle" data-on="Sim"
     data-off="Não" {{ $obj->refrigerado ? 'checked' : '' }}>
-  </div>
+  </div> -->
   <div class="form-group">
     <a type="button" href="/grupoItem.index" class="btn btn-warning">Fechar</a>
     <button type="submit" class="btn btn-primary">Salvar</button>

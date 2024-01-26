@@ -26,8 +26,10 @@ class GrupoItemController extends Controller
             $obj = GrupoItem::find($request['id']);
         }
         $obj->descricao = $request['descricao'];
-        $obj->perecivel = isset($request['perecivel']) ? 1 : 0;
-        $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
+        $obj->perecivel = 0;
+        $obj->refrigerado = 0;
+        // $obj->perecivel = isset($request['perecivel']) ? 1 : 0;
+        // $obj->refrigerado = isset($request['refrigerado']) ? 1 : 0;
 
         $msg = 'Registro salvo com sucesso.';
 
