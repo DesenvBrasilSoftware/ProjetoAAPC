@@ -52,20 +52,25 @@ class AcomodacaoController extends Controller
       $obj = Acomodacao::find($id);
 
       $listaLeitosAcomodacao = DB::select("
-          SELECT
-              l.id,
-              l.descricao,
-              l.ocupado,
-              p.nome as paciente
-          FROM
-              leito l
-              LEFT JOIN leito_paciente lp ON l.id = lp.leito_id
-              LEFT JOIN paciente p ON lp.paciente_id = p.id
-          WHERE
-              lp.data_saida IS NULL AND
-              l.acomodacao_id = :acomodacao_id
+      SELECT
+        l.id,
+        l.descricao,
+        l.ocupado,
+        COALESCE(p.nome, a.nome) as nome_pessoa,
+        CASE
+            WHEN p.id IS NOT NULL THEN 'Paciente'
+            WHEN a.id IS NOT NULL THEN 'Acompanhante'
+        END as perfil
+      FROM
+          leito l
+        LEFT JOIN leito_paciente lp ON l.id = lp.leito_id
+        LEFT JOIN paciente p ON lp.paciente_id = p.id
+        LEFT JOIN leito_acompanhante la ON l.id = la.leito_id
+        LEFT JOIN pessoa a ON la.acompanhante_id = a.id
+      WHERE
+          lp.data_saida IS NULL AND
+          l.acomodacao_id =:acomodacao_id
       ", ['acomodacao_id' => $id]);
-
 
         return view(
           'acomodacao.edit',

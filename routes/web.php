@@ -172,6 +172,8 @@ Route::middleware(['auth'])->group(function () {
     // Acompanhante
     Route::get('/acompanhantes/{id}', [AcompanhanteController::class, 'index']);
     Route::post('/acompanhante.store', [AcompanhanteController::class, 'store']);
+    Route::post('/acompanhante.adicionarAcomodacao', [AcompanhanteController::class, 'adicionarAcomodacao']);
+    Route::post('/acompanhantente.deletarAcomodacao', [AcompanhanteController::class, 'deletarAcomodacao']);
     Route::get('/acompanhante.delete.{i}', [AcompanhanteController::class, 'delete']);
 
     // Usuário
