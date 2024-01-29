@@ -18,27 +18,7 @@
     <div  class="col-md-4">
       <div class="form-group">
         <label for="data_nascimento">Data de nascimento:</label>
-        <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Insira sua data de nascimento">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_obito">Data de óbito:</label>
-        <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_biopsia">Data de Biopsia:</label>
-        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia">
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_alta">Data de Alta:</label>
-        <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta">
+        <input required type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Insira sua data de nascimento">
       </div>
     </div>
   </div>
@@ -69,15 +49,75 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="cidade_id">Cidade:</label>
+        <select required name="cidade_id" class="form-control" id="cidade_id" maxlength="45" onchange="handleSelectCidade()">
+          <option value="" label="Selecione a cidade..." selected></option>
+          @foreach ($listaCidade as $cidade)
+          <option value="{{ $cidade->id }}" label="{{ $cidade->nome }}">{{ $cidade->nome }}</option>
+          @endforeach
+        </select>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="endereco">Endereço:</label>
+        <input required type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
+        placeholder="Digite o endereço" value="{{ old('endereco') }}" autofocus>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="cep">CEP:</label>
+        <input type="text" name="cep" class="form-control cep"
+          id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}"
+          autofocus>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="bairro">Bairro:</label>
+        <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" placeholder="Digite o bairro" value="{{ old('bairro') }}" autofocus>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="complemento">Complemento:</label>
+        <input type="text" name="complemento" class="form-control" id="complemento" maxlength="45" placeholder="Digite o complemento" value="{{ old('complemento') }}" autofocus>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="ponto_referencia">Ponto de referência:</label>
+        <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="moradia">Moradia:</label>
+        <select name="moradia" class="form-control" id="moradia" maxlength="45">
+          <option value="" label="Nenhuma" selected></option>
+          <option value="P" label="Própria" >Própria</option>
+          <option value="A" label="Alugada" >Alugada</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="quantidade_filhos">Quantidade de filhos:</label>
-        <input required type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
+        <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
           value="{{ old('quantidade_filhos') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g,');"
           placeholder="Informe a quantidade de filhos...">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="form-group">
         <label for="estado_civil">Estado Civil:</label>
         <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
@@ -119,84 +159,32 @@
         <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45" placeholder="Digite a profissão" value="{{ old('profissao') }}" autofocus>
       </div>
     </div>
-    <div class="col-md-2">
+
+    <div class="col-md-4">
       <div class="form-group">
-    
-        <label for="vulnerabilidade">Vulnerabilidade Social:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('vulnerabilidade') ? 'checked' : '' }}>
-        </div>
-  
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-group">
-    
-        <label for="aposentado">Aposentado(a):</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('aposentado') ? 'checked' : '' }}>
-        </div>
-  
+        <label for="telefone" id="labelTelefone">Telefone:</label>
+        <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+        id="telefone" maxlength="50" value="{{ old('telefone') }}" />
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="cep">CEP:</label>
-        <input type="text" name="cep" class="form-control cep"
-          id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}"
-          autofocus>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="form-group">
-        <label for="endereco">Endereço:</label>
-        <input type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
-        placeholder="Digite o endereço" value="{{ old('endereco') }}" autofocus>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="cidade_id">Cidade:</label>
-        <select required name="cidade_id" class="form-control" id="cidade_id" maxlength="45" onchange="handleSelectCidade()">
-          <option value="" label="Selecione a cidade..." selected></option>
-          @foreach ($listaCidade as $cidade)
-          <option value="{{ $cidade->id }}" label="{{ $cidade->nome }}">{{ $cidade->nome }}</option>
-          @endforeach
-        </select>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="form-group">
-        <label for="bairro">Bairro:</label>
-        <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" placeholder="Digite o bairro" value="{{ old('bairro') }}" autofocus>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="complemento">Complemento:</label>
-        <input type="text" name="complemento" class="form-control" id="complemento" maxlength="45" placeholder="Digite o complemento" value="{{ old('complemento') }}" autofocus>
+        <label for="data_obito">Data de óbito:</label>
+        <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="ponto_referencia">Ponto de referência:</label>
-        <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
+        <label for="data_biopsia">Data de Biopsia:</label>
+        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="moradia">Moradia:</label>
-        <select name="moradia" class="form-control" id="moradia" maxlength="45">
-          <option value="" label="Nenhuma" selected></option>
-          <option value="P" label="Própria" >Própria</option>
-          <option value="A" label="Alugada" >Alugada</option>
-        </select>
+        <label for="data_alta">Data de Alta:</label>
+        <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta">
       </div>
     </div>
   </div>
@@ -215,29 +203,36 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="telefone" id="labelTelefone">Telefone:</label>
-    <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
-    id="telefone" maxlength="50" value="{{ old('telefone') }}" />
-  </div>
-  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
   </div>
   <div class="row">
-    <div class="col-md-2">
+  <div class="col-md-2">
       <div class="form-group">
-        <label for="radio">Radioterapia:</label>
+        <label for="vulnerabilidade">Vulnerabilidade:</label>
         <div class="checkbox-toggle">
-          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('radio') ? 'checked' : '' }}>
+          <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('vulnerabilidade') ? 'checked' : '' }}>
         </div>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <label for="quimio">Quimioterapia:</label>
+        <label for="aposentado">Aposentado(a):</label>
         <div class="checkbox-toggle">
-          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('quimio') ? 'checked' : '' }}>
+          <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('aposentado') ? 'checked' : '' }}>
         </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-switch">
+        <label for="radio">Radioterapia:</label>
+          <input type="checkbox" class="form-check-input" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('radio') ? 'checked' : '' }}>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-switch">
+        <label for="quimio">Quimioterapia:</label>
+          <input type="checkbox" class="form-check-input" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('quimio') ? 'checked' : '' }}>
       </div>
     </div>
   </div>

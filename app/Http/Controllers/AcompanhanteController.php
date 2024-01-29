@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Acompanhante;
 use App\Models\Leito;
+use App\Models\Pessoa;
 use App\Models\LeitoAcompanhante;
 
 class AcompanhanteController extends Controller
@@ -36,11 +37,13 @@ class AcompanhanteController extends Controller
 
         $acompanhante->grau = $req['grau'];
         $acompanhante->profissao = $req['profissaoAcom'];
+        $pessoa = Pessoa::find($acompanhante->pessoa_id);
+        $pessoa->telefone = $req['telefoneAcom'];
         $acompanhante->moradia = ($req['moraJunto'] === "on") ? 1 : 0;
 
         try {
+            $pessoa->save();
             $acompanhante->save();
-
             $msg = 'Acompanhante salvo com sucesso.';
             return redirect('/paciente.edit.' . $req['paciente_id'])->with('mensagem', $msg);
 
