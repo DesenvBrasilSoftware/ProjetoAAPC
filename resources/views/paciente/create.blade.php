@@ -99,7 +99,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="form-group">
         <label for="escolaridade">Escolaridade:</label>
         <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
@@ -119,24 +119,23 @@
         <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45" placeholder="Digite a profissão" value="{{ old('profissao') }}" autofocus>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="form-group">
-    
         <label for="vulnerabilidade">Vulnerabilidade Social:</label>
         <div class="checkbox-toggle">
           <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('vulnerabilidade') ? 'checked' : '' }}>
         </div>
-  
+
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-    
+
         <label for="aposentado">Aposentado(a):</label>
         <div class="checkbox-toggle">
           <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('aposentado') ? 'checked' : '' }}>
         </div>
-  
+
       </div>
     </div>
   </div>
@@ -201,6 +200,27 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="telefone" id="labelTelefone">Telefone:</label>
+        <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+        id="telefone" maxlength="50" value="{{ old('telefone') }}" />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-switch">
+        <label for="radio">Radioterapia:</label>
+          <input type="checkbox" class="form-check-input" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('radio') ? 'checked' : '' }}>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-switch">
+        <label for="quimio">Quimioterapia:</label>
+          <input type="checkbox" class="form-check-input" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('quimio') ? 'checked' : '' }}>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <div class="form-group">
         <label for="medicamentos">Medicamentos:</label>
@@ -215,31 +235,8 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="telefone" id="labelTelefone">Telefone:</label>
-    <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
-    id="telefone" maxlength="50" value="{{ old('telefone') }}" />
-  </div>
-  <div class="form-group">
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
-  </div>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="radio">Radioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('radio') ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="quimio">Quimioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ old('quimio') ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="d-flex form-group justify-content-end">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>

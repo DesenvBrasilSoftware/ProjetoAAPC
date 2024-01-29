@@ -127,29 +127,20 @@
     </div>
     <div class="col-md-2">
       <div class="form-group">
-    
         <label for="vulnerabilidade">Vulnerabilidade Social:</label>
         <div class="checkbox-toggle">
           <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->vulnerabilidade_social ? 'checked' : '' }}>
         </div>
-  
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-    
         <label for="aposentado">Aposentado(a):</label>
         <div class="checkbox-toggle">
           <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->aposentado ? 'checked' : '' }}>
         </div>
-  
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="telefone" id="labelTelefone">Telefone:</label>
-    <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
-    id="telefone" maxlength="50" value="{{ $obj->telefone }}" />
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -215,6 +206,31 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="telefone" id="labelTelefone">Telefone:</label>
+        <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+          id="telefone" maxlength="50" value="{{ $obj->telefone }}" />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="radio">Radioterapia:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="quimio">Quimioterapia:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <div class="form-group">
         <label for="medicamentos">Medicamentos:</label>
@@ -233,28 +249,7 @@
     <input type="text" name="observacao" class="form-control" id="observacao"
       value="{{ $obj->observacao }}" autofocus placeholder="Digite uma observação...">
   </div>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="radio">Radioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="quimio">Quimioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group pt-3" id="acompanhanteDiv">
-    <label for="acompanhante" class="w-100 p-2 rounded"
-      style="background-color: #999999a8">Acompanhante(s):</label>
-    @if (count($listaAcompanhante) > 0)
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px;">
     <table id="tabela-acompanhantes" class="table table-striped">
       <thead>
         <tr>
@@ -275,7 +270,7 @@
           <td>{{ $acompanhante->profissao }}</td>
           <td>{{ $acompanhante->telefone }}</td>
           <td>{{ $acompanhante->moradia == 1? 'Sim' : 'Não' }}</td>
-          <td width="1%">
+          <td style="text-align: center" width="1%">
             <a data-toggle="modal"
               onclick="abreModalEditAcompanhante(
               '{{ $acompanhante->id }}',
@@ -287,7 +282,7 @@
             <i class="fa fa-lg fa-edit"></i>
             </a>
           </td>
-          <td width="1%">
+          <td style="text-align: center" width="1%">
             <a href="/acompanhante.delete.{{ $acompanhante->id }}"><i
               class="fa fa-trash"></i></a>
           </td>
@@ -295,24 +290,27 @@
         @endforeach
       </tbody>
     </table>
-    @endif
-    <div id="paciente-container">
-      <select name="acompanhante" class="form-control" id="acompanhante">
-        <option value="" label="Selecione um acompanhante..." selected></option>
-        @foreach ($listaPessoaAcompanhante as $pessoa)
-        <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
-        @endforeach
-      </select>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <select name="acompanhante" class="form-control" id="acompanhante">
+            <option value="" label="Selecione um acompanhante..." selected></option>
+            @foreach ($listaPessoaAcompanhante as $pessoa)
+            <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button style="width: 100%;" id="adicionar-acompanhante" type="button" class="btn btn-success" data-toggle="modal">
+          Adicionar
+          </button>
+        </div>
+      </div>
     </div>
-    <button id="adicionar-acompanhante" type="button" class="btn btn-sm btn-success mt-3" data-toggle="modal"
-      >
-    Adicionar acompanhante
-    </button>
   </div>
-  <div class="form-group pt-3" id="contatoDiv">
-    <label for="contato" class="w-100 p-2 rounded"
-      style="background-color: #999999a8">Contato(s):</label>
-    @if (count($listaContato) > 0)
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px;">
     <table id="tabela-contatos" class="table table-striped">
       <thead>
         <tr>
@@ -326,7 +324,7 @@
         <tr>
           <td>{{ $contato->nome_contato }}</td>
           <td>{{ $contato->telefone_contato }}</td>
-          <td width="1%">
+          <td style="text-align: center" width="1%">
             <a href="/contato.delete.{{ $contato->id }}"><i
               class="fa fa-trash"></i></a>
           </td>
@@ -334,17 +332,23 @@
         @endforeach
       </tbody>
     </table>
-    @endif
-    <div id="paciente-container">
-      <select name="contato" class="form-control" id="contato">
-        <option value="" label="Selecione um contato..." selected></option>
-        @foreach ($listaPessoaContato as $pessoa)
-        <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
-        @endforeach
-      </select>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <select name="contato" class="form-control" id="contato">
+            <option value="" label="Selecione um contato..." selected></option>
+            @foreach ($listaPessoaContato as $pessoa)
+            <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button style="width: 100%" class="btn btn-success" type="button" id="adicionar-contato">Adicionar</button>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-sm btn-success mt-3" type="button" id="adicionar-contato">Adicionar
-    Contato</button>
   </div>
   <table id="dataTable" class="display table-responsive">
     <thead>
@@ -593,6 +597,11 @@
   .disabled-link {
   pointer-events: none; /* Desabilita interações do mouse e do teclado */
   opacity: 0.6; /* Adiciona uma opacidade para indicar que está desativado */
+  }
+
+  td {
+    padding: 0px 8px !important;
+    vertical-align: middle !important;
   }
 </style>
 @endsection
