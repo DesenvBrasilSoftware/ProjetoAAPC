@@ -25,11 +25,6 @@
               <input type="text" name="profissaoAcom" class="form-control" id="profissaoAcom" maxlength="60" placeholder="Digite a profissão do acompanhante" >
             </div>
             <div class="form-group">
-              <label for="telefoneAcom" id="labelTelefone">Telefone:</label>
-              <input type="text" name="telefoneAcom" placeholder="00 00000-0000" class="form-control telefone"
-                id="telefoneAcom" maxlength="50"/>
-            </div>
-            <div class="form-group">
               <label for="moraJunto">Mora com o paciente:</label>
               <div class="checkbox-toggle">
                 <input type="checkbox" data-toggle="toggle" name="moraJunto" id="moraJunto" data-on="Sim" data-off="Não">
@@ -53,7 +48,6 @@
     $('#acompanhante_id').val(id);
     $('#grau').val(grau);
     $('#profissaoAcom').val(profissao);
-    $('#telefoneAcom').val(telefone);
     if (moradia == 1) {
         $('#moraJunto').bootstrapToggle('on');
     }
@@ -64,7 +58,6 @@
     $('#acompanhante_id').val(id);
     $('#grau').val('');
     $('#profissaoAcom').val('');
-    $('#telefoneAcom').val('');
     $('#moradia').val('');
     $('#modalAcompanhante').modal("show");
   }
