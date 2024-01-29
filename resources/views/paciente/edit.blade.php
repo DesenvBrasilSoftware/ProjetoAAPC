@@ -104,7 +104,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="form-group">
         <label for="escolaridade">Escolaridade:</label>
         <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
@@ -125,7 +125,7 @@
           value="{{ $obj->profissao }}" autofocus placeholder="Informe a profissão">
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="form-group">
         <label for="vulnerabilidade">Vulnerabilidade Social:</label>
         <div class="checkbox-toggle">
@@ -249,8 +249,8 @@
     <input type="text" name="observacao" class="form-control" id="observacao"
       value="{{ $obj->observacao }}" autofocus placeholder="Digite uma observação...">
   </div>
-  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px;">
-    <table id="tabela-acompanhantes" class="table table-striped">
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
+    <table id="tabela-acompanhantes" class="table">
       <thead>
         <tr>
           <th>Acompanhante</th>
@@ -268,7 +268,7 @@
           <td>{{ $acompanhante->nome_acompanhante }}</td>
           <td>{{ $acompanhante->grau }}</td>
           <td>{{ $acompanhante->profissao }}</td>
-          <td>{{ $acompanhante->telefone }}</td>
+          <td>{{ $acompanhante->telefone_acompanhante }}</td>
           <td>{{ $acompanhante->moradia == 1? 'Sim' : 'Não' }}</td>
           <td style="text-align: center" width="1%">
             <a data-toggle="modal"
@@ -276,7 +276,7 @@
               '{{ $acompanhante->id }}',
               '{{ $acompanhante->grau }}',
               '{{ $acompanhante->profissao }}',
-              '{{ $acompanhante->telefone }}',
+              '{{ $acompanhante->telefone_acompanhante }}',
               '{{ $acompanhante->moradia }}')
               ">
             <i class="fa fa-lg fa-edit"></i>
@@ -310,8 +310,8 @@
       </div>
     </div>
   </div>
-  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px;">
-    <table id="tabela-contatos" class="table table-striped">
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
+    <table id="tabela-contatos" class="table">
       <thead>
         <tr>
           <th>Contato</th>
@@ -350,155 +350,161 @@
       </div>
     </div>
   </div>
-  <table id="dataTable" class="display table-responsive">
-    <thead>
-      <tr>
-        <th>Entrada</th>
-        <th>Saída</th>
-        <th>Acomodação</th>
-        <th>Leito</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($listaLeitoPaciente as $leitoPaciente)
-      <tr>
-        <td>
-          {{ $leitoPaciente->data_entrada }}
-        </td>
-        <td>
-          {{ $leitoPaciente->data_saida }}
-        </td>
-        <td>
-          {{ $leitoPaciente->acomodacao }}
-        </td>
-        <td>
-          {{ $leitoPaciente->leito }}
-        </td>
-        <td width="1%">
-          <a data-toggle="modal" data-target="#modalAcomodacaoPaciente"
-          @if($leitoPaciente->data_saida != null) class="disabled-link" @endif
-          onclick="abreModalEditAcomodacaoPaciente(
-          '{{ $leitoPaciente->id }}',
-          '{{ $leitoPaciente->data_entrada }}',
-          '{{ $leitoPaciente->data_saida }}',
-          '{{ $leitoPaciente->acomodacao_id }}',
-          '{{ $leitoPaciente->leito_id }}'
-          )">
-          <i class="fa fa-lg fa-edit"></i>
-          </a>
-        </td>
-        <td width="1%">
-          <a
-            onclick="deletarAcomodacaoPaciente('{{ $leitoPaciente->id }}', '{{ $obj->id }}')">
-          <i class="fa fa-lg fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-  <div class="form-group">
-    <button onclick="abreModalAcomodacaoPaciente()" type="button" class="btn btn-secondary" data-toggle="modal"
-      data-target="#modalAcomodacaoPaciente">
-    Adicionar acomodação
-    </button>
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
+    <table id="tabela-contatos" class="table">
+      <thead>
+        <tr>
+          <th>Acomodação</th>
+          <th>Leito</th>
+          <th>Entrada</th>
+          <th>Saída</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($listaLeitoPaciente as $leitoPaciente)
+        <tr>
+          <td>
+            {{ $leitoPaciente->acomodacao }}
+          </td>
+          <td>
+            {{ $leitoPaciente->leito }}
+          </td>
+          <td>
+            {{ $leitoPaciente->data_entrada }}
+          </td>
+          <td>
+            {{ $leitoPaciente->data_saida }}
+          </td>
+          <td width="1%">
+            <a data-toggle="modal" data-target="#modalAcomodacaoPaciente"
+            @if($leitoPaciente->data_saida != null) class="disabled-link" @endif
+            onclick="abreModalEditAcomodacaoPaciente(
+            '{{ $leitoPaciente->id }}',
+            '{{ $leitoPaciente->data_entrada }}',
+            '{{ $leitoPaciente->data_saida }}',
+            '{{ $leitoPaciente->acomodacao_id }}',
+            '{{ $leitoPaciente->leito_id }}'
+            )">
+            <i class="fa fa-lg fa-edit"></i>
+            </a>
+          </td>
+          <td width="1%">
+            <a
+              onclick="deletarAcomodacaoPaciente('{{ $leitoPaciente->id }}', '{{ $obj->id }}')">
+            <i class="fa fa-lg fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <div class="form-group">
+      <button onclick="abreModalAcomodacaoPaciente()" type="button" class="btn btn-secondary" data-toggle="modal"
+        data-target="#modalAcomodacaoPaciente">
+      Adicionar acomodação
+      </button>
+    </div>
   </div>
-  <table id="dataTable" class="display table-responsive">
-    <thead>
-      <tr>
-        <th>Data Cadastro</th>
-        <th>Enfermidade</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($listaEnfermidadePaciente as $enfermidadePaciente)
-      <tr>
-        <td>
-          {{ $enfermidadePaciente->data_cadastro }}
-        </td>
-        <td>
-          {{ $enfermidadePaciente->enfermidade }}
-        </td>
-        <td width="1%">
-          <a data-toggle="modal" data-target="#modalEnfermidadePaciente"
-            onclick="abreModalEditEnfermidadePaciente(
-            '{{ $enfermidadePaciente->id }}',
-            '{{ $enfermidadePaciente->data_cadastro }}',
-            '{{ $enfermidadePaciente->enfermidade_id }}')
-            "><i
-            class="fa fa-lg fa-edit"></i></a>
-        </td>
-        <td width="1%">
-          <a
-            onclick="deletarEnfermidadePaciente('{{ $enfermidadePaciente->id }}', '{{ $obj->id }}')">
-          <i class="fa fa-lg fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-  <div class="form-group">
-    <button onclick="abreModalEnfermidadePaciente()" type="button" class="btn btn-secondary"
-      data-toggle="modal" data-target="#modalEnfermidadePaciente">
-    Cadastrar enfermidade
-    </button>
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
+    <table id="tabela-contatos" class="table">
+      <thead>
+        <tr>
+          <th>Enfermidade</th>
+          <th>Data Cadastro</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($listaEnfermidadePaciente as $enfermidadePaciente)
+        <tr>
+          <td>
+            {{ $enfermidadePaciente->enfermidade }}
+          </td>
+          <td>
+            {{ $enfermidadePaciente->data_cadastro }}
+          </td>
+          <td width="1%">
+            <a data-toggle="modal" data-target="#modalEnfermidadePaciente"
+              onclick="abreModalEditEnfermidadePaciente(
+              '{{ $enfermidadePaciente->id }}',
+              '{{ $enfermidadePaciente->data_cadastro }}',
+              '{{ $enfermidadePaciente->enfermidade_id }}')
+              "><i
+              class="fa fa-lg fa-edit"></i></a>
+          </td>
+          <td width="1%">
+            <a
+              onclick="deletarEnfermidadePaciente('{{ $enfermidadePaciente->id }}', '{{ $obj->id }}')">
+            <i class="fa fa-lg fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <div class="form-group">
+      <button onclick="abreModalEnfermidadePaciente()" type="button" class="btn btn-secondary"
+        data-toggle="modal" data-target="#modalEnfermidadePaciente">
+      Cadastrar enfermidade
+      </button>
+    </div>
   </div>
-  <table id="dataTable" class="display table-responsive">
-    <thead>
-      <tr>
-        <th>Data Consulta</th>
-        <th>Profissional</th>
-        <th>Realizada</th>
-        <th>Observações</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($listaConsultaPaciente as $consultaPaciente)
-      <tr>
-        <td>
-          {{ $consultaPaciente->data_consulta }}
-        </td>
-        <td>
-          {{ $consultaPaciente->profissional }}
-        </td>
-        <td>
-          {{ $consultaPaciente->realizada ? 'Sim' : 'Não' }}
-        </td>
-        <td style="max-width: 264px; word-wrap: break-word;">
-          {{ $consultaPaciente->observacoes }}
-        </td>
-        <td width="1%">
-          <a data-toggle="modal" data-target="#modalConsultaPaciente"
-            onclick="abreModalEditConsultaPaciente(
-            '{{ $consultaPaciente->id }}',
-            '{{ $consultaPaciente->data_consulta }}',
-            '{{ $consultaPaciente->pessoa_id }}',
-            '{{ $consultaPaciente->realizada }}',
-            '{{ $consultaPaciente->observacoes }}')
-            "><i
-            class="fa fa-lg fa-edit"></i></a>
-        </td>
-        <td width="1%">
-          <a onclick="deletarConsultaPaciente('{{ $consultaPaciente->id }}', '{{ $obj->id }}')">
-          <i class="fa fa-lg fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-  <div class="form-group">
-    <button onclick="abreModalConsultaPaciente()" type="button" class="btn btn-secondary" data-toggle="modal"
-      data-target="#modalConsultaPaciente">
-    Cadastrar consulta
-    </button>
+  <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
+    <table id="tabela-contatos" class="table">
+      <thead>
+        <tr>
+          <th>Data Consulta</th>
+          <th>Profissional</th>
+          <th>Realizada</th>
+          <th>Observações</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($listaConsultaPaciente as $consultaPaciente)
+        <tr>
+          <td>
+            {{ $consultaPaciente->data_consulta }}
+          </td>
+          <td>
+            {{ $consultaPaciente->profissional }}
+          </td>
+          <td>
+            {{ $consultaPaciente->realizada ? 'Sim' : 'Não' }}
+          </td>
+          <td style="max-width: 264px; word-wrap: break-word;">
+            {{ $consultaPaciente->observacoes }}
+          </td>
+          <td width="1%">
+            <a data-toggle="modal" data-target="#modalConsultaPaciente"
+              onclick="abreModalEditConsultaPaciente(
+              '{{ $consultaPaciente->id }}',
+              '{{ $consultaPaciente->data_consulta }}',
+              '{{ $consultaPaciente->pessoa_id }}',
+              '{{ $consultaPaciente->realizada }}',
+              '{{ $consultaPaciente->observacoes }}')
+              "><i
+              class="fa fa-lg fa-edit"></i></a>
+          </td>
+          <td width="1%">
+            <a onclick="deletarConsultaPaciente('{{ $consultaPaciente->id }}', '{{ $obj->id }}')">
+            <i class="fa fa-lg fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <div class="form-group">
+      <button onclick="abreModalConsultaPaciente()" type="button" class="btn btn-secondary" data-toggle="modal"
+        data-target="#modalConsultaPaciente">
+      Cadastrar consulta
+      </button>
+    </div>
   </div>
   <div class="form-group">
     <a type="button" href="/paciente.index" class="btn btn-warning">Fechar</a>
@@ -598,10 +604,13 @@
   pointer-events: none; /* Desabilita interações do mouse e do teclado */
   opacity: 0.6; /* Adiciona uma opacidade para indicar que está desativado */
   }
-
   td {
-    padding: 0px 8px !important;
-    vertical-align: middle !important;
+  padding: 0px 8px !important;
+  vertical-align: middle !important;
+  background-color: white;
+  }
+  tbody {
+    border-radius: 0 0 6px 6px;
   }
 </style>
 @endsection
