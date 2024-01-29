@@ -20,29 +20,8 @@
     <div  class="col-md-4">
       <div class="form-group">
         <label for="data_nascimento">Data de nascimento:</label>
-        <input type="date" class="form-control" id="data_nascimento" name="data_nascimento"
+        <input required type="date" class="form-control" id="data_nascimento" name="data_nascimento"
           placeholder="Informe a data de nascimento" value="{{ $obj->data_nascimento }}">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_obito">Data de óbito:</label>
-        <input type="date" class="form-control" id="data_obito" name="data_obito"
-          placeholder="Informe a data de óbito" value="{{ $obj->data_obito }}">
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_biopsia">Data de Biopsia:</label>
-        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia"  value="{{ $obj->data_biopsia }}">
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="data_alta">Data de Alta:</label>
-        <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta"  value="{{ $obj->data_alta }}">
       </div>
     </div>
   </div>
@@ -74,92 +53,6 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="quantidade_filhos">Quantidade de filhos:</label>
-        <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
-          value="{{ $obj->quantidade_filhos }}" autofocus placeholder="Digite a quantidade de filhos"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="estado_civil">Estado Civil:</label>
-        <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
-        <option value="" label="Nenhum" {{ $obj->estado_civil ? '' : 'selected' }}></option>
-        <option value="1" label="Solteiro" {{ $obj->estado_civil == 1? 'selected' : '' }}>Solteiro</option>
-        <option value="2" label="Casado" {{ $obj->estado_civil == 2? 'selected' : '' }}>Casado</option>
-        <option value="3" label="Convivio" {{ $obj->estado_civil == 3? 'selected' : '' }}>Convivio</option>
-        <option value="4" label="Viúvo" {{ $obj->estado_civil == 4? 'selected' : '' }} >Viúvo</option>
-        <option value="5" label="Separado" {{ $obj->estado_civil == 5? 'selected' : '' }}>Separado</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="form-group">
-        <label for="conjuge">Cônjuge</label>
-        <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50"
-          value="{{ $obj->conjuge }}" autofocus>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="escolaridade">Escolaridade:</label>
-        <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
-        <option value="" label="Nenhuma" {{ $obj->escolaridade ? '' : 'selected' }} >Nenhuma</option>
-        <option value="1" label="Fundamental Incompleto" {{ $obj->escolaridade == 1? 'selected' : '' }}>Fundamental Incompleto</option>
-        <option value="2" label="Fundamental completo" {{ $obj->escolaridade == 2? 'selected' : '' }}>Fundamental completo</option>
-        <option value="3" label="Médio Incompleto" {{ $obj->escolaridade == 3? 'selected' : '' }}>Médio Incompleto</option>
-        <option value="4" label="Médio completo" {{ $obj->escolaridade == 4? 'selected' : '' }}>Médio completo</option>
-        <option value="5" label="Superior incompleto" {{ $obj->escolaridade == 5? 'selected' : '' }}>Superior incompleto</option>
-        <option value="6" label="Superior completo" {{ $obj->escolaridade == 6? 'selected' : '' }}>Superior completo</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="profissao">Profissão:</label>
-        <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45"
-          value="{{ $obj->profissao }}" autofocus placeholder="Informe a profissão">
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="vulnerabilidade">Vulnerabilidade Social:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->vulnerabilidade_social ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="aposentado">Aposentado(a):</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->aposentado ? 'checked' : '' }}>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="cep">CEP:</label>
-        <input type="text" name="cep" class="form-control cep" id="cep"
-          value="{{ $obj->cep }}" autofocus
-          placeholder="Informe o CEP...">
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="form-group">
-        <label for="endereco">Endereço:</label>
-        <input type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
-          value="{{ $obj->endereco }}" autofocus placeholder="Informe o endereço">
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <label for="cidade_id">Cidade:</label>
@@ -170,6 +63,23 @@
           @if ($obj->cidade_id == $cidade->id) selected @endif>{{ $cidade->nome }}</option>
           @endforeach
         </select>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="endereco">Endereço:</label>
+        <input required type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
+          value="{{ $obj->endereco }}" autofocus placeholder="Informe o endereço">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="cep">CEP:</label>
+        <input type="text" name="cep" class="form-control cep" id="cep"
+          value="{{ $obj->cep }}" autofocus
+          placeholder="Informe o CEP...">
       </div>
     </div>
     <div class="col-md-8">
@@ -206,27 +116,83 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="quantidade_filhos">Quantidade de filhos:</label>
+        <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
+          value="{{ $obj->quantidade_filhos }}" autofocus placeholder="Digite a quantidade de filhos"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="estado_civil">Estado Civil:</label>
+        <select name="estado_civil" class="form-control" id="estado_civil" maxlength="45">
+        <option value="" label="Nenhum" {{ $obj->estado_civil ? '' : 'selected' }}></option>
+        <option value="1" label="Solteiro" {{ $obj->estado_civil == 1? 'selected' : '' }}>Solteiro</option>
+        <option value="2" label="Casado" {{ $obj->estado_civil == 2? 'selected' : '' }}>Casado</option>
+        <option value="3" label="Convivio" {{ $obj->estado_civil == 3? 'selected' : '' }}>Convivio</option>
+        <option value="4" label="Viúvo" {{ $obj->estado_civil == 4? 'selected' : '' }} >Viúvo</option>
+        <option value="5" label="Separado" {{ $obj->estado_civil == 5? 'selected' : '' }}>Separado</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <label for="conjuge">Cônjuge</label>
+        <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50"
+          value="{{ $obj->conjuge }}" autofocus>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="escolaridade">Escolaridade:</label>
+        <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
+        <option value="" label="Nenhuma" {{ $obj->escolaridade ? '' : 'selected' }} >Nenhuma</option>
+        <option value="1" label="Fundamental Incompleto" {{ $obj->escolaridade == 1? 'selected' : '' }}>Fundamental Incompleto</option>
+        <option value="2" label="Fundamental completo" {{ $obj->escolaridade == 2? 'selected' : '' }}>Fundamental completo</option>
+        <option value="3" label="Médio Incompleto" {{ $obj->escolaridade == 3? 'selected' : '' }}>Médio Incompleto</option>
+        <option value="4" label="Médio completo" {{ $obj->escolaridade == 4? 'selected' : '' }}>Médio completo</option>
+        <option value="5" label="Superior incompleto" {{ $obj->escolaridade == 5? 'selected' : '' }}>Superior incompleto</option>
+        <option value="6" label="Superior completo" {{ $obj->escolaridade == 6? 'selected' : '' }}>Superior completo</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="profissao">Profissão:</label>
+        <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45"
+          value="{{ $obj->profissao }}" autofocus placeholder="Informe a profissão">
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group">
         <label for="telefone" id="labelTelefone">Telefone:</label>
         <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
           id="telefone" maxlength="50" value="{{ $obj->telefone }}" />
       </div>
     </div>
-    <div class="col-md-2">
+  </div>
+  <div class="row">
+    <div class="col-md-4">
       <div class="form-group">
-        <label for="radio">Radioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
-        </div>
+        <label for="data_obito">Data de óbito:</label>
+        <input type="date" class="form-control" id="data_obito" name="data_obito"
+          placeholder="Informe a data de óbito" value="{{ $obj->data_obito }}">
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
       <div class="form-group">
-        <label for="quimio">Quimioterapia:</label>
-        <div class="checkbox-toggle">
-          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
-        </div>
+        <label for="data_biopsia">Data de Biopsia:</label>
+        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia"  value="{{ $obj->data_biopsia }}">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="data_alta">Data de Alta:</label>
+        <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta"  value="{{ $obj->data_alta }}">
       </div>
     </div>
   </div>
@@ -248,6 +214,40 @@
     <label for="observacao">Observação:</label>
     <input type="text" name="observacao" class="form-control" id="observacao"
       value="{{ $obj->observacao }}" autofocus placeholder="Digite uma observação...">
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="vulnerabilidade">Vulnerabilidade:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="vulnerabilidade" id="vulnerabilidade" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->vulnerabilidade_social ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="aposentado">Aposentado(a):</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="aposentado" id="aposentado" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->aposentado ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="radio">Radioterapia:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="radio" id="radio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->radioterapia ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="quimio">Quimioterapia:</label>
+        <div class="checkbox-toggle">
+          <input type="checkbox" name="quimio" id="quimio" data-toggle="toggle" data-on="Sim" data-off="Não" {{ $obj->quimioterapia ? 'checked' : '' }}>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="form-group" style="border: 1px solid #ced4da; border-radius: 6px; padding: 0px 16px; background-color: #f7f7f7c9">
     <table id="tabela-acompanhantes" class="table">
