@@ -8501,6 +8501,18 @@ INSERT INTO `uf` (`id`, `nome`, `sigla`) VALUES
 INSERT INTO `usuario` (`id`, `nome`, `login`, `senha`, `visualiza_acomodacao`, `visualiza_localidade`, `visualiza_pessoa`, `visualiza_paciente`, `visualiza_refeicao`, `visualiza_doacoes`, `visualiza_financeiro`, `visualiza_classe_terapeutica`, `visualiza_enfermidade`, `visualiza_estoque`, `visualiza_medicamentos`, `visualiza_usuarios`, `visualiza_relatorios`) VALUES
 	(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
+INSERT INTO grupo_item (descricao)
+VALUES
+    ('Bebidas'),
+    ('Limpeza'),
+    ('Higiene Pessoal'),
+    ('Frutas'),
+    ('Vegetais'),
+    ('Carnes'),
+    ('Laticínios'),
+    ('Cereais e Grãos'),
+    ('Pães e Massas');
+
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
