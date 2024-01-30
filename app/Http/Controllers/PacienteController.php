@@ -173,12 +173,12 @@ class PacienteController extends Controller
         $listaPessoaAcompanhante = Pessoa::where('acompanhante', 1)->orderBy('nome')->get();
         $listaProfissional = Pessoa::where('profissional', 1)->orderBy('nome')->get();
 
-        $listaAcompanhante = Acompanhante::where('paciente_id', $id)
+        $listaAcompanhantesPaciente = Acompanhante::where('paciente_id', $id)
             ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
             ->select('acompanhante.*', 'pessoa.nome as nome_acompanhante', 'pessoa.telefone as telefone_acompanhante')
             ->get();
 
-        $listaContato = Contato::where('paciente_id', $id)
+        $listaContatosPaciente = Contato::where('paciente_id', $id)
             ->join('pessoa', 'contato.pessoa_id', '=', 'pessoa.id')
             ->select('contato.*', 'pessoa.nome as nome_contato', 'pessoa.telefone as telefone_contato')
             ->get();
@@ -198,8 +198,8 @@ class PacienteController extends Controller
                 'listaPessoaContato',
                 'listaPessoaAcompanhante',
                 'listaProfissional',
-                'listaAcompanhante',
-                'listaContato',
+                'listaAcompanhantesPaciente',
+                'listaContatosPaciente',
             )
         );
     }

@@ -263,7 +263,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($listaAcompanhante as $acompanhante)
+        @foreach ($listaAcompanhantesPaciente as $acompanhante)
         <tr>
           <td>{{ $acompanhante->nome_acompanhante }}</td>
           <td>{{ $acompanhante->grau }}</td>
@@ -320,7 +320,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($listaContato as $contato)
+        @foreach ($listaContatosPaciente as $contato)
         <tr>
           <td>{{ $contato->nome_contato }}</td>
           <td>{{ $contato->telefone_contato }}</td>
