@@ -263,7 +263,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($listaAcompanhante as $acompanhante)
+        @foreach ($listaAcompanhantesPaciente as $acompanhante)
         <tr>
           <td>{{ $acompanhante->nome_acompanhante }}</td>
           <td>{{ $acompanhante->grau }}</td>
@@ -293,8 +293,8 @@
     <div class="row">
       <div class="col-md-10">
         <div class="form-group">
-          <select name="acompanhante" class="form-control" id="acompanhante">
-            <option value="" label="Selecione um acompanhante..." selected></option>
+          <select name="acompanhante" class="form-control select2" id="acompanhante">
+            <option value="" selected>Selecione um acompanhante...</option>
             @foreach ($listaPessoaAcompanhante as $pessoa)
             <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
             @endforeach
@@ -320,7 +320,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($listaContato as $contato)
+        @foreach ($listaContatosPaciente as $contato)
         <tr>
           <td>{{ $contato->nome_contato }}</td>
           <td>{{ $contato->telefone_contato }}</td>
@@ -335,8 +335,8 @@
     <div class="row">
       <div class="col-md-10">
         <div class="form-group">
-          <select name="contato" class="form-control" id="contato">
-            <option value="" label="Selecione um contato..." selected></option>
+          <select name="contato" class="form-control select2" id="contato">
+            <option value="" selected>Selecione um contato...</option>
             @foreach ($listaPessoaContato as $pessoa)
             <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
             @endforeach

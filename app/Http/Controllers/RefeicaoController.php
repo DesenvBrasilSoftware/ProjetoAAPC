@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Refeicao;
 use App\Models\Paciente;
 use App\Models\Acompanhante;
+use App\Models\Pessoa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -45,11 +46,7 @@ class RefeicaoController extends Controller
     {
       $listaPaciente = Paciente::orderBy('nome')->get();
 
-      $listaAcompanhante = DB::table('acompanhante')
-          ->join('pessoa', 'acompanhante.pessoa_id', '=', 'pessoa.id')
-          ->select('acompanhante.id', 'pessoa.nome')
-          ->orderBy('pessoa.nome')
-          ->get();
+      $listaAcompanhante = Pessoa::where('acompanhante', 1)->orderBy('nome')->get();
 
       return view('refeicao.create', compact('listaPaciente', 'listaAcompanhante', 'msg'));
     }
@@ -91,14 +88,7 @@ class RefeicaoController extends Controller
     {
         $obj = Refeicao::find($id);
         $listaPaciente = Paciente::all();
-        $listaAcompanhante = DB::select("
-            SELECT
-                a.id,
-                p.nome
-            FROM
-            acompanhante a
-            INNER JOIN pessoa p ON a.pessoa_id = p.id
-        ");
+        $listaAcompanhante = Pessoa::where('acompanhante', 1)->orderBy('nome')->get();
 
         return view('refeicao.edit', compact('listaPaciente', 'listaAcompanhante', 'msg', 'obj'));
     }

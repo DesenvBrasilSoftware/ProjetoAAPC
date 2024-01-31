@@ -148,3 +148,6 @@ switch (route) {
     break;
   default:
 }
+$(document).ready(function () {
+  $(".select2").select2();
+});
