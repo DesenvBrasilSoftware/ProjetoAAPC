@@ -43,7 +43,7 @@ class ItemController extends Controller
         $obj->descricao = $request['descricao'];
         $obj->kit = isset($request['kit']) ? 1 : 0;
         if($obj->kit != 1) {
-          $obj->quantidade = $request['quantidade'];
+          $obj->quantidade = $request['quantidade'] ?? 0;
         }
         $obj->grupo_item_id = $request['grupo_item_id'];
         $obj->medicamento_id = $request['medicamento_id'];
