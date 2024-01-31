@@ -335,8 +335,8 @@
     <div class="row">
       <div class="col-md-10">
         <div class="form-group">
-          <select name="contato" class="form-control" id="contato">
-            <option value="" label="Selecione um contato..." selected></option>
+          <select name="contato" class="form-control select2" id="contato">
+            <option value="" selected>Selecione um contato...</option>
             @foreach ($listaPessoaContato as $pessoa)
             <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
             @endforeach
