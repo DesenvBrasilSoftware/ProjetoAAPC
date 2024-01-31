@@ -293,8 +293,8 @@
     <div class="row">
       <div class="col-md-10">
         <div class="form-group">
-          <select name="acompanhante" class="form-control" id="acompanhante">
-            <option value="" label="Selecione um acompanhante..." selected></option>
+          <select name="acompanhante" class="form-control select2" id="acompanhante">
+            <option value="" selected>Selecione um acompanhante...</option>
             @foreach ($listaPessoaAcompanhante as $pessoa)
             <option value="{{ $pessoa->id }}" label="{{ $pessoa->nome }}">{{ $pessoa->nome }}</option>
             @endforeach
