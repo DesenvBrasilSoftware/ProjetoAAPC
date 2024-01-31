@@ -257,7 +257,7 @@
           <th>Grau</th>
           <th>Profissão</th>
           <th>Telefone</th>
-          <th>Moradia</th>
+          <th>Mora com Paciente</th>
           <th></th>
           <th></th>
         </tr>
@@ -424,7 +424,7 @@
             {{ $enfermidadePaciente->enfermidade }}
           </td>
           <td>
-            {{ $enfermidadePaciente->data_cadastro }}
+            {{ date('d/m/Y', strtotime($enfermidadePaciente->data_cadastro)) }}
           </td>
           <td width="1%">
             <a data-toggle="modal" data-target="#modalEnfermidadePaciente"
@@ -517,6 +517,7 @@
 @include('paciente/modal_consulta')
 @include('paciente/modal_acompanhante')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -590,8 +591,6 @@
       });
   });
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
   $(".cpf").mask("000.000.000-00");
 
