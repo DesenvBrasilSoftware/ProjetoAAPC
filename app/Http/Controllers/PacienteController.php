@@ -295,7 +295,6 @@ class PacienteController extends Controller
 
     public function deletarConsulta(Request $request)
     {
-        dd($request);
         $obj = Consulta::find($request->delete_consulta_paciente_id);
         $msg = "Consulta do paciente excluída.";
         try {
@@ -312,8 +311,9 @@ class PacienteController extends Controller
     public function adicionarConsulta(Request $request)
     {
         $consultaPaciente = new Consulta();
+
         if ($request['consulta_paciente_id']) {
-            $consultaPaciente = Consulta::find($request['consulta_paciente_id']);
+          $consultaPaciente = Consulta::find($request['consulta_paciente_id']);
         }
 
         $consultaPaciente->paciente_id = $request['paciente_id'];

@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
 
 
--- 26/01/2024 - Criação da tabela acompanhante_id
+-- 26/01/2024 - Criação da tabela leito_acompanhante
 CREATE TABLE IF NOT EXISTS `leito_acompanhante` (
   `id` int NOT NULL AUTO_INCREMENT,
   `data_entrada` date NOT NULL,

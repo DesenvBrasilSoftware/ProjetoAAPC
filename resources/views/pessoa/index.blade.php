@@ -14,6 +14,17 @@
       </thead>
 
       <tbody>
+        @php
+          $tiposPerfil = [
+            'colaborador' => 'Col',
+            'profissional' => 'Prof',
+            'voluntario' => 'Volu',
+            'fornecedor' => 'Forn',
+            'clinica' => 'Cli',
+            'acompanhante' => 'Acom',
+          ];
+        @endphp
+
         @foreach($lista as $obj)
           <input type="hidden" id="id_{{$obj->id}}" value="{{$obj->id}}" />
           <tr>
@@ -26,21 +37,21 @@
             </td>
 
             <td>
-                @if ($obj->colaborador == 1)
-                  Colaborador
-                @elseif ($obj->profissional == 1)
-                    Profissional
-                @elseif ($obj->voluntario == 1)
-                    Voluntário
-                @elseif ($obj->fornecedor == 1)
-                    Fornecedor
-                @elseif ($obj->clinica == 1)
-                    Clínica
-                @elseif ($obj->acompanhante == 1)
-                    Acompanhante
-                @else
-                    Não especificado
+              @php
+                $perfisEncontrados = [];
+              @endphp
+
+              @foreach ($tiposPerfil as $tipo => $nome)
+                @if ($obj->$tipo == 1)
+                  @php
+                      $perfisEncontrados[] = $nome;
+                  @endphp
                 @endif
+              @endforeach
+
+              @if (!empty($perfisEncontrados))
+                {!! implode(' / ', $perfisEncontrados) !!}
+              @endif
             </td>
 
             <td>

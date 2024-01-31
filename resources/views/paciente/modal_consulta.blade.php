@@ -18,16 +18,16 @@
             <input id="paciente_id" type="hidden" name="paciente_id" value="{{ $obj->id }}">
             <div class="form-group">
             <label for="data_consulta_id">Data:</label>
-            <input type="date" class="form-control" id="data_consulta_id" name="data_consulta_id"
+            <input required type="date" class="form-control" id="data_consulta_id" name="data_consulta_id"
                 placeholder="Informe a data da consulta...">
             </div>
             <div class="form-group">
-            <label for="profissional">Profissional:</label>
-            <select name="profissional" class="form-control" id="profissional" maxlength="45">
+            <label for="profissional_id">Profissional:</label>
+            <select required name="profissional_id" class="form-control" id="profissional_id" maxlength="45">
                 <option value="" label="Selecione o profissonal..."></option>
                 @foreach ($listaProfissional as $profissional)
                 <option value="{{ $profissional->id }}" label="{{ $profissional->nome }}">
-                {{ $profissional->nome }}
+                {{ $profissional->id }}
                 </option>
                 @endforeach
             </select>
@@ -70,7 +70,7 @@
     $('#observacoes').val(observacoes);
   }
 
-  function abreModalConsultaPaciente(id, dataConsulta, profissional_id, realizada, observacoes) {
+  function abreModalConsultaPaciente() {
     $('#consulta_paciente_id').val('');
     $('#data_consulta_id').val('');
     $('#profissional_id').val('');
@@ -83,8 +83,6 @@
           $('#delete_consulta_paciente_id').val(consulta_paciente_id);
           $("#deletarConsultaForm #delete_paciente_id").val(paciente_id);
           $('#deletarConsultaForm').submit();
-      } else {
-          // Não faz nada se o usuário clicar em "Cancelar"
       }
   }
 </script>
