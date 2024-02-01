@@ -102,6 +102,7 @@
               <ul>
                 <li><a href="item.index">Item</a></li>
                 <li><a href="grupoItem.index">Grupo Item</a></li>
+                <li><a href="saidaConsumo.index">Saída por consumo</a></li>
               </ul>
             </li>
             @endif
