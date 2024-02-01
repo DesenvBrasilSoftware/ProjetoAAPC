@@ -4,7 +4,7 @@
   @csrf
   <div class="form-group">
     <label for="data_cadastro">Data de cadastro:</label>
-    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro" placeholder="Insira a data de cadastro"
+    <input required type="date" required class="form-control" id="data_cadastro" name="data_cadastro"
       value="{{ now()->toDateString() }}" readonly>
   </div>
   <div class="row">
@@ -12,13 +12,13 @@
       <div class="form-group">
         <label for="nome">Nome:</label>
         <input type="text" name="nome" class="form-control" id="nome" maxlength="50"
-          required value="{{ old('nome') }}" autofocus placeholder="Informe o Nome do Paciente...">
+          required value="{{ old('nome') }}" autofocus>
       </div>
     </div>
     <div  class="col-md-4">
       <div class="form-group">
         <label for="data_nascimento">Data de nascimento:</label>
-        <input required type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Insira sua data de nascimento">
+        <input required type="date" class="form-control" id="data_nascimento" name="data_nascimento">
       </div>
     </div>
   </div>
@@ -26,14 +26,14 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="cpf" id="labelCpfCnpj">CPF:</label>
-        <input type="text" name="cpf" placeholder="Informe o CPF..."
+        <input type="text" name="cpf"
           class="form-control cpf" required id="cpf" maxlength="45" value="{{ old('cpf') }}" />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
         <label for="rg">RG:</label>
-        <input type="text" name="rg" class="form-control" placeholder="Informe o RG..."
+        <input type="text" name="rg" class="form-control"
           id="rg" required maxlength="15" value="{{ old('rg') }}" />
       </div>
     </div>
@@ -41,7 +41,7 @@
       <div class="form-group">
           <label for="sexo">Sexo:</label>
           <select class="form-control" id="sexo" name="sexo" required>
-            <option value="" selected disabled>Selecione o sexo do paciente...</option>
+            <option value="" selected disabled></option>
             <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino</option>
             <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Feminino</option>
           </select>
@@ -53,7 +53,7 @@
       <div class="form-group">
         <label for="cidade_id">Cidade:</label>
         <select required name="cidade_id" class="form-control" id="cidade_id" maxlength="45" onchange="handleSelectCidade()">
-          <option value="" label="Selecione a cidade..." selected></option>
+          <option value="" selected></option>
           @foreach ($listaCidade as $cidade)
           <option value="{{ $cidade->id }}" label="{{ $cidade->nome }}">{{ $cidade->nome }}</option>
           @endforeach
@@ -64,7 +64,7 @@
       <div class="form-group">
         <label for="endereco">Endereço:</label>
         <input required type="text" name="endereco" class="form-control" id="endereco" maxlength="60"
-        placeholder="Digite o endereço" value="{{ old('endereco') }}" autofocus>
+        value="{{ old('endereco') }}" autofocus>
       </div>
     </div>
   </div>
@@ -73,14 +73,14 @@
       <div class="form-group">
         <label for="cep">CEP:</label>
         <input type="text" name="cep" class="form-control cep"
-          id="cep" maxlength="8" placeholder="Digite o CEP" value="{{ old('cep') }}"
+          id="cep" maxlength="8" value="{{ old('cep') }}"
           autofocus>
       </div>
     </div>
     <div class="col-md-8">
       <div class="form-group">
         <label for="bairro">Bairro:</label>
-        <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" placeholder="Digite o bairro" value="{{ old('bairro') }}" autofocus>
+        <input type="text" name="bairro" class="form-control" id="bairro" maxlength="60" value="{{ old('bairro') }}" autofocus>
       </div>
     </div>
   </div>
@@ -88,13 +88,13 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="complemento">Complemento:</label>
-        <input type="text" name="complemento" class="form-control" id="complemento" maxlength="45" placeholder="Digite o complemento" value="{{ old('complemento') }}" autofocus>
+        <input type="text" name="complemento" class="form-control" id="complemento" maxlength="45" value="{{ old('complemento') }}" autofocus>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="ponto_referencia">Ponto de referência:</label>
-        <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" placeholder="Digite um ponto de referência" value="{{ old('ponto_referencia') }}" autofocus>
+        <input type="text" name="ponto_referencia" class="form-control" id="ponto_referencia" maxlength="45" value="{{ old('ponto_referencia') }}" autofocus>
       </div>
     </div>
     <div class="col-md-4">
@@ -113,8 +113,7 @@
       <div class="form-group">
         <label for="quantidade_filhos">Quantidade de filhos:</label>
         <input type="text" name="quantidade_filhos" class="form-control" id="quantidade_filhos"
-          value="{{ old('quantidade_filhos') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g,');"
-          placeholder="Informe a quantidade de filhos...">
+          value="{{ old('quantidade_filhos') }}" autofocus oninput="this.value = this.value.replace(/[^0-9]/g,');">
       </div>
     </div>
     <div class="col-md-3">
@@ -134,7 +133,7 @@
       <div class="form-group">
         <label for="conjuge">Cônjuge</label>
         <input type="text" name="conjuge" class="form-control" id="conjuge" maxlength="50"
-        placeholder="Digite o nome do cônjuge..." value="{{ old('conjuge') }}" autofocus>
+        value="{{ old('conjuge') }}" autofocus>
       </div>
     </div>
   </div>
@@ -143,7 +142,7 @@
       <div class="form-group">
         <label for="escolaridade">Escolaridade:</label>
         <select name="escolaridade" class="form-control" id="escolaridade" maxlength="45">
-          <option value="" label="Nenhuma" selected >Nenhuma</option>
+          <option value="" label="" selected ></option>
           <option value="1" label="Fundamental Incompleto" >Fundamental Incompleto</option>
           <option value="2" label="Fundamental completo" >Fundamental completo</option>
           <option value="3" label="Médio Incompleto" >Médio Incompleto</option>
@@ -156,14 +155,14 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="profissao">Profissão:</label>
-        <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45" placeholder="Digite a profissão" value="{{ old('profissao') }}" autofocus>
+        <input type="text" name="profissao" class="form-control" id="profissao" maxlength="45" value="{{ old('profissao') }}" autofocus>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-group">
         <label for="telefone" id="labelTelefone">Telefone:</label>
-        <input type="text" name="telefone" placeholder="00 00000-0000" class="form-control telefone"
+        <input type="text" name="telefone" class="form-control telefone"
         id="telefone" maxlength="50" value="{{ old('telefone') }}" />
       </div>
     </div>
@@ -172,19 +171,19 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="data_obito">Data de óbito:</label>
-        <input type="date" class="form-control" id="data_obito" name="data_obito" placeholder="Insira a data de óbito">
+        <input type="date" class="form-control" id="data_obito" name="data_obito">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="data_biopsia">Data de Biopsia:</label>
-        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia" placeholder="Insira a data de biopsia">
+        <input type="date" class="form-control" id="data_biopsia" name="data_biopsia">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="data_alta">Data de Alta:</label>
-        <input type="date" class="form-control" id="data_alta" name="data_alta" placeholder="Insira a data de alta">
+        <input type="date" class="form-control" id="data_alta" name="data_alta">
       </div>
     </div>
   </div>
@@ -192,19 +191,19 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="medicamentos">Medicamentos:</label>
-        <input type="text" name="medicamentos" class="form-control" id="medicamentos" maxlength="60" placeholder="Medicamentos..." value="{{ old('medicamentos') }}" autofocus>
+        <input type="text" name="medicamentos" class="form-control" id="medicamentos" maxlength="60" value="{{ old('medicamentos') }}" autofocus>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="clinica">Clínica:</label>
-        <input type="text" name="clinica" class="form-control" id="clinica" maxlength="60" placeholder="Clínica..." value="{{ old('clinica') }}" autofocus>
+        <input type="text" name="clinica" class="form-control" id="clinica" maxlength="60" value="{{ old('clinica') }}" autofocus>
       </div>
     </div>
   </div>
   <div class="form-group">
     <label for="observacao">Observação:</label>
-    <input type="text" name="observacao" class="form-control" id="observacao" placeholder="Digite uma observação" value="{{ old('observacao') }}" autofocus>
+    <input type="text" name="observacao" class="form-control" id="observacao" value="{{ old('observacao') }}" autofocus>
   </div>
   <div class="row">
   <div class="col-md-2">
