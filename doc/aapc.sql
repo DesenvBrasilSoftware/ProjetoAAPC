@@ -439,3 +439,28 @@ CREATE TABLE IF NOT EXISTS `leito_acompanhante` (
   CONSTRAINT `FK_leito_acompanhante_aapc.leito` FOREIGN KEY (`leito_id`) REFERENCES `leito` (`id`),
   CONSTRAINT `fk_leito_acompanhante_acompanhante1` FOREIGN KEY (`acompanhante_id`) REFERENCES `acompanhante` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Copiando estrutura para tabela aapc.saida_consumo
+CREATE TABLE IF NOT EXISTS `saida_consumo` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data` date NOT NULL,
+  `usuario_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_saida_consumo_usuario1_idx` (`usuario_id`),
+  CONSTRAINT `fk_saida_consumo_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela aapc.saida_consumo_item
+CREATE TABLE IF NOT EXISTS `saida_consumo_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `saida_consumo_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `quantidade` decimal(12,4) NOT NULL DEFAULT '0.0000',
+  PRIMARY KEY (`id`),
+  KEY `fk_saida_consumo_item_saida_consumo1_idx` (`saida_consumo_id`),
+  KEY `fk_saida_consumo_item_item1_idx` (`item_id`),
+  CONSTRAINT `fk_saida_consumo_item_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `fk_saida_consumo_item_saida_consumo1` FOREIGN KEY (`saida_consumo_id`) REFERENCES `saida_consumo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
