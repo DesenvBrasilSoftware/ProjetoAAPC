@@ -52,8 +52,8 @@
     <table>
         <thead>
             <tr>
+              <th>Item</th>
               <th>Grupo de Item</th>
-              <th>Data de Fabricação</th>
               <th>Quantidade</th>
               <th>Medicamento</th>
               <th>Kit</th>
@@ -62,6 +62,7 @@
         <tbody>
             @foreach($lista as $item)
             <tr>
+              <td>{{ $item->descricao }}</td>
               <td>{{ $item->descricao_grupo_item }}</td>
               <td>{{ number_format($item->quantidade, 4, ',', '.') }}</td>
               <td>{{ $item->nome_medicamento }}</td>
