@@ -68,17 +68,18 @@ class PessoaController extends Controller
     public function edit(string $id, $msg = '')
     {
       $listaAcomodacao = Acomodacao::all();
-
       $listaLeito = DB::select("
       SELECT
-          l.*,
-          lp.acompanhante_id
+        l.*,
+        lp.acompanhante_id
       FROM
-          leito l
-      LEFT JOIN
-          leito_acompanhante lp ON lp.leito_id = l.id;
+        leito l
+      LEFT JOIN (
+          SELECT *
+          FROM leito_acompanhante
+          WHERE data_saida IS NULL
+      ) AS lp ON lp.leito_id = l.id;
       ");
-
       $listaLeitoAcompanhante = DB::select("
         SELECT
           lp.id,

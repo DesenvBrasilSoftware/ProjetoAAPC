@@ -112,12 +112,15 @@ class PacienteController extends Controller
         $listaAcomodacao = Acomodacao::all();
         $listaLeito = DB::select("
         SELECT
-            l.*,
-            lp.paciente_id
+          l.*,
+          lp.paciente_id
         FROM
-            leito l
-        LEFT JOIN
-            leito_paciente lp ON lp.leito_id = l.id;
+          leito l
+        LEFT JOIN (
+            SELECT *
+            FROM leito_paciente
+            WHERE data_saida IS NULL
+        ) AS lp ON lp.leito_id = l.id;
         ");
         $listaEnfermidade = Enfermidade::all();
         $listaLeitoPaciente = DB::select("

@@ -53,22 +53,30 @@ class AcomodacaoController extends Controller
 
       $listaLeitosAcomodacao = DB::select("
       SELECT
-        l.id,
-        l.descricao,
-        l.ocupado,
-        COALESCE(p.nome, a.nome) as nome_pessoa,
-        CASE
-            WHEN p.id IS NOT NULL THEN 'Paciente'
-            WHEN a.id IS NOT NULL THEN 'Acompanhante'
-        END as perfil
+          l.id,
+          l.descricao,
+          l.ocupado,
+          COALESCE(pc.nome, ps.nome) as nome_pessoa,
+          CASE
+              WHEN pc.id IS NOT NULL THEN 'Paciente'
+              WHEN ps.id IS NOT NULL THEN 'Acompanhante'
+          END as perfil
       FROM
           leito l
-        LEFT JOIN leito_paciente lp ON l.id = lp.leito_id
-        LEFT JOIN paciente p ON lp.paciente_id = p.id
-        LEFT JOIN leito_acompanhante la ON l.id = la.leito_id
-        LEFT JOIN pessoa a ON la.acompanhante_id = a.id
+          INNER JOIN acomodacao a ON a.id = l.acomodacao_id
+          LEFT JOIN (
+              SELECT *
+              FROM leito_paciente
+              WHERE data_saida IS NULL
+          ) AS lp ON lp.leito_id = l.id
+          LEFT JOIN (
+              SELECT *
+              FROM leito_acompanhante
+              WHERE data_saida IS NULL
+          ) AS la ON la.leito_id = l.id
+          LEFT JOIN paciente pc ON pc.id = lp.paciente_id
+          LEFT JOIN pessoa ps ON ps.id = la.acompanhante_id
       WHERE
-          lp.data_saida IS NULL AND
           l.acomodacao_id =:acomodacao_id
       ", ['acomodacao_id' => $id]);
 
