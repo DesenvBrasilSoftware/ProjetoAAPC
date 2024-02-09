@@ -4621,7 +4621,7 @@ table th {
   font-size: 1rem !important;
   line-height: 24px !important;
   font-family: "Roboto", sans-serif !important;
-  color: #495057 !important;
+  color: #252d35 !important;
 }
 
 .select2-container .select2-selection--single:focus {
@@ -4657,7 +4657,7 @@ table th {
   padding: 0px 0px 0px 14px !important;
   min-height: 1.2em !important;
   white-space: nowrap !important;
-  color: #495057 !important;
+  color: #252d35 !important;
   font-size: 1rem !important;
   font-family: "Roboto", sans-serif !important;
 }
@@ -4672,7 +4672,7 @@ table th {
 }
 
 .select2-container--default .select2-results__option--selected {
-  color: #495057 !important;
+  color: #252d35 !important;
   background-color: #fff !important;
 }
 
@@ -4688,4 +4688,19 @@ table th {
 
 .select2-results__option--selectable {
   cursor: default !important;
+}
+
+.form-group {
+  margin-bottom: 0.25rem !important;
+}
+
+.form-control {
+  color: #252d35 !important;
+  font-size: 1.2rem !important;
+  border: 1.5px solid #7e8b97 !important;
+}
+
+label {
+  font-weight: 500 !important;
+  margin-bottom: 0.2rem !important;
 }
