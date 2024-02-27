@@ -464,3 +464,14 @@ CREATE TABLE IF NOT EXISTS `saida_consumo_item` (
   CONSTRAINT `fk_saida_consumo_item_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   CONSTRAINT `fk_saida_consumo_item_saida_consumo1` FOREIGN KEY (`saida_consumo_id`) REFERENCES `saida_consumo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Alterando saida_doacao (27/02/24)
+ALTER TABLE saida_doacao
+DROP FOREIGN KEY `fk_saida_doacao_pessoa1`,
+CHANGE COLUMN pessoa_id pessoa_doador_id INT NOT NULL,
+ADD COLUMN pessoa_donatario_id INT DEFAULT NULL,
+ADD COLUMN paciente_donatario_id INT DEFAULT NULL,
+ADD KEY `fk_saida_doacao_pessoa_idx` (`pessoa_doador_id`),
+ADD CONSTRAINT `fk_saida_doacao_pessoa` FOREIGN KEY (`pessoa_doador_id`) REFERENCES `pessoa` (`id`),
+ADD CONSTRAINT fk_saida_doacao_pessoa_donatario FOREIGN KEY (pessoa_donatario_id) REFERENCES pessoa(id),
+ADD CONSTRAINT fk_saida_doacao_paciente_donatario FOREIGN KEY (paciente_donatario_id) REFERENCES paciente(id);
