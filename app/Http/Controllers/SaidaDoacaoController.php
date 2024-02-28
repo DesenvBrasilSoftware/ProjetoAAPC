@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SaidaDoacao;
 use App\Models\SaidaDoacaoItem;
 use App\Models\Pessoa;
+use App\Models\Paciente;
 use App\Models\KitItem;
 use App\Models\Item;
 use Illuminate\Support\Facades\DB;
@@ -15,14 +16,16 @@ class SaidaDoacaoController extends Controller
     public function index($msg='')
     {
         $lista = DB::select("
-        SELECT
-            sd.id,
-            sd.data,
-            p.nome as doador
-        FROM
-            saida_doacao sd
-            INNER JOIN pessoa p
-            ON p.id = sd.pessoa_id
+          SELECT
+              sd.id,
+              sd.data,
+              p.nome as doador,
+              COALESCE(pessoa_donatario.nome, paciente_donatario.nome) as donatario
+          FROM
+              saida_doacao sd
+              INNER JOIN pessoa p ON p.id = sd.pessoa_doador_id
+              LEFT JOIN pessoa pessoa_donatario ON pessoa_donatario.id = sd.pessoa_donatario_id
+              LEFT JOIN paciente paciente_donatario ON paciente_donatario.id = sd.paciente_donatario_id;
         ");
 
         return view('saidaDoacao.index')->with(['lista' => $lista]);
@@ -31,19 +34,27 @@ class SaidaDoacaoController extends Controller
     public function create($msg = '')
     {
         $listaPessoa = Pessoa::all();
+        $listaPaciente = Paciente::all();
 
-        return view('saidaDoacao.create', compact('listaPessoa', 'msg',));
+        return view('saidaDoacao.create')->with(['listaPessoa' => $listaPessoa, 'listaPaciente' => $listaPaciente]);
     }
 
     public function store(Request $request)
     {
         $obj = new SaidaDoacao();
+
         if ($request['id']) {
             $obj = SaidaDoacao::find($request['id']);
         }
-        $obj->pessoa_id = $request['pessoa_id'];
+
+        $obj->pessoa_doador_id = $request['pessoa_doador_id'];
+        $obj->pessoa_donatario_id = $request['radio'] ? null : $request['pessoa_donatario_id'];
+        $obj->paciente_donatario_id = $request['radio'] ? $request['paciente_donatario_id'] : null;
+
         $obj->data = $request['data'];
+
         $msg = 'Registro salvo no banco de dados';
+
         try {
             $obj->save();
         }catch(\Exception $e) {
@@ -61,8 +72,22 @@ class SaidaDoacaoController extends Controller
     public function edit(string $id, $msg = '')
     {
         $obj = SaidaDoacao::find($id);
+
         $listaPessoa = Pessoa::all();
+
+        $listaPaciente = Paciente::all();
+
         $listaItem = Item::all();
+
+        $saidaDoacao = DB::select("
+          SELECT
+              *
+          FROM
+              saida_doacao sd
+          WHERE
+              sd.id = :id
+        ", ['id' => $id]);
+
         $listaSaidaDoacaoItem = DB::select("
             SELECT
                 sdi.id,
@@ -77,24 +102,27 @@ class SaidaDoacaoController extends Controller
                 saida_doacao_id = :saida_doacao_id
         ", ['saida_doacao_id' => $id]);
 
-        return view('saidaDoacao.edit', compact('listaItem', 'listaSaidaDoacaoItem', 'listaPessoa','obj', 'msg',));
+        return view('saidaDoacao.edit', compact('listaItem', 'listaSaidaDoacaoItem', 'listaPessoa', 'listaPaciente', 'saidaDoacao', 'obj', 'msg',));
     }
 
     public function delete($id)
     {
         $obj = SaidaDoacao::find($id);
+
         $msg = "Doação excluída.";
+
         try {
             $obj->delete();
         } catch (\PDOException $e) {
-            // Verifica se a exceção é devido a uma violação de chave estrangeira
             if (strpos($e->getMessage(), 'Integrity constraint violation') !== false) {
                 $msg = 'Não é possível excluir a doação, pois existem itens cadastrados nessa saída de doação. Remova os itens antes de excluí-la.';
             } else {
                 $msg = 'Não foi possível excluir a doação.';
             }
+
             return redirect('/saidaDoacao.index')->with(['error' => $msg]);
         }
+
         return redirect('/saidaDoacao.index')->with(['success' => $msg]);
     }
 
@@ -107,21 +135,26 @@ class SaidaDoacaoController extends Controller
         $item->save();
 
         $msg = "Item da doação excluído excluída.";
+
         try {
             $obj->delete();
         } catch (\Exception $e) {
             $msg = 'Não foi possível excluir o item da doação. ';
+
             return redirect('/saidaDoacao.edit.' . $request->delete_saida_doacao_id)->with('mensagem', $msg);
         }
+
         return redirect('/saidaDoacao.edit.' . $request->delete_saida_doacao_id)->with('mensagem', $msg);
     }
 
     public function adicionarItem(Request $request)
     {
         $saidaDoacaoItem = new SaidaDoacaoItem();
+
         if ($request['saida_doacao_item_id']) {
             $saidaDoacaoItem = SaidaDoacaoItem::find($request['saida_doacao_item_id']);
         }
+
         $novaQuantidade = $request['quantidade'];
         $antigaQuantidade = $saidaDoacaoItem->quantidade;
 
@@ -132,11 +165,13 @@ class SaidaDoacaoController extends Controller
         $saidaDoacaoItem->save();
 
         if ($request['saida_doacao_item_id']) {
-          // Edição da quantidade
           $diferenca = $novaQuantidade - $antigaQuantidade;
+
           $item = Item::find($request['item_id']);
+
           if ($item->kit == 1) {
             $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+
             foreach($listaKitItem as $kitItem) {
               $itemComposicao = Item::find($kitItem->item_composicao_id);
               $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
@@ -148,6 +183,7 @@ class SaidaDoacaoController extends Controller
           }
         } else {
           $item = Item::find($request['item_id']);
+
           if ($item->kit == 1) {
             $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
             foreach($listaKitItem as $kitItem) {
