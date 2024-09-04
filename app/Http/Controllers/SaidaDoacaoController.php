@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\KitItem;
+use App\Models\Paciente;
+use App\Models\Pessoa;
 use App\Models\SaidaDoacao;
 use App\Models\SaidaDoacaoItem;
-use App\Models\Pessoa;
-use App\Models\Paciente;
-use App\Models\KitItem;
-use App\Models\Item;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SaidaDoacaoController extends Controller
 {
-    public function index($msg='')
+    public function index($msg = '')
     {
         $lista = DB::select("
           SELECT
@@ -33,8 +33,8 @@ class SaidaDoacaoController extends Controller
 
     public function create($msg = '')
     {
-        $listaPessoa = Pessoa::all();
-        $listaPaciente = Paciente::all();
+        $listaPessoa = Pessoa::all()->sortBy('nome');
+        $listaPaciente = Paciente::all()->sortBy('nome');
 
         return view('saidaDoacao.create')->with(['listaPessoa' => $listaPessoa, 'listaPaciente' => $listaPaciente]);
     }
@@ -57,16 +57,16 @@ class SaidaDoacaoController extends Controller
 
         try {
             $obj->save();
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = 'Não foi possível salvar o registro no banco de dados';
             session()->flashInput($request->input());
         }
 
-        if ($request['id']){
-            return redirect('/saidaDoacao.edit.'.$obj->id);
+        if ($request['id']) {
+            return redirect('/saidaDoacao.edit.' . $obj->id);
         }
 
-        return redirect('/saidaDoacao.edit.'.$obj->id);
+        return redirect('/saidaDoacao.edit.' . $obj->id);
     }
 
     public function edit(string $id, $msg = '')
@@ -102,7 +102,7 @@ class SaidaDoacaoController extends Controller
                 saida_doacao_id = :saida_doacao_id
         ", ['saida_doacao_id' => $id]);
 
-        return view('saidaDoacao.edit', compact('listaItem', 'listaSaidaDoacaoItem', 'listaPessoa', 'listaPaciente', 'saidaDoacao', 'obj', 'msg',));
+        return view('saidaDoacao.edit', compact('listaItem', 'listaSaidaDoacaoItem', 'listaPessoa', 'listaPaciente', 'saidaDoacao', 'obj', 'msg', ));
     }
 
     public function delete($id)
@@ -165,36 +165,36 @@ class SaidaDoacaoController extends Controller
         $saidaDoacaoItem->save();
 
         if ($request['saida_doacao_item_id']) {
-          $diferenca = $novaQuantidade - $antigaQuantidade;
+            $diferenca = $novaQuantidade - $antigaQuantidade;
 
-          $item = Item::find($request['item_id']);
+            $item = Item::find($request['item_id']);
 
-          if ($item->kit == 1) {
-            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+            if ($item->kit == 1) {
+                $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
 
-            foreach($listaKitItem as $kitItem) {
-              $itemComposicao = Item::find($kitItem->item_composicao_id);
-              $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
-              $itemComposicao->save();
+                foreach ($listaKitItem as $kitItem) {
+                    $itemComposicao = Item::find($kitItem->item_composicao_id);
+                    $itemComposicao->quantidade -= $kitItem->quantidade * $diferenca;
+                    $itemComposicao->save();
+                }
+            } else {
+                $item->quantidade -= $diferenca;
+                $item->save();
             }
-          } else {
-            $item->quantidade -= $diferenca;
-            $item->save();
-          }
         } else {
-          $item = Item::find($request['item_id']);
+            $item = Item::find($request['item_id']);
 
-          if ($item->kit == 1) {
-            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
-            foreach($listaKitItem as $kitItem) {
-              $itemComposicao = Item::find($kitItem->item_composicao_id);
-              $itemComposicao->quantidade -= $kitItem->quantidade * $novaQuantidade;
-              $itemComposicao->save();
+            if ($item->kit == 1) {
+                $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+                foreach ($listaKitItem as $kitItem) {
+                    $itemComposicao = Item::find($kitItem->item_composicao_id);
+                    $itemComposicao->quantidade -= $kitItem->quantidade * $novaQuantidade;
+                    $itemComposicao->save();
+                }
+            } else {
+                $item->quantidade -= $novaQuantidade;
+                $item->save();
             }
-          } else{
-            $item->quantidade -= $novaQuantidade;
-            $item->save();
-          }
         }
 
         return redirect('/saidaDoacao.edit.' . $request->saida_doacao_id)->with('mensagem', 'Item adicionado com sucesso');
