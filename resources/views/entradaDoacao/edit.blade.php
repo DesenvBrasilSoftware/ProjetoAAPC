@@ -20,6 +20,15 @@
     <label for="data">Data:</label>
     <input type="date" class="form-control" id="data" name="data" placeholder="Informe a data da doação..." value="{{ $obj->data }}"/>
   </div>
+  <div class="form-group">
+    <label for="valor_doacao">Valor doado:</label>
+    <input type="text" name="valor_doacao" id="valor_doacao" class="dinheiro form-control" value="{{ $obj->valor_doacao }}">
+  </div>
+  <div class="form-group">
+    <a href="/entradaDoacao.imprimeRecibo.{{ $obj->id }}" type="button" class="btn btn-secondary" @if(!$obj->valor_doacao) disabled="true" @endif>
+    Imprimir recibo de valor doado
+    </a>
+  </div>
   <table id="dataTable" class="display table-responsive">
     <thead>
       <tr>
@@ -68,4 +77,9 @@
   </div>
 </form>
 @include('entradaDoacao/modal_item')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
+</script>
 @endsection

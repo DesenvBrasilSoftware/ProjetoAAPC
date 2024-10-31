@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\EntradaDoacao;
 use App\Models\EntradaDoacaoItem;
-use App\Models\Pessoa;
 use App\Models\Item;
 use App\Models\KitItem;
+use App\Models\Pessoa;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EntradaDoacaoController extends Controller
 {
-    public function index($msg='')
+    public function index($msg = '')
     {
         $lista = DB::select("
         SELECT
@@ -32,7 +32,7 @@ class EntradaDoacaoController extends Controller
     {
         $listaPessoa = Pessoa::all();
 
-        return view('entradaDoacao.create', compact('listaPessoa', 'msg',));
+        return view('entradaDoacao.create', compact('listaPessoa', 'msg', ));
     }
 
     public function store(Request $request)
@@ -43,21 +43,22 @@ class EntradaDoacaoController extends Controller
         }
         $obj->pessoa_id = $request['pessoa_id'];
         $obj->data = $request['data'];
+        $obj->valor_doacao = str_replace(',', '.', $request['valor_doacao']);
         $msg = 'Registro salvo no banco de dados';
-
 
         try {
             $obj->save();
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = 'Não foi possível salvar o registro no banco de dados';
             session()->flashInput($request->input());
+            return redirect('/entradaDoacao.index')->with(['error' => $msg]);
         }
 
-        if ($request['id']){
-            return redirect('/entradaDoacao.edit.'.$obj->id);
+        if ($request['id']) {
+            return redirect('/entradaDoacao.edit.' . $obj->id);
         }
 
-        return redirect('/entradaDoacao.edit.'.$obj->id);
+        return redirect('/entradaDoacao.edit.' . $obj->id);
     }
 
     public function edit(string $id, $msg = '')
@@ -79,7 +80,7 @@ class EntradaDoacaoController extends Controller
                 entrada_doacao_id = :entrada_doacao_id
         ", ['entrada_doacao_id' => $id]);
 
-        return view('entradaDoacao.edit', compact('listaItem', 'listaEntradaDoacaoItem', 'listaPessoa','obj', 'msg',));
+        return view('entradaDoacao.edit', compact('listaItem', 'listaEntradaDoacaoItem', 'listaPessoa', 'obj', 'msg', ));
     }
 
     public function delete($id)
@@ -134,34 +135,42 @@ class EntradaDoacaoController extends Controller
         $entradaDoacaoItem->save();
 
         if ($request['entrada_doacao_item_id']) {
-          // Edição da quantidade
-          $diferenca = $novaQuantidade - $antigaQuantidade;
-          $item = Item::find($request['item_id']);
-          if ($item->kit == 1) {
-            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
-            foreach($listaKitItem as $kitItem) {
-              $itemComposicao = Item::find($kitItem->item_composicao_id);
-              $itemComposicao->quantidade += $kitItem->quantidade * $diferenca;
-              $itemComposicao->save();
+            // Edição da quantidade
+            $diferenca = $novaQuantidade - $antigaQuantidade;
+            $item = Item::find($request['item_id']);
+            if ($item->kit == 1) {
+                $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+                foreach ($listaKitItem as $kitItem) {
+                    $itemComposicao = Item::find($kitItem->item_composicao_id);
+                    $itemComposicao->quantidade += $kitItem->quantidade * $diferenca;
+                    $itemComposicao->save();
+                }
+            } else {
+                $item->quantidade += $diferenca;
             }
-          } else {
-            $item->quantidade += $diferenca;
-          }
         } else {
-          $item = Item::find($request['item_id']);
-          if ($item->kit == 1) {
-            $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
-            foreach($listaKitItem as $kitItem) {
-              $itemComposicao = Item::find($kitItem->item_composicao_id);
-              $itemComposicao->quantidade += $kitItem->quantidade * $novaQuantidade;
-              $itemComposicao->save();
+            $item = Item::find($request['item_id']);
+            if ($item->kit == 1) {
+                $listaKitItem = KitItem::where('item_kit_id', $item->id)->get();
+                foreach ($listaKitItem as $kitItem) {
+                    $itemComposicao = Item::find($kitItem->item_composicao_id);
+                    $itemComposicao->quantidade += $kitItem->quantidade * $novaQuantidade;
+                    $itemComposicao->save();
+                }
+            } else {
+                $item->quantidade += $request['quantidade'];
             }
-          } else {
-            $item->quantidade += $request['quantidade'];
-          }
         }
         $item->save();
 
         return redirect('/entradaDoacao.edit.' . $request->entrada_doacao_id)->with('mensagem', 'Item adicionado com sucesso');
+    }
+
+    public function imprimeRecibo($id)
+    {
+      $entradaDoacao = EntradaDoacao::find($id);
+      $pessoa = Pessoa::find($entradaDoacao->pessoa_id);
+
+      return view('entradaDoacaO.recibo')->with(['entradaDoacao' => $entradaDoacao, 'pessoa' => $pessoa]);
     }
 }

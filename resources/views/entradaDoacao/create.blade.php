@@ -16,8 +16,17 @@
     <input type="date" class="form-control" id="data" name="data" placeholder="Informe a data da doação..." />
   </div>
   <div class="form-group">
+    <label for="valor_doacao">Doar valor:</label>
+    <input type="text" value="{{old('valor_doacao')}}" name="valor_doacao" id="valor_doacao" class="dinheiro form-control">
+  </div>
+  <div class="form-group">
       <a href="/entradaDoacao.index" class="btn btn-warning">Fechar</a>
       <button type="submit" class="btn btn-primary">Salvar</button>
   </div>
 </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    $(".dinheiro").mask("#.###.###.###.###.###,00", { reverse: true });
+</script>
 @endsection
