@@ -20,7 +20,7 @@
     </script>
 
     <script src="/js/jquery.formatCurrency-1.4.0.min.js"></script>
-
+    <title>AAPC</title>
 </head>
 
 <div class="row mt-1">
@@ -37,7 +37,6 @@
 </div>
 
 <div id="notaPDF" name="notaPDF" class="h-100" style="background-color: white">
-
     <body>
         <strong>
             <basefont face = "courier">
@@ -52,7 +51,7 @@
                                 <td width="40%" align="left">
                                     <h3>AAPC</h3>
                                     <span style="font-size: 10px">Associação de Apoio a Pessoa com Câncer</span>
-                                </td> 
+                                </td>
                                 <span style="font-size: 6px">CNPJ: 05.363.115/0001-64</span>
                                 <td>
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -113,7 +112,8 @@
                         <span>Feira de Santana {{ date('d/m/Y', strtotime($entradaDoacao->data)) }} </Datag></span>
                     </div>
                     <div align="center">
-                        <hr>
+                        <br>
+                        <span>_______________________________________________________________________________________</span>
                         <span style="font-size: 8px">AAPC - Associação de Apoio a Pessoa com Câncer</span>
                     </div>
                 </div>
@@ -142,6 +142,7 @@
 
     #notaPDF {
         padding: 10px;
+
     }
 
     #content {
