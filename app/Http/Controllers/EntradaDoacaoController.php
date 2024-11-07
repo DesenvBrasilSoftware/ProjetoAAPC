@@ -43,7 +43,7 @@ class EntradaDoacaoController extends Controller
         }
         $obj->pessoa_id = $request['pessoa_id'];
         $obj->data = $request['data'];
-        $obj->valor_doacao = str_replace(',', '.', $request['valor_doacao']);
+        $obj->valor_doacao = str_replace(',', '.', preg_replace('/[^\d,]/', '', $request['valor_doacao']));
         $msg = 'Registro salvo no banco de dados';
 
         try {
